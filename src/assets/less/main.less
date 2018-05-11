@@ -1,0 +1,136 @@
+@text-color-active: #0af;
+@text-color-normal: #999;
+
+@import '~vux/src/styles/reset.less';
+
+body {
+  background-color: #f4f4f4;
+}
+
+* {
+  font-font: -apple-system-font, "Helvetica Neue", sans-serif;
+}
+
+/*底部导航条*/
+.weui-tabbar {
+  display: flex;
+  position: absolute;
+  z-index: 500;
+  bottom: 0;
+  width: 100%;
+  background-color: #f7f7fa;
+  .weui-tabbar__item {
+    display: block;
+    color: @text-color-normal;
+    position: relative;
+    width: 25%;
+    text-align: center;
+    font-size: .5rem;
+    height: 2.25rem;
+    .weui-tabbar__icon {
+      position: absolute;
+      width: 1.125rem;
+      height: .9rem;
+      background-color: blue;
+      top: 37%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .weui-tabbar__label {
+      position: absolute;
+      width: 100%;
+      bottom: 0px;
+    }
+  }
+  .router-link-active {
+    color: @text-color-active;
+  }
+}
+
+/*顶部介绍条*/
+.header-wrapper {
+  padding: .5rem 1rem;
+  background-color: #2b3033;
+  h1 {
+    font-size: 1rem;
+    color: #fff;
+  }
+}
+
+.banner-introduce {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+  > a {
+    background-color: red;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    width: 25%;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    font-size: .5rem;
+    color: #fff;
+    &:first-of-type {
+      border-left: none;
+    }
+  }
+}
+
+.product-wrapper {
+  background-color: #fff;
+  .product-header {
+    font-size: .9rem;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #e7e7e7;
+  }
+  .product-content {
+    .product-content-item {
+      .product-item-header {
+        position: relative;
+        border-bottom: 1px solid #e7e7e7;
+        p {
+          padding-left: 4rem;
+          line-height: 3rem;
+          position: relative;
+          font-size: .8rem;
+          &:before {
+            content: '';
+            width: 2rem;
+            height: 2rem;
+            display: block;
+            background-color: #00aaff;
+            position: absolute;
+            left: 1rem;
+            top: .5rem;
+          }
+          &:after {
+            content: '';
+            border-bottom: 1px solid #999;
+            border-left: 1px solid #999;
+            width: .5rem;
+            height: .5rem;
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 1.5rem;
+            transform-origin: 50% 50%;
+            transform: translateY(-50%) rotate(-45deg);
+          }
+        }
+      }
+      .product-item-content {
+        padding: 1rem;
+      }
+    }
+    .product-content-item-active {
+      .product-item-header {
+        p {
+          &:after {
+            transform: rotate(135deg);
+          }
+        }
+      }
+    }
+  }
+}
