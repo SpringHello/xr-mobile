@@ -14,9 +14,9 @@ body {
 /*底部导航条*/
 .weui-tabbar {
   display: flex;
-  position: absolute;
+  position: fixed;
   z-index: 500;
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
   background-color: #f7f7fa;
   .weui-tabbar__item {
@@ -120,7 +120,18 @@ body {
         }
       }
       .product-item-content {
-        padding: 1rem;
+        padding: .5rem 1rem;
+        h6 {
+          font-weight: normal;
+          font-size: .75rem;
+          color: #333;
+          line-height: 1.5rem;
+        }
+        p {
+          font-weight: normal;
+          font-size: .6rem;
+          color: #666;
+        }
       }
     }
     .product-content-item-active {

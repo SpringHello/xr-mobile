@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: 2.25rem;">
     <!--顶部logo-->
     <header class="header-wrapper">
       <h1>logo位置</h1>
@@ -25,7 +25,13 @@
             <p>{{product.title}}</p>
           </div>
           <div class="product-item-content" v-show="product.opened">
-            {{product.descTitle}}
+            <h6>{{product.descTitle}}</h6>
+            <p>{{product.descContent}}</p>
+            <div>
+              <span>{{product.cost}}元/月起</span>
+              <router-link to="home" class="link-button-default">查看详情</router-link>
+              <router-link to="home" class="link-button-default">立即选购</router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -35,10 +41,11 @@
 
 <script>
   import {Swiper} from 'vux'
-
+  import {XButton} from 'vux'
   export default {
     components: {
-      Swiper
+      Swiper,
+      XButton
     },
     data () {
       return {
@@ -64,16 +71,19 @@
           opened: false,
           descTitle: '极速稳定高弹性的计算服务',
           descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
+          cost: 15
         }, {
           title: '云服务器',
           opened: false,
           descTitle: '极速稳定高弹性的计算服务',
           descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
+          cost: 15
         }, {
           title: '云服务器',
           opened: false,
           descTitle: '极速稳定高弹性的计算服务',
           descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
+          cost: 15
         }]
       }
     }
