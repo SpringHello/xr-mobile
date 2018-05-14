@@ -6,6 +6,7 @@ import router from './router'
 import App from './App'
 
 import './assets/less/main.less'
+import './assets/less/public.less'
 
 FastClick.attach(document.body)
 

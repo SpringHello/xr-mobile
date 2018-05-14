@@ -131,14 +131,26 @@ body {
           font-weight: normal;
           font-size: .6rem;
           color: #666;
+          padding-bottom: .1rem;
         }
+        span{
+          font-size: 0.8rem;
+        }
+        .product-item-price{
+          color: #0af;
+          font-size: 1rem;
+        }
+
       }
     }
     .product-content-item-active {
       .product-item-header {
+        color: #0af;
         p {
           &:after {
             transform: rotate(135deg);
+            border-bottom: 1px solid #0af;
+            border-left: 1px solid #0af;
           }
         }
       }
