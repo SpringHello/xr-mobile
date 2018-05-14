@@ -8,8 +8,10 @@ import App from './App'
 import './assets/less/main.less'
 import './assets/less/public.less'
 
-FastClick.attach(document.body)
+//FastClick.attach(document.body)
+import {TransferDom} from 'vux'
 
+Vue.directive('transfer-dom', TransferDom)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

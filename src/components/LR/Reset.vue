@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :right-options="{showMore: true}">登录</x-header>
+    <x-header :right-options="{showMore: true}">重置密码</x-header>
     <div>
       <form class="sign-form">
         <div class="form-item">

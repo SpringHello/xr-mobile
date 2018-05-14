@@ -3,8 +3,11 @@ import Router from 'vue-router'
 
 import Main from '@/components/Main'
 import Home from '@/components/Home'
+import Sort from '@/components/Sort'
 
 import Login from '@/components/LR/Login'
+import Register from '@/components/LR/Register'
+import Reset from '@/components/LR/Reset'
 
 Vue.use(Router)
 
@@ -15,13 +18,25 @@ export default new Router({
       name: 'Main',
       component: Main,
       children: [
-        {path: 'Home', name: 'Home', component: Home}
+        {path: '/', name: 'Home', component: Home},
+        {path: 'Home', name: 'Home', component: Home},
+        {path: 'Sort', name: 'Sort', component: Sort},
       ]
     },
     {
       path: '/Login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/Register',
+      name: 'Register',
+      component: Register,
+    },
+    {
+      path: '/Reset',
+      name: 'Reset',
+      component: Reset,
     }
   ]
 })
