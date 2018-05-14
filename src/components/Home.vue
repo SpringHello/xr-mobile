@@ -28,9 +28,11 @@
             <h6>{{product.descTitle}}</h6>
             <p>{{product.descContent}}</p>
             <div>
-              <span>{{product.cost}}元/月起</span>
-              <router-link to="home" class="link-button-default">查看详情</router-link>
-              <router-link to="home" class="link-button-default">立即选购</router-link>
+              <span><span class="product-item-price">{{product.cost}}</span>元/月起</span>
+              <div style="float: right">
+                <router-link to="home" class="link-button-default">查看详情</router-link>
+                <router-link to="home" class="link-button-default link-button-main">立即选购</router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -66,7 +68,8 @@
           }
         ],
         // 产品资料
-        productList: [{
+        productList: [
+            {
           title: '云服务器',
           opened: false,
           descTitle: '极速稳定高弹性的计算服务',
