@@ -5,6 +5,9 @@ import FastClick from 'fastclick'
 import router from './router'
 import App from './App'
 
+import  {ToastPlugin} from 'vux'
+Vue.use(ToastPlugin)
+
 import './assets/less/main.less'
 import './assets/less/public.less'
 

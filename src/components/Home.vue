@@ -41,30 +41,17 @@
     <!--动态-->
     <div class="dynamic-wrapper">
       <h6 class="title">新睿云动态</h6>
-      <div class="dynamic-content">
-        <div class="dynamic-content-title" v-for="(item,index) in dynamicList"
-             :class="{'dynamic-content-active':Info.type==item.value}" @click="Info.type=item.value">
-          <p>{{item.title}}</p>
-        </div>
-      </div>
-      <div v-if="Info.type == 'office'" class="dynamic">
-        <div class="dynamicContent-item" v-for="(item,index) in dynamicContent.offices">
-          <h3><span>{{item.title}}</span> {{item.subtitle}}</h3>
-          <p>{{item.desc}}</p>
-        </div>
-      </div>
-      <div v-if="Info.type == 'news'" class="dynamic">
-        <div class="dynamicContent-item" v-for="(item,index) in dynamicContent.News">
-          <h3><span>{{item.title}}</span> {{item.subtitle}}</h3>
-          <p>{{item.desc}}</p>
-        </div>
-      </div>
+      <tab :line-width="2" active-color="#00aaff" custom-bar-width="80%">
+        <tab-item selected>官方公告</tab-item>
+        <tab-item>业界新闻</tab-item>
+      </tab>
     </div>
     <!--资质认证-->
     <div class="certification-wrapper">
       <h6 class="title">资质认证</h6>
       <div class="certification-content">
-        <div class="certification-content-item">
+        <div class="certification-content-item" v-for="picture in auth">
+          <img :src="picture" style="width:2rem;height:2rem;">
         </div>
       </div>
     </div>
@@ -91,12 +78,13 @@
 </template>
 
 <script>
-  import {Swiper} from 'vux'
-  import {XButton} from 'vux'
+  import {Swiper, XButton, Tab, TabItem} from 'vux'
   export default {
     components: {
       Swiper,
-      XButton
+      XButton,
+      Tab,
+      TabItem
     },
     data () {
       return {
@@ -155,9 +143,6 @@
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }],
-        Info: {
-          type: 'office'
-        },
         // 动态
         dynamicList: [
           {title: "官方公告", value: "office"},
@@ -192,6 +177,16 @@
             {title: "【04-26】", subtitle: ' 关于Memcached反射放大攻击的安全预警通知', desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."}
           ],
         },
+        // 资质认证
+        auth: [
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png')
+        ],
         //了解新睿云
         understands: [
           {img: require('../assets/logo.png'), title: "自建数据", desc: "中心12+"},
