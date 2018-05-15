@@ -38,13 +38,37 @@
         </div>
       </div>
     </div>
+    <!--解决定制方案-->
     <!--动态-->
+    <div class="scheme-wrapper">
+      <h6 class="title">解决定制方案</h6>
+      <div class="scheme-content">
+        <div class="scheme-content-item" v-for="picture in schemes">
+          <img :src="picture" style="width:2rem;height:2rem;">
+        </div>
+      </div>
+    </div>
     <div class="dynamic-wrapper">
       <h6 class="title">新睿云动态</h6>
       <tab :line-width="2" active-color="#00aaff" custom-bar-width="80%">
-        <tab-item selected>官方公告</tab-item>
-        <tab-item>业界新闻</tab-item>
+        <tab-item selected @on-item-click="dynamicContent.showNews = false ,dynamicContent.showOffices = true">官方公告
+        </tab-item>
+        <tab-item @on-item-click="dynamicContent.showNews = true ,dynamicContent.showOffices = false">业界新闻</tab-item>
       </tab>
+      <div class="dynamic-content">
+        <ul v-if="dynamicContent.showOffices">
+          <li v-for="(item,index) in dynamicContent.offices">
+            <h6 class="dynamic-content-item-title"><span>{{item.title}}</span>{{item.subtitle}} </h6>
+            <p class="dynamic-content-item-desc">{{item.desc}}</p>
+          </li>
+        </ul>
+        <ul v-if="dynamicContent.showNews">
+          <li v-for="(item,index) in dynamicContent.News">
+            <h6 class="dynamic-content-item-title"><span>{{item.title}}</span>{{item.subtitle}} </h6>
+            <p class="dynamic-content-item-desc">{{item.desc}}</p>
+          </li>
+        </ul>
+      </div>
     </div>
     <!--资质认证-->
     <div class="certification-wrapper">
@@ -60,7 +84,7 @@
       <h6 class="title">了解新睿云</h6>
       <div class="understands-content">
         <div class="understands-item" v-for="(item,index) in understands">
-          <p><img :src=item.img style="width: 2rem;height: 2rem;"></p>
+          <p><img :src=item.img style="width: 2.75rem;height: 2.4rem;"></p>
           <div class="understands-item-bottom">
             <p>{{item.title}}</p>
             <p>{{item.desc}}</p>
@@ -143,13 +167,22 @@
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }],
-        // 动态
-        dynamicList: [
-          {title: "官方公告", value: "office"},
-          {title: "业界新闻", value: "news"}
+        // 定制方案
+        schemes:[
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
+          require('../assets/logo.png')
         ],
         //动态集合
         dynamicContent: {
+          showOffices: true,
+          showNews: false,
           offices: [
             {
               title: '【03-05】',
@@ -161,7 +194,16 @@
               subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
               desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
             },
-            {title: "【03-17】", subtitle: ' 关于Memcached反射放大攻击的安全预警通知', desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."}
+            {
+              title: "【03-17】",
+              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
+              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
+            },
+            {
+              title: "【01-04】",
+              subtitle: '  【重要通知】小鸟云平台安全升级通告',
+              desc: "近日，英特尔处理器被发现重大安全漏洞。为解决此安全问题，小鸟云华北1区（原华北多线）、华南1区（原华..."
+            },
           ],
           News: [
             {
@@ -174,11 +216,22 @@
               subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
               desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
             },
-            {title: "【04-26】", subtitle: ' 关于Memcached反射放大攻击的安全预警通知', desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."}
+            {
+              title: "【04-26】",
+              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
+              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
+            },
+            {
+              title: "【11-14】",
+              subtitle: '  搞事情？小鸟云计算又一动态BGP节点开放',
+              desc: "【科技讯】11月14日消息，继去年9月9日，小鸟云计算与中国电信（内蒙古）签署战略合作协议后，在今年..."
+            },
           ],
         },
         // 资质认证
         auth: [
+          require('../assets/logo.png'),
+          require('../assets/logo.png'),
           require('../assets/logo.png'),
           require('../assets/logo.png'),
           require('../assets/logo.png'),

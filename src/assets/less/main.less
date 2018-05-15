@@ -5,6 +5,7 @@
 
 body {
   background-color: #f4f4f4;
+  font-family: Helvetica Neue,sans-serif;
 }
 
 * {
@@ -159,7 +160,28 @@ body {
     }
   }
 }
-
+ //方案
+.scheme-wrapper{
+  margin-bottom: .5rem;
+  background: #fff;
+  .title {
+    padding: .5rem 1rem;
+    font-size: .9rem;
+    font-weight: normal;
+    color: #000;
+    border-bottom: 1px solid #e7e7e7;
+  }
+  .scheme-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem .8rem ;
+    overflow-x: auto;
+    .scheme-content-item {
+      margin-right: 1rem;
+    }
+  }
+}
+//动态
 .dynamic-wrapper {
   background-color: #FFF;
   margin-bottom: .5rem;
@@ -170,57 +192,43 @@ body {
     color: #000;
     border-bottom: 1px solid #e7e7e7;
   }
-  .dynamic-content {
-    padding: .5rem;
-    display: flex;
-    justify-content: space-between;
-    .dynamic-content-title {
-      width: 48%;
-      text-align: center;
-      p {
-        line-height: 2.65rem;
-        color: #333;
-        font-size: .8rem;
-      }
-    }
-    .dynamic-content-active {
-      border-bottom: 2px solid #0af;
-      p {
-        color: #0af;
-      }
-    }
-  }
-  .dynamic {
-    padding: 1rem .4rem;
-    .dynamicContent-item {
-      padding: .5rem 0;
-      h3 {
-        margin-bottom: .5rem;
-        overflow: hidden;
-        font-weight: normal;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: .75rem;
-        font-size: .75rem;
-        color: #333;
-        span {
-          color: #999;
+  .dynamic-content{
+    ul{
+      padding: .375rem .725rem;
+      li{
+        list-style: none;
+        border-bottom: .025rem solid #e7e7e7;
+        padding-top: .8rem;
+        height: 3.175rem;
+        .dynamic-content-item-title{
+          font-weight: normal;
+          margin-bottom: .5rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: .75rem;
+          font-size: .75rem;
+          color: #333;
+          span{
+            color: #999;
+          }
         }
-      }
-      p {
-        padding-left: .3rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: .65rem;
-        font-size: .65rem;
-        color: #999;
+        .dynamic-content-item-desc{
+          padding-left: .3rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: .6rem;
+          font-size: .6rem;
+          color: #999;
+
+        }
       }
     }
   }
 
 }
-
+//认证
 .certification-wrapper {
   background-color: #FFF;
   margin-bottom: .5rem;
@@ -233,35 +241,45 @@ body {
   }
   .certification-content {
     display: flex;
-    padding: .5rem 1rem;
+    justify-content: space-between;
+    padding: 1rem .8rem;
     overflow-x: auto;
     .certification-content-item {
       margin-right: 1rem;
     }
   }
 }
-
+//了解新睿云
 .understand-wrapper {
+  margin-bottom: .5rem;
+  background: #fff;
   .title {
+    padding: .5rem 1rem;
     font-size: .9rem;
-    padding-left: 1rem;
     font-weight: normal;
     color: #000;
+    border-bottom: 1px solid #e7e7e7;
   }
   .understands-content {
-    margin-top: 1.5rem;
-    border-top: 1px solid #e7e7e7;
     display: flex;
     justify-content: space-between;
-    padding: 1.5rem 1rem 2rem 1rem;
-    text-align: center;
+    padding: 0 1.2rem;
     .understands-item {
+      padding-top: .725rem;
+      font-size: .5rem;
+      text-align: center;
+      color: #666;
+      text-align: center;
       .understands-item-bottom {
         p {
-          line-height: .5rem;
-          font-size: .5rem;
+          line-height: .7rem;
+          height: .7rem;
           padding-top: .5rem;
           color: #666;
+          &:last-of-type{
+            line-height: 1.15rem;
+            height: 1.15rem;
+          }
         }
       }
     }
