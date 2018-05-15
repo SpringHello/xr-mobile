@@ -6,14 +6,17 @@
         <div class="form-item">
           <!--禁止自动填充-->
           <input type="text" style="height: 0;opacity: 0;position: absolute;padding:0px;">
-          <input type="text" v-model="signForm.username" placeholder="已验证邮箱/注册手机号" autocomplete="off">
+          <input type="text" v-model="signForm.username" placeholder="已验证邮箱/注册手机号" autocomplete="off"
+                 class="main-input">
         </div>
         <div class="form-item">
           <input type="password" style="height: 0;opacity: 0;position: absolute;z-index: -999;padding:0px;"
                  autocomplete="off">
           <input type="text" v-model="signForm.password" placeholder="密码" v-if="signForm.showPassword"
+                 class="main-input"
                  autocomplete="off">
-          <input type="password" v-model="signForm.password" placeholder="密码" v-else autocomplete="off">
+          <input type="password" v-model="signForm.password" placeholder="密码" v-else autocomplete="off"
+                 class="main-input">
         </div>
         <div class="form-item" style="border:none">
           <x-button type="primary">登录</x-button>
