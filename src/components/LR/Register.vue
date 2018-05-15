@@ -43,7 +43,7 @@
 
 <script>
   import {XHeader, XButton, Alert} from 'vux'
-
+  import regexp from '@/util/RegExp'
   export default {
     components: {
       XHeader,
@@ -64,8 +64,17 @@
     },
     methods: {
       sendCode(){
+        if (this.signForm.username.trim() == '') {
+          this.$vux.toast.text('请输入手机/邮箱')
+          return
+        }
+        // 展现图片验证码前先校验手机/邮箱
+        if (!regexp.phoneRegexp.test(this.signForm.username) && !regexp.emailRegexp.test(this.signForm.username)) {
+          // 既不是手机也不是邮箱
+          this.$vux.toast.text('手机/邮箱格式错误')
+          return
+        }
         this.showAlert = true
-        return false
       },
       register(){
         console.log('注册成功')
