@@ -5,6 +5,8 @@ import Main from '@/components/Main'
 import Home from '@/components/Home'
 import Sort from '@/components/Sort'
 
+import Dynamic from '@/components/App/Dynamic'
+
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
 import Reset from '@/components/LR/Reset'
@@ -37,6 +39,11 @@ export default new Router({
       path: '/Reset',
       name: 'Reset',
       component: Reset,
+    },
+    {
+      path: '/Dynamic',
+      name: 'Dynamic',
+      component: Dynamic,
     }
   ]
 })

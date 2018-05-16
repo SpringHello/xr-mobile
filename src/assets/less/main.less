@@ -199,27 +199,31 @@ body {
         list-style: none;
         border-bottom: .025rem solid #e7e7e7;
         padding-top: .8rem;
-        height: 3.175rem;
+        height: 3rem;
         .dynamic-content-item-title{
+          display: inline-block;
+          width: 12rem;
           font-weight: normal;
-          margin-bottom: .5rem;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          line-height: .75rem;
-          font-size: .75rem;
+          line-height: .65rem;
+          font-size: .65rem;
           color: #333;
-          span{
-            color: #999;
-          }
         }
-        .dynamic-content-item-desc{
-          padding-left: .3rem;
+        .dynamic-content-item-content{
+          width: 12rem;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          line-height: .6rem;
-          font-size: .6rem;
+          line-height: .65rem;
+          font-size: .65rem;
+          color: #999;
+        }
+        .item-time{
+          float: right;
+          line-height: 1.8rem;
+          font-size: .65rem;
           color: #999;
 
         }
@@ -271,10 +275,11 @@ body {
       color: #666;
       text-align: center;
       .understands-item-bottom {
+        padding-bottom: .7rem;
         p {
           line-height: .7rem;
           height: .7rem;
-          padding-top: .5rem;
+          padding-top: .3rem;
           color: #666;
           &:last-of-type{
             line-height: 1.15rem;

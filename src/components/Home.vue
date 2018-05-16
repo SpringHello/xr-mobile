@@ -39,7 +39,6 @@
       </div>
     </div>
     <!--解决定制方案-->
-    <!--动态-->
     <div class="scheme-wrapper">
       <h6 class="title">解决定制方案</h6>
       <div class="scheme-content">
@@ -48,6 +47,7 @@
         </div>
       </div>
     </div>
+    <!--动态-->
     <div class="dynamic-wrapper">
       <h6 class="title">新睿云动态</h6>
       <tab :line-width="2" active-color="#00aaff" custom-bar-width="80%">
@@ -57,15 +57,13 @@
       </tab>
       <div class="dynamic-content">
         <ul v-if="dynamicContent.showOffices">
-          <li v-for="(item,index) in dynamicContent.offices">
-            <h6 class="dynamic-content-item-title"><span>{{item.title}}</span>{{item.subtitle}} </h6>
-            <p class="dynamic-content-item-desc">{{item.desc}}</p>
+          <li v-for="(item,index) in dynamicContent.offices" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">
+            <h6 class="dynamic-content-item-title">{{item.title}}</h6><p class="item-time">{{item.createtime}}</p>
           </li>
         </ul>
         <ul v-if="dynamicContent.showNews">
           <li v-for="(item,index) in dynamicContent.News">
-            <h6 class="dynamic-content-item-title"><span>{{item.title}}</span>{{item.subtitle}} </h6>
-            <p class="dynamic-content-item-desc">{{item.desc}}</p>
+            <h6 class="dynamic-content-item-title" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><p class="item-time">{{item.createtime}}</p>
           </li>
         </ul>
       </div>
@@ -103,6 +101,7 @@
 
 <script>
   import {Swiper, XButton, Tab, TabItem} from 'vux'
+  import axios from '@/util/iaxios'
   export default {
     components: {
       Swiper,
@@ -168,7 +167,7 @@
             cost: 15
           }],
         // 定制方案
-        schemes:[
+        schemes: [
           require('../assets/logo.png'),
           require('../assets/logo.png'),
           require('../assets/logo.png'),
@@ -183,50 +182,8 @@
         dynamicContent: {
           showOffices: true,
           showNews: false,
-          offices: [
-            {
-              title: '【03-05】',
-              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
-              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
-            },
-            {
-              title: "【03-08】",
-              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
-              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
-            },
-            {
-              title: "【03-17】",
-              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
-              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
-            },
-            {
-              title: "【01-04】",
-              subtitle: '  【重要通知】小鸟云平台安全升级通告',
-              desc: "近日，英特尔处理器被发现重大安全漏洞。为解决此安全问题，小鸟云华北1区（原华北多线）、华南1区（原华..."
-            },
-          ],
-          News: [
-            {
-              title: "【04-06】",
-              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
-              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
-            },
-            {
-              title: "【04-20】",
-              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
-              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
-            },
-            {
-              title: "【04-26】",
-              subtitle: ' 关于Memcached反射放大攻击的安全预警通知',
-              desc: "近日，利用memcached服务器实施反射DDoS攻击的事件呈大幅上升趋势。..."
-            },
-            {
-              title: "【11-14】",
-              subtitle: '  搞事情？小鸟云计算又一动态BGP节点开放',
-              desc: "【科技讯】11月14日消息，继去年9月9日，小鸟云计算与中国电信（内蒙古）签署战略合作协议后，在今年..."
-            },
-          ],
+          offices: [],
+          News: [],
         },
         // 资质认证
         auth: [
@@ -248,6 +205,26 @@
           {img: require('../assets/logo.png'), title: "巨资打造", desc: "顶尖设施"},
         ]
       }
+    },
+    methods:{
+        setData(response){
+            if (response.status == 200 && response.data.status == 1) {
+              this.dynamicContent.offices = response.data.result.announcement_list
+              this.dynamicContent.News = response.data.result.news_list
+            }
+        }
+    },
+    beforeRouteEnter(to,from,next){
+      axios.get('user/getAnnouncement.do', {
+        params: {
+          listAll: -1,
+        }
+      }).then(response =>{
+          next(vm =>{
+              vm.setData(response)
+          })
+      })
+
     }
   }
 </script>
