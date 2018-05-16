@@ -50,7 +50,19 @@
     },
     methods: {
       hello(){
-        console.log('focus')
+        if (this.signForm.username == '') {
+          this.$vux.toast.text('请输入手机/邮箱')
+          return
+        }
+        if (this.signForm.vailCode == '') {
+          this.$vux.toast.text('请输入验证码')
+          return
+        }
+        if (this.signForm.password == '') {
+          this.$vux.toast.text('请输入密码')
+          return
+        }
+
       }
     }
   }
