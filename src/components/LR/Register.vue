@@ -13,7 +13,7 @@
           <input type="text" style="height: 0;opacity: 0;position: absolute;padding:0px;">
           <input type="text" v-model="signForm.vailCode" placeholder="验证码" autocomplete="off" class="main-input">
           <button class="vailCode-button" @click.prevent="showPictureCode">
-            获取短信验证码
+            {{sendButtonText}}
           </button>
         </div>
         <div class="form-item">
@@ -67,13 +67,20 @@
           passwordConfirm: '',
           showPassword: false
         },
+        sendButtonText: '获取验证码',
         showAlert: false,
         imgSrc: `user/getKaptchaImage.do?t=${new Date().getTime()}`//require('../../assets/logo.png')
       }
     },
+    created(){
+
+    },
     methods: {
       // 展示图片验证码
       showPictureCode(){
+        if (this.sendButtonText != '获取验证码') {
+          return
+        }
         if (this.signForm.username.trim() == '') {
           this.$vux.toast.text('请输入手机/邮箱')
           return
@@ -84,10 +91,25 @@
           this.$vux.toast.text('手机/邮箱格式错误')
           return
         }
-        this.showAlert = true
+        axios.get('user/isRegister.do', {
+          params: {
+            username: this.signForm.username
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.showAlert = true
+          } else {
+            this.$vux.toast.text(response.data.message)
+          }
+        })
+
       },
       // 发送手机验证码
       sendCode(){
+        // 没有输入验证码默认退出
+        if (this.signForm.pictureCode == '') {
+          return
+        }
         // 默认邮箱注册
         let isemail = '1'
         if (regexp.phoneRegexp.test(this.signForm.username)) {
@@ -102,6 +124,21 @@
           }
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
+            this.$vux.toast.show({
+              text: response.data.message
+            })
+            // 倒计时
+            let countDown = 60
+            this.sendButtonText = countDown + 's'
+            let interval = setInterval(() => {
+              countDown--
+              if (countDown == 0) {
+                this.sendButtonText = '获取验证码'
+                clearInterval(interval)
+              }
+              this.sendButtonText = countDown + 's'
+            }, 1000)
+          } else {
             this.$vux.toast.text(response.data.message)
           }
         })
@@ -119,6 +156,10 @@
           this.$vux.toast.text('请输入密码')
           return
         }
+        if (!regexp.registerPassword.test(this.signForm.password)) {
+          this.$vux.toast.text('密码格式错误')
+          return
+        }
         if (this.signForm.passwordConfirm == '') {
           this.$vux.toast.text('请输入确认密码')
           return
@@ -133,8 +174,14 @@
             password: this.signForm.password,
             code: this.signForm.vailCode
           }
-        }).then(response=>{
-
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.$vux.toast.show({
+              text: response.data.message
+            })
+          } else {
+            this.$vux.toast.text(response.data.message)
+          }
         })
       }
     }
