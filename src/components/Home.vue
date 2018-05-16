@@ -58,12 +58,12 @@
       <div class="dynamic-content">
         <ul v-if="dynamicContent.showOffices">
           <li v-for="(item,index) in dynamicContent.offices" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">
-            <h6 class="dynamic-content-item-title">{{item.title}}</h6><p class="item-time">{{item.createtime}}</p>
+            <h6 class="dynamic-content-item-title">{{item.title}}</h6><span class="item-time">{{item.createtime}}</span>
           </li>
         </ul>
         <ul v-if="dynamicContent.showNews">
           <li v-for="(item,index) in dynamicContent.News">
-            <h6 class="dynamic-content-item-title" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><p class="item-time">{{item.createtime}}</p>
+            <h6 class="dynamic-content-item-title" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><span class="item-time">{{item.createtime}}</span>
           </li>
         </ul>
       </div>
