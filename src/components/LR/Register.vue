@@ -102,7 +102,6 @@
             this.$vux.toast.text(response.data.message)
           }
         })
-
       },
       // 发送手机验证码
       sendCode(){
