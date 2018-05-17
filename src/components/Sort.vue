@@ -2,7 +2,7 @@
   <div style="margin-bottom: 2.25rem;">
     <!--顶部logo-->
     <header class="header-wrapper">
-      <h1>logo位置</h1>
+      <h1 style="text-align: center">分类</h1>
     </header>
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>

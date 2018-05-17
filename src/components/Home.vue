@@ -41,11 +41,11 @@
     <!--解决定制方案-->
     <div class="scheme-wrapper">
       <h6 class="title">解决定制方案</h6>
-      <div class="scheme-content">
-        <div class="scheme-content-item" v-for="picture in schemes">
-          <img :src="picture" style="width:2rem;height:2rem;">
+      <scroller lock-y :scrollbar-x=false>
+        <div class="box1">
+          <div class="box1-item" v-for="i in 7"><p>{{' ' + i + ' '}}</p></div>
         </div>
-      </div>
+      </scroller>
     </div>
     <!--动态-->
     <div class="dynamic-wrapper">
@@ -71,11 +71,11 @@
     <!--资质认证-->
     <div class="certification-wrapper">
       <h6 class="title">资质认证</h6>
-      <div class="certification-content">
-        <div class="certification-content-item" v-for="picture in auth">
-          <img :src="picture" style="width:2rem;height:2rem;">
+      <scroller lock-y :scrollbar-x=false>
+        <div class="box1">
+          <div class="box1-item" v-for="i in 7"><p>{{' ' + i + ' '}}</p></div>
         </div>
-      </div>
+      </scroller>
     </div>
     <!--了解新睿云-->
     <div class="understand-wrapper">
@@ -100,14 +100,15 @@
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem} from 'vux'
+  import {Swiper, XButton, Tab, TabItem,Scroller} from 'vux'
   import axios from '@/util/iaxios'
   export default {
     components: {
       Swiper,
       XButton,
       Tab,
-      TabItem
+      TabItem,
+      Scroller
     },
     data () {
       return {
@@ -167,17 +168,7 @@
             cost: 15
           }],
         // 定制方案
-        schemes: [
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png')
-        ],
+        schemes: [],
         //动态集合
         dynamicContent: {
           showOffices: true,
@@ -186,17 +177,7 @@
           News: [],
         },
         // 资质认证
-        auth: [
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png')
-        ],
+        auth: [],
         //了解新睿云
         understands: [
           {img: require('../assets/logo.png'), title: "自建数据", desc: "中心12+"},
