@@ -57,17 +57,13 @@
       </tab>
       <div class="dynamic-content">
         <ul v-if="dynamicContent.showOffices">
-          <li v-for="(item,index) in dynamicContent.offices"
-              @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">
-            <h6 class="dynamic-content-item-title">{{item.title}}</h6>
-            <p class="item-time">{{item.createtime}}</p>
+          <li v-for="(item,index) in dynamicContent.offices" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">
+            <h6 class="dynamic-content-item-title">{{item.title}}</h6><p class="item-time">{{item.createtime}}</p>
           </li>
         </ul>
         <ul v-if="dynamicContent.showNews">
           <li v-for="(item,index) in dynamicContent.News">
-            <h6 class="dynamic-content-item-title"
-                @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6>
-            <p class="item-time">{{item.createtime}}</p>
+            <h6 class="dynamic-content-item-title" @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><p class="item-time">{{item.createtime}}</p>
           </li>
         </ul>
       </div>
@@ -210,321 +206,26 @@
         ]
       }
     },
-    methods: {
-      setData(response){
-        if (response.status == 200 && response.data.status == 1) {
-          this.dynamicContent.offices = response.data.result.announcement_list
-          this.dynamicContent.News = response.data.result.news_list
+    methods:{
+        setData(response){
+            if (response.status == 200 && response.data.status == 1) {
+              this.dynamicContent.offices = response.data.result.announcement_list
+              this.dynamicContent.News = response.data.result.news_list
+            }
         }
-      }
     },
-    beforeRouteEnter(to, from, next){
+    beforeRouteEnter(to,from,next){
       console.log('beforeRouteEnter')
       axios.get('user/getAnnouncement.do', {
         params: {
           listAll: -1,
         }
-      }).then(response => {
-        next(vm => {
-          vm.setData(response)
-        })
+      }).then(response =>{
+          next(vm =>{
+              vm.setData(response)
+          })
       })
 
     }
   }
 </script>
-
-<style rel="stylesheet/less" lang="less" scoped>
-  /*顶部介绍条*/
-  .header-wrapper {
-    padding: .5rem 1rem;
-    background-color: #2b3033;
-
-    h1 {
-      font-size: 1rem;
-      color: #fff;
-    }
-
-  }
-
-  .banner-introduce {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: .5rem;
-
-    >
-    a {
-      background-color: red;
-      height: 2.5rem;
-      line-height: 2.5rem;
-      text-align: center;
-      width: 25%;
-      border-left: 1px solid #fff;
-      border-top: 1px solid #fff;
-      font-size: .5rem;
-      color: #fff;
-
-      &
-      :first-of-type {
-        border-left: none;
-      }
-
-    }
-  }
-
-  .product-wrapper {
-    background-color: #fff;
-    margin-bottom: .5rem;
-
-    .product-header {
-      font-size: .9rem;
-      padding: .5rem 1rem;
-      border-bottom: 1px solid #e7e7e7;
-    }
-
-    .product-content {
-
-      .product-content-item {
-
-        .product-item-header {
-          position: relative;
-          border-bottom: 1px solid #e7e7e7;
-
-          p {
-            padding-left: 4rem;
-            line-height: 3rem;
-            position: relative;
-            font-size: .8rem;
-
-            &
-            :before {
-              content: '';
-              width: 2rem;
-              height: 2rem;
-              display: block;
-              background-color: #00aaff;
-              position: absolute;
-              left: 1rem;
-              top: .5rem;
-            }
-
-            &
-            :after {
-              content: '';
-              border-bottom: 1px solid #999;
-              border-left: 1px solid #999;
-              width: .5rem;
-              height: .5rem;
-              display: block;
-              position: absolute;
-              top: 50%;
-              right: 1.5rem;
-              transform-origin: 50% 50%;
-              transform: translateY(-50%) rotate(-45deg);
-            }
-
-          }
-        }
-        .product-item-content {
-          padding: .5rem 1rem;
-          border-bottom: 1px solid #e7e7e7;
-
-          h6 {
-            font-weight: normal;
-            font-size: .75rem;
-            color: #333;
-            line-height: 1.5rem;
-          }
-
-          p {
-            font-weight: normal;
-            font-size: .6rem;
-            color: #666;
-            padding-bottom: .1rem;
-          }
-
-          span {
-            font-size: 0.8rem;
-          }
-
-          .product-item-price {
-            color: #0af;
-            font-size: 1rem;
-          }
-
-        }
-      }
-      .product-content-item-active {
-
-        .product-item-header {
-          color: #0af;
-
-          p {
-
-            &
-            :after {
-              transform: rotate(135deg);
-              border-bottom: 1px solid #0af;
-              border-left: 1px solid #0af;
-            }
-
-          }
-        }
-      }
-    }
-  }
-
-  .scheme-wrapper {
-    margin-bottom: .5rem;
-    background: #fff;
-
-    .title {
-      padding: .5rem 1rem;
-      font-size: .9rem;
-      font-weight: normal;
-      color: #000;
-      border-bottom: 1px solid #e7e7e7;
-    }
-
-    .scheme-content {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem .8rem;
-      overflow-x: auto;
-
-      .scheme-content-item {
-        margin-right: 1rem;
-      }
-
-    }
-  }
-
-  .dynamic-wrapper {
-    background-color: #FFF;
-    margin-bottom: .5rem;
-
-    .title {
-      padding: .5rem 1rem;
-      font-size: .9rem;
-      font-weight: normal;
-      color: #000;
-      border-bottom: 1px solid #e7e7e7;
-    }
-
-    .dynamic-content {
-
-      ul {
-        padding: .375rem .725rem;
-
-        li {
-          list-style: none;
-          border-bottom: .025rem solid #e7e7e7;
-          padding-top: .8rem;
-          height: 3rem;
-
-          .dynamic-content-item-title {
-            display: inline-block;
-            width: 12rem;
-            font-weight: normal;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            line-height: .65rem;
-            font-size: .65rem;
-            color: #333;
-          }
-
-          .dynamic-content-item-content {
-            width: 12rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            line-height: .65rem;
-            font-size: .65rem;
-            color: #999;
-          }
-
-          .item-time {
-            float: right;
-            line-height: 1.8rem;
-            font-size: .65rem;
-            color: #999;
-
-          }
-
-        }
-      }
-    }
-
-  }
-
-  .certification-wrapper {
-    background-color: #FFF;
-    margin-bottom: .5rem;
-
-    .title {
-      padding: .5rem 1rem;
-      font-size: .9rem;
-      font-weight: normal;
-      color: #000;
-      border-bottom: 1px solid #e7e7e7;
-    }
-
-    .certification-content {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem .8rem;
-      overflow-x: auto;
-
-      .certification-content-item {
-        margin-right: 1rem;
-      }
-
-    }
-  }
-
-  .understand-wrapper {
-    margin-bottom: .5rem;
-    background: #fff;
-
-    .title {
-      padding: .5rem 1rem;
-      font-size: .9rem;
-      font-weight: normal;
-      color: #000;
-      border-bottom: 1px solid #e7e7e7;
-    }
-
-    .understands-content {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1.2rem;
-
-      .understands-item {
-        padding-top: .725rem;
-        font-size: .5rem;
-        text-align: center;
-        color: #666;
-        text-align: center;
-
-        .understands-item-bottom {
-          padding-bottom: .7rem;
-
-          p {
-            line-height: .7rem;
-            height: .7rem;
-            padding-top: .3rem;
-            color: #666;
-
-            &
-            :last-of-type {
-              line-height: 1.15rem;
-              height: 1.15rem;
-            }
-
-          }
-        }
-      }
-    }
-  }
-</style>

@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Home from '@/components/Home'
 import Sort from '@/components/Sort'
+import Console from '@/components/Console'
+import Mine from '@/components/Mine'
 
 import Dynamic from '@/components/App/Dynamic'
 
@@ -23,6 +25,8 @@ export default new Router({
         {path: '/', name: 'Home', component: Home},
         {path: 'Home', name: 'Home', component: Home},
         {path: 'Sort', name: 'Sort', component: Sort},
+        {path: 'Console', name: 'Console', component: Console},
+        {path: 'Mine', name: 'Mine', component: Mine},
       ]
     },
     {
