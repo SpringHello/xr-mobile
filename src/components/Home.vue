@@ -1,22 +1,24 @@
 <template>
   <div style="margin-bottom: 2.25rem;">
     <!--顶部logo-->
-    <header class="header-wrapper">
-      <h1>logo位置</h1>
-    </header>
+    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
     <!--走马灯下方介绍-->
     <div class="banner-introduce">
-      <router-link to="home">探索数字世界</router-link>
-      <router-link to="home">探索数字世界</router-link>
-      <router-link to="home">探索数字世界</router-link>
-      <router-link to="home">探索数字世界</router-link>
+      <grid :show-lr-borders="false" :show-vertical-dividers="false">
+        <grid-item v-for="(item,index) in introduce" :link="item.url" :key="index">
+          <div style="text-align: center">
+            <img src="" style="width:2rem;height:1.7rem;display: block;margin:auto">
+            <span style="font-size:.5rem;color:rgba(34,34,34,1);">{{item.title}}</span>
+          </div>
+        </grid-item>
+      </grid>
     </div>
     <!--产品模块-->
     <div class="product-wrapper">
       <div class="product-header">
-        <p>云计算产品</p>
+        <p>云产品目录</p>
       </div>
       <div class="product-content">
         <div v-for="product in productList" class="product-content-item"
@@ -41,11 +43,11 @@
     <!--解决定制方案-->
     <div class="scheme-wrapper">
       <h6 class="title">解决定制方案</h6>
-      <div class="scheme-content">
-        <div class="scheme-content-item" v-for="picture in schemes">
-          <img :src="picture" style="width:2rem;height:2rem;">
+      <scroller lock-y :scrollbar-x=false>
+        <div class="box1">
+          <div class="box1-item" v-for="i in 7"><p>{{' ' + i + ' '}}</p></div>
         </div>
-      </div>
+      </scroller>
     </div>
     <!--动态-->
     <div class="dynamic-wrapper">
@@ -59,15 +61,14 @@
         <ul v-if="dynamicContent.showOffices">
           <li v-for="(item,index) in dynamicContent.offices"
               @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">
-            <h6 class="dynamic-content-item-title">{{item.title}}</h6>
-            <p class="item-time">{{item.createtime}}</p>
+            <h6 class="dynamic-content-item-title">{{item.title}}</h6><span class="item-time">{{item.createtime}}</span>
           </li>
         </ul>
         <ul v-if="dynamicContent.showNews">
           <li v-for="(item,index) in dynamicContent.News">
             <h6 class="dynamic-content-item-title"
-                @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6>
-            <p class="item-time">{{item.createtime}}</p>
+                @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><span
+            class="item-time">{{item.createtime}}</span>
           </li>
         </ul>
       </div>
@@ -75,11 +76,11 @@
     <!--资质认证-->
     <div class="certification-wrapper">
       <h6 class="title">资质认证</h6>
-      <div class="certification-content">
-        <div class="certification-content-item" v-for="picture in auth">
-          <img :src="picture" style="width:2rem;height:2rem;">
+      <scroller lock-y :scrollbar-x=false>
+        <div class="box1">
+          <div class="box1-item" v-for="i in 7"><p>{{' ' + i + ' '}}</p></div>
         </div>
-      </div>
+      </scroller>
     </div>
     <!--了解新睿云-->
     <div class="understand-wrapper">
@@ -104,14 +105,18 @@
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem} from 'vux'
+  import {Swiper, XButton, Tab, TabItem, Scroller, XHeader, Grid, GridItem} from 'vux'
   import axios from '@/util/iaxios'
   export default {
     components: {
       Swiper,
       XButton,
       Tab,
-      TabItem
+      TabItem,
+      Scroller,
+      XHeader,
+      Grid,
+      GridItem
     },
     data () {
       return {
@@ -130,6 +135,13 @@
             img: 'https://static.vux.li/demo/5.jpg',
             fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
           }
+        ],
+        // 走马灯下方介绍
+        introduce: [
+          {img: '', title: "云服务器", url: "/sort"},
+          {img: '', title: "云硬盘", url: "/sort"},
+          {img: '', title: "负载均衡", url: "/sort"},
+          {img: '', title: "弹性IP", url: "/sort"}
         ],
         // 产品资料
         productList: [
@@ -171,17 +183,7 @@
             cost: 15
           }],
         // 定制方案
-        schemes: [
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png')
-        ],
+        schemes: [],
         //动态集合
         dynamicContent: {
           showOffices: true,
@@ -190,17 +192,7 @@
           News: [],
         },
         // 资质认证
-        auth: [
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png'),
-          require('../assets/logo.png')
-        ],
+        auth: [],
         //了解新睿云
         understands: [
           {img: require('../assets/logo.png'), title: "自建数据", desc: "中心12+"},
@@ -235,69 +227,35 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
+
   /*顶部介绍条*/
-  .header-wrapper {
-    padding: .5rem 1rem;
-    background-color: #2b3033;
-
-    h1 {
-      font-size: 1rem;
-      color: #fff;
-    }
-
+  .vux-header {
+    background: linear-gradient(180deg, rgba(44, 45, 49, 1), rgba(16, 16, 19, 1));
   }
 
   .banner-introduce {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: .5rem;
-
-    >
-    a {
-      background-color: red;
-      height: 2.5rem;
-      line-height: 2.5rem;
-      text-align: center;
-      width: 25%;
-      border-left: 1px solid #fff;
-      border-top: 1px solid #fff;
-      font-size: .5rem;
-      color: #fff;
-
-      &
-      :first-of-type {
-        border-left: none;
-      }
-
-    }
   }
 
   .product-wrapper {
     background-color: #fff;
     margin-bottom: .5rem;
-
     .product-header {
       font-size: .9rem;
       padding: .5rem 1rem;
       border-bottom: 1px solid #e7e7e7;
     }
-
     .product-content {
-
       .product-content-item {
-
         .product-item-header {
           position: relative;
           border-bottom: 1px solid #e7e7e7;
-
           p {
             padding-left: 4rem;
             line-height: 3rem;
             position: relative;
             font-size: .8rem;
-
-            &
-            :before {
+            &:before {
               content: '';
               width: 2rem;
               height: 2rem;
@@ -307,9 +265,7 @@
               left: 1rem;
               top: .5rem;
             }
-
-            &
-            :after {
+            &:after {
               content: '';
               border-bottom: 1px solid #999;
               border-left: 1px solid #999;
@@ -322,31 +278,26 @@
               transform-origin: 50% 50%;
               transform: translateY(-50%) rotate(-45deg);
             }
-
           }
         }
         .product-item-content {
           padding: .5rem 1rem;
           border-bottom: 1px solid #e7e7e7;
-
           h6 {
             font-weight: normal;
             font-size: .75rem;
             color: #333;
             line-height: 1.5rem;
           }
-
           p {
             font-weight: normal;
             font-size: .6rem;
             color: #666;
             padding-bottom: .1rem;
           }
-
           span {
             font-size: 0.8rem;
           }
-
           .product-item-price {
             color: #0af;
             font-size: 1rem;
@@ -355,29 +306,24 @@
         }
       }
       .product-content-item-active {
-
         .product-item-header {
           color: #0af;
-
           p {
-
-            &
-            :after {
+            &:after {
               transform: rotate(135deg);
               border-bottom: 1px solid #0af;
               border-left: 1px solid #0af;
             }
-
           }
         }
       }
     }
   }
 
+  //方案
   .scheme-wrapper {
     margin-bottom: .5rem;
-    background: #fff;
-
+    background: #FFF;
     .title {
       padding: .5rem 1rem;
       font-size: .9rem;
@@ -385,24 +331,32 @@
       color: #000;
       border-bottom: 1px solid #e7e7e7;
     }
-
-    .scheme-content {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem .8rem;
-      overflow-x: auto;
-
-      .scheme-content-item {
-        margin-right: 1rem;
+    .box1 {
+      height: 4.5rem;
+      position: relative;
+      width: 40rem;
+      padding: .6rem 0;
+      .box1-item {
+        width: 4.5rem;
+        height: 4.5rem;
+        background-color: #ccc;
+        display: inline-block;
+        margin-left: 1rem;
+        float: left;
+        text-align: center;
+        line-height: 4.5rem;
+        p {
+          line-height: 4.5rem;
+        }
       }
-
     }
+
   }
 
+  //动态
   .dynamic-wrapper {
     background-color: #FFF;
     margin-bottom: .5rem;
-
     .title {
       padding: .5rem 1rem;
       font-size: .9rem;
@@ -410,21 +364,15 @@
       color: #000;
       border-bottom: 1px solid #e7e7e7;
     }
-
     .dynamic-content {
-
       ul {
         padding: .375rem .725rem;
-
         li {
           list-style: none;
           border-bottom: .025rem solid #e7e7e7;
           padding-top: .8rem;
-          height: 3rem;
-
+          height: 2.5rem;
           .dynamic-content-item-title {
-            display: inline-block;
-            width: 12rem;
             font-weight: normal;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -432,10 +380,9 @@
             line-height: .65rem;
             font-size: .65rem;
             color: #333;
+            margin-bottom: .5rem;
           }
-
           .dynamic-content-item-content {
-            width: 12rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -443,25 +390,23 @@
             font-size: .65rem;
             color: #999;
           }
-
           .item-time {
             float: right;
-            line-height: 1.8rem;
+            line-height: .8rem;
             font-size: .65rem;
             color: #999;
 
           }
-
         }
       }
     }
 
   }
 
+  //认证
   .certification-wrapper {
     background-color: #FFF;
     margin-bottom: .5rem;
-
     .title {
       padding: .5rem 1rem;
       font-size: .9rem;
@@ -469,24 +414,31 @@
       color: #000;
       border-bottom: 1px solid #e7e7e7;
     }
-
-    .certification-content {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem .8rem;
-      overflow-x: auto;
-
-      .certification-content-item {
-        margin-right: 1rem;
+    .box1 {
+      height: 4.5rem;
+      position: relative;
+      width: 40rem;
+      padding: .6rem 0;
+      .box1-item {
+        width: 4.5rem;
+        height: 4.5rem;
+        background-color: #ccc;
+        display: inline-block;
+        margin-left: 1rem;
+        float: left;
+        text-align: center;
+        line-height: 4.5rem;
+        p {
+          line-height: 4.5rem;
+        }
       }
-
     }
   }
 
+  //了解新睿云
   .understand-wrapper {
     margin-bottom: .5rem;
     background: #fff;
-
     .title {
       padding: .5rem 1rem;
       font-size: .9rem;
@@ -494,37 +446,31 @@
       color: #000;
       border-bottom: 1px solid #e7e7e7;
     }
-
     .understands-content {
       display: flex;
       justify-content: space-between;
       padding: 0 1.2rem;
-
       .understands-item {
         padding-top: .725rem;
         font-size: .5rem;
         text-align: center;
         color: #666;
         text-align: center;
-
         .understands-item-bottom {
           padding-bottom: .7rem;
-
           p {
             line-height: .7rem;
             height: .7rem;
             padding-top: .3rem;
             color: #666;
-
-            &
-            :last-of-type {
+            &:last-of-type {
               line-height: 1.15rem;
               height: 1.15rem;
             }
-
           }
         }
       }
     }
   }
+
 </style>
