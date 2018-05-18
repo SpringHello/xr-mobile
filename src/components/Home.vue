@@ -9,8 +9,8 @@
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
         <grid-item v-for="(item,index) in introduce" :link="item.url" :key="index">
           <div style="text-align: center">
-            <img src="" style="width:2rem;height:1.7rem;display: block;margin:auto">
-            <span style="font-size:.5rem;color:rgba(34,34,34,1);">{{item.title}}</span>
+            <img src="" class="introduce-img">
+            <span class="introduce-desc">{{item.title}}</span>
           </div>
         </grid-item>
       </grid>
@@ -87,7 +87,7 @@
       <h6 class="title">了解新睿云</h6>
       <div class="understands-content">
         <div class="understands-item" v-for="(item,index) in understands">
-          <p><img :src=item.img style="width: 2.75rem;height: 2.4rem;"></p>
+          <p><img :src=item.img class="item-img"></p>
           <div class="understands-item-bottom">
             <p>{{item.title}}</p>
             <p>{{item.desc}}</p>
@@ -235,6 +235,16 @@
 
   .banner-introduce {
     margin-bottom: .5rem;
+    .introduce-img {
+      width: 2rem;
+      height: 1.7rem;
+      display: block;
+      margin: auto;
+    }
+    .introduce-desc {
+      font-size: .5rem;
+      color: rgba(34, 34, 34, 1);
+    }
   }
 
   .product-wrapper {
@@ -371,7 +381,7 @@
           list-style: none;
           border-bottom: .025rem solid #e7e7e7;
           padding-top: .8rem;
-          height: 2.5rem;
+          height: 2.8rem;
           .dynamic-content-item-title {
             font-weight: normal;
             overflow: hidden;
@@ -456,6 +466,10 @@
         text-align: center;
         color: #666;
         text-align: center;
+        .item-img {
+          width: 2.75rem;
+          height: 2.4rem;
+        }
         .understands-item-bottom {
           padding-bottom: .7rem;
           p {
