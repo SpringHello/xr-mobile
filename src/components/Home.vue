@@ -9,8 +9,8 @@
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
         <grid-item v-for="(item,index) in introduce" :link="item.url" :key="index">
           <div style="text-align: center">
-            <img src="" style="width:2rem;height:1.7rem;display: block;margin:auto">
-            <span style="font-size:.5rem;color:rgba(34,34,34,1);">{{item.title}}</span>
+            <img src="" class="introduce-img">
+            <span class="introduce-desc">{{item.title}}</span>
           </div>
         </grid-item>
       </grid>
@@ -32,7 +32,7 @@
             <div>
               <span><span class="product-item-price">{{product.cost}}</span>元/月起</span>
               <div style="float: right">
-                <router-link to="home" class="link-button-default">查看详情</router-link>
+                <router-link :to="{path:'prodetail',query:{item:product}}" class="link-button-default">查看详情</router-link>
                 <router-link to="home" class="link-button-default link-button-main">立即选购</router-link>
               </div>
             </div>
@@ -87,7 +87,7 @@
       <h6 class="title">了解新睿云</h6>
       <div class="understands-content">
         <div class="understands-item" v-for="(item,index) in understands">
-          <p><img :src=item.img style="width: 2.75rem;height: 2.4rem;"></p>
+          <p><img :src=item.img class="item-img"></p>
           <div class="understands-item-bottom">
             <p>{{item.title}}</p>
             <p>{{item.desc}}</p>
@@ -148,37 +148,37 @@
           {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }],
@@ -235,6 +235,16 @@
 
   .banner-introduce {
     margin-bottom: .5rem;
+    .introduce-img {
+      width: 2rem;
+      height: 1.7rem;
+      display: block;
+      margin: auto;
+    }
+    .introduce-desc {
+      font-size: .5rem;
+      color: rgba(34, 34, 34, 1);
+    }
   }
 
   .product-wrapper {
@@ -371,7 +381,7 @@
           list-style: none;
           border-bottom: .025rem solid #e7e7e7;
           padding-top: .8rem;
-          height: 2.5rem;
+          height: 2.8rem;
           .dynamic-content-item-title {
             font-weight: normal;
             overflow: hidden;
@@ -456,6 +466,10 @@
         text-align: center;
         color: #666;
         text-align: center;
+        .item-img {
+          width: 2.75rem;
+          height: 2.4rem;
+        }
         .understands-item-bottom {
           padding-bottom: .7rem;
           p {

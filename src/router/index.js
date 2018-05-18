@@ -8,6 +8,7 @@ import Console from '@/components/Console'
 import Mine from '@/components/Mine'
 
 import Dynamic from '@/components/App/Dynamic'
+import Prodetail from '@/components/App/Prodetail'
 
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
@@ -48,6 +49,11 @@ export default new Router({
       path: '/Dynamic',
       name: 'Dynamic',
       component: Dynamic,
-    }
+    },
+    {
+      path: '/Prodetail',
+      name: 'Prodetail',
+      component: Prodetail,
+    },
   ]
 })
