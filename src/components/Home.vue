@@ -1,22 +1,24 @@
 <template>
   <div style="margin-bottom: 2.25rem;">
     <!--顶部logo-->
-    <header class="header-wrapper">
-      <h1>logo位置</h1>
-    </header>
+    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
     <!--走马灯下方介绍-->
     <div class="banner-introduce">
-      <router-link to="home">探索数字世界</router-link>
-      <router-link to="home">探索数字世界</router-link>
-      <router-link to="home">探索数字世界</router-link>
-      <router-link to="home">探索数字世界</router-link>
+      <grid :show-lr-borders="false" :show-vertical-dividers="false">
+        <grid-item v-for="(item,index) in introduce" :link="item.url" :key="index">
+          <div style="text-align: center">
+            <p style="width:3.5rem;height:3rem; background:rgba(216,216,216,1);"></p>
+            <span style="font-size:.5rem;color:rgba(34,34,34,1);">{{item.title}}</span>
+          </div>
+        </grid-item>
+      </grid>
     </div>
     <!--产品模块-->
     <div class="product-wrapper">
       <div class="product-header">
-        <p>云计算产品</p>
+        <p>云产品目录</p>
       </div>
       <div class="product-content">
         <div v-for="product in productList" class="product-content-item"
@@ -100,7 +102,7 @@
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem,Scroller} from 'vux'
+  import {Swiper, XButton, Tab, TabItem,Scroller,XHeader, Grid, GridItem} from 'vux'
   import axios from '@/util/iaxios'
   export default {
     components: {
@@ -108,7 +110,10 @@
       XButton,
       Tab,
       TabItem,
-      Scroller
+      Scroller,
+      XHeader,
+      Grid,
+      GridItem
     },
     data () {
       return {
@@ -127,6 +132,13 @@
             img: 'https://static.vux.li/demo/5.jpg',
             fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
           }
+        ],
+        // 走马灯下方介绍
+        introduce:[
+          {img:'',title:"云服务器",url:"/sort"},
+          {img:'',title:"云硬盘",url:"/sort"},
+          {img:'',title:"负载均衡",url:"/sort"},
+          {img:'',title:"弹性IP",url:"/sort"}
         ],
         // 产品资料
         productList: [

@@ -12,7 +12,7 @@
         <div class="weui-tabbar__icon">
           <p class="iconfont icon-classify"></p>
         </div>
-        <p class="weui-tabbar__label"><span>分类</span></p>
+        <p class="weui-tabbar__label"><span>活动</span></p>
       </router-link>
       <router-link to="console" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">

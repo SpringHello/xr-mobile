@@ -1,8 +1,5 @@
 <template>
   <div>
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus"  :left-options="{backText: ''}" style="background-color:#2b3033;">
-      新睿云
-    </x-header>
     <div v-if="$route.query.type==1">
       <div v-if="annContent!=null" class="anncontents">
         <div class="anncontent-header">
@@ -78,88 +75,3 @@
   }
 </script>
 
-<style lang="less">
-
-.anncontents {
-    padding: 1rem;
-  .anncontent-header {
-    padding-bottom: .5rem;
-    border-bottom: .025rem solid #ddd;
-  .anncontent-header-item {
-    width: 16.8rem;
-    line-height: 1.5rem;
-    font-size: .55rem;
-    color: #333;
-   .anncontent-header-lo {
-    width: 3rem;
-    height: 1rem;
-    color: #fff;
-    line-height: 1.1rem;
-    font-size: .5rem;
-    text-align: center;
-    background: #0af;
-    padding: .19rem .55rem;
-    margin-right: 1rem;
-  }
-  }
-
-  .anncontent-header-time {
-    line-height: 2.5rem;
-    font-size: .5rem;
-    color: #aaa;
-    span {
-    float: right;
-  }
-  }
-  }
-  .anncontent-content {
-    padding-top: .75rem;
-    text-align: justify;
-    font-size: .5rem;
-    line-height: 1.15rem;
-    color: #333;
-  }
-  }
-
-
-  .newContent {
-    padding: 1rem;
-  .newContent-header {
-    padding-bottom: .5rem;
-    border-bottom: .025rem solid #ddd;
-  .newContent-header-item {
-    width: 16.8rem;
-    line-height: 1.5rem;
-    font-size: .55rem;
-    color: #333;
-  .newContent-header-lo {
-    width: 3rem;
-    height: 1rem;
-    color: #fff;
-    line-height: 1.1rem;
-    font-size: .5rem;
-    text-align: center;
-    background: #8c8c8c;
-    padding: .19rem .55rem;
-    margin-right: 1rem;
-  }
-  }
-
-  .newContent-header-time {
-    line-height: 2.5rem;
-    font-size: .5rem;
-    color: #aaa;
-  span {
-    float: right;
-  }
-  }
-  }
-  .newContent-content {
-    padding-top: .75rem;
-    text-align: justify;
-    font-size: .5rem;
-    line-height: 1.15rem;
-    color: #333;
-  }
-  }
-</style>
