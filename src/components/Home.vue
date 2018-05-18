@@ -32,7 +32,7 @@
             <div>
               <span><span class="product-item-price">{{product.cost}}</span>元/月起</span>
               <div style="float: right">
-                <router-link to="home" class="link-button-default">查看详情</router-link>
+                <router-link :to="{path:'prodetail',query:{item:product}}" class="link-button-default">查看详情</router-link>
                 <router-link to="home" class="link-button-default link-button-main">立即选购</router-link>
               </div>
             </div>
@@ -148,37 +148,37 @@
           {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性的计算服务',
+            descTitle: '极速稳定高弹性',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }],
