@@ -5,13 +5,10 @@
       <form class="sign-form">
         <div class="form-item">
           <!--禁止自动填充-->
-          <input type="text" style="height: 0;opacity: 0;position: absolute;padding:0px;">
           <input type="text" v-model="signForm.username" placeholder="已验证邮箱/注册手机号" autocomplete="off"
                  class="main-input">
         </div>
         <div class="form-item">
-          <input type="password" style="height: 0;opacity: 0;position: absolute;z-index: -999;padding:0px;"
-                 autocomplete="off">
           <input type="text" v-model="signForm.password" placeholder="密码" v-if="signForm.showPassword"
                  class="main-input"
                  autocomplete="off">
@@ -20,7 +17,6 @@
         </div>
         <div class="form-item" style="position: relative">
           <!--禁止自动填充-->
-          <input type="text" style="height: 0;opacity: 0;position: absolute;padding:0px;">
           <input type="text" v-model="signForm.vailCode" placeholder="图片验证码" autocomplete="off"
                  class="main-input">
           <img :src="imgSrc" style="position:absolute;right:0px;top:0px;height:2rem;width:30%">
@@ -46,6 +42,10 @@
   import regexp from '@/util/RegExp'
   import axios from '@/util/iaxios'
   export default {
+    beforeRouteEnter(to, from, next){
+      console.log(to)
+      next()
+    },
     components: {
       XHeader,
       XButton
@@ -93,7 +93,7 @@
           }
         }).then((response) => {
           if (response.status == 200 && response.data.status == 1) {
-            this.$router.push({path: 'overview'})
+            this.$router.push({path: this.$route.query.from || 'Home'})
           } else {
             this.imgSrc = `user/getKaptchaImage.do?t=${new Date().getTime()}`
             this.$vux.toast.text(response.data.message)

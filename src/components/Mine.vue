@@ -3,31 +3,28 @@
     <header class="header-wrapper">
       <div style="display: flex">
         <img class="avator" src="">
-        <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo}}</router-link>
-        <router-link class="userInfo" to="login" v-else>请点击登录</router-link>
-      </div>
-
-      <div>
-
+        <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo.realname}}</router-link>
+        <router-link class="userInfo" to="login?from=Mine" v-else>请点击登录</router-link>
       </div>
     </header>
     <div class="accountInfo">
       <div>
-        <p>￥80</p>
+        <p v-if="userInfo">￥{{remainder}}</p>
+        <p v-else>￥0</p>
         <p>账户余额</p>
       </div>
       <div>
-        <p>￥80</p>
-        <p>账户余额</p>
+        <p v-if="userInfo">￥{{voucher}}</p>
+        <p v-else>￥0</p>
+        <p>现金券余额</p>
       </div>
     </div>
-    <div>
+    <div class="group">
       <group v-for="(cellList,index) in groupList" :key="index">
-        <cell-box v-for="(cell,i) in cellList" :key="i" is-link>
-          <div style="display: flex;align-items: center">
+        <cell-box v-for="(cell,i) in cellList" :key="i" is-link :link="cell.url">
+          <div class="cell">
             <div>
-              <img src=""
-                   style="width:1.5rem;height:1.5rem;background-color: #00aaff;display:block;margin-right: .5rem">
+              <img src="">
             </div>
             <div>
               <p style="font-size: .7rem"><label>{{cell.title}}</label></p>
@@ -42,6 +39,7 @@
 <script>
   import {Group, CellBox} from 'vux'
   import axios from '@/util/iaxios'
+  import $store from '@/vuex'
   import {mapState} from 'vuex'
   export default {
     components: {
@@ -50,6 +48,8 @@
     },
     data () {
       return {
+        remainder: '',
+        voucher: '',
         groupList: [
           [
             {title: '实名认证', url: '/home'},
@@ -69,13 +69,24 @@
         ]
       }
     },
-    methods: {},
+    methods: {
+      setData(response){
+        if (response.status == 200 && response.data.status == 1) {
+          this.remainder = response.data.data.remainder
+          this.voucher = response.data.data.voucher
+        }
+      }
+    },
     computed: mapState([
       // 映射 this.count 为 store.state.count
       'userInfo'
     ]),
     beforeRouteEnter(to, from, next){
-      next()
+      axios.post('device/DescribeWalletsBalance.do', {
+        zoneId: $store.state.zone.zoneid
+      }).then(response => {
+        next(vm => vm.setData(response))
+      })
     }
   }
 </script>
@@ -126,6 +137,20 @@
       > p {
         font-size: .7rem;
         text-align: center;
+      }
+    }
+  }
+
+  .group {
+    .cell {
+      display: flex;
+      align-items: center;
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: #00aaff;
+        display: block;
+        margin-right: .5rem
       }
     }
   }
