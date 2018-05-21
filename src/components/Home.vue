@@ -347,16 +347,16 @@
       width: 40rem;
       padding: .6rem 0;
       .box1-item {
-        width: 4.5rem;
-        height: 4.5rem;
+        width: 3rem;
+        height: 3rem;
         background-color: #ccc;
         display: inline-block;
-        margin-left: 1rem;
+        margin-left: 1.4rem;
         float: left;
         text-align: center;
-        line-height: 4.5rem;
+        line-height: 3rem;
         p {
-          line-height: 4.5rem;
+          line-height: 3rem;
         }
       }
     }
@@ -430,16 +430,16 @@
       width: 40rem;
       padding: .6rem 0;
       .box1-item {
-        width: 4.5rem;
-        height: 4.5rem;
+        width: 3rem;
+        height: 3rem;
         background-color: #ccc;
         display: inline-block;
-        margin-left: 1rem;
+        margin-left: 1.4rem;
         float: left;
         text-align: center;
-        line-height: 4.5rem;
+        line-height: 3rem;
         p {
-          line-height: 4.5rem;
+          line-height: 3rem;
         }
       }
     }
