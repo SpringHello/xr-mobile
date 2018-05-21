@@ -32,7 +32,8 @@
             <div>
               <span><span class="product-item-price">{{product.cost}}</span>元/月起</span>
               <div style="float: right">
-                <router-link :to="{path:'prodetail',query:{item:product}}" class="link-button-default">查看详情</router-link>
+                <router-link :to="{path:'prodetail',query:{item:product}}" class="link-button-default">查看详情
+                </router-link>
                 <router-link to="home" class="link-button-default link-button-main">立即选购</router-link>
               </div>
             </div>
@@ -45,7 +46,7 @@
       <h6 class="title">解决定制方案</h6>
       <scroller lock-y :scrollbar-x=false>
         <div class="box1">
-          <div class="box1-item" v-for="i in 7"><p>{{' ' + i + ' '}}</p></div>
+          <div class="box1-item" v-for="i in 7"><img src=""></div>
         </div>
       </scroller>
     </div>
@@ -78,7 +79,7 @@
       <h6 class="title">资质认证</h6>
       <scroller lock-y :scrollbar-x=false>
         <div class="box1">
-          <div class="box1-item" v-for="i in 7"><p>{{' ' + i + ' '}}</p></div>
+          <div class="box1-item" v-for="i in 7"><img src=""></div>
         </div>
       </scroller>
     </div>
@@ -342,22 +343,19 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .box1 {
-      height: 4.5rem;
-      position: relative;
-      width: 40rem;
-      padding: .6rem 0;
+      width: 175%;
+      margin: .6rem 0;
+      padding-bottom: 25%;
       .box1-item {
-        width: 3rem;
-        height: 3rem;
+        width: 14%;
+        height: 0rem;
+        padding-bottom: 14.28%;
         background-color: #ccc;
         display: inline-block;
-        margin-left: 1.4rem;
+        margin-left: .28%;
         float: left;
         text-align: center;
         line-height: 3rem;
-        p {
-          line-height: 3rem;
-        }
       }
     }
 
@@ -425,22 +423,19 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .box1 {
-      height: 4.5rem;
-      position: relative;
-      width: 40rem;
-      padding: .6rem 0;
+      width: 175%;
+      margin: .6rem 0;
+      padding-bottom: 25%;
       .box1-item {
-        width: 3rem;
-        height: 3rem;
+        width: 14%;
+        height: 0rem;
+        padding-bottom: 14.28%;
         background-color: #ccc;
         display: inline-block;
-        margin-left: 1.4rem;
+        margin-left: .28%;
         float: left;
         text-align: center;
         line-height: 3rem;
-        p {
-          line-height: 3rem;
-        }
       }
     }
   }
