@@ -81,6 +81,7 @@
       TabItem
     },
     data ()  {
+      scrollTo( 0, 0 )
       return {
         // 导航1
         Products: {

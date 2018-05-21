@@ -36,6 +36,7 @@
       Actionsheet
     },
     data () {
+      scrollTo( 0, 0 )
       return {
         //  公告内容
         annContent: null,
@@ -80,7 +81,6 @@
   .anncontents {
     padding: 1rem;
     .anncontent-header {
-      padding-bottom: .5rem;
       border-bottom: .025rem solid #ddd;
       .anncontent-header-item {
         line-height: 1.5rem;
@@ -119,7 +119,6 @@
   .newContent {
     padding: 1rem;
     .newContent-header {
-      padding-bottom: .5rem;
       border-bottom: .025rem solid #ddd;
       .newContent-header-item {
         width: 16.8rem;
