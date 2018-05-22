@@ -8,10 +8,8 @@
     <div class="banner-introduce">
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
         <grid-item v-for="(item,index) in introduce" :link="item.url" :key="index">
-          <div style="text-align: center">
-            <img src="" class="introduce-img">
-            <span class="introduce-desc">{{item.title}}</span>
-          </div>
+          <img slot="icon" src="">
+          <span slot="label" class="grid-item">{{ item.title }}</span>
         </grid-item>
       </grid>
     </div>
@@ -86,15 +84,12 @@
     <!--了解新睿云-->
     <div class="understand-wrapper">
       <h6 class="title">了解新睿云</h6>
-      <div class="understands-content">
-        <div class="understands-item" v-for="(item,index) in understands">
-          <p><img :src=item.img class="item-img"></p>
-          <div class="understands-item-bottom">
-            <p>{{item.title}}</p>
-            <p>{{item.desc}}</p>
-          </div>
-        </div>
-      </div>
+      <grid :show-lr-borders="false" :show-vertical-dividers="false">
+        <grid-item v-for='(item,index) in understands' :link="item.url" :key="index">
+          <img slot="icon" src="">
+          <p slot="label" class="under-item">{{item.title}}<span style="display: block;">{{item.desc}}</span></p>
+        </grid-item>
+      </grid>
     </div>
     <!--免费注册-->
     <div class="register-wrapper">
@@ -196,12 +191,12 @@
         auth: [],
         //了解新睿云
         understands: [
-          {img: require('../assets/logo.png'), title: "自建数据", desc: "中心12+"},
-          {img: require('../assets/logo.png'), title: "IP领先", desc: "行业领先"},
-          {img: require('../assets/logo.png'), title: "服务客服", desc: "超过10万"},
-          {img: require('../assets/logo.png'), title: "巨资打造", desc: "顶尖设施"},
-        ]
-      }
+          {title: "自建数据", desc: "中心12+", url: ''},
+          {title: "IP领先", desc: "行业领先", url: ''},
+          {title: "服务客服", desc: "超过10万", url: ""},
+          {title: "巨资打造", desc: "顶尖设施",url:''}
+          ]
+        }
     },
     methods: {
       setData(response){
@@ -236,15 +231,10 @@
 
   .banner-introduce {
     margin-bottom: .5rem;
-    .introduce-img {
-      width: 2rem;
-      height: 1.7rem;
-      display: block;
-      margin: auto;
-    }
-    .introduce-desc {
-      font-size: .5rem;
+    .grid-item {
+      font-size: .7rem;
       color: rgba(34, 34, 34, 1);
+      line-height: 1.65rem;
     }
   }
 
@@ -451,35 +441,12 @@
       color: #000;
       border-bottom: 1px solid #e7e7e7;
     }
-    .understands-content {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1.2rem;
-      .understands-item {
-        padding-top: .725rem;
-        font-size: .5rem;
-        text-align: center;
-        color: #666;
-        text-align: center;
-        .item-img {
-          width: 2.75rem;
-          height: 2.4rem;
-        }
-        .understands-item-bottom {
-          padding-bottom: .7rem;
-          p {
-            line-height: .7rem;
-            height: .7rem;
-            padding-top: .3rem;
-            color: #666;
-            &:last-of-type {
-              line-height: 1.15rem;
-              height: 1.15rem;
-            }
-          }
-        }
-      }
+    .under-item {
+      padding-top: .5rem;
+      font-size: .6rem;
+      color: #666;
     }
+
   }
 
 </style>

@@ -19,11 +19,19 @@
         <p>现金券余额</p>
       </div>
     </div>
+    <div class="cons-nav">
+      <grid :show-lr-borders="false" :show-vertical-dividers="false">
+        <grid-item v-for="(item,index) in controlNav" :link="item.url" :key="index">
+          <img slot="icon" src="">
+          <span slot="label" class="grid-item">{{ item.title }}</span>
+        </grid-item>
+      </grid>
+    </div>
   </div>
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem} from 'vux'
+  import {Swiper, XButton, Tab, TabItem,Grid, GridItem} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
@@ -32,12 +40,19 @@
       Swiper,
       XButton,
       Tab,
-      TabItem
+      TabItem,
+      Grid,
+      GridItem
     },
     data () {
       return {
         remainder: '',
-        voucher: ''
+        voucher: '',
+        controlNav:[
+          {title:'告警',url:'/home'},
+          {title:'工单',url:'/home'},
+          {title:'充值',url:'/home'},
+        ]
       }
     },
     methods: {
@@ -109,6 +124,14 @@
         font-size: .7rem;
         text-align: center;
       }
+    }
+  }
+
+  .cons-nav{
+    .grid-item{
+      font-size:.7rem;
+      color:rgba(34,34,34,1);
+      line-height:1.65rem;
     }
   }
 
