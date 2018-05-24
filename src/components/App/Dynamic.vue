@@ -1,4 +1,5 @@
 <template>
+  <!--公告详情页面-->
   <div>
     <div v-if="$route.query.type==1">
       <div v-if="annContent!=null" class="anncontents">

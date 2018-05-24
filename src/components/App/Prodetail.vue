@@ -1,4 +1,5 @@
 <template>
+  <!--产品详情页面-->
   <div>
     <div class="detail-top">
       <p class="detail-title">{{$route.query.item.descTitle}}</p>
@@ -15,7 +16,7 @@
         <tab-item selected @on-item-click="Products.showFuc = true,Products.showScen=false,Products.showAdv=false">
           功能描述
         </tab-item>
-        <tab-item @on-item-click="Products.showFuc = fasle,Products.showScen=true,Products.showAdv=false">应用场景</tab-item>
+        <tab-item @on-item-click="Products.showFuc = false,Products.showScen=true,Products.showAdv=false">应用场景</tab-item>
         <tab-item @on-item-click="Products.showFuc = false,Products.showScen=false,Products.showAdv=true">产品优势</tab-item>
       </tab>
       <div class="detail-content">
@@ -154,7 +155,7 @@
 
   .detail-content {
     .title {
-      padding: .5rem 1rem;
+      padding: .9rem 1rem .5rem 1rem;
       font-size: .8rem;
       font-weight: normal;
       color: #000;

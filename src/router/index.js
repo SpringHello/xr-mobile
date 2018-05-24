@@ -7,8 +7,10 @@ import Sort from '@/components/Sort'
 import Console from '@/components/Console'
 import Mine from '@/components/Mine'
 
-import Dynamic from '@/components/App/Dynamic'
-import Prodetail from '@/components/App/Prodetail'
+import Dynamic from '@/components/App/Dynamic'  //公告详情
+import Prodetail from '@/components/App/Prodetail' // 产品详情
+import Sortdetail from '@/components/App/Sortdetail' //活动详情
+import Sourcedetail from '@/components/App/Sourcedetail'//资源详情
 
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
@@ -54,6 +56,16 @@ export default new Router({
       path: '/Prodetail',
       name: 'Prodetail',
       component: Prodetail,
+    },
+    {
+      path: '/Sortdetail',
+      name: 'Sortdetail',
+      component: Sortdetail,
+    },
+    {
+      path: '/Sourcedetail',
+      name: 'Sourcedetail',
+      component: Sourcedetail,
     },
   ]
 })

@@ -144,37 +144,37 @@
           {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性',
+            descTitle: '极速稳定高弹性1',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性',
+            descTitle: '极速稳定高弹性2',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性',
+            descTitle: '极速稳定高弹性3',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性',
+            descTitle: '极速稳定高弹性4',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性',
+            descTitle: '极速稳定高弹性5',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }, {
             title: '云服务器',
             opened: false,
-            descTitle: '极速稳定高弹性',
+            descTitle: '极速稳定高弹性6',
             descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
             cost: 15
           }],

@@ -19,6 +19,7 @@
         <p>现金券余额</p>
       </div>
     </div>
+    <!--导航-->
     <div class="cons-nav">
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
         <grid-item v-for="(item,index) in controlNav" :link="item.url" :key="index">
@@ -27,11 +28,23 @@
         </grid-item>
       </grid>
     </div>
+    <!--资源-->
+    <div class="resources">
+      <h6 class="title">我的资源</h6>
+      <div class="cellbox">
+        <group>
+          <cell v-for="(item,index) in myResources" :title="item.name" :inline-desc="$store.state.zone.zonename" is-link
+                :link="{path:'Sourcedetail',query:{item:item}}" class="cell-title" :key="index">
+            <span class="cell-right">查看详情</span>
+          </cell>
+        </group>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem,Grid, GridItem} from 'vux'
+  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
@@ -42,24 +55,33 @@
       Tab,
       TabItem,
       Grid,
-      GridItem
+      GridItem,
+      Group,
+      Cell,
+      CellBox
     },
     data () {
       return {
         remainder: '',
         voucher: '',
-        controlNav:[
-          {title:'告警',url:'/home'},
-          {title:'工单',url:'/home'},
-          {title:'充值',url:'/home'},
-        ]
+        controlNav: [
+          {title: '告警', url: '/home'},
+          {title: '工单', url: '/home'},
+          {title: '充值', url: '/home'},
+        ],
+        myResources: []
       }
     },
     methods: {
-      setData(response){
+      setData(values){
+         var response=values[0]
         if (response.status == 200 && response.data.status == 1) {
           this.remainder = response.data.data.remainder
           this.voucher = response.data.data.voucher
+        }
+        var response=values[1]
+        if (response.status == 200 && response.data.status == 1) {
+          this.myResources = response.data.result
         }
       }
     },
@@ -68,10 +90,21 @@
       'userInfo'
     ]),
     beforeRouteEnter(to, from, next){
-      axios.post('device/DescribeWalletsBalance.do', {
+      var money = axios.post('device/DescribeWalletsBalance.do', {
         zoneId: $store.state.zone.zoneid
-      }).then(response => {
-        next(vm => vm.setData(response))
+      })
+      var sources = axios.get('user/userSourceManager.do', {
+        params: {
+          zoneId: $store.state.zone.zoneid
+        }
+      })
+      Promise.all([money, sources]).then((values) => {
+         next(vm=>{
+             vm.setData(values)
+         })
+        next(vm=>{
+          vm.setData(values)
+        })
       })
     }
   }
@@ -127,11 +160,31 @@
     }
   }
 
-  .cons-nav{
-    .grid-item{
-      font-size:.7rem;
-      color:rgba(34,34,34,1);
-      line-height:1.65rem;
+  .cons-nav {
+    .grid-item {
+      font-size: .7rem;
+      color: rgba(34, 34, 34, 1);
+      line-height: 1.65rem;
+    }
+  }
+
+  .resources {
+    .title {
+      padding: .9rem 1rem .5rem 1rem;
+      font-size: .8rem;
+      font-weight: normal;
+      color: #000;
+      border-bottom: 1px solid #e7e7e7;
+    }
+    .cellbox {
+      .cell-title {
+        font-size: .8rem;
+      }
+      .cell-right {
+        font-size: .7rem;
+        color: rgba(102, 102, 102, 1);
+        line-height: 1.4rem;
+      }
     }
   }
 
