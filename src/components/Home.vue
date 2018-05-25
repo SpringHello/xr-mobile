@@ -2,6 +2,25 @@
   <div style="margin-bottom: 2.25rem;">
     <!--顶部logo-->
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
+    <div class="topNav">
+      <p class="top-logo"></p>
+      <div class="logo-right" v-model="showDialogStyle" @click="showDialogStyle = true">
+        <span class="span"></span>
+        <span class="span"></span>
+        <span class="span"></span>
+      </div>
+    </div>
+    <div v-transfer-dom>
+      <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', 'background-color': 'transparent'}" :hide-on-blur="true">
+        <p @click="showDialogStyle = false">
+          <span style="font-size:30px;">HELLO WORLD</span>
+          <br>
+          <br>
+          <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
+        </p>
+      </x-dialog>
+    </div>
+
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
     <!--走马灯下方介绍-->
@@ -85,7 +104,7 @@
     <div class="understand-wrapper">
       <h6 class="title">了解新睿云</h6>
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item v-for='(item,index) in understands' :link="item.url" :key="index">
+        <grid-item v-for="(item,index) in understands" :link="item.url" :key="index">
           <img slot="icon" src="">
           <p slot="label" class="under-item">{{item.title}}<span style="display: block;">{{item.desc}}</span></p>
         </grid-item>
@@ -101,7 +120,7 @@
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem, Scroller, XHeader, Grid, GridItem} from 'vux'
+  import {Swiper, XButton, Tab, TabItem, Scroller, XHeader, Grid, GridItem,XDialog,TransferDomDirective as TransferDom} from 'vux'
   import axios from '@/util/iaxios'
   export default {
     components: {
@@ -112,10 +131,13 @@
       Scroller,
       XHeader,
       Grid,
-      GridItem
+      GridItem,
+      XDialog,
+      TransferDom
     },
     data () {
       return {
+        showDialogStyle: false,
         // 轮播图资料
         swiperList: [
           {
@@ -194,9 +216,9 @@
           {title: "自建数据", desc: "中心12+", url: ''},
           {title: "IP领先", desc: "行业领先", url: ''},
           {title: "服务客服", desc: "超过10万", url: ""},
-          {title: "巨资打造", desc: "顶尖设施",url:''}
-          ]
-        }
+          {title: "巨资打造", desc: "顶尖设施", url: ''}
+        ]
+      }
     },
     methods: {
       setData(response){
@@ -227,6 +249,31 @@
   /*顶部介绍条*/
   .vux-header {
     background: linear-gradient(180deg, rgba(44, 45, 49, 1), rgba(16, 16, 19, 1));
+  }
+
+  /*顶部导航*/
+  .topNav {
+    height: 2.4rem;
+    padding: .5rem .2rem;
+    background: rgba(32, 32, 35, 1);
+    display: flex;
+    justify-content: space-between;
+    .top-logo {
+      width: 5rem;
+      background: url('../assets/img/home/logo.gif') no-repeat 50%;
+      background-size: cover;
+    }
+    .logo-right {
+      padding: .5rem 0;
+      .span {
+        display: block;
+        width: 1rem;
+        height: .05rem;
+        background: #FFF;
+        margin-bottom: .1rem;
+        border-radius: 12%;
+      }
+    }
   }
 
   .banner-introduce {

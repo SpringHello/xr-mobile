@@ -12,6 +12,9 @@ import Prodetail from '@/components/App/Prodetail' // 产品详情
 import Sortdetail from '@/components/App/Sortdetail' //活动详情
 import Sourcedetail from '@/components/App/Sourcedetail'//资源详情
 
+import workOrder from '@/components/Back/workOrder'
+
+
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
 import Reset from '@/components/LR/Reset'
@@ -66,6 +69,11 @@ export default new Router({
       path: '/Sourcedetail',
       name: 'Sourcedetail',
       component: Sourcedetail,
+    },
+    {
+      path: '/workOrder',
+      name: 'workOrder',
+      component: workOrder,
     },
   ]
 })

@@ -65,9 +65,9 @@
         remainder: '',
         voucher: '',
         controlNav: [
-          {title: '告警', url: '/home'},
-          {title: '工单', url: '/home'},
-          {title: '充值', url: '/home'},
+          {title: '告警', url: '/warn'},
+          {title: '工单', url: '/workOrder'},
+          {title: '充值', url: '/recharge'},
         ],
         myResources: []
       }
