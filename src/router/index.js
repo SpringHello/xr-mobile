@@ -10,9 +10,11 @@ import Mine from '@/components/Mine'
 import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
 import Sortdetail from '@/components/App/Sortdetail' //活动详情
-import Sourcedetail from '@/components/App/Sourcedetail'//资源详情
+
 
 import workOrder from '@/components/Back/workOrder'
+import Sourcedetail from '@/components/Back/Sourcedetail'//资源详情
+import hostDetail from '@/components/Back/hostDetail'//资源详情
 
 
 import Login from '@/components/LR/Login'
@@ -33,6 +35,8 @@ export default new Router({
         {path: 'Sort', name: 'Sort', component: Sort},
         {path: 'Console', name: 'Console', component: Console},
         {path: 'Mine', name: 'Mine', component: Mine},
+        {path: '/Sourcedetail', name: 'Sourcedetail', component: Sourcedetail},
+        {path: '/hostDetail', name: 'hostDetail', component: hostDetail},
       ]
     },
     {
@@ -64,11 +68,6 @@ export default new Router({
       path: '/Sortdetail',
       name: 'Sortdetail',
       component: Sortdetail,
-    },
-    {
-      path: '/Sourcedetail',
-      name: 'Sourcedetail',
-      component: Sourcedetail,
     },
     {
       path: '/workOrder',

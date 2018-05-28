@@ -49,9 +49,9 @@
             <div>
               <span><span class="product-item-price">{{product.cost}}</span>元/月起</span>
               <div style="float: right">
-                <router-link :to="{path:'prodetail',query:{item:product}}" class="link-button-default">查看详情
-                </router-link>
-                <router-link to="home" class="link-button-default link-button-main">立即选购</router-link>
+                <p @click="toProdu(product)" class="button-default">查看详情
+                </p>
+                <p @click="$router.push('home')" class="button-default button-main">立即选购</p>
               </div>
             </div>
           </div>
@@ -226,6 +226,11 @@
           this.dynamicContent.offices = response.data.result.announcement_list
           this.dynamicContent.News = response.data.result.news_list
         }
+      },
+      toProdu(product){
+        sessionStorage.setItem('title', product.title)
+        sessionStorage.setItem('desc', product.descContent)
+          this.$router.push('prodetail')
       }
     },
     beforeRouteEnter(to, from, next){

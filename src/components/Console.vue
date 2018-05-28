@@ -34,8 +34,8 @@
       <div class="cellbox">
         <group>
           <cell v-for="(item,index) in myResources" :title="item.name" :inline-desc="$store.state.zone.zonename" is-link
-                :link="{path:'Sourcedetail',query:{item:item}}" class="cell-title" :key="index">
-            <span class="cell-right">查看详情</span>
+                class="cell-title" :key="index">
+            <span class="cell-right"  @click="push(item)">查看详情</span>
           </cell>
         </group>
       </div>
@@ -62,6 +62,7 @@
     },
     data () {
       return {
+        type: '',
         remainder: '',
         voucher: '',
         controlNav: [
@@ -74,15 +75,24 @@
     },
     methods: {
       setData(values){
-         var response=values[0]
+        var response = values[0]
         if (response.status == 200 && response.data.status == 1) {
           this.remainder = response.data.data.remainder
           this.voucher = response.data.data.voucher
         }
-        var response=values[1]
+        var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
           this.myResources = response.data.result
         }
+      },
+      //查看详情
+      push(item){
+        if(item.name=='云计算'){this.type='server'}
+        if(item.name=='云网络'){this.type='network'}
+        if(item.name=='云安全'){this.type='security'}
+        if(item.name=='云存储'){this.type='storage'}
+        if(item.name=='云运维'){this.type='operations'}
+        this.$router.push({path:'Sourcedetail',query:{type:this.type}})
       }
     },
     computed: mapState([
@@ -99,13 +109,13 @@
         }
       })
       Promise.all([money, sources]).then((values) => {
-         next(vm=>{
-             vm.setData(values)
-         })
-        next(vm=>{
-          vm.setData(values)
-        })
-      })
+        next(vm => {
+        vm.setData(values)
+    })
+      next(vm => {
+        vm.setData(values)
+    })
+    })
     }
   }
 </script>
@@ -164,17 +174,18 @@
     .grid-item {
       font-size: .7rem;
       color: rgba(34, 34, 34, 1);
-      line-height: 1.65rem;
+      line-height: 1.6rem;
     }
   }
 
   .resources {
+    padding: .5rem 0;
     .title {
-      padding: .9rem 1rem .5rem 1rem;
+      padding: .5rem 1rem 0rem 1rem;
       font-size: .8rem;
       font-weight: normal;
       color: #000;
-      border-bottom: 1px solid #e7e7e7;
+      /*border-bottom: 1px solid #e7e7e7;*/
     }
     .cellbox {
       .cell-title {

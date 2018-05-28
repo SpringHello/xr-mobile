@@ -2,10 +2,10 @@
   <!--产品详情页面-->
   <div>
     <div class="detail-top">
-      <p class="detail-title">{{$route.query.item.descTitle}}</p>
+      <p class="detail-title">{{title}}</p>
       <div style="display: flex;justify-content: space-between">
         <p class="detail-desc">
-          {{$route.query.item.descContent}}
+          {{desc}}
         </p>
         <p class="buy-btn">购买</p>
       </div>
@@ -16,8 +16,10 @@
         <tab-item selected @on-item-click="Products.showFuc = true,Products.showScen=false,Products.showAdv=false">
           功能描述
         </tab-item>
-        <tab-item @on-item-click="Products.showFuc = false,Products.showScen=true,Products.showAdv=false">应用场景</tab-item>
-        <tab-item @on-item-click="Products.showFuc = false,Products.showScen=false,Products.showAdv=true">产品优势</tab-item>
+        <tab-item @on-item-click="Products.showFuc = false,Products.showScen=true,Products.showAdv=false">应用场景
+        </tab-item>
+        <tab-item @on-item-click="Products.showFuc = false,Products.showScen=false,Products.showAdv=true">产品优势
+        </tab-item>
       </tab>
       <div class="detail-content">
         <div v-if="Products.showFuc">
@@ -82,8 +84,10 @@
       TabItem
     },
     data ()  {
-      scrollTo( 0, 0 )
+      scrollTo(0, 0)
       return {
+        title: sessionStorage.getItem('title'),
+        desc: sessionStorage.getItem('desc'),
         // 导航1
         Products: {
           showFuc: true,
