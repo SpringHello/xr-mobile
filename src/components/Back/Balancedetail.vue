@@ -1,6 +1,5 @@
 <template>
-  <div class="workorder">
-
+  <div>
   </div>
 </template>
 
@@ -12,6 +11,5 @@
   }
 </script>
 
-<style  rel="stylesheet/less" lang="less" scoped>
-
+<style rel="stylesheet/less" lang="less" scoped>
 </style>

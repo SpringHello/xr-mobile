@@ -269,14 +269,14 @@
       background-size: cover;
     }
     .logo-right {
-      padding: .5rem 0;
+      padding: .5rem .3rem .5rem;
       .span {
         display: block;
-        width: 1rem;
-        height: .05rem;
+        width: 1.2rem;
+        height: .08rem;
         background: #FFF;
-        margin-bottom: .1rem;
-        border-radius: 12%;
+        margin-bottom: .2rem;
+        border-radius: 1rem;
       }
     }
   }

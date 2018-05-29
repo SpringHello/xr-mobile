@@ -32,12 +32,48 @@
     <div class="resources">
       <h6 class="title">我的资源</h6>
       <div class="cellbox">
-        <group>
-          <cell v-for="(item,index) in myResources" :title="item.name" :inline-desc="$store.state.zone.zonename" is-link
-                class="cell-title" :key="index">
-            <span class="cell-right"  @click="push(item)">查看详情</span>
-          </cell>
-        </group>
+        <ul>
+          <li @click="push(resources)">
+            <div class="soures">
+              <img src="">
+              <div>
+                <p class="soures-title">{{resources.itemName}}</p>
+                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+resources.used}}</span>
+              </div>
+            </div>
+            <p class="check">查看详情</p>
+          </li>
+          <li @click="push(disks)">
+            <div class="soures">
+              <img src="">
+              <div>
+                <p class="soures-title">{{disks.itemName}}</p>
+                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+disks.used}}</span>
+              </div>
+            </div>
+            <p class="check">查看详情</p>
+          </li>
+          <li @click="push(ip)">
+            <div class="soures">
+              <img src="">
+              <div>
+                <p class="soures-title">{{ip.itemName}}</p>
+                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+ip.used}}</span>
+              </div>
+            </div>
+            <p class="check">查看详情</p>
+          </li>
+          <li @click="push(balance)">
+            <div class="soures">
+              <img src="">
+              <div>
+                <p class="soures-title">{{balance.itemName}}</p>
+                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+balance.used}}</span>
+              </div>
+            </div>
+            <p class="check">查看详情</p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -70,7 +106,10 @@
           {title: '工单', url: '/workOrder'},
           {title: '充值', url: '/recharge'},
         ],
-        myResources: []
+        resources: {},//云服务器
+        disks: {},//云硬盘
+        ip: {},//弹性IP
+        balance: {},//负载均衡
       }
     },
     methods: {
@@ -82,17 +121,19 @@
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
-          this.myResources = response.data.result
+          response.data.result[0].items[0].url = `Sourcedetail?type=host`
+          this.resources = response.data.result[0].items[0]
+          response.data.result[3].items[0].url = `Sourcedetail?type=disk`
+          this.disks = response.data.result[3].items[0]
+          response.data.result[1].items[1].url = `Sourcedetail?type=ip`
+          this.ip = response.data.result[1].items[1]
+          response.data.result[1].items[2].url = `Sourcedetail?type=balance`
+          this.balance = response.data.result[1].items[2]
         }
       },
       //查看详情
       push(item){
-        if(item.name=='云计算'){this.type='server'}
-        if(item.name=='云网络'){this.type='network'}
-        if(item.name=='云安全'){this.type='security'}
-        if(item.name=='云存储'){this.type='storage'}
-        if(item.name=='云运维'){this.type='operations'}
-        this.$router.push({path:'Sourcedetail',query:{type:this.type}})
+        this.$router.push(item.url)
       }
     },
     computed: mapState([
@@ -110,12 +151,12 @@
       })
       Promise.all([money, sources]).then((values) => {
         next(vm => {
-        vm.setData(values)
-    })
-      next(vm => {
-        vm.setData(values)
-    })
-    })
+          vm.setData(values)
+        })
+        next(vm => {
+          vm.setData(values)
+        })
+      })
     }
   }
 </script>
@@ -181,20 +222,56 @@
   .resources {
     padding: .5rem 0;
     .title {
-      padding: .5rem 1rem 0rem 1rem;
+      padding: .5rem;
       font-size: .8rem;
       font-weight: normal;
       color: #000;
-      /*border-bottom: 1px solid #e7e7e7;*/
+      border-bottom: 1px solid #e7e7e7;
     }
-    .cellbox {
-      .cell-title {
-        font-size: .8rem;
-      }
-      .cell-right {
-        font-size: .7rem;
-        color: rgba(102, 102, 102, 1);
-        line-height: 1.4rem;
+    ul {
+      padding: .5rem;
+      li {
+        padding: .5rem 0;
+        border-bottom: 1px solid #e7e7e7;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .soures {
+          display: flex;
+          img {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-right: .5rem;
+            background: #00aaff;
+            vertical-align: middle;
+          }
+          > div {
+            font-size: .7rem;
+            .soures-title {
+              color: rgba(34, 34, 34, 1);
+            }
+            .soures-desc {
+              color: rgba(153, 153, 153, 1);
+              line-height: 1.5rem;
+            }
+          }
+        }
+        .check {
+          color: rgba(102, 102, 102, 1);
+          font-size: .7rem;
+          &::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-right: 1px solid #999999;
+            border-bottom: 1px solid #999999;
+            transform: translateY(.05rem) rotate(311deg);
+            display: inline-block;
+            margin-left: .3rem;
+          }
+        }
       }
     }
   }

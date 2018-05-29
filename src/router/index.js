@@ -12,9 +12,12 @@ import Prodetail from '@/components/App/Prodetail' // 产品详情
 import Sortdetail from '@/components/App/Sortdetail' //活动详情
 
 
-import workOrder from '@/components/Back/workOrder'
+import Workorder from '@/components/Back/Workorder'
 import Sourcedetail from '@/components/Back/Sourcedetail'//资源详情
-import hostDetail from '@/components/Back/hostDetail'//资源详情
+import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
+import Diskdetail from '@/components/Back/Diskdetail'//磁盘资源详情
+import Ipdetail from '@/components/Back/Ipdetail'//弹性IP资源详情
+import Balancedetail from '@/components/Back/Balancedetail'//负载均衡资源详情
 
 
 import Login from '@/components/LR/Login'
@@ -36,7 +39,10 @@ export default new Router({
         {path: 'Console', name: 'Console', component: Console},
         {path: 'Mine', name: 'Mine', component: Mine},
         {path: '/Sourcedetail', name: 'Sourcedetail', component: Sourcedetail},
-        {path: '/hostDetail', name: 'hostDetail', component: hostDetail},
+        {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
+        {path: '/Diskdetail', name: 'hostDetail', component: Diskdetail},
+        {path: '/Ipdetail', name: 'hostDetail', component: Ipdetail},
+        {path: '/Balancedetail', name: 'hostDetail', component: Balancedetail},
       ]
     },
     {
@@ -70,9 +76,9 @@ export default new Router({
       component: Sortdetail,
     },
     {
-      path: '/workOrder',
-      name: 'workOrder',
-      component: workOrder,
+      path: '/Workorder',
+      name: 'Workorder',
+      component: Workorder,
     },
   ]
 })
