@@ -6,7 +6,7 @@
         <h6 class="title">{{$route.query.name}} <span>修改名称</span></h6>
         <ul>
           <li>系统镜像 : {{details.template}}</li>
-          <li>内网IP : {{details.privateIp}}<span class="opon">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span></li>
+          <li>内网IP : {{details.privateIp}}<span class="open">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span></li>
           <li>主机配置 :{{$route.query.configs}}
             <span class="password">点击查看主机密码</span>
           </li>
@@ -100,7 +100,7 @@
           font-size: .65rem;
           color: rgba(34, 34, 34, 1);
           line-height: 1.3rem;
-          .opon {
+          .open {
             float: right;
             color: rgba(102, 102, 102, 1);
             line-height: .7rem;
@@ -109,7 +109,7 @@
           .password {
             float: right;
             color: #2B99F2;
-            font-size: .7rem;
+            font-size: .65rem;
           }
         }
       }

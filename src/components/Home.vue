@@ -12,12 +12,9 @@
     </div>
     <div v-transfer-dom>
       <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', 'background-color': 'transparent'}" :hide-on-blur="true">
-        <p @click="showDialogStyle = false">
-          <span style="font-size:30px;">HELLO WORLD</span>
-          <br>
-          <br>
-          <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
-        </p>
+        <div @click="showDialogStyle = false" style="color: #FFF;">
+         123
+        </div>
       </x-dialog>
     </div>
 
@@ -279,6 +276,7 @@
         border-radius: 1rem;
       }
     }
+
   }
 
   .banner-introduce {

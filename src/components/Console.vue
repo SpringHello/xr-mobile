@@ -267,7 +267,7 @@
             height: 10px;
             border-right: 1px solid #999999;
             border-bottom: 1px solid #999999;
-            transform: translateY(.05rem) rotate(311deg);
+            transform: translateY(.0rem) rotate(311deg);
             display: inline-block;
             margin-left: .3rem;
           }
