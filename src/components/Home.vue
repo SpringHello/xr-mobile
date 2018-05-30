@@ -4,20 +4,27 @@
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <div class="topNav">
       <p class="top-logo"></p>
-      <div class="logo-right" v-model="showDialogStyle" @click="showDialogStyle = true">
+      <div class="logo-right" @click="DialogStyle = true">
         <span class="span"></span>
         <span class="span"></span>
         <span class="span"></span>
       </div>
     </div>
-    <div v-transfer-dom>
-      <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', 'background-color': 'transparent'}" :hide-on-blur="true">
-        <div @click="showDialogStyle = false" style="color: #FFF;">
-         123
-        </div>
-      </x-dialog>
+    <div v-if="DialogStyle" class="showMenu">
+      <ul>
+        <li v-for="(item,index) in titleItem" :key="index">
+          <div @click="item.open=!item.open"><p class="ftitle">{{item.title}}</p></div>
+          <div class="showItem" v-show="item.open">
+            <div v-for="(subItem,index) in item.content" :key="index">
+              <p class="ntitle">{{subItem.prod}}</p>
+              <ol>
+                <li v-for="(content,index) in subItem.prodItem" @click="DialogStyle = false">{{content.title}}</li>
+              </ol>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
     <!--走马灯下方介绍-->
@@ -117,7 +124,18 @@
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem, Scroller, XHeader, Grid, GridItem,XDialog,TransferDomDirective as TransferDom} from 'vux'
+  import {
+    Swiper,
+    XButton,
+    Tab,
+    TabItem,
+    Scroller,
+    XHeader,
+    Grid,
+    GridItem,
+    XDialog,
+    TransferDomDirective as TransferDom
+  } from 'vux'
   import axios from '@/util/iaxios'
   export default {
     components: {
@@ -130,11 +148,53 @@
       Grid,
       GridItem,
       XDialog,
-      TransferDom
+      TransferDom,
     },
     data () {
       return {
-        showDialogStyle: false,
+        DialogStyle: false,
+        titleItem: [
+          {
+            title: '产品',
+            path: '',
+            open:false,
+            content: [
+              {
+                prod: '云计算',
+                prodItem: [
+                  {title: '弹性云服务器（ECS）', path: ''},
+                  {title: '镜像服务', path: ''},
+                  {title: 'ECS快照', path: ''},
+                ]
+              },
+              {
+                prod: '云网络',
+                prodItem: [
+                  {title: '虚拟私有云VPC', path: ''},
+                  {title: '弹性IP', path: ''},
+                  {title: '负载均衡', path: ''},
+                  {title: 'NAT网关', path: ''},
+                  {title: '虚拟专网VPN', path: ''},
+                ]
+              },
+            ]
+          },
+          {
+            title: '动态',
+            path: '',
+            open:false,
+          },
+          {
+            title: '关于',
+            path: '',
+            open:false,
+          },
+          {
+            title: '文档',
+            path: '',
+            open:false,
+          },
+        ], // banner item
         // 轮播图资料
         swiperList: [
           {
@@ -227,7 +287,7 @@
       toProdu(product){
         sessionStorage.setItem('title', product.title)
         sessionStorage.setItem('desc', product.descContent)
-          this.$router.push('prodetail')
+        this.$router.push('prodetail')
       }
     },
     beforeRouteEnter(to, from, next){
@@ -276,7 +336,48 @@
         border-radius: 1rem;
       }
     }
+  }
 
+  .showMenu {
+    position: absolute;
+    width: 100%;
+    background: rgba(55, 56, 59, 1);
+    left: 0;
+    z-index: 1000;
+    color: rgba(255, 255, 255, 1);
+    padding: .5rem .8rem;
+    ul {
+      li {
+        list-style: none;
+        > div {
+          font-size: .8rem;
+          margin-bottom: .5rem;
+          P.ftitle {
+            &::after {
+              content: '';
+              width: 10px;
+              height: 10px;
+              border-right: 1px solid #FFF;
+              border-bottom: 1px solid #FFF;
+              transform: translateY(.4rem) rotate(311deg);
+              display: inline-block;
+              float: right;
+            }
+          }
+        }
+        .showItem {
+          ol {
+            padding: .5rem .9rem;
+            li {
+              list-style: none;
+              font-size: .7rem;
+              line-height: 1.3rem;
+            }
+          }
+
+        }
+      }
+    }
   }
 
   .banner-introduce {
