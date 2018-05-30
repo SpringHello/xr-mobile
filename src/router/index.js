@@ -18,6 +18,8 @@ import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//磁盘资源详情
 import Ipdetail from '@/components/Back/Ipdetail'//弹性IP资源详情
 import Balancedetail from '@/components/Back/Balancedetail'//负载均衡资源详情
+import Newscenter from '@/components/Back/Newscenter'//消息中心
+import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 
 import Login from '@/components/LR/Login'
@@ -43,6 +45,8 @@ export default new Router({
         {path: '/Diskdetail', name: 'hostDetail', component: Diskdetail},
         {path: '/Ipdetail', name: 'hostDetail', component: Ipdetail},
         {path: '/Balancedetail', name: 'hostDetail', component: Balancedetail},
+        {path: '/Newscenter', name: 'hostDetail', component: Newscenter},
+        {path: '/Newdetail', name: 'hostDetail', component: Newdetail},
       ]
     },
     {
