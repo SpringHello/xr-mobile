@@ -262,7 +262,7 @@
       background: rgba(255, 255, 255, 1);
       .item {
         display: flex;
-        padding: .8rem;
+        padding: .5rem .8rem;
         border-bottom: 1px solid #D9D9D9;
         img {
           margin-right: .5rem;
@@ -318,7 +318,7 @@
       }
       .stageInfo-item {
         background: rgba(250, 250, 250, 1);
-        padding: .8rem;
+        padding: .5rem .8rem;
         .describe {
           h6 {
             font-size: .8rem;
@@ -390,7 +390,7 @@
       background: rgba(255, 255, 255, 1);
       .item {
         display: flex;
-        padding: .8rem;
+        padding: .5rem .8rem;
         border-bottom: 1px solid #D9D9D9;
         img {
           margin-right: .5rem;

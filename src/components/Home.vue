@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;">
+  <div style="margin-bottom: 2.25rem;background:rgba(245,245,245,1);">
     <!--顶部logo-->
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <div class="topNav">
@@ -439,6 +439,7 @@
 
   .banner-introduce {
     background-color: #fff;
+    margin-bottom: .5rem;
     img {
     }
     .grid-item {
@@ -451,6 +452,7 @@
   //云产品目录
   .product-wrapper {
     background-color: #fff;
+    margin-bottom: .5rem;
     .product-header {
       font-size: .9rem;
       color: #222;
@@ -492,6 +494,7 @@
           }
         }
         .product-item-content {
+          background:rgba(245,245,245,1);
           padding: .5rem 1rem;
           border-bottom: 1px solid #e7e7e7;
           ul {
@@ -524,8 +527,8 @@
       }
       .product-content-item-active {
         .product-item-header {
-          color: #4A90E2;
           p {
+            color: #4A90E2;
             &:after {
               transform: rotate(135deg);
               border-bottom: 1px solid #4A90E2;
@@ -540,6 +543,7 @@
   //数据中心
   .data-wrapper {
     background-color: #fff;
+    margin-bottom: .5rem;
     .data-header {
       padding: .5rem 1rem;
       border-bottom: 1px solid #e7e7e7;
@@ -559,6 +563,7 @@
   //权威认证
   .authority-wrapper {
     background-color: #fff;
+    margin-bottom: .5rem;
     .authority-header {
       font-size: .9rem;
       color: #222;
@@ -601,6 +606,7 @@
   //合作伙伴
   .partner-wrapper {
     background-color: #fff;
+    margin-bottom: .5rem;
     .partner-header {
       font-size: .9rem;
       color: #222;
@@ -623,6 +629,7 @@
   //support
   .support-wrapper {
     background-color: #fff;
+    margin-bottom: .5rem;
     padding: .5rem 1rem;
     .item {
       display: flex;
