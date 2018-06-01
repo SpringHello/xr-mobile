@@ -10,7 +10,11 @@ import Mine from '@/components/Mine'
 import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
 import Sortdetail from '@/components/App/Sortdetail' //活动详情
-import host from '@/components/App/Host' //活动详情
+import host from '@/components/App/Products/Host'
+import ecsSnapshot from '@/components/App/Products/EcsSnapshot'
+import mirror from '@/components/App/Products/Mirror'
+import disk from '@/components/App/Products/Disk'
+import diskbackup from '@/components/App/Products/Diskbackup'
 
 
 import Workorder from '@/components/Back/Workorder'
@@ -89,6 +93,26 @@ export default new Router({
       path: '/host',
       name: 'host',
       component: host,
+    },
+    {
+      path: '/ecsSnapshot',
+      name: 'ecsSnapshot',
+      component: ecsSnapshot,
+    },
+    {
+      path: '/mirror',
+      name: 'mirror',
+      component: mirror,
+    },
+    {
+      path: '/disk',
+      name: 'disk',
+      component: disk,
+    },
+    {
+      path: '/diskbackup',
+      name: 'diskbackup',
+      component: diskbackup,
     },
   ]
 })

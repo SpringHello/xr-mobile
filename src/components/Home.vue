@@ -260,8 +260,8 @@
             img: require('../assets/img/home/serve.png'),
             prodItem: [
               {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: '/host'},
-              {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/home'},
-              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: '/home'},
+              {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/mirror'},
+              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: '/EcsSnapshot'},
               {title: '裸金属服务器（敬请期待）', desc: '专属物理服务器', path: ''},
               {title: '弹性伸缩（敬请期待）', desc: '高可用、可视化、低成本', path: ''}
             ]
@@ -270,8 +270,8 @@
             opened: false,
             img: require('../assets/img/home/serve.png'),
             prodItem: [
-              {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: '/home'},
-              {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: '/home'}
+              {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: '/disk'},
+              {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: '/diskbackup'}
             ]
           }, {
             title: '云数据库',
