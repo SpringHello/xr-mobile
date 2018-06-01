@@ -25,8 +25,10 @@
         </li>
       </ul>
     </div>
+
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
+
     <!--走马灯下方介绍-->
     <div class="banner-introduce">
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
@@ -36,6 +38,7 @@
         </grid-item>
       </grid>
     </div>
+
     <!--产品模块-->
     <div class="product-wrapper">
       <div class="product-header">
@@ -45,81 +48,112 @@
         <div v-for="product in productList" class="product-content-item"
              :class="{'product-content-item-active':product.opened}">
           <div class="product-item-header" @click="product.opened=!product.opened">
+            <img :src="product.img">
             <p>{{product.title}}</p>
           </div>
           <div class="product-item-content" v-show="product.opened">
-            <h6>{{product.descTitle}}</h6>
-            <p>{{product.descContent}}</p>
-            <div>
-              <span><span class="product-item-price">{{product.cost}}</span>元/月起</span>
-              <div style="float: right">
-                <p @click="toProdu(product)" class="button-default">查看详情
-                </p>
-                <p @click="$router.push('home')" class="button-default button-main">立即选购</p>
-              </div>
-            </div>
+            <ul>
+              <router-link v-for="(item,index) in product.prodItem" :key="index" :to="item.path">
+                <li class="item">
+                  <div>
+                    <p class="item-title">{{item.title}}</p>
+                    <p class="item-desc">{{item.desc}}</p>
+                  </div>
+                  <p class="item-check" v-show="item.path != ''">查看详情</p>
+                </li>
+              </router-link>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <!--解决定制方案-->
-    <div class="scheme-wrapper">
-      <h6 class="title">解决定制方案</h6>
-      <scroller lock-y :scrollbar-x=false>
-        <div class="box1">
-          <div class="box1-item" v-for="i in 7"><img src=""></div>
-        </div>
-      </scroller>
+
+    <!--数据中心-->
+    <div class="data-wrapper">
+      <div class="data-header">
+        <p>数据中心 <span> 五星级数据中心，与各骨干网络互联互通</span></p>
+      </div>
+      <img src="" style="display: block;width: 15rem;height: 15rem;margin: 1rem auto;background: #ccc;">
     </div>
+
+    <!--权威认证-->
+    <div class="authority-wrapper">
+      <div class="authority-header">
+        <p>权威认证</p>
+      </div>
+      <ul>
+        <li v-for="(item,index) in authoritys" class="item">
+          <img :src="item.img">
+          <p class="item-desc">{{item.desc}}</p>
+        </li>
+      </ul>
+    </div>
+
+    <!--合作伙伴-->
+    <div class="partner-wrapper">
+      <div class="partner-header">
+        <p>合作伙伴</p>
+      </div>
+      <div class="item">
+        <img v-for="(item,index) in partners" :src="item">
+      </div>
+    </div>
+
+    <!--support-->
+    <div class="support-wrapper">
+      <div class="item">
+        <div v-for="(item,index) in support">
+          <img :src="item.img">
+          <div>
+            <p class="item-title">{{item.title}}</p>
+            <p class="item-subtitle">{{item.subTitle}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--页尾-->
+    <div class="footer-wrapper">
+      <div class="foot-one">
+        <img src="">
+        <div class="foot-one-right">
+          <h6>联系我们</h6>
+          <p>400-0505-565</p>
+          <span>service@unionstech.cn</span>
+          <span>北京市海淀区东升大厦AB座611、612</span>
+        </div>
+      </div>
+      <div class="foot-two">
+        <p>Copyright © 2014-2017 <span> 京ICP备15035854号</span></p>
+        <p>北京允睿讯通科技有限公司</p>
+      </div>
+    </div>
+
     <!--动态-->
-    <div class="dynamic-wrapper">
-      <h6 class="title">新睿云动态</h6>
-      <tab :line-width="2" active-color="#00aaff" custom-bar-width="80%">
-        <tab-item selected @on-item-click="dynamicContent.showNews = false ,dynamicContent.showOffices = true">官方公告
-        </tab-item>
-        <tab-item @on-item-click="dynamicContent.showNews = true ,dynamicContent.showOffices = false">业界新闻</tab-item>
-      </tab>
-      <div class="dynamic-content">
-        <ul v-if="dynamicContent.showOffices">
-          <li v-for="(item,index) in dynamicContent.offices"
-              @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">
-            <h6 class="dynamic-content-item-title">{{item.title}}</h6><span class="item-time">{{item.createtime}}</span>
-          </li>
-        </ul>
-        <ul v-if="dynamicContent.showNews">
-          <li v-for="(item,index) in dynamicContent.News">
-            <h6 class="dynamic-content-item-title"
-                @click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><span
-            class="item-time">{{item.createtime}}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!--资质认证-->
-    <div class="certification-wrapper">
-      <h6 class="title">资质认证</h6>
-      <scroller lock-y :scrollbar-x=false>
-        <div class="box1">
-          <div class="box1-item" v-for="i in 7"><img src=""></div>
-        </div>
-      </scroller>
-    </div>
-    <!--了解新睿云-->
-    <div class="understand-wrapper">
-      <h6 class="title">了解新睿云</h6>
-      <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item v-for="(item,index) in understands" :link="item.url" :key="index">
-          <img slot="icon" src="">
-          <p slot="label" class="under-item">{{item.title}}<span style="display: block;">{{item.desc}}</span></p>
-        </grid-item>
-      </grid>
-    </div>
-    <!--免费注册-->
-    <div class="register-wrapper">
-      <div class="register-item">
-        <router-link to="home">立即免费注册</router-link>
-      </div>
-    </div>
+    <!--<div class="dynamic-wrapper">-->
+    <!--<h6 class="title">新睿云动态</h6>-->
+    <!--<tab :line-width="2" active-color="#00aaff" custom-bar-width="80%">-->
+    <!--<tab-item selected @on-item-click="dynamicContent.showNews = false ,dynamicContent.showOffices = true">官方公告-->
+    <!--</tab-item>-->
+    <!--<tab-item @on-item-click="dynamicContent.showNews = true ,dynamicContent.showOffices = false">业界新闻</tab-item>-->
+    <!--</tab>-->
+    <!--<div class="dynamic-content">-->
+    <!--<ul v-if="dynamicContent.showOffices">-->
+    <!--<li v-for="(item,index) in dynamicContent.offices"-->
+    <!--@click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">-->
+    <!--<h6 class="dynamic-content-item-title">{{item.title}}</h6><span class="item-time">{{item.createtime}}</span>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<ul v-if="dynamicContent.showNews">-->
+    <!--<li v-for="(item,index) in dynamicContent.News">-->
+    <!--<h6 class="dynamic-content-item-title"-->
+    <!--@click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><span-->
+    <!--class="item-time">{{item.createtime}}</span>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+
   </div>
 </template>
 
@@ -157,7 +191,7 @@
           {
             title: '产品',
             path: '',
-            open:false,
+            open: false,
             content: [
               {
                 prod: '云计算',
@@ -182,17 +216,17 @@
           {
             title: '动态',
             path: '',
-            open:false,
+            open: false,
           },
           {
             title: '关于',
             path: '',
-            open:false,
+            open: false,
           },
           {
             title: '文档',
             path: '',
-            open:false,
+            open: false,
           },
         ], // banner item
         // 轮播图资料
@@ -221,84 +255,107 @@
         // 产品资料
         productList: [
           {
-            title: '云服务器',
+            title: '云计算',
             opened: false,
-            descTitle: '极速稳定高弹性1',
-            descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
-            cost: 15
+            img: require('../assets/img/home/serve.png'),
+            prodItem: [
+              {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: '/host'},
+              {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/home'},
+              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: '/home'},
+              {title: '裸金属服务器（敬请期待）', desc: '专属物理服务器', path: ''},
+              {title: '弹性伸缩（敬请期待）', desc: '高可用、可视化、低成本', path: ''}
+            ]
           }, {
-            title: '云服务器',
+            title: '云存储',
             opened: false,
-            descTitle: '极速稳定高弹性2',
-            descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
-            cost: 15
+            img: require('../assets/img/home/serve.png'),
+            prodItem: [
+              {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: '/home'},
+              {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: '/home'}
+            ]
           }, {
-            title: '云服务器',
+            title: '云数据库',
             opened: false,
-            descTitle: '极速稳定高弹性3',
-            descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
-            cost: 15
+            img: require('../assets/img/home/serve.png'),
+            prodItem: [
+              {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: '/home'},
+              {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/home'},
+              {title: '负载均衡', desc: '源算法、轮询、最小连接数', path: '/home'},
+              {title: 'NAT网关', desc: 'TCP/HTTP协议、多对一支持', path: '/home'},
+              {title: '虚拟专网VPN', desc: '跨VPC链接', path: '/home'},
+              {title: 'CDN（敬请期待）', desc: '节点丰富、安全易用', path: ''}
+            ]
           }, {
-            title: '云服务器',
+            title: '云运维',
             opened: false,
-            descTitle: '极速稳定高弹性4',
-            descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
-            cost: 15
+            img: require('../assets/img/home/serve.png'),
+            prodItem: [
+              {title: '云监控', desc: '自定义监控项、多告警推送方式', path: '/home'},
+              {title: '访问控制（敬请期待）', desc: '权限管理、精准控制', path: ''}
+            ]
+
           }, {
-            title: '云服务器',
+            title: '云安全',
             opened: false,
-            descTitle: '极速稳定高弹性5',
-            descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
-            cost: 15
-          }, {
-            title: '云服务器',
-            opened: false,
-            descTitle: '极速稳定高弹性6',
-            descContent: '采用由数据切片技术构建的三层存储功能，切实保护客户数据的安全。同时可弹性扩展的资源用量，为客户业务在高峰期的顺畅保驾护航',
-            cost: 15
-          }],
-        // 定制方案
-        schemes: [],
+            img: require('../assets/img/home/serve.png'),
+            prodItem: [
+              {title: '防火墙', desc: '自定义规则、协议、端口', path: '/home'},
+              {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: '/home'}
+            ]
+
+          }
+        ],
+        // 权威认证
+        authoritys: [
+          {img: require('../assets/img/home/authority-1.png'), desc: '中国高新技术企业'},
+          {img: require('../assets/img/home/authority-2.png'), desc: '中关村高新技术企业'},
+          {img: require('../assets/img/home/authority-3.png'), desc: 'ISO27001企业认证'},
+          {img: require('../assets/img/home/authority-4.png'), desc: 'ISO9001企业认证'},
+          {img: require('../assets/img/home/authority-5.png'), desc: '华为云管理网络ISV'}
+        ],
+        //合作伙伴
+        partners: [
+          require('../assets/img/home/partner-dell.png'),
+          require('../assets/img/home/partner-huawei.png'),
+          require('../assets/img/home/partner-cooce.png'),
+          require('../assets/img/home/partner-telecom.png'),
+          require('../assets/img/home/partner-sugon.png'),
+          require('../assets/img/home/partner-hitachi.png'),
+          require('../assets/img/home/partner-unicom.png'),
+          require('../assets/img/home/partner-vmware.png'),
+        ],
+        //
+        support: [
+          {img: require('../assets/img/home/support.png'), title: '7*24', subTitle: '多渠道服务与支持'},
+          {img: require('../assets/img/home/support.png'), title: '意见', subTitle: '反馈与投诉建议'},
+          {img: require('../assets/img/home/support.png'), title: '1V1', subTitle: '专项服务'},
+          {img: require('../assets/img/home/support.png'), title: '退款', subTitle: '7天无理由退款'}
+        ],
         //动态集合
-        dynamicContent: {
-          showOffices: true,
-          showNews: false,
-          offices: [],
-          News: [],
-        },
-        // 资质认证
-        auth: [],
-        //了解新睿云
-        understands: [
-          {title: "自建数据", desc: "中心12+", url: ''},
-          {title: "IP领先", desc: "行业领先", url: ''},
-          {title: "服务客服", desc: "超过10万", url: ""},
-          {title: "巨资打造", desc: "顶尖设施", url: ''}
-        ]
+//        dynamicContent: {
+//          showOffices: true,
+//          showNews: false,
+//          offices: [],
+//          News: [],
+//        },
       }
     },
     methods: {
-      setData(response){
-        if (response.status == 200 && response.data.status == 1) {
-          this.dynamicContent.offices = response.data.result.announcement_list
-          this.dynamicContent.News = response.data.result.news_list
-        }
-      },
-      toProdu(product){
-        sessionStorage.setItem('title', product.title)
-        sessionStorage.setItem('desc', product.descContent)
-        this.$router.push('prodetail')
-      }
+//      setData(response){
+//        if (response.status == 200 && response.data.status == 1) {
+//          this.dynamicContent.offices = response.data.result.announcement_list
+//          this.dynamicContent.News = response.data.result.news_list
+//        }
+//      },
     },
     beforeRouteEnter(to, from, next){
-      console.log('beforeRouteEnter')
       axios.get('user/getAnnouncement.do', {
         params: {
           listAll: -1,
         }
       }).then(response => {
         next(vm => {
-          vm.setData(response)
+//          vm.setData(response)
         })
       })
 
@@ -350,7 +407,7 @@
       li {
         list-style: none;
         > div {
-          font-size: .8rem;
+          font-size: .7rem;
           margin-bottom: .5rem;
           P.ftitle {
             &::after {
@@ -370,7 +427,7 @@
             padding: .5rem .9rem;
             li {
               list-style: none;
-              font-size: .7rem;
+              font-size: .6rem;
               line-height: 1.3rem;
             }
           }
@@ -381,19 +438,22 @@
   }
 
   .banner-introduce {
-    margin-bottom: .5rem;
+    background-color: #fff;
+    img {
+    }
     .grid-item {
       font-size: .7rem;
-      color: rgba(34, 34, 34, 1);
-      line-height: 1.65rem;
+      color: rgba(136, 136, 136, 1);
+      line-height: 1.5rem;
     }
   }
 
+  //云产品目录
   .product-wrapper {
     background-color: #fff;
-    margin-bottom: .5rem;
     .product-header {
       font-size: .9rem;
+      color: #222;
       padding: .5rem 1rem;
       border-bottom: 1px solid #e7e7e7;
     }
@@ -402,21 +462,20 @@
         .product-item-header {
           position: relative;
           border-bottom: 1px solid #e7e7e7;
+          img {
+            width: 2rem;
+            height: 2rem;
+            position: absolute;
+            left: 1rem;
+            top: .5rem;
+            background: #C9C9C9;
+          }
           p {
             padding-left: 4rem;
             line-height: 3rem;
             position: relative;
             font-size: .8rem;
-            &:before {
-              content: '';
-              width: 2rem;
-              height: 2rem;
-              display: block;
-              background-color: #00aaff;
-              position: absolute;
-              left: 1rem;
-              top: .5rem;
-            }
+            color: #222;
             &:after {
               content: '';
               border-bottom: 1px solid #999;
@@ -435,36 +494,42 @@
         .product-item-content {
           padding: .5rem 1rem;
           border-bottom: 1px solid #e7e7e7;
-          h6 {
-            font-weight: normal;
-            font-size: .75rem;
-            color: #333;
-            line-height: 1.5rem;
-          }
-          p {
-            font-weight: normal;
-            font-size: .6rem;
-            color: #666;
-            padding-bottom: .1rem;
-          }
-          span {
-            font-size: 0.8rem;
-          }
-          .product-item-price {
-            color: #0af;
-            font-size: 1rem;
+          ul {
+            .item {
+              /*border-bottom: 1px solid #e7e7e7;*/
+              padding: .4rem 0;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              > div {
+                .item-title {
+                  font-size: .7rem;
+                  color: rgba(51, 51, 51, 1);
+                }
+                .item-desc {
+                  font-size: .6rem;
+                  color: rgba(153, 153, 153, 1);
+                  line-height: 1.2rem;
+                }
+              }
+              .item-check {
+                font-size: .6rem;
+                color: rgba(153, 153, 153, 1);
+              }
+            }
           }
 
         }
       }
       .product-content-item-active {
         .product-item-header {
-          color: #0af;
+          color: #4A90E2;
           p {
             &:after {
               transform: rotate(135deg);
-              border-bottom: 1px solid #0af;
-              border-left: 1px solid #0af;
+              border-bottom: 1px solid #4A90E2;
+              border-left: 1px solid #4A90E2;
             }
           }
         }
@@ -472,132 +537,209 @@
     }
   }
 
-  //方案
-  .scheme-wrapper {
-    margin-bottom: .5rem;
-    background: #FFF;
-    .title {
+  //数据中心
+  .data-wrapper {
+    background-color: #fff;
+    .data-header {
       padding: .5rem 1rem;
-      font-size: .9rem;
-      font-weight: normal;
-      color: #000;
       border-bottom: 1px solid #e7e7e7;
-    }
-    .box1 {
-      width: 175%;
-      margin: .6rem 0;
-      padding-bottom: 25%;
-      .box1-item {
-        width: 14%;
-        height: 0rem;
-        padding-bottom: 14.28%;
-        background-color: #ccc;
-        display: inline-block;
-        margin-left: .28%;
-        float: left;
-        text-align: center;
-        line-height: 3rem;
+      p {
+        font-size: .9rem;
+        color: #222;
+        span {
+          display: inline-block;
+          padding-left: .4rem;
+          font-size: .6rem;
+          color: rgba(136, 136, 136, 1);
+        }
       }
     }
-
   }
 
-  //动态
-  .dynamic-wrapper {
-    background-color: #FFF;
-    margin-bottom: .5rem;
-    .title {
-      padding: .5rem 1rem;
+  //权威认证
+  .authority-wrapper {
+    background-color: #fff;
+    .authority-header {
       font-size: .9rem;
-      font-weight: normal;
-      color: #000;
+      color: #222;
+      padding: .5rem 1rem;
       border-bottom: 1px solid #e7e7e7;
     }
-    .dynamic-content {
-      ul {
-        padding: .375rem .725rem;
-        li {
-          list-style: none;
-          border-bottom: .025rem solid #e7e7e7;
-          padding-top: .8rem;
-          height: 2.8rem;
-          .dynamic-content-item-title {
-            font-weight: normal;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            line-height: .65rem;
-            font-size: .65rem;
-            color: #333;
-            margin-bottom: .5rem;
-          }
-          .dynamic-content-item-content {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            line-height: .65rem;
-            font-size: .65rem;
-            color: #999;
-          }
-          .item-time {
-            float: right;
-            line-height: .8rem;
-            font-size: .65rem;
-            color: #999;
-
+    ul {
+      padding: .5rem 1rem;
+      .item {
+        list-style: none;
+        padding: .5rem 0;
+        border-bottom: 1px solid #e7e7e7;
+        img {
+          vertical-align: middle;
+          width: 2rem;
+          height: 2rem;
+        }
+        .item-desc {
+          display: inline-block;
+          font-size: .7rem;
+          color: rgba(51, 51, 51, 1);
+          padding-left: .5rem;
+          &::after {
+            content: '';
+            border-bottom: 1px solid #999;
+            border-right: 1px solid #999;
+            width: .5rem;
+            height: .5rem;
+            display: inline-block;
+            position: absolute;
+            right: 1.3rem;
+            transform-origin: 50% 50%;
+            transform: translateY(.3rem) rotate(311deg);
           }
         }
       }
     }
-
   }
 
-  //认证
-  .certification-wrapper {
-    background-color: #FFF;
-    margin-bottom: .5rem;
-    .title {
-      padding: .5rem 1rem;
+  //合作伙伴
+  .partner-wrapper {
+    background-color: #fff;
+    .partner-header {
       font-size: .9rem;
-      font-weight: normal;
-      color: #000;
+      color: #222;
+      padding: .5rem 1rem;
       border-bottom: 1px solid #e7e7e7;
     }
-    .box1 {
-      width: 175%;
-      margin: .6rem 0;
-      padding-bottom: 25%;
-      .box1-item {
-        width: 14%;
-        height: 0rem;
-        padding-bottom: 14.28%;
-        background-color: #ccc;
-        display: inline-block;
-        margin-left: .28%;
-        float: left;
-        text-align: center;
-        line-height: 3rem;
+    .item {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      img {
+        width: 20.2%;
+        margin-bottom: 1.5rem;
       }
     }
   }
 
-  //了解新睿云
-  .understand-wrapper {
-    margin-bottom: .5rem;
-    background: #fff;
-    .title {
-      padding: .5rem 1rem;
-      font-size: .9rem;
-      font-weight: normal;
-      color: #000;
-      border-bottom: 1px solid #e7e7e7;
+  //support
+  .support-wrapper {
+    background-color: #fff;
+    padding: .5rem 1rem;
+    .item {
+      display: flex;
+      flex-wrap: wrap;
+      > div {
+        display: flex;
+        vertical-align: middle;
+        font-size: .6rem;
+        width: 50%;
+        .item-title {
+          color: rgba(51, 51, 51, 1);
+        }
+        .item-subtitle {
+          color: rgba(153, 153, 153, 1);
+        }
+      }
+      img {
+        width: 2rem;
+        height: 2rem;
+        margin-right: .8rem;
+        margin-bottom: 1.5rem;
+      }
     }
-    .under-item {
-      padding-top: .5rem;
-      font-size: .6rem;
-      color: #666;
-    }
-
   }
+
+  //首页页尾
+  .footer-wrapper {
+    height: 12rem;
+    background: rgba(67, 67, 67, 1);
+    padding: .5rem;
+    .foot-one {
+      height: 8rem;
+      border-bottom: 1px solid #666;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      img {
+      }
+      .foot-one-right {
+        h6 {
+          font-weight: normal;
+          font-size: .9rem;
+          color: rgba(255, 255, 255, 1);
+        }
+        p {
+          color: rgba(125, 161, 217, 1);
+          font-size: 1rem;
+          line-height: 1.8rem;
+        }
+        span {
+          display: block;
+          font-size: .7rem;
+          color: rgba(255, 255, 255, 1);
+          &:last-of-type {
+            font-size: .6rem;
+          }
+        }
+      }
+    }
+    .foot-two {
+      padding: .5rem 0;
+      text-align: center;
+      font-size: .6rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.2rem;
+    }
+  }
+
+  //动态
+  /*.dynamic-wrapper {*/
+  /*background-color: #FFF;*/
+  /*margin-bottom: .5rem;*/
+  /*.title {*/
+  /*padding: .5rem 1rem;*/
+  /*font-size: .9rem;*/
+  /*font-weight: normal;*/
+  /*color: #000;*/
+  /*border-bottom: 1px solid #e7e7e7;*/
+  /*}*/
+  /*.dynamic-content {*/
+  /*ul {*/
+  /*padding: .375rem .725rem;*/
+  /*li {*/
+  /*list-style: none;*/
+  /*border-bottom: .025rem solid #e7e7e7;*/
+  /*padding-top: .8rem;*/
+  /*height: 2.8rem;*/
+  /*.dynamic-content-item-title {*/
+  /*font-weight: normal;*/
+  /*overflow: hidden;*/
+  /*text-overflow: ellipsis;*/
+  /*white-space: nowrap;*/
+  /*line-height: .65rem;*/
+  /*font-size: .65rem;*/
+  /*color: #333;*/
+  /*margin-bottom: .5rem;*/
+  /*}*/
+  /*.dynamic-content-item-content {*/
+  /*overflow: hidden;*/
+  /*text-overflow: ellipsis;*/
+  /*white-space: nowrap;*/
+  /*line-height: .65rem;*/
+  /*font-size: .65rem;*/
+  /*color: #999;*/
+  /*}*/
+  /*.item-time {*/
+  /*float: right;*/
+  /*line-height: .8rem;*/
+  /*font-size: .65rem;*/
+  /*color: #999;*/
+
+  /*}*/
+  /*}*/
+  /*}*/
+  /*}*/
+
+  /*}*/
+
 
 </style>

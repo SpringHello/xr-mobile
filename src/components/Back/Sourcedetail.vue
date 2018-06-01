@@ -6,7 +6,7 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img src="" :class="{error:item.status=='error',open:item.status=='open'}">
+            <img src="" :class="{error:item.status=='error',open:item.status=='open',close:item.status=='close',arrears:item.status=='arrears'}">
             <div>
               <p class="soures-title">{{item.title}}</p>
               <span class="soures-desc">{{item.desc}}</span>
@@ -56,6 +56,12 @@
             break;
           case 'ip':
             this.address = 'ipDetail'
+            var params ={
+              vpcid:item.vpcId,
+              public:item.public,
+              case:item.case,
+              price:item.price
+            }
             break;
           case 'balance':
             this.address = 'balanceDetail'
@@ -96,7 +102,7 @@
           url = 'network/listPublicIp.do'
           operate = (response) => {
             response.data.result.forEach(ip => {
-              list.push({type: 'ip', title: ip.vpcname, desc: ip.publicip})
+              list.push({type: 'ip', title: ip.vpcname, desc: ip.publicip,vpcId:ip.vpcid,public:ip.publicip,price:ip.cpCase,case:ip.caseType})
             })
           }
           break;
@@ -152,6 +158,12 @@
           }
           .open {
             background: #00aaff;
+          }
+          .close{
+            background: #ccc;
+          }
+          .arrears{
+            background: yellow;
           }
           > div {
             font-size: .7rem;

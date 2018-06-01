@@ -24,7 +24,7 @@
             <li>计费方式 <span>{{details.case_type == 1 ? '包年' : details.case_type == 2 ? '包月' : '实时'}}</span></li>
             <li>创建时间 <span>{{details.createTime}}</span></li>
             <li>有效期 <span>{{details.endTime}}</span></li>
-            <li>主机价格 <span>{{$route.query.price}}元/小时</span></li>
+            <li>主机价格 <span>{{$route.query.price}}元/{{details.case_type == 1 ? '年' : details.case_type == 2 ? '月' : '小时'}}</span></li>
           </ol>
         </div>
         <div class="xins">
@@ -55,7 +55,7 @@
     },
     data (){
       return {
-        details: '',
+        details: {},
         navs: [
           {title: "续费", url: ""},
           {title: "升级", url: ""},

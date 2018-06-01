@@ -60,7 +60,7 @@
             {title: '当月消费', url: '/home'}
           ],
           [
-            {title: '消息中心', url: '/home'}
+            {title: '消息中心', url: '/newscenter'}
           ],
           [
             {title: '意见反馈', url: '/home'},
