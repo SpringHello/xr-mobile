@@ -115,7 +115,7 @@
     <!--页尾-->
     <div class="footer-wrapper">
       <div class="foot-one">
-        <img src="">
+        <img src="../assets/img/home/QR-code.jpg">
         <div class="foot-one-right">
           <h6>联系我们</h6>
           <p>400-0505-565</p>
@@ -124,7 +124,7 @@
         </div>
       </div>
       <div class="foot-two">
-        <p>Copyright © 2014-2017 <span> 京ICP备15035854号</span></p>
+        <p>Copyright © 2014-2017 <img src="../assets/img/home/record.png"><span> 京ICP备15035854号</span></p>
         <p>北京允睿讯通科技有限公司</p>
       </div>
     </div>
@@ -278,10 +278,10 @@
             opened: false,
             img: require('../assets/img/home/serve.png'),
             prodItem: [
-              {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: '/home'},
-              {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/home'},
-              {title: '负载均衡', desc: '源算法、轮询、最小连接数', path: '/home'},
-              {title: 'NAT网关', desc: 'TCP/HTTP协议、多对一支持', path: '/home'},
+              {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: '/vpc'},
+              {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/elasticip'},
+              {title: '负载均衡', desc: '源算法、轮询、最小连接数', path: '/balance'},
+              {title: 'NAT网关', desc: 'TCP/HTTP协议、多对一支持', path: '/natgateway'},
               {title: '虚拟专网VPN', desc: '跨VPC链接', path: '/home'},
               {title: 'CDN（敬请期待）', desc: '节点丰富、安全易用', path: ''}
             ]
@@ -634,11 +634,10 @@
     .item {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
       > div {
         display: flex;
-        vertical-align: middle;
         font-size: .6rem;
-        width: 50%;
         .item-title {
           color: rgba(51, 51, 51, 1);
         }
@@ -647,10 +646,11 @@
         }
       }
       img {
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
         margin-right: .8rem;
         margin-bottom: 1.5rem;
+        vertical-align: middle;
       }
     }
   }
@@ -695,6 +695,10 @@
       font-size: .6rem;
       color: rgba(255, 255, 255, 0.5);
       line-height: 1.2rem;
+      img{
+        padding-left: .5rem;
+        width: 1.3rem;
+      }
     }
   }
 

@@ -15,6 +15,10 @@ import ecsSnapshot from '@/components/App/Products/EcsSnapshot'
 import mirror from '@/components/App/Products/Mirror'
 import disk from '@/components/App/Products/Disk'
 import diskbackup from '@/components/App/Products/Diskbackup'
+import vpc from '@/components/App/Products/Vpc'
+import elasticip from '@/components/App/Products/ElasticIP'
+import balance from '@/components/App/Products/Balance'
+import natgateway from '@/components/App/Products/Natgateway'
 
 
 import Workorder from '@/components/Back/Workorder'
@@ -113,6 +117,26 @@ export default new Router({
       path: '/diskbackup',
       name: 'diskbackup',
       component: diskbackup,
+    },
+    {
+      path: '/vpc',
+      name: 'vpc',
+      component: vpc,
+    },
+    {
+      path: '/elasticip',
+      name: 'elasticip',
+      component: elasticip,
+    },
+    {
+      path: '/balance',
+      name: 'balance',
+      component: balance,
+    },
+    {
+      path: '/natgateway',
+      name: 'natgateway',
+      component: natgateway,
     },
   ]
 })
