@@ -282,7 +282,7 @@
               {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/elasticip'},
               {title: '负载均衡', desc: '源算法、轮询、最小连接数', path: '/balance'},
               {title: 'NAT网关', desc: 'TCP/HTTP协议、多对一支持', path: '/natgateway'},
-              {title: '虚拟专网VPN', desc: '跨VPC链接', path: '/home'},
+              {title: '虚拟专网VPN', desc: '跨VPC链接', path: '/virtualvpn'},
               {title: 'CDN（敬请期待）', desc: '节点丰富、安全易用', path: ''}
             ]
           }, {
@@ -290,7 +290,7 @@
             opened: false,
             img: require('../assets/img/home/serve.png'),
             prodItem: [
-              {title: '云监控', desc: '自定义监控项、多告警推送方式', path: '/home'},
+              {title: '云监控', desc: '自定义监控项、多告警推送方式', path: '/cloudmonitoring'},
               {title: '访问控制（敬请期待）', desc: '权限管理、精准控制', path: ''}
             ]
 
@@ -299,8 +299,8 @@
             opened: false,
             img: require('../assets/img/home/serve.png'),
             prodItem: [
-              {title: '防火墙', desc: '自定义规则、协议、端口', path: '/home'},
-              {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: '/home'}
+              {title: '防火墙', desc: '自定义规则、协议、端口', path: '/firewall'},
+              {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: '/ddos'}
             ]
 
           }

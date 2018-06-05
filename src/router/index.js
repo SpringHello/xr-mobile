@@ -19,6 +19,10 @@ import vpc from '@/components/App/Products/Vpc'
 import elasticip from '@/components/App/Products/ElasticIP'
 import balance from '@/components/App/Products/Balance'
 import natgateway from '@/components/App/Products/Natgateway'
+import virtualvpn from '@/components/App/Products/Virtualvpn'
+import cloudmonitoring from '@/components/App/Products/Cloudmonitoring'
+import firewall from '@/components/App/Products/Firewall'
+import ddos from '@/components/App/Products/DDOS'
 
 
 import Workorder from '@/components/Back/Workorder'
@@ -137,6 +141,26 @@ export default new Router({
       path: '/natgateway',
       name: 'natgateway',
       component: natgateway,
+    },
+    {
+      path: '/virtualvpn',
+      name: 'virtualvpn',
+      component: virtualvpn,
+    },
+    {
+      path: '/cloudmonitoring',
+      name: 'cloudmonitoring',
+      component: cloudmonitoring,
+    },
+    {
+      path: '/firewall',
+      name: 'firewall',
+      component: firewall,
+    },
+    {
+      path: '/ddos',
+      name: 'ddos',
+      component: ddos,
     },
   ]
 })
