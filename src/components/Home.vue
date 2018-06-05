@@ -18,7 +18,7 @@
             <div v-for="(subItem,index) in item.content" :key="index">
               <p class="ntitle">{{subItem.prod}}</p>
               <ol>
-                <li v-for="(content,index) in subItem.prodItem" @click="DialogStyle = false">{{content.title}}</li>
+                <li v-for="(content,index) in subItem.prodItem" @click="push(content.path)">{{content.title}}</li>
               </ol>
             </div>
           </div>
@@ -196,19 +196,19 @@
               {
                 prod: '云计算',
                 prodItem: [
-                  {title: '弹性云服务器（ECS）', path: ''},
-                  {title: '镜像服务', path: ''},
-                  {title: 'ECS快照', path: ''},
+                  {title: '弹性云服务器（ECS）', path: '/host'},
+                  {title: '镜像服务', path: '/mirror'},
+                  {title: 'ECS快照', path: '/ecsSnapshot'},
                 ]
               },
               {
                 prod: '云网络',
                 prodItem: [
-                  {title: '虚拟私有云VPC', path: ''},
-                  {title: '弹性IP', path: ''},
-                  {title: '负载均衡', path: ''},
-                  {title: 'NAT网关', path: ''},
-                  {title: '虚拟专网VPN', path: ''},
+                  {title: '虚拟私有云VPC', path: '/vpc'},
+                  {title: '弹性IP', path: '/elasticip'},
+                  {title: '负载均衡', path: '/balance'},
+                  {title: 'NAT网关', path: '/natgateway'},
+                  {title: '虚拟专网VPN', path: '/virtualvpn'},
                 ]
               },
             ]
@@ -261,7 +261,7 @@
             prodItem: [
               {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: '/host'},
               {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/mirror'},
-              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: '/EcsSnapshot'},
+              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: '/ecsSnapshot'},
               {title: '裸金属服务器（敬请期待）', desc: '专属物理服务器', path: ''},
               {title: '弹性伸缩（敬请期待）', desc: '高可用、可视化、低成本', path: ''}
             ]
@@ -341,6 +341,10 @@
       }
     },
     methods: {
+      push(url){
+          this.DialogStyle=false
+          this.$router.push(url)
+      }
 //      setData(response){
 //        if (response.status == 200 && response.data.status == 1) {
 //          this.dynamicContent.offices = response.data.result.announcement_list
@@ -638,19 +642,19 @@
       > div {
         display: flex;
         font-size: .6rem;
+        align-items: center;
+        margin-bottom: 1rem;
         .item-title {
           color: rgba(51, 51, 51, 1);
         }
         .item-subtitle {
           color: rgba(153, 153, 153, 1);
         }
-      }
-      img {
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-right: .8rem;
-        margin-bottom: 1.5rem;
-        vertical-align: middle;
+        img {
+          width: 1.5rem;
+          height: 1.5rem;
+          margin-right: .8rem;
+        }
       }
     }
   }
@@ -667,6 +671,7 @@
       justify-content: space-between;
       padding: 1rem;
       img {
+        width: 5rem;
       }
       .foot-one-right {
         h6 {
