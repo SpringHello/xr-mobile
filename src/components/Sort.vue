@@ -5,10 +5,8 @@
       <router-link v-for="(item,index) in actives" :key="index" :to="item.url">
         <div class="active-item">
           <img src="" class="item-img">
-          <p class="item-bottom">
-            {{item.desc}}
-            <x-button mini class="item-btn">立即参与</x-button>
-          </p>
+          <h6>企业级云服务 重磅来袭</h6>
+          <p class="item-bottom">{{item.desc}}</p>
         </div>
       </router-link>
 
@@ -44,31 +42,27 @@
 <style rel="stylesheet/less" lang="less" scoped>
   //活动页面样式
   .active-box {
-    padding: .2rem .5rem 1.5rem;
+    padding: .5rem;
     font-size: .6rem;
     .active-item {
-      height: 14rem;
-      border: 1px solid #e6e6e6;
-      padding-bottom: .5rem;
-      margin: 0 0 .5rem;
-      position: relative;
+      height: 15rem;
+      /*border: 1px solid #e6e6e6;*/
+      margin-bottom: .5rem;
       .item-img {
         height: 10.8rem;
         display: block;
         background-color: #ccc;
       }
+      h6{
+        padding: .4rem 0 0.2rem .5rem;
+        font-size: 1rem;
+        color:rgba(51,51,51,1);
+        font-weight: normal;
+      }
       .item-bottom {
-        padding: .5rem .4rem;
-        font-size: .65rem;
-        line-height: 1.45rem;
+        padding-left: .5rem;
+        font-size: .6rem;
         color: rgba(156, 156, 156, 1);
-        .item-btn {
-          font-size: .65rem;
-          float: right;
-          background: rgba(51, 51, 51, 1);
-          color: rgba(156, 156, 156, 1);
-
-        }
       }
     }
   }

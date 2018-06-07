@@ -3,20 +3,17 @@
     <x-header></x-header>
     <div class="host">
       <div class="host-item">
-        <h6 class="title">{{$route.query.name}} <span>修改名称</span></h6>
+        <h6 class="title">{{$route.query.name}} <span style="float: right;font-size: .8rem;">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span>
+        </h6>
         <ul>
-          <li>系统镜像 : {{details.template}}</li>
-          <li>内网IP : {{details.privateIp}}<span class="open">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span></li>
-          <li>主机配置 :{{$route.query.configs}}
-            <span class="password">点击查看主机密码</span>
-          </li>
+          <li>系统镜像 : <span style="float: right;color: #333;">{{details.template}}</span></li>
+          <li>系统盘 : <span style="float: right;color: #333;"></span></li>
+          <li style="text-align: right;color: #4A90E2;">{{details.memory}}G</li>
+          <li>内网IP : <span style="float: right;color: #333;">{{details.privateIp}}</span></li>
+          <li>主机配置 :<span style="float: right;color: #333;">{{$route.query.configs}}</span></li>
+          <li>主机密码 :<span style="float: right;color: #4A90E2;font-size: .7rem">发送密码</span></li>
         </ul>
-        <grid :show-lr-borders="false" :show-vertical-dividers="false">
-          <grid-item v-for="(item,index) in navs" :link="item.url" :key="index">
-            <img slot="icon" style="border-radius: 50%;background: #cccccc;">
-            <span slot="label">{{ item.title}}</span>
-          </grid-item>
-        </grid>
+
 
         <div class="xins">
           <p class="xin-title">主机基础信息</p>
@@ -24,7 +21,8 @@
             <li>计费方式 <span>{{details.case_type == 1 ? '包年' : details.case_type == 2 ? '包月' : '实时'}}</span></li>
             <li>创建时间 <span>{{details.createTime}}</span></li>
             <li>有效期 <span>{{details.endTime}}</span></li>
-            <li>主机价格 <span>{{$route.query.price}}元/{{details.case_type == 1 ? '年' : details.case_type == 2 ? '月' : '小时'}}</span></li>
+            <li>主机价格 <span>{{$route.query.price}}/{{details.case_type == 1 ? '年' : details.case_type == 2 ? '月' : '小时'}}</span>
+            </li>
           </ol>
         </div>
         <div class="xins">
@@ -32,9 +30,30 @@
           <ol>
             <li>所属VPC <span>{{details.vpc}}</span></li>
             <li>绑定公网 <span style="color: #108EE9;">{{details.publicIp}}</span></li>
+            <li>所属负载均衡 <span style="color: #108EE9;">{{details.loadbalance.join('|')}}</span></li>
+          </ol>
+        </div>
+        <div class="disks">
+          <p class="disks-title">磁盘与快照</p>
+          <ol>
+            <li>挂载磁盘 <span>{{details.disk.join('|') }}</span></li>
+            <li>挂载磁盘容量统计 <span></span></li>
+            <li>主机快照 <span></span></li>
           </ol>
         </div>
 
+        <!--主机操作-->
+        <div class="handle">
+          <p class="handle-title">主机操作</p>
+          <div class="handle-content">
+            <router-link v-for="(item,index) in hostHandle" :key="index" :to="item.url">
+              <div>
+                <img src="">
+                <p>{{item.title}}</p>
+              </div>
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,12 +73,16 @@
       XHeader
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         details: {},
-        navs: [
-          {title: "续费", url: ""},
-          {title: "升级", url: ""},
-          {title: "监控", url: ""},
+        //主机操作
+        hostHandle: [
+          {img: '', title: '续费', url: '/home'},
+          {img: '', title: '升级', url: '/home'},
+          {img: '', title: '监控', url: '/home'},
+          {img: '', title: '重置主机密码', url: '/home'},
+          {img: '', title: '查看操作日志', url: '/home'}
         ]
       }
     },
@@ -70,65 +93,124 @@
           zoneId: $store.state.zone.zoneid,
           VMId: to.query.id
         }
-      }).then(response => {
-        next(vm =>{
-          vm.details=response.data.result
-        })
-      })
+      }).then(response =>
+      {
+        next(vm=>
+      {
+        vm.details = response.data.result
+    }
+    )
+    }
+    )
     }
   }
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
   .host {
-    padding: .5rem;
+    background: rgba(243, 243, 243, 1);
     .host-item {
       .title {
-        font-size: .8rem;
+        padding: .5rem;
+        background: rgba(255, 255, 255, 1);
+        font-size: .9rem;
         font-weight: normal;
-        color: rgba(34, 34, 34, 1);
-        line-height: 1.2rem;
-        span {
-          font-size: .65rem;
-          color: #2B99F2;
-        }
+        color: #222;
+        line-height: 1.3rem;
       }
       ul {
-        padding: .5rem 0;
+        background: rgba(255, 255, 255, 1);
+        border-bottom: 1px solid #D9D9D9;
+        margin-bottom: .5rem;
+        padding: .5rem;
         li {
           list-style: none;
-          font-size: .65rem;
-          color: rgba(34, 34, 34, 1);
-          line-height: 1.3rem;
-          .open {
-            float: right;
-            color: rgba(102, 102, 102, 1);
-            line-height: .7rem;
-            font-size: .7rem;
-          }
-          .password {
-            float: right;
-            color: #2B99F2;
-            font-size: .65rem;
-          }
+          font-size: .8rem;
+          color: #999;
+          line-height: 1.5rem;
         }
       }
       .xins {
+        background: rgba(255, 255, 255, 1);
+        margin-bottom: .5rem;
         .xin-title {
-          padding: .7rem 0;
-          font-size: .7rem;
+          padding: .7rem .5rem;
+          font-size: .9rem;
+          color: rgba(51, 51, 51, 1);
+          border-bottom: 1px solid #e7e7e7;
+        }
+        ol {
+          padding: .7rem 0.5rem;
+          li {
+            list-style: none;
+            font-size: .8rem;
+            color: #333;
+            line-height: 2rem;
+            span {
+              float: right;
+              color: #666;
+            }
+          }
+        }
+      }
+      .disks {
+        background: rgba(255, 255, 255, 1);
+        margin-bottom: .5rem;
+        .disks-title {
+          padding: .7rem .5rem;
+          font-size: .9rem;
           color: rgba(51, 51, 51, 1);
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
           padding: .7rem 0;
           li {
+            padding: 0 .5rem;
             list-style: none;
-            font-size: .7rem;
-            color: rgba(102, 102, 102, 1);
-            line-height: 1.3rem;
+            font-size: .8rem;
+            color: #333;
+            line-height: 2.2rem;
+            border-bottom: 1px solid #e7e7e7;
             span {
+              color: #4A90E2;
               float: right;
+            }
+          }
+        }
+      }
+
+      //主机操作
+      .handle {
+        background: rgba(255, 255, 255, 1);
+        margin-bottom: 1rem;
+        border-top: 1px solid #e7e7e7;
+        border-bottom: 1px solid #e7e7e7;
+        padding: 1rem 0;
+        .handle-title {
+          padding: 0.2rem .5rem;
+          font-size: .9rem;
+          color: rgba(51, 51, 51, 1);
+        }
+        .handle-content {
+          padding: 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          a {
+            width: 33.3%;
+          }
+          div {
+            text-align: center;
+            margin-bottom: 1rem;
+            img {
+              width: 1.5rem;
+              height: 1.5rem;
+              margin: 0 auto;
+              display: block;
+            }
+            p {
+              padding-top: 16px;
+              font-size: .8rem;
+              color: #222;
             }
           }
         }

@@ -31,12 +31,14 @@
 
     <!--走马灯下方介绍-->
     <div class="banner-introduce">
-      <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item v-for="(item,index) in introduce" :link="item.url" :key="index">
-          <img slot="icon" src="">
-          <span slot="label" class="grid-item">{{ item.title }}</span>
-        </grid-item>
-      </grid>
+      <div class="grid">
+        <router-link v-for="(item,index) in introduce" :key="index" :to="item.url">
+          <div class="grid-item">
+            <img :src="item.img" >
+            <p>{{item.title}}</p>
+          </div>
+        </router-link>
+      </div>
     </div>
 
     <!--产品模块-->
@@ -102,7 +104,7 @@
     <!--support-->
     <div class="support-wrapper">
       <div class="item">
-        <div v-for="(item,index) in support">
+        <div v-for="(item,index) in support" :key="index" style="width: 50%">
           <img :src="item.img">
           <div>
             <p class="item-title">{{item.title}}</p>
@@ -115,7 +117,7 @@
     <!--页尾-->
     <div class="footer-wrapper">
       <div class="foot-one">
-        <img src="../assets/img/home/QR-code.jpg">
+        <img src="">
         <div class="foot-one-right">
           <h6>联系我们</h6>
           <p>400-0505-565</p>
@@ -124,7 +126,7 @@
         </div>
       </div>
       <div class="foot-two">
-        <p>Copyright © 2014-2017 <img src="../assets/img/home/record.png"><span> 京ICP备15035854号</span></p>
+        <p>Copyright © 2014-2017 <img src=""><span> 京ICP备15035854号</span></p>
         <p>北京允睿讯通科技有限公司</p>
       </div>
     </div>
@@ -247,17 +249,17 @@
         ],
         // 走马灯下方介绍
         introduce: [
-          {img: '', title: "云服务器", url: "/sort"},
-          {img: '', title: "云硬盘", url: "/sort"},
-          {img: '', title: "负载均衡", url: "/sort"},
-          {img: '', title: "弹性IP", url: "/sort"}
+          {img: '', title: "云服务器", url: "/host"},
+          {img: '', title: "云硬盘", url: "/disk"},
+          {img:'', title: "负载均衡", url: "/balance"},
+          {img: '', title: "弹性IP", url: "/elasticip"}
         ],
         // 产品资料
         productList: [
           {
             title: '云计算',
             opened: false,
-            img: require('../assets/img/home/serve.png'),
+            img: '',
             prodItem: [
               {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: '/host'},
               {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/mirror'},
@@ -268,7 +270,7 @@
           }, {
             title: '云存储',
             opened: false,
-            img: require('../assets/img/home/serve.png'),
+            img: '',
             prodItem: [
               {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: '/disk'},
               {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: '/diskbackup'}
@@ -276,7 +278,7 @@
           }, {
             title: '云数据库',
             opened: false,
-            img: require('../assets/img/home/serve.png'),
+            img: '',
             prodItem: [
               {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: '/vpc'},
               {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/elasticip'},
@@ -288,7 +290,7 @@
           }, {
             title: '云运维',
             opened: false,
-            img: require('../assets/img/home/serve.png'),
+            img: '',
             prodItem: [
               {title: '云监控', desc: '自定义监控项、多告警推送方式', path: '/cloudmonitoring'},
               {title: '访问控制（敬请期待）', desc: '权限管理、精准控制', path: ''}
@@ -297,7 +299,7 @@
           }, {
             title: '云安全',
             opened: false,
-            img: require('../assets/img/home/serve.png'),
+            img: '',
             prodItem: [
               {title: '防火墙', desc: '自定义规则、协议、端口', path: '/firewall'},
               {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: '/ddos'}
@@ -307,29 +309,22 @@
         ],
         // 权威认证
         authoritys: [
-          {img: require('../assets/img/home/authority-1.png'), desc: '中国高新技术企业'},
-          {img: require('../assets/img/home/authority-2.png'), desc: '中关村高新技术企业'},
-          {img: require('../assets/img/home/authority-3.png'), desc: 'ISO27001企业认证'},
-          {img: require('../assets/img/home/authority-4.png'), desc: 'ISO9001企业认证'},
-          {img: require('../assets/img/home/authority-5.png'), desc: '华为云管理网络ISV'}
+          {img: '', desc: '中国高新技术企业'},
+          {img: '', desc: '中关村高新技术企业'},
+          {img: '', desc: 'ISO27001企业认证'},
+          {img: '', desc: 'ISO9001企业认证'},
+          {img: '', desc: '华为云管理网络ISV'}
         ],
         //合作伙伴
         partners: [
-          require('../assets/img/home/partner-dell.png'),
-          require('../assets/img/home/partner-huawei.png'),
-          require('../assets/img/home/partner-cooce.png'),
-          require('../assets/img/home/partner-telecom.png'),
-          require('../assets/img/home/partner-sugon.png'),
-          require('../assets/img/home/partner-hitachi.png'),
-          require('../assets/img/home/partner-unicom.png'),
-          require('../assets/img/home/partner-vmware.png'),
+
         ],
         //
         support: [
-          {img: require('../assets/img/home/support.png'), title: '7*24', subTitle: '多渠道服务与支持'},
-          {img: require('../assets/img/home/support.png'), title: '意见', subTitle: '反馈与投诉建议'},
-          {img: require('../assets/img/home/support.png'), title: '1V1', subTitle: '专项服务'},
-          {img: require('../assets/img/home/support.png'), title: '退款', subTitle: '7天无理由退款'}
+          {img: '', title: '7*24', subTitle: '多渠道服务与支持'},
+          {img: '', title: '意见', subTitle: '反馈与投诉建议'},
+          {img: '', title: '1V1', subTitle: '专项服务'},
+          {img: '', title: '退款', subTitle: '7天无理由退款'}
         ],
         //动态集合
 //        dynamicContent: {
@@ -444,12 +439,15 @@
   .banner-introduce {
     background-color: #fff;
     margin-bottom: .5rem;
-    img {
-    }
-    .grid-item {
-      font-size: .7rem;
-      color: rgba(136, 136, 136, 1);
-      line-height: 1.5rem;
+    .grid{
+         display: flex;
+        align-items: center;
+       justify-content: space-between;
+        padding: 1rem;
+      p{
+        font-size: .7rem;
+        color: #888;
+      }
     }
   }
 

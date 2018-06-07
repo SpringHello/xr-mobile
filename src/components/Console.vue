@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;">
+  <div style="margin-bottom: 2.25rem;background:rgba(243,243,243,1);">
     <header class="header-wrapper">
       <div style="display: flex">
         <img class="avator" src="">
@@ -19,61 +19,25 @@
         <p>现金券余额</p>
       </div>
     </div>
-    <!--导航-->
-    <div class="cons-nav">
-      <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item v-for="(item,index) in controlNav" :link="item.url" :key="index">
-          <img slot="icon" src="">
-          <span slot="label" class="grid-item">{{ item.title }}</span>
-        </grid-item>
-      </grid>
-    </div>
-    <!--资源-->
-    <div class="resources">
-      <h6 class="title">我的资源</h6>
-      <div class="cellbox">
-        <ul>
-          <li @click="push(resources)">
-            <div class="soures">
-              <img src="">
-              <div>
-                <p class="soures-title">{{resources.itemName}}</p>
-                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+resources.used}}</span>
-              </div>
-            </div>
-            <p class="check">查看详情</p>
-          </li>
-          <li @click="push(disks)">
-            <div class="soures">
-              <img src="">
-              <div>
-                <p class="soures-title">{{disks.itemName}}</p>
-                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+disks.used}}</span>
-              </div>
-            </div>
-            <p class="check">查看详情</p>
-          </li>
-          <li @click="push(ip)">
-            <div class="soures">
-              <img src="">
-              <div>
-                <p class="soures-title">{{ip.itemName}}</p>
-                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+ip.used}}</span>
-              </div>
-            </div>
-            <p class="check">查看详情</p>
-          </li>
-          <li @click="push(balance)">
-            <div class="soures">
-              <img src="">
-              <div>
-                <p class="soures-title">{{balance.itemName}}</p>
-                <span class="soures-desc">{{$store.state.zone.zonename + ' '+'数量：'+balance.used}}</span>
-              </div>
-            </div>
-            <p class="check">查看详情</p>
-          </li>
-        </ul>
+
+    <div class="control">
+      <div class="control-header">
+        <p>我的资源</p>
+      </div>
+      <div class="control-content">
+        <div v-for="(item,index) in controls" :key="index" class="content" @click="conPush(item.type)">
+          <img src="">
+          <p>{{item.title}}</p>
+        </div>
+      </div>
+
+      <!--备案-->
+      <div class="record">
+        <group>
+          <cell is-link>
+            <span slot="title" class="cell-item">查看备案进度</span>
+          </cell>
+        </group>
       </div>
     </div>
   </div>
@@ -101,15 +65,14 @@
         type: '',
         remainder: '',
         voucher: '',
-        controlNav: [
-          {title: '告警', url: '/warn'},
-          {title: '工单', url: '/workOrder'},
-          {title: '充值', url: '/recharge'},
+        controls: [
+          {img: '', title: '云服务器', type: 'host'},
+          {img: '', title: '云硬盘', type: 'disk'},
+          {img: '', title: '负载均衡', type: 'balance'},
+          {img: '', title: '弹性IP', type: 'ip'},
+          {img: '', title: '镜像服务', type: 'mirror'},
+          {img: '', title: 'NAT网关', type: 'nat'},
         ],
-        resources: {},//云服务器
-        disks: {},//云硬盘
-        ip: {},//弹性IP
-        balance: {},//负载均衡
       }
     },
     methods: {
@@ -131,10 +94,14 @@
           this.balance = response.data.result[1].items[2]
         }
       },
-      //查看详情
-      push(item){
-        this.$router.push(item.url)
+      conPush(url){
+        if ($store.state.userInfo) {
+          this.$router.push({path:'Sourcedetail',query:{type:url}})
+        } else {
+          this.$router.push('login')
+        }
       }
+
     },
     computed: mapState([
       // 映射 this.count 为 store.state.count
@@ -211,70 +178,55 @@
     }
   }
 
-  .cons-nav {
-    .grid-item {
-      font-size: .7rem;
-      color: rgba(34, 34, 34, 1);
-      line-height: 1.6rem;
-    }
-  }
-
-  .resources {
-    padding: .5rem 0;
-    .title {
-      padding: .5rem;
-      font-size: .8rem;
-      font-weight: normal;
+  .control {
+    background: rgba(255, 255, 255, 1);
+    .control-header {
+      font-size: .9rem;
       color: #000;
-      border-bottom: 1px solid #e7e7e7;
+      padding: .5rem 1rem;
+      border-bottom: 1px solid #D9D9D9;
     }
-    ul {
-      padding: .5rem;
-      li {
-        padding: .5rem 0;
-        border-bottom: 1px solid #e7e7e7;
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .soures {
-          display: flex;
-          img {
-            width: 2.5rem;
-            height: 2.5rem;
-            margin-right: .5rem;
-            background: #00aaff;
-            vertical-align: middle;
-          }
-          > div {
-            font-size: .7rem;
-            .soures-title {
-              color: rgba(34, 34, 34, 1);
-            }
-            .soures-desc {
-              color: rgba(153, 153, 153, 1);
-              line-height: 1.5rem;
-            }
-          }
+    .control-content {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #d9d9d9;
+      div {
+        width: 30%;
+        text-align: center;
+        margin-bottom: 1rem;
+        img {
+          display: block;
+          width: 1.5rem;
+          height: 1.5rem;
+          margin: 0 auto;
+          background: #ccc;
         }
-        .check {
-          color: rgba(102, 102, 102, 1);
-          font-size: .7rem;
-          &::after {
-            content: '';
-            width: 10px;
-            height: 10px;
-            border-right: 1px solid #999999;
-            border-bottom: 1px solid #999999;
-            transform: translateY(.0rem) rotate(311deg);
-            display: inline-block;
-            margin-left: .3rem;
-          }
+        p {
+          padding-top: 16px;
+          font-size: .8rem;
+          color: #222;
         }
       }
     }
+
+    //备案
+    .record {
+      /*.record-header{*/
+      /*font-size: .8rem;*/
+      /*color: #222;*/
+      /*padding: .5rem 1rem;*/
+      /*border-bottom: 1px solid #e7e7e7;*/
+      /*border-top: 1px solid #e7e7e7;*/
+      /*}*/
+      .cell-item {
+        font-size: .8rem;
+        color: #222;
+      }
+    }
   }
+
 
 </style>
 
