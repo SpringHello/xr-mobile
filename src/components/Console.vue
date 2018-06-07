@@ -68,8 +68,8 @@
         controls: [
           {img: '', title: '云服务器', type: 'host'},
           {img: '', title: '云硬盘', type: 'disk'},
-          {img: '', title: '负载均衡', type: 'balance'},
           {img: '', title: '弹性IP', type: 'ip'},
+          {img: '', title: '负载均衡', type: 'balance'},
           {img: '', title: '镜像服务', type: 'mirror'},
           {img: '', title: 'NAT网关', type: 'nat'},
         ],

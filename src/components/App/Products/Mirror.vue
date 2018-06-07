@@ -69,7 +69,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -153,6 +153,13 @@
             desc: '种类繁多的镜像，实现快速部署操作系统与软件。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }

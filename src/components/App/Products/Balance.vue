@@ -88,7 +88,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -166,6 +166,13 @@
             desc: '基于源IP、HTTP Cookie、Application Cookie 将同一客户端发送的多个请求。分发给同一后端服务器处理，保持请求处理逻辑的可持续性。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+            this.$router.push('login')
+        }
       }
     }
   }

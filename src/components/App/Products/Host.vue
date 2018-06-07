@@ -94,7 +94,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -203,6 +203,13 @@
             desc: '云服务器业务不中断，可以在同一可用区下实现热迁移。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }

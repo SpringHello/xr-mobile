@@ -79,7 +79,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -138,6 +138,13 @@
             desc: '使用联通、电信两大运营商的公网地址，可以根据用户的需求分配公网IP资源。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }

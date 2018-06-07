@@ -70,7 +70,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -127,6 +127,13 @@
             desc: '简单的备份/恢复界面，只需一键，便可轻松保护用户的数据。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }

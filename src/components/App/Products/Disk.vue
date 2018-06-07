@@ -88,7 +88,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -165,6 +165,13 @@
             desc: '设计规格为99.999999999%持久性，数据不丢失。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }

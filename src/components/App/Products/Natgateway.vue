@@ -79,7 +79,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -148,6 +148,13 @@
             desc: 'NAT网关的规格、带宽和公网IP，均可以随时升降，轻松应对业务变化。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }

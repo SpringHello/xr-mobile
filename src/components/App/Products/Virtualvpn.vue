@@ -79,7 +79,7 @@
     </div>
 
     <!--购买-->
-    <button>立即购买</button>
+    <button @click="buy">立即购买</button>
   </div>
 </template>
 
@@ -143,6 +143,13 @@
             desc: '对用户本地IDC的VPN设备进行简单配置即可完成对接，即开即用，部署快速，实时生效。'
           }
         ],
+      }
+    },
+    methods:{
+      buy(){
+        if ($store.state.userInfo){
+          this.$router.push('login')
+        }
       }
     }
   }
