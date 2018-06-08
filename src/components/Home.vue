@@ -472,7 +472,6 @@
             position: absolute;
             left: 1rem;
             top: .5rem;
-            background: #C9C9C9;
           }
           p {
             padding-left: 4rem;
@@ -489,7 +488,7 @@
               display: block;
               position: absolute;
               top: 50%;
-              right: 1.5rem;
+              right: 1.2rem;
               transform-origin: 50% 50%;
               transform: translateY(-50%) rotate(-45deg);
             }
@@ -554,7 +553,7 @@
         color: #222;
         span {
           display: inline-block;
-          padding-left: .4rem;
+          padding-left: .8rem;
           font-size: .6rem;
           color: rgba(136, 136, 136, 1);
         }
@@ -587,7 +586,7 @@
           display: inline-block;
           font-size: .7rem;
           color: rgba(51, 51, 51, 1);
-          padding-left: .5rem;
+          padding-left: .9rem;
           &::after {
             content: '';
             border-bottom: 1px solid #999;
@@ -642,6 +641,7 @@
         font-size: .6rem;
         align-items: center;
         margin-bottom: 1rem;
+        padding-left: 1rem;
         .item-title {
           color: rgba(51, 51, 51, 1);
         }
@@ -651,7 +651,7 @@
         img {
           width: 1.5rem;
           height: 1.5rem;
-          margin-right: .8rem;
+          margin-right: .5rem;
         }
       }
     }

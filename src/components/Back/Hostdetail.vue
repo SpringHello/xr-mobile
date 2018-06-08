@@ -70,7 +70,7 @@
       CellFormPreview,
       Group,
       Cell,
-      XHeader
+      XHeader,
     },
     data (){
       window.scrollTo(0, 0);

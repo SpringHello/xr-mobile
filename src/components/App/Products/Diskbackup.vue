@@ -133,6 +133,8 @@
       buy(){
         if ($store.state.userInfo){
           this.$router.push('login')
+        }else{
+          this.$router.go(0)
         }
       }
     }
