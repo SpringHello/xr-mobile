@@ -208,9 +208,9 @@
     methods:{
       buy(){
         if ($store.state.userInfo){
-          this.$router.push('login')
+          this.$router.go(0)
         }else{
-            this.$router.go(0)
+          this.$router.push('login')
         }
       }
     }
