@@ -3,12 +3,12 @@
     <!--顶部logo-->
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <div class="topNav">
-      <p class="top-logo"></p>
-      <div class="logo-right" @click="DialogStyle = true">
+      <img class="top-logo" src="../assets/img/home/logo.png">
+      <!--<div class="logo-right" @click="DialogStyle = true">
         <span class="span"></span>
         <span class="span"></span>
         <span class="span"></span>
-      </div>
+      </div>-->
     </div>
     <div v-if="DialogStyle" class="showMenu">
       <ul>
@@ -309,11 +309,11 @@
         ],
         // 权威认证
         authoritys: [
-          {img:require('../assets/img/home/renzheng-1.png'), desc: '中国高新技术企业'},
-          {img:require('../assets/img/home/renzheng-2.png'), desc: '中关村高新技术企业'},
-          {img:require('../assets/img/home/renzheng-3.png'), desc: 'ISO27001企业认证'},
-          {img:require('../assets/img/home/renzheng-4.png'), desc: 'ISO9001企业认证'},
-          {img:require('../assets/img/home/renzheng-5.png'), desc: '华为云管理网络ISV'}
+          {img: require('../assets/img/home/renzheng-1.png'), desc: '中国高新技术企业'},
+          {img: require('../assets/img/home/renzheng-2.png'), desc: '中关村高新技术企业'},
+          {img: require('../assets/img/home/renzheng-3.png'), desc: 'ISO27001企业认证'},
+          {img: require('../assets/img/home/renzheng-4.png'), desc: 'ISO9001企业认证'},
+          {img: require('../assets/img/home/renzheng-5.png'), desc: '华为云管理网络ISV'}
         ],
         //合作伙伴
         partners: [
@@ -344,8 +344,8 @@
     },
     methods: {
       push(url){
-          this.DialogStyle=false
-          this.$router.push(url)
+        this.DialogStyle = false
+        this.$router.push(url)
       }
 //      setData(response){
 //        if (response.status == 200 && response.data.status == 1) {
@@ -378,15 +378,13 @@
 
   /*顶部导航*/
   .topNav {
-    height: 2.4rem;
-    padding: .5rem .2rem;
+    height: 0.96rem;
+    //padding: .5rem .2rem;
     background: rgba(32, 32, 35, 1);
     display: flex;
     justify-content: space-between;
     .top-logo {
-      width: 5rem;
-      background: url('../assets/img/home/logo.gif') no-repeat 50%;
-      background-size: cover;
+      width: 2rem;
     }
     .logo-right {
       padding: .5rem .3rem .5rem;
@@ -446,20 +444,24 @@
   .banner-introduce {
     background-color: #fff;
     margin-bottom: .5rem;
-    .grid{
-         display: flex;
-        align-items: center;
-       justify-content: space-between;
-        padding: 1rem;
-      p{
-        font-size: .7rem;
-        color: #888;
+    .grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .22rem .27rem .25rem;
+      a {
+        width: 50%;
       }
-      img{
+      p {
+        font-size: .24rem;
+        color: #888;
+        text-align: center;
+      }
+      img {
         display: block;
-        width: 2rem;
+        width: 0.64rem;
         margin: 0 auto;
-        padding-bottom: .5rem;
+        padding-bottom: .09rem;
       }
     }
   }
@@ -507,7 +509,7 @@
           }
         }
         .product-item-content {
-          background:rgba(245,245,245,1);
+          background: rgba(245, 245, 245, 1);
           padding: .5rem 1rem;
           border-bottom: 1px solid #e7e7e7;
           ul {
@@ -563,18 +565,23 @@
       p {
         font-size: .9rem;
         color: #222;
+
         span {
-          padding-left: .5rem;
-          font-size: .6rem;
           color: rgba(136, 136, 136, 1);
+          margin-left: .5rem;
+          font-size: 0.3rem;
+          color: #888888;
+          display: inline-block;
+          vertical-align: middle;
+          line-height: 35px;
         }
       }
     }
-    img{
-     display: block;
+    img {
+      display: block;
       margin: 1rem auto;
       width: 16rem;
-     padding-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
     }
   }
 
@@ -712,7 +719,7 @@
       font-size: .6rem;
       color: rgba(255, 255, 255, 0.5);
       line-height: 1.2rem;
-      img{
+      img {
         padding-left: .5rem;
         width: 1.3rem;
       }
@@ -771,3 +778,4 @@
 
 
 </style>
+
