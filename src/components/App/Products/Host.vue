@@ -47,8 +47,8 @@
           </tab-item>
         </tab>
         <div class="stageInfo-item">
-          <img src="">
           <div class="describe" v-if="stageInfo.showYY">
+            <img src="../../../assets/img/host/stageInfo-shujufenxi.png">
             <h6>场景描述</h6>
             <ul>
               <li v-for="(item,index) in stageInfo.YY.text" :key="index">{{item}}</li>
@@ -57,6 +57,7 @@
             <p>{{stageInfo.YY.desc}}</p>
           </div>
           <div class="describe" v-if="stageInfo.showSJ">
+            <img src="../../../assets/img/host/stageInfo-shujufenxi.png">
             <h6>场景描述</h6>
             <ul>
               <li v-for="(item,index) in stageInfo.SJ.text" :key="index">{{item}}</li>
@@ -65,6 +66,7 @@
             <p>{{stageInfo.SJ.desc}}</p>
           </div>
           <div class="describe" v-if="stageInfo.showMJ">
+            <img src="../../../assets/img/host/stageInfo-yingyong.png">
             <h6>场景描述</h6>
             <ul>
               <li v-for="(item,index) in stageInfo.MJ.text" :key="index">{{item}}</li>
@@ -330,6 +332,11 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .8rem;
         .describe {
+          img{
+            width: 16rem;
+            display: block;
+            margin: 0 auto;
+          }
           h6 {
             font-size: .8rem;
             color: #333;
@@ -360,10 +367,6 @@
             color: #999;
             height: 3rem;
           }
-        }
-        img {
-          width: 15rem;
-          height: 15rem;
         }
       }
     }
