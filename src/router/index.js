@@ -42,6 +42,7 @@ import Reset from '@/components/LR/Reset'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

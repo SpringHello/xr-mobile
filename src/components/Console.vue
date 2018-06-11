@@ -1,21 +1,37 @@
 <template>
   <div style="margin-bottom: 2.25rem;background:rgba(243,243,243,1);">
     <header class="header-wrapper">
+      <p>控制台</p>
       <div style="display: flex">
-        <img class="avator" src="">
-        <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo.realname}}</router-link>
-        <router-link class="userInfo" to="login?from=Mine" v-else>请点击登录</router-link>
+        <router-link class="userInfo" to="home">
+          <div>
+            <span>0</span>
+            <span>告警</span>
+          </div>
+        </router-link>
+        <router-link class="userInfo" to="home">
+          <div>
+            <span>0</span>
+            <span>工单</span>
+          </div>
+        </router-link>
+        <router-link class="userInfo" to="login">
+          <div>
+            <span>0</span>
+            <span>待续费</span>
+          </div>
+        </router-link>
       </div>
     </header>
     <div class="accountInfo">
       <div>
         <p v-if="userInfo">￥{{remainder}}</p>
-        <p v-else>￥0</p>
+        <p v-else>￥0.00</p>
         <p>账户余额</p>
       </div>
       <div>
         <p v-if="userInfo">￥{{voucher}}</p>
-        <p v-else>￥0</p>
+        <p v-else>￥0.00</p>
         <p>现金券余额</p>
       </div>
     </div>
@@ -26,7 +42,7 @@
       </div>
       <div class="control-content">
         <div v-for="(item,index) in controls" :key="index" class="content" @click="conPush(item)">
-          <img src="">
+          <img :src="item.img">
           <p>{{item.title}}</p>
         </div>
       </div>
@@ -65,12 +81,12 @@
         remainder: '',
         voucher: '',
         controls: [
-          {img: '', title: '云服务器', type: 'host',url:'host'},
-          {img: '', title: '云硬盘', type: 'disk',url:'disk'},
-          {img: '', title: '弹性IP', type: 'ip',url:'host'},
-          {img: '', title: '负载均衡', type: 'balance',url:'host'},
-          {img: '', title: '镜像服务', type: 'mirror',url:'host'},
-          {img: '', title: 'NAT网关', type: 'nat',url:'host'},
+          {img: require('../assets/img/console/Group62@2x.png'), title: '云服务器', type: 'host', url: 'host'},
+          {img: require('../assets/img/console/Group63@2x.png'), title: '云硬盘', type: 'disk', url: 'disk'},
+          {img: require('../assets/img/console/Group67@2x.png'), title: '弹性IP', type: 'ip', url: 'host'},
+          {img: require('../assets/img/console/Group65@2x.png'), title: '负载均衡', type: 'balance', url: 'host'},
+          {img: require('../assets/img/console/Group36@2x.png'), title: '镜像服务', type: 'mirror', url: 'host'},
+          {img: require('../assets/img/console/Group38@2x.png'), title: 'NAT网关', type: 'nat', url: 'host'},
         ],
       }
     },
@@ -83,7 +99,7 @@
       },
       conPush(item){
         if ($store.state.userInfo) {
-          this.$router.push({path:item.url,query:{type:item.type}})
+          this.$router.push({path: item.url, query: {type: item.type}})
         } else {
           this.$router.push('login')
         }
@@ -97,11 +113,10 @@
     beforeRouteEnter(to, from, next){
       axios.post('device/DescribeWalletsBalance.do', {
         zoneId: $store.state.zone.zoneid
-      }).then(response =>
-      {
-        next(vm =>{
-        vm.setData(response)
-      })
+      }).then(response => {
+        next(vm => {
+          vm.setData(response)
+        })
       })
     }
   }
@@ -109,15 +124,14 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .header-wrapper {
-    background-color: #616161;
-    height: 4rem;
-    padding: 1rem 1.2rem;
-    .avator {
-      width: 2rem;
-      height: 2rem;
-      background-color: #ccc;
-      margin-right: 1rem;
-      vertical-align: middle;
+    background: url(../assets/img/console/Mask@2x.png) no-repeat center;
+    height: 5.5rem;
+    background-size: cover;
+    padding: .5rem 1.2rem;
+    color: #fff;
+    p {
+      text-align: center;
+      margin-bottom: 20px;
     }
     .userInfo {
       line-height: 2rem;
@@ -125,17 +139,12 @@
       color: #fff;
       width: 100%;
       position: relative;
-      &:after {
-        content: '';
-        display: inline-block;
-        position: absolute;
-        width: .5rem;
-        height: .5rem;
-        border-left: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        transform: translateY(-50%) rotate(-135deg);
-        top: 50%;
-        right: 0rem;
+      div {
+        span {
+          line-height: 150%;
+          display: block;
+          text-align: center;
+        }
       }
     }
   }
@@ -180,7 +189,6 @@
           width: 1.5rem;
           height: 1.5rem;
           margin: 0 auto;
-          background: #ccc;
         }
         p {
           padding-top: 16px;
