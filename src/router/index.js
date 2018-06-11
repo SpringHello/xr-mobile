@@ -7,6 +7,8 @@ import Sort from '@/components/Sort'
 import Console from '@/components/Console'
 import Mine from '@/components/Mine'
 
+import Warn from '@/components/Back/Warn'
+
 import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
 import Sortdetail from '@/components/App/Sortdetail' //活动详情
@@ -37,6 +39,7 @@ export default new Router({
         {path: 'Mine', name: 'Mine', component: Mine},
         {path: '/Sourcedetail', name: 'Sourcedetail', component: Sourcedetail},
         {path: '/hostDetail', name: 'hostDetail', component: hostDetail},
+        {path: 'Warn', name: 'Warn', component: Warn}
       ]
     },
     {
