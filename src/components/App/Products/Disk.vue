@@ -47,20 +47,22 @@
           </tab-item>
         </tab>
         <div class="stageInfo-item">
-          <img src="">
           <div class="describe" v-if="stageInfo.showYY">
+            <img src="../../../assets/img/disk/stageInfo-gaoxingn.png">
             <h6>场景描述</h6>
             <ul>
               <li v-for="(item,index) in stageInfo.YY.text" :key="index">{{item}}</li>
             </ul>
           </div>
           <div class="describe" v-if="stageInfo.showSJ">
+            <img src="../../../assets/img/disk/stageInfo-guangxi.png">
             <h6>场景描述</h6>
             <ul>
               <li v-for="(item,index) in stageInfo.SJ.text" :key="index">{{item}}</li>
             </ul>
           </div>
           <div class="describe" v-if="stageInfo.showMJ">
+            <img src="../../../assets/img/disk/stageInfo-cangku.png">
             <h6>场景描述</h6>
             <ul>
               <li v-for="(item,index) in stageInfo.MJ.text" :key="index">{{item}}</li>
@@ -127,7 +129,8 @@
           {
             img: require('../../../assets/img/host/featrue.png'),
             title: '灵活管理',
-            desc: '可以使用界面进行管理配置，操作简单易用。'}
+            desc: '可以使用界面进行管理配置，操作简单易用。'
+          }
         ],
         stageInfo: {
           showYY: true,
@@ -167,11 +170,11 @@
         ],
       }
     },
-    methods:{
+    methods: {
       buy(){
-        if ($store.state.userInfo){
+        if ($store.state.userInfo) {
           this.$router.go(0)
-        }else{
+        } else {
           this.$router.push('login')
         }
       }
@@ -292,6 +295,11 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .8rem;
         .describe {
+          img {
+            width: 16rem;
+            display: block;
+            margin: 0 auto;
+          }
           h6 {
             font-size: .8rem;
             color: #333;
@@ -317,10 +325,6 @@
               }
             }
           }
-        }
-        img {
-          width: 15rem;
-          height: 15rem;
         }
       }
     }
