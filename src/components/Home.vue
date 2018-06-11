@@ -75,7 +75,7 @@
       <div class="data-header">
         <p>数据中心 <span> 五星级数据中心，与各骨干网络互联互通</span></p>
       </div>
-      <img src="" style="display: block;width: 15rem;height: 15rem;margin: 1rem auto;background: #ccc;">
+      <img src="../assets/img/home/sjzx.png">
     </div>
 
     <!--权威认证-->
@@ -309,11 +309,11 @@
         ],
         // 权威认证
         authoritys: [
-          {img: '', desc: '中国高新技术企业'},
-          {img: '', desc: '中关村高新技术企业'},
-          {img: '', desc: 'ISO27001企业认证'},
-          {img: '', desc: 'ISO9001企业认证'},
-          {img: '', desc: '华为云管理网络ISV'}
+          {img:require('../assets/img/home/renzheng-1.png'), desc: '中国高新技术企业'},
+          {img:require('../assets/img/home/renzheng-2.png'), desc: '中关村高新技术企业'},
+          {img:require('../assets/img/home/renzheng-3.png'), desc: 'ISO27001企业认证'},
+          {img:require('../assets/img/home/renzheng-4.png'), desc: 'ISO9001企业认证'},
+          {img:require('../assets/img/home/renzheng-5.png'), desc: '华为云管理网络ISV'}
         ],
         //合作伙伴
         partners: [
@@ -328,10 +328,10 @@
         ],
         //
         support: [
-          {img: '', title: '7*24', subTitle: '多渠道服务与支持'},
-          {img: '', title: '意见', subTitle: '反馈与投诉建议'},
-          {img: '', title: '1V1', subTitle: '专项服务'},
-          {img: '', title: '退款', subTitle: '7天无理由退款'}
+          {img: require('../assets/img/home/suport-1.png'), title: '7*24', subTitle: '多渠道服务与支持'},
+          {img: require('../assets/img/home/suport-2.png'), title: '意见', subTitle: '反馈与投诉建议'},
+          {img: require('../assets/img/home/suport-3.png'), title: '1V1', subTitle: '专项服务'},
+          {img: require('../assets/img/home/suport-4.png'), title: '退款', subTitle: '7天无理由退款'}
         ],
         //动态集合
 //        dynamicContent: {
@@ -564,12 +564,17 @@
         font-size: .9rem;
         color: #222;
         span {
-          display: inline-block;
-          padding-left: .8rem;
+          padding-left: .5rem;
           font-size: .6rem;
           color: rgba(136, 136, 136, 1);
         }
       }
+    }
+    img{
+     display: block;
+      margin: 1rem auto;
+      width: 16rem;
+     padding-bottom: 1.2rem;
     }
   }
 
@@ -584,15 +589,13 @@
       border-bottom: 1px solid #e7e7e7;
     }
     ul {
-      padding: .5rem 1rem;
       .item {
         list-style: none;
-        padding: .5rem 0;
+        padding: .5rem 1rem;
         border-bottom: 1px solid #e7e7e7;
         img {
           vertical-align: middle;
           width: 2rem;
-          height: 2rem;
         }
         .item-desc {
           display: inline-block;
@@ -662,7 +665,6 @@
         }
         img {
           width: 1.5rem;
-          height: 1.5rem;
           margin-right: .5rem;
         }
       }
