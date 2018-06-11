@@ -87,10 +87,10 @@
   .box {
     background:rgba(243,243,243,1);
     ul {
-      padding: .5rem;
+      padding: .8rem;
       background:rgba(255,255,255,1);
       li {
-        padding: .5rem 0;
+        padding: .8rem 0;
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
         display: flex;
