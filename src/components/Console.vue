@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;">
+  <div style="margin-bottom: 2.25rem;background:rgba(243,243,243,1);">
     <header class="header-wrapper">
       <div style="display: flex">
         <img class="avator" src="">
@@ -19,23 +19,23 @@
         <p>现金券余额</p>
       </div>
     </div>
-    <!--导航-->
-    <div class="cons-nav">
-      <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item v-for="(item,index) in controlNav" :link="item.url" :key="index">
-          <img slot="icon" src="">
-          <span slot="label" class="grid-item">{{ item.title }}</span>
-        </grid-item>
-      </grid>
-    </div>
-    <!--资源-->
-    <div class="resources">
-      <h6 class="title">我的资源</h6>
-      <div class="cellbox">
+
+    <div class="control">
+      <div class="control-header">
+        <p>我的资源</p>
+      </div>
+      <div class="control-content">
+        <div v-for="(item,index) in controls" :key="index" class="content" @click="conPush(item.type)">
+          <img src="">
+          <p>{{item.title}}</p>
+        </div>
+      </div>
+
+      <!--备案-->
+      <div class="record">
         <group>
-          <cell v-for="(item,index) in myResources" :title="item.name" :inline-desc="$store.state.zone.zonename" is-link
-                class="cell-title" :key="index">
-            <span class="cell-right"  @click="push(item)">查看详情</span>
+          <cell is-link>
+            <span slot="title" class="cell-item">查看备案进度</span>
           </cell>
         </group>
       </div>
@@ -65,12 +65,14 @@
         type: '',
         remainder: '',
         voucher: '',
-        controlNav: [
-          {title: '告警', url: '/warn'},
-          {title: '工单', url: '/workOrder'},
-          {title: '充值', url: '/recharge'},
+        controls: [
+          {img: '', title: '云服务器', type: 'host'},
+          {img: '', title: '云硬盘', type: 'disk'},
+          {img: '', title: '弹性IP', type: 'ip'},
+          {img: '', title: '负载均衡', type: 'balance'},
+          {img: '', title: '镜像服务', type: 'mirror'},
+          {img: '', title: 'NAT网关', type: 'nat'},
         ],
-        myResources: []
       }
     },
     methods: {
@@ -82,18 +84,24 @@
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
-          this.myResources = response.data.result
+          response.data.result[0].items[0].url = `Sourcedetail?type=host`
+          this.resources = response.data.result[0].items[0]
+          response.data.result[3].items[0].url = `Sourcedetail?type=disk`
+          this.disks = response.data.result[3].items[0]
+          response.data.result[1].items[1].url = `Sourcedetail?type=ip`
+          this.ip = response.data.result[1].items[1]
+          response.data.result[1].items[2].url = `Sourcedetail?type=balance`
+          this.balance = response.data.result[1].items[2]
         }
       },
-      //查看详情
-      push(item){
-        if(item.name=='云计算'){this.type='server'}
-        if(item.name=='云网络'){this.type='network'}
-        if(item.name=='云安全'){this.type='security'}
-        if(item.name=='云存储'){this.type='storage'}
-        if(item.name=='云运维'){this.type='operations'}
-        this.$router.push({path:'Sourcedetail',query:{type:this.type}})
+      conPush(url){
+        if ($store.state.userInfo) {
+          this.$router.push({path:'Sourcedetail',query:{type:url}})
+        } else {
+          this.$router.push('login')
+        }
       }
+
     },
     computed: mapState([
       // 映射 this.count 为 store.state.count
@@ -110,12 +118,12 @@
       })
       Promise.all([money, sources]).then((values) => {
         next(vm => {
-        vm.setData(values)
-    })
-      next(vm => {
-        vm.setData(values)
-    })
-    })
+          vm.setData(values)
+        })
+        next(vm => {
+          vm.setData(values)
+        })
+      })
     }
   }
 </script>
@@ -170,34 +178,55 @@
     }
   }
 
-  .cons-nav {
-    .grid-item {
-      font-size: .7rem;
-      color: rgba(34, 34, 34, 1);
-      line-height: 1.6rem;
+  .control {
+    background: rgba(255, 255, 255, 1);
+    .control-header {
+      font-size: .9rem;
+      color: #000;
+      padding: .5rem 1rem;
+      border-bottom: 1px solid #D9D9D9;
+    }
+    .control-content {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #d9d9d9;
+      div {
+        width: 30%;
+        text-align: center;
+        margin-bottom: 1rem;
+        img {
+          display: block;
+          width: 1.5rem;
+          height: 1.5rem;
+          margin: 0 auto;
+          background: #ccc;
+        }
+        p {
+          padding-top: 16px;
+          font-size: .8rem;
+          color: #222;
+        }
+      }
+    }
+
+    //备案
+    .record {
+      /*.record-header{*/
+      /*font-size: .8rem;*/
+      /*color: #222;*/
+      /*padding: .5rem 1rem;*/
+      /*border-bottom: 1px solid #e7e7e7;*/
+      /*border-top: 1px solid #e7e7e7;*/
+      /*}*/
+      .cell-item {
+        font-size: .8rem;
+        color: #222;
+      }
     }
   }
 
-  .resources {
-    padding: .5rem 0;
-    .title {
-      padding: .5rem 1rem 0rem 1rem;
-      font-size: .8rem;
-      font-weight: normal;
-      color: #000;
-      /*border-bottom: 1px solid #e7e7e7;*/
-    }
-    .cellbox {
-      .cell-title {
-        font-size: .8rem;
-      }
-      .cell-right {
-        font-size: .7rem;
-        color: rgba(102, 102, 102, 1);
-        line-height: 1.4rem;
-      }
-    }
-  }
 
 </style>
 

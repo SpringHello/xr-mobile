@@ -6,7 +6,7 @@
         <div class="weui-tabbar__icon">
           <img src="" class="iconfont icon-home">
         </div>
-        <p class="weui-tabbar__label"><span>首页</span></p>
+        <p class="weui-tabbar__label"><span>新睿云</span></p>
       </router-link>
       <router-link to="sort" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">

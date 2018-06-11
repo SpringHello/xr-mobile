@@ -12,11 +12,29 @@ import Warn from '@/components/Back/Warn'
 import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
 import Sortdetail from '@/components/App/Sortdetail' //活动详情
+import host from '@/components/App/Products/Host'
+import ecsSnapshot from '@/components/App/Products/EcsSnapshot'
+import mirror from '@/components/App/Products/Mirror'
+import disk from '@/components/App/Products/Disk'
+import diskbackup from '@/components/App/Products/Diskbackup'
+import vpc from '@/components/App/Products/Vpc'
+import elasticip from '@/components/App/Products/ElasticIP'
+import balance from '@/components/App/Products/Balance'
+import natgateway from '@/components/App/Products/Natgateway'
+import virtualvpn from '@/components/App/Products/Virtualvpn'
+import cloudmonitoring from '@/components/App/Products/Cloudmonitoring'
+import firewall from '@/components/App/Products/Firewall'
+import ddos from '@/components/App/Products/DDOS'
 
 
-import workOrder from '@/components/Back/workOrder'
+import Workorder from '@/components/Back/Workorder'
 import Sourcedetail from '@/components/Back/Sourcedetail'//资源详情
-import hostDetail from '@/components/Back/hostDetail'//资源详情
+import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
+import Diskdetail from '@/components/Back/Diskdetail'//磁盘资源详情
+import Ipdetail from '@/components/Back/Ipdetail'//弹性IP资源详情
+import Balancedetail from '@/components/Back/Balancedetail'//负载均衡资源详情
+import Newscenter from '@/components/Back/Newscenter'//消息中心
+import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 
 import Login from '@/components/LR/Login'
@@ -38,8 +56,13 @@ export default new Router({
         {path: 'Console', name: 'Console', component: Console},
         {path: 'Mine', name: 'Mine', component: Mine},
         {path: '/Sourcedetail', name: 'Sourcedetail', component: Sourcedetail},
-        {path: '/hostDetail', name: 'hostDetail', component: hostDetail},
-        {path: 'Warn', name: 'Warn', component: Warn}
+        {path: 'Warn', name: 'Warn', component: Warn},
+        {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
+        {path: '/Diskdetail', name: 'hostDetail', component: Diskdetail},
+        {path: '/Ipdetail', name: 'hostDetail', component: Ipdetail},
+        {path: '/Balancedetail', name: 'hostDetail', component: Balancedetail},
+        {path: '/Newscenter', name: 'hostDetail', component: Newscenter},
+        {path: '/Newdetail', name: 'hostDetail', component: Newdetail},
       ]
     },
     {
@@ -73,9 +96,74 @@ export default new Router({
       component: Sortdetail,
     },
     {
-      path: '/workOrder',
-      name: 'workOrder',
-      component: workOrder,
+      path: '/Workorder',
+      name: 'Workorder',
+      component: Workorder,
+    },
+    {
+      path: '/host',
+      name: 'host',
+      component: host,
+    },
+    {
+      path: '/ecsSnapshot',
+      name: 'ecsSnapshot',
+      component: ecsSnapshot,
+    },
+    {
+      path: '/mirror',
+      name: 'mirror',
+      component: mirror,
+    },
+    {
+      path: '/disk',
+      name: 'disk',
+      component: disk,
+    },
+    {
+      path: '/diskbackup',
+      name: 'diskbackup',
+      component: diskbackup,
+    },
+    {
+      path: '/vpc',
+      name: 'vpc',
+      component: vpc,
+    },
+    {
+      path: '/elasticip',
+      name: 'elasticip',
+      component: elasticip,
+    },
+    {
+      path: '/balance',
+      name: 'balance',
+      component: balance,
+    },
+    {
+      path: '/natgateway',
+      name: 'natgateway',
+      component: natgateway,
+    },
+    {
+      path: '/virtualvpn',
+      name: 'virtualvpn',
+      component: virtualvpn,
+    },
+    {
+      path: '/cloudmonitoring',
+      name: 'cloudmonitoring',
+      component: cloudmonitoring,
+    },
+    {
+      path: '/firewall',
+      name: 'firewall',
+      component: firewall,
+    },
+    {
+      path: '/ddos',
+      name: 'ddos',
+      component: ddos,
     },
   ]
 })
