@@ -28,8 +28,8 @@ import ddos from '@/components/App/Products/DDOS'
 
 
 import Workorder from '@/components/Back/Workorder'
-import Host from '@/components/Back/Host'//
-import Disk from '@/components/Back/Disk'//
+import Bhost from '@/components/Back/Bhost'//
+import Bdisk from '@/components/Back/Bdisk'//
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
@@ -53,8 +53,8 @@ export default new Router({
         {path: 'Sort', name: 'Sort', component: Sort},
         {path: 'Console', name: 'Console', component: Console},
         {path: 'Mine', name: 'Mine', component: Mine},
-        {path: '/Host', name: 'Host', component: Host},
-        {path: '/Disk', name: 'Disk', component: Disk},
+        {path: '/Bhost', name: 'Bhost', component: Bhost},
+        {path: '/Bdisk', name: 'Bdisk', component: Bdisk},
         {path: 'Warn', name: 'Warn', component: Warn},
         {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/Newscenter', name: 'hostDetail', component: Newscenter},

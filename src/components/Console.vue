@@ -65,12 +65,12 @@
         remainder: '',
         voucher: '',
         controls: [
-          {img: '', title: '云服务器', type: 'host',url:'host'},
-          {img: '', title: '云硬盘', type: 'disk',url:'disk'},
-          {img: '', title: '弹性IP', type: 'ip',url:'host'},
-          {img: '', title: '负载均衡', type: 'balance',url:'host'},
-          {img: '', title: '镜像服务', type: 'mirror',url:'host'},
-          {img: '', title: 'NAT网关', type: 'nat',url:'host'},
+          {img: '', title: '云服务器', type: 'host',url:'bhost'},
+          {img: '', title: '云硬盘', type: 'disk',url:'bdisk'},
+          {img: '', title: '弹性IP', type: 'ip',url:'bhost'},
+          {img: '', title: '负载均衡', type: 'balance',url:'bhost'},
+          {img: '', title: '镜像服务', type: 'mirror',url:'bhost'},
+          {img: '', title: 'NAT网关', type: 'nat',url:'bhost'},
         ],
       }
     },
