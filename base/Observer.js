@@ -2,6 +2,8 @@
  * Created by yunrui001 on 2018-05-25.
  */
 class Observer {
+  value
+  def
   constructor(value) {
     this.value = value
     Object.defineProperty(value, '__observer__', this)
@@ -28,11 +30,9 @@ function defineReactive(obj, key, value) {
     configurable: true,
     enumerable: true,
     set: function (val) {
-      console.log('set')
       set ? set.call(obj, val) : value = val
     },
     get: function () {
-      console.log('get')
       const val = get ? get.call(obj) : value
       return val
     }
