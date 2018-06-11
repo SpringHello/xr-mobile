@@ -34,7 +34,7 @@
       <div class="grid">
         <router-link v-for="(item,index) in introduce" :key="index" :to="item.url">
           <div class="grid-item">
-            <img :src="item.img" style="width: 2rem;">
+            <img :src="item.img">
             <p>{{item.title}}</p>
           </div>
         </router-link>
@@ -252,14 +252,14 @@
           {img: require('../assets/img/home/itr-1.png'), title: "云服务器", url: "/host"},
           {img: require('../assets/img/home/itr-2.png'), title: "云硬盘", url: "/disk"},
           {img: require('../assets/img/home/itr-3.png'), title: "负载均衡", url: "/balance"},
-          {img: require('../assets/img/home/itr-1.png'), title: "弹性IP", url: "/elasticip"}
+          {img: require('../assets/img/home/itr-4.png'), title: "弹性IP", url: "/elasticip"}
         ],
         // 产品资料
         productList: [
           {
             title: '云计算',
             opened: false,
-            img: '',
+            img: require('../assets/img/home/pro-jisuan.png'),
             prodItem: [
               {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: '/host'},
               {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/mirror'},
@@ -270,7 +270,7 @@
           }, {
             title: '云存储',
             opened: false,
-            img: '',
+            img: require('../assets/img/home/pro-cunchu.png'),
             prodItem: [
               {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: '/disk'},
               {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: '/diskbackup'}
@@ -278,7 +278,7 @@
           }, {
             title: '云数据库',
             opened: false,
-            img: '',
+            img: require('../assets/img/home/pro-shujuku.png'),
             prodItem: [
               {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: '/vpc'},
               {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/elasticip'},
@@ -290,7 +290,7 @@
           }, {
             title: '云运维',
             opened: false,
-            img: '',
+            img: require('../assets/img/home/pro-yunwei.png'),
             prodItem: [
               {title: '云监控', desc: '自定义监控项、多告警推送方式', path: '/cloudmonitoring'},
               {title: '访问控制（敬请期待）', desc: '权限管理、精准控制', path: ''}
@@ -299,7 +299,7 @@
           }, {
             title: '云安全',
             opened: false,
-            img: '',
+            img: require('../assets/img/home/pro-anquan.png'),
             prodItem: [
               {title: '防火墙', desc: '自定义规则、协议、端口', path: '/firewall'},
               {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: '/ddos'}
@@ -317,7 +317,14 @@
         ],
         //合作伙伴
         partners: [
-
+          require('../assets/img/home/partner-dell.png'),
+          require('../assets/img/home/partner-huawei.png'),
+          require('../assets/img/home/partner-cooce.png'),
+          require('../assets/img/home/partner-telecom.png'),
+          require('../assets/img/home/partner-sugon.png'),
+          require('../assets/img/home/partner-hitachi.png'),
+          require('../assets/img/home/partner-unicom.png'),
+          require('../assets/img/home/partner-vmware.png'),
         ],
         //
         support: [
@@ -448,6 +455,12 @@
         font-size: .7rem;
         color: #888;
       }
+      img{
+        display: block;
+        width: 2rem;
+        margin: 0 auto;
+        padding-bottom: .5rem;
+      }
     }
   }
 
@@ -468,7 +481,6 @@
           border-bottom: 1px solid #e7e7e7;
           img {
             width: 2rem;
-            height: 2rem;
             position: absolute;
             left: 1rem;
             top: .5rem;
@@ -615,13 +627,13 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       img {
-        width: 20.2%;
+        width: 20.1%;
         margin-bottom: 1.5rem;
       }
     }

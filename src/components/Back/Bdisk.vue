@@ -6,10 +6,11 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img src="" :class="{error:item.status=='error',open:item.status=='open',close:item.status=='close',arrears:item.status=='arrears'}">
+            <img src="">
             <div>
-              <p class="soures-title">{{item.title}}</p>
-              <span class="soures-desc">系统镜像: {{item.desc}}</span>
+              <p class="soures-title">{{item.title}}
+              </p>
+              <span class="soures-desc">{{item.diskoffer == 'ssd' ? 'SSD存储' : item.diskoffer == 'sas' ? 'SAS存储' : 'SATA存储'}}</span>
             </div>
           </div>
           <p class="check">详细信息</p>
@@ -38,15 +39,25 @@
     },
     methods: {
       push(item){
-        if (item.type =='host') {
-            this.address = 'hostDetail'
-               var params = {
-              id: item.id,
-              name: item.title,
-              configs: item.desc,
-              price: item.price,
-              password:item.password
+        switch (item.type) {
+          case 'disk':
+            this.address = 'diskDetail'
+            var params={
+              id:item.id
             }
+            break;
+          case 'ip':
+            this.address = 'ipDetail'
+            var params ={
+              vpcid:item.vpcId,
+              public:item.public,
+              case:item.case,
+              price:item.price
+            }
+            break;
+          case 'balance':
+            this.address = 'balanceDetail'
+            break;
         }
         this.$router.push({path: this.address, query: params})
       },
@@ -58,16 +69,36 @@
       let url = ''
       let list = []
       let operate = null
-      if(to.query.type =='host') {
-          url = 'information/listVirtualMachines.do'
+      switch (to.query.type) {
+        case 'disk':
+          url = 'Disk/listDisk.do'
+          operate = (response) => {
+            response.data.result.forEach(disk => {
+              list.push({type: 'disk', title: disk.diskname, desc: disk.diskoffer,id:disk.diskid
+              })
+            })
+          }
+          break;
+        case 'ip':
+          url = 'network/listPublicIp.do'
+          operate = (response) => {
+            response.data.result.forEach(ip => {
+              list.push({type: 'ip', title: ip.vpcname, desc: ip.publicip,vpcId:ip.vpcid,public:ip.publicip,price:ip.cpCase,case:ip.caseType})
+            })
+          }
+          break;
+        case 'balance':
+          url = 'loadbalance/listLoadBalanceRole.do'
           operate = (response) => {
             for (let type in response.data.result) {
-              response.data.result[type].list.forEach(host => {
-                list.push({type: 'host', status: type, title: host.instancename, desc: host.templatename, id: host.computerid, price: host.cpCase, password:host.connectpassword
-                })
+              response.data.result[type].forEach(balance => {
+                var name = balance.lbname || balance.name
+                var text = balance._internal ? '内网负载均衡' : '公网负载均衡'
+                list.push({type: 'balance', status: type, title: name, desc: text})
               })
             }
           }
+          break;
       }
       axios.get(url, {
         params: {
@@ -87,10 +118,10 @@
   .box {
     background:rgba(243,243,243,1);
     ul {
-      padding: .5rem;
+      padding: .8rem .8rem 0 .8rem;
       background:rgba(255,255,255,1);
       li {
-        padding: .5rem 0;
+        padding: .8rem 0;
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
         display: flex;
@@ -104,18 +135,6 @@
             margin-right: .5rem;
             background: #00aaff;
             vertical-align: middle;
-          }
-          .error {
-            background: rgb(242, 71, 71);
-          }
-          .open {
-            background: #00aaff;
-          }
-          .close{
-            background: #ccc;
-          }
-          .arrears{
-            background: yellow;
           }
           > div {
             font-size: .7rem;

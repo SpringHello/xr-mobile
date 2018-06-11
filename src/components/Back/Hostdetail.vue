@@ -140,12 +140,13 @@
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
-          padding: .7rem 0.5rem;
           li {
+            padding: 0 0.5rem;
+            border-bottom: 1px solid #e7e7e7;
             list-style: none;
             font-size: .8rem;
             color: #333;
-            line-height: 2rem;
+            line-height: 2.5rem;
             span {
               float: right;
               color: #666;
@@ -163,13 +164,12 @@
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
-          padding: .7rem 0;
           li {
             padding: 0 .5rem;
             list-style: none;
             font-size: .8rem;
             color: #333;
-            line-height: 2.2rem;
+            line-height: 2.5rem;
             border-bottom: 1px solid #e7e7e7;
             span {
               color: #4A90E2;
