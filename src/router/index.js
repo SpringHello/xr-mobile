@@ -28,11 +28,9 @@ import ddos from '@/components/App/Products/DDOS'
 
 
 import Workorder from '@/components/Back/Workorder'
-import Sourcedetail from '@/components/Back/Sourcedetail'//资源详情
+import Host from '@/components/Back/Host'//
+import Disk from '@/components/Back/Disk'//
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
-import Diskdetail from '@/components/Back/Diskdetail'//磁盘资源详情
-import Ipdetail from '@/components/Back/Ipdetail'//弹性IP资源详情
-import Balancedetail from '@/components/Back/Balancedetail'//负载均衡资源详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
@@ -55,12 +53,10 @@ export default new Router({
         {path: 'Sort', name: 'Sort', component: Sort},
         {path: 'Console', name: 'Console', component: Console},
         {path: 'Mine', name: 'Mine', component: Mine},
-        {path: '/Sourcedetail', name: 'Sourcedetail', component: Sourcedetail},
+        {path: '/Host', name: 'Host', component: Host},
+        {path: '/Disk', name: 'Disk', component: Disk},
         {path: 'Warn', name: 'Warn', component: Warn},
         {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
-        {path: '/Diskdetail', name: 'hostDetail', component: Diskdetail},
-        {path: '/Ipdetail', name: 'hostDetail', component: Ipdetail},
-        {path: '/Balancedetail', name: 'hostDetail', component: Balancedetail},
         {path: '/Newscenter', name: 'hostDetail', component: Newscenter},
         {path: '/Newdetail', name: 'hostDetail', component: Newdetail},
       ]

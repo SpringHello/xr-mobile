@@ -34,7 +34,7 @@
       <div class="grid">
         <router-link v-for="(item,index) in introduce" :key="index" :to="item.url">
           <div class="grid-item">
-            <img :src="item.img" >
+            <img :src="item.img" style="width: 2rem;">
             <p>{{item.title}}</p>
           </div>
         </router-link>
@@ -249,10 +249,10 @@
         ],
         // 走马灯下方介绍
         introduce: [
-          {img: '', title: "云服务器", url: "/host"},
-          {img: '', title: "云硬盘", url: "/disk"},
-          {img:'', title: "负载均衡", url: "/balance"},
-          {img: '', title: "弹性IP", url: "/elasticip"}
+          {img: require('../assets/img/home/itr-1.png'), title: "云服务器", url: "/host"},
+          {img: require('../assets/img/home/itr-2.png'), title: "云硬盘", url: "/disk"},
+          {img: require('../assets/img/home/itr-3.png'), title: "负载均衡", url: "/balance"},
+          {img: require('../assets/img/home/itr-1.png'), title: "弹性IP", url: "/elasticip"}
         ],
         // 产品资料
         productList: [

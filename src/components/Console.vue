@@ -25,20 +25,19 @@
         <p>我的资源</p>
       </div>
       <div class="control-content">
-        <div v-for="(item,index) in controls" :key="index" class="content" @click="conPush(item.type)">
+        <div v-for="(item,index) in controls" :key="index" class="content" @click="conPush(item)">
           <img src="">
           <p>{{item.title}}</p>
         </div>
       </div>
-
-      <!--备案-->
-      <div class="record">
-        <group>
-          <cell is-link>
-            <span slot="title" class="cell-item">查看备案进度</span>
-          </cell>
-        </group>
-      </div>
+    </div>
+    <!--备案-->
+    <div class="record">
+      <group>
+        <cell is-link>
+          <span slot="title" class="cell-item">查看备案进度</span>
+        </cell>
+      </group>
     </div>
   </div>
 </template>
@@ -66,37 +65,25 @@
         remainder: '',
         voucher: '',
         controls: [
-          {img: '', title: '云服务器', type: 'host'},
-          {img: '', title: '云硬盘', type: 'disk'},
-          {img: '', title: '弹性IP', type: 'ip'},
-          {img: '', title: '负载均衡', type: 'balance'},
-          {img: '', title: '镜像服务', type: 'mirror'},
-          {img: '', title: 'NAT网关', type: 'nat'},
+          {img: '', title: '云服务器', type: 'host',url:'host'},
+          {img: '', title: '云硬盘', type: 'disk',url:'disk'},
+          {img: '', title: '弹性IP', type: 'ip',url:'host'},
+          {img: '', title: '负载均衡', type: 'balance',url:'host'},
+          {img: '', title: '镜像服务', type: 'mirror',url:'host'},
+          {img: '', title: 'NAT网关', type: 'nat',url:'host'},
         ],
       }
     },
     methods: {
-      setData(values){
-        var response = values[0]
+      setData(response){
         if (response.status == 200 && response.data.status == 1) {
           this.remainder = response.data.data.remainder
           this.voucher = response.data.data.voucher
         }
-        var response = values[1]
-        if (response.status == 200 && response.data.status == 1) {
-          response.data.result[0].items[0].url = `Sourcedetail?type=host`
-          this.resources = response.data.result[0].items[0]
-          response.data.result[3].items[0].url = `Sourcedetail?type=disk`
-          this.disks = response.data.result[3].items[0]
-          response.data.result[1].items[1].url = `Sourcedetail?type=ip`
-          this.ip = response.data.result[1].items[1]
-          response.data.result[1].items[2].url = `Sourcedetail?type=balance`
-          this.balance = response.data.result[1].items[2]
-        }
       },
-      conPush(url){
+      conPush(item){
         if ($store.state.userInfo) {
-          this.$router.push({path:'Sourcedetail',query:{type:url}})
+          this.$router.push({path:item.url,query:{type:item.type}})
         } else {
           this.$router.push('login')
         }
@@ -108,21 +95,13 @@
       'userInfo'
     ]),
     beforeRouteEnter(to, from, next){
-      var money = axios.post('device/DescribeWalletsBalance.do', {
+      axios.post('device/DescribeWalletsBalance.do', {
         zoneId: $store.state.zone.zoneid
+      }).then(response =>
+      {
+        next(vm =>{
+        vm.setData(response)
       })
-      var sources = axios.get('user/userSourceManager.do', {
-        params: {
-          zoneId: $store.state.zone.zoneid
-        }
-      })
-      Promise.all([money, sources]).then((values) => {
-        next(vm => {
-          vm.setData(values)
-        })
-        next(vm => {
-          vm.setData(values)
-        })
       })
     }
   }
@@ -210,23 +189,15 @@
         }
       }
     }
-
-    //备案
-    .record {
-      /*.record-header{*/
-      /*font-size: .8rem;*/
-      /*color: #222;*/
-      /*padding: .5rem 1rem;*/
-      /*border-bottom: 1px solid #e7e7e7;*/
-      /*border-top: 1px solid #e7e7e7;*/
-      /*}*/
-      .cell-item {
-        font-size: .8rem;
-        color: #222;
-      }
-    }
   }
 
+  //备案
+  .record {
 
+    .cell-item {
+      font-size: .8rem;
+      color: #222;
+    }
+  }
 </style>
 

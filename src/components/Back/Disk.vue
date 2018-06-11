@@ -45,7 +45,7 @@
         switch (item.type) {
           case 'host':
             this.address = 'hostDetail'
-               var params = {
+            var params = {
               id: item.id,
               name: item.title,
               configs: item.desc,
@@ -56,7 +56,7 @@
           case 'disk':
             this.address = 'diskDetail'
             var params={
-                id:item.id
+              id:item.id
             }
             break;
           case 'ip':
