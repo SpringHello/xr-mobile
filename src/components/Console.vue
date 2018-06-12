@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;background:rgba(243,243,243,1);">
+  <div style="margin-bottom: 1.5rem;background:rgba(243,243,243,1);">
     <header class="header-wrapper">
       <p>控制台</p>
       <div style="display: flex">

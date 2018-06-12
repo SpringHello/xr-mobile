@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;background:rgba(245,245,245,1);">
+  <div style="margin-bottom: 1.5rem;background:rgba(245,245,245,1);">
     <!--顶部logo-->
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <div class="topNav">
@@ -186,6 +186,7 @@
       TransferDom,
     },
     data () {
+      scrollTo( 0, 0 )
       return {
         DialogStyle: false,
         titleItem: [
@@ -559,9 +560,8 @@
     }
     img {
       display: block;
-      margin: 1rem auto;
       width: 100%;
-      padding-bottom: 1.2rem;
+      padding: .24rem 0;
     }
   }
 
@@ -591,18 +591,18 @@
           font-size: .28rem;
           color: rgba(51, 51, 51, 1);
           vertical-align: middle;
-          &::after {
-            content: '';
-            border-bottom: 1px solid #999;
-            border-right: 1px solid #999;
-            width: .5rem;
-            height: .5rem;
-            display: inline-block;
-            position: absolute;
-            right: 1.3rem;
-            transform-origin: 50% 50%;
-            transform: translateY(.3rem) rotate(311deg);
-          }
+          /*&::after {*/
+            /*content: '';*/
+            /*border-bottom: 1px solid #999;*/
+            /*border-right: 1px solid #999;*/
+            /*width: .5rem;*/
+            /*height: .5rem;*/
+            /*display: inline-block;*/
+            /*position: absolute;*/
+            /*right: 1.3rem;*/
+            /*transform-origin: 50% 50%;*/
+            /*transform: translateY(.3rem) rotate(311deg);*/
+          /*}*/
         }
       }
     }
@@ -626,7 +626,7 @@
       flex-wrap: wrap;
       img {
         width: 20.1%;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
       }
     }
   }
@@ -661,48 +661,46 @@
 
   //首页页尾
   .footer-wrapper {
-    height: 12rem;
     background: rgba(67, 67, 67, 1);
-    padding: .5rem;
     .foot-one {
-      height: 8rem;
       border-bottom: 1px solid #666;
       display: flex;
-      justify-content: space-between;
-      padding: 1rem;
+      justify-content: space-around;
+      align-items: center;
+      padding: .33rem 0 .38rem .97rem;
       img {
-        width: 5rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        display: block;
       }
       .foot-one-right {
         h6 {
           font-weight: normal;
-          font-size: .9rem;
+          font-size: .32rem;
           color: rgba(255, 255, 255, 1);
         }
         p {
           color: rgba(125, 161, 217, 1);
-          font-size: .1rem;
-          line-height: 1.8rem;
+          font-size: .36rem;
         }
         span {
           display: block;
-          font-size: .3rem;
+          font-size: .24rem;
           color: rgba(255, 255, 255, 1);
           &:last-of-type {
-            font-size: .6rem;
+            font-size: .2rem;
           }
         }
       }
     }
     .foot-two {
-      padding: .5rem 0;
+      padding: .18rem 0 .22rem 0;
       text-align: center;
-      font-size: .6rem;
+      font-size: .2rem;
       color: rgba(255, 255, 255, 0.5);
-      line-height: 1.2rem;
       img {
-        padding-left: .5rem;
-        width: 1.3rem;
+        padding-left: .3rem;
+        width: .2rem;
       }
     }
   }

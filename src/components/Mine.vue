@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;">
+  <div style="margin-bottom:1.5rem;">
     <header class="header-wrapper">
       <div>
        <img src="" class="avator">
@@ -47,7 +47,7 @@
       CellBox
     },
     data () {
-      window.scrollTo(0, 0);
+      scrollTo( 0, 0 )
       return {
         remainder: '',
         voucher: '',
@@ -106,7 +106,6 @@
           display: block;
       }
       .login-right{
-        line-height: .31rem;
         .userInfo {
           font-size: .24rem;
           color: #fff;

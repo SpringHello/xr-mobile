@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;">
+  <div style="margin-bottom: 1.5rem;">
     <x-header :left-options="{showBack: false}">活动</x-header>
     <div class="active-box">
       <router-link v-for="(item,index) in actives" :key="index" :to="item.url">
