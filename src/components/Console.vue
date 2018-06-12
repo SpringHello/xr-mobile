@@ -25,13 +25,13 @@
     </header>
     <div class="accountInfo">
       <div>
-        <p v-if="userInfo">￥{{remainder}}</p>
-        <p v-else>￥0.00</p>
+        <p v-if="userInfo" class="money">￥{{remainder}}</p>
+        <p v-else class="money">￥0.00</p>
         <p>账户余额</p>
       </div>
       <div>
-        <p v-if="userInfo">￥{{voucher}}</p>
-        <p v-else>￥0.00</p>
+        <p v-if="userInfo" class="money">￥{{voucher}}</p>
+        <p v-else class="money">￥0.00</p>
         <p>现金券余额</p>
       </div>
     </div>
@@ -76,6 +76,7 @@
       CellBox
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         type: '',
         remainder: '',
@@ -125,25 +126,28 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .header-wrapper {
     background: url(../assets/img/console/Mask@2x.png) no-repeat center;
-    height: 5.5rem;
     background-size: cover;
-    padding: .5rem 1.2rem;
-    color: #fff;
+    padding: .26rem 1.3rem;
+    color: #FFF;
     p {
+      font-size: .36rem;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: .35rem;
     }
     .userInfo {
-      line-height: 2rem;
-      font-size: .7rem;
       color: #fff;
       width: 100%;
       position: relative;
       div {
         span {
-          line-height: 150%;
+          line-height: .4rem;
           display: block;
           text-align: center;
+          font-size: .28rem;
+          &:first-of-type{
+            font-size: .56rem;
+            line-height: .78rem;
+          }
         }
       }
     }
@@ -151,31 +155,37 @@
 
   .accountInfo {
     display: flex;
-    padding: .5rem;
+    padding: .2rem;
     background-color: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: .2rem;
     > div {
       width: 50%;
       &:first-of-type {
         border-right: 1px solid rgba(216, 216, 216, 1);
       }
       > p {
-        font-size: .7rem;
+        font-size: .24rem;
         text-align: center;
+        color: #222;
       }
+       .money{
+         color: #E6001B;
+         font-size: .32rem;
+         line-height: .45rem;
+       }
     }
   }
 
   .control {
     background: rgba(255, 255, 255, 1);
     .control-header {
-      font-size: .9rem;
+      font-size: .32rem;
       color: #000;
-      padding: .5rem 1rem;
+      padding: .23rem .3rem;
       border-bottom: 1px solid #D9D9D9;
     }
     .control-content {
-      padding: 1.5rem;
+      padding: .24rem .69rem;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -183,17 +193,18 @@
       div {
         width: 30%;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: .4rem;
         img {
           display: block;
-          width: 1.5rem;
-          height: 1.5rem;
+          width: .8rem;
+          height: .8rem;
           margin: 0 auto;
         }
         p {
-          padding-top: 16px;
-          font-size: .8rem;
+          padding-top: .16rem;
+          font-size: .28rem;
           color: #222;
+          line-height: .4rem;
         }
       }
     }
@@ -203,8 +214,9 @@
   .record {
 
     .cell-item {
-      font-size: .8rem;
+      font-size: .28rem;
       color: #222;
+      line-height: .4rem;
     }
   }
 </style>

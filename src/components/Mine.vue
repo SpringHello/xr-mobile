@@ -1,10 +1,12 @@
 <template>
   <div style="margin-bottom: 2.25rem;">
     <header class="header-wrapper">
-      <div style="display: flex">
-        <img class="avator" src="">
-        <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo.realname}}</router-link>
-        <router-link class="userInfo" to="login?from=Mine" v-else>请点击登录</router-link>
+      <div>
+       <img src="" class="avator">
+       <div class="login-right">
+         <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo.realname}}</router-link>
+         <router-link class="userInfo" to="login?from=Mine" v-else>请点击登录</router-link>
+       </div>
       </div>
     </header>
     <div class="accountInfo">
@@ -23,11 +25,9 @@
       <group v-for="(cellList,index) in groupList" :key="index">
         <cell-box v-for="(cell,i) in cellList" :key="i" is-link :link="cell.url">
           <div class="cell">
+            <img src="">
             <div>
-              <img src="">
-            </div>
-            <div>
-              <p style="font-size: .7rem"><label>{{cell.title}}</label></p>
+              <p style="font-size: .24rem"><label>{{cell.title}}</label></p>
             </div>
           </div>
         </cell-box>
@@ -47,6 +47,7 @@
       CellBox
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         remainder: '',
         voucher: '',
@@ -93,49 +94,51 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .header-wrapper {
-    background-color: #616161;
-    height: 4rem;
-    padding: 1rem 1.2rem;
-    .avator {
-      width: 2rem;
-      height: 2rem;
-      background-color: #ccc;
-      margin-right: 1rem;
-      vertical-align: middle;
-    }
-    .userInfo {
-      line-height: 2rem;
-      font-size: .7rem;
-      color: #fff;
-      width: 100%;
-      position: relative;
-      &:after {
-        content: '';
-        display: inline-block;
-        position: absolute;
-        width: .5rem;
-        height: .5rem;
-        border-left: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        transform: translateY(-50%) rotate(-135deg);
-        top: 50%;
-        right: 0rem;
+    background-color: #626262;
+    line-height: 0;
+    padding-left: .48rem;
+    >div{
+      display: flex;
+       padding: .4rem 0;
+      img{
+          width: .8rem;
+          height: .8rem;
+          display: block;
+      }
+      .login-right{
+        line-height: .31rem;
+        .userInfo {
+          font-size: .24rem;
+          color: #fff;
+          padding-left: .32rem;
+          &:after {
+            content: '';
+            display: inline-block;
+            width: .11rem;
+            height: .11rem;
+            border-left: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            transform: translateY(-5%) rotate(-135deg);
+            margin-left: 4.3rem;
+          }
+        }
       }
     }
   }
 
   .accountInfo {
     display: flex;
-    padding: .5rem;
     background-color: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: .24rem;
+    padding: .24rem 0;
     > div {
       width: 50%;
+      color: #222;
       &:first-of-type {
         border-right: 1px solid rgba(216, 216, 216, 1);
       }
       > p {
-        font-size: .7rem;
+        font-size: .24rem;
         text-align: center;
       }
     }
@@ -146,11 +149,10 @@
       display: flex;
       align-items: center;
       img {
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: #00aaff;
+        width: .64rem;
+        height: .64rem;
         display: block;
-        margin-right: .5rem
+        margin-right:.24rem
       }
     }
   }

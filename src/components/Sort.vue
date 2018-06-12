@@ -42,27 +42,24 @@
 <style rel="stylesheet/less" lang="less" scoped>
   //活动页面样式
   .active-box {
-    padding: .5rem;
-    font-size: .6rem;
+    padding: .2rem;
     .active-item {
-      height: 15rem;
-      /*border: 1px solid #e6e6e6;*/
-      margin-bottom: .5rem;
+      margin-bottom: .21rem;
       .item-img {
-        height: 10.8rem;
+        height: 3.54rem;
         display: block;
         background-color: #ccc;
       }
       h6{
-        padding: .4rem 0 0.2rem .5rem;
-        font-size: 1rem;
+        padding: .19rem 0 .08rem .24rem;
         color:rgba(51,51,51,1);
         font-weight: normal;
+        font-size: .32rem;
       }
       .item-bottom {
-        padding-left: .5rem;
-        font-size: .6rem;
-        color: rgba(156, 156, 156, 1);
+        padding-left: .24rem;
+        font-size: .2rem;
+        color:rgba(102,102,102,1);
       }
     }
   }
