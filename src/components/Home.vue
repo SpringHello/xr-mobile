@@ -50,7 +50,7 @@
         <div v-for="product in productList" class="product-content-item"
              :class="{'product-content-item-active':product.opened}">
           <div class="product-item-header" @click="product.opened=!product.opened">
-            <!--<img style="font-size: 0px" :src="product.img">-->
+            <img style="font-size: 0px" :src="product.img">
             <p>{{product.title}}</p>
             <!--<span>gekki</span>-->
           </div>
@@ -104,13 +104,11 @@
 
     <!--support-->
     <div class="support-wrapper">
-      <div class="item">
-        <div v-for="(item,index) in support" :key="index" style="width: 50%">
-          <img :src="item.img">
-          <div>
-            <p class="item-title">{{item.title}}</p>
-            <p class="item-subtitle">{{item.subTitle}}</p>
-          </div>
+      <div class="item" v-for="(item,index) in support" :key="index">
+        <img :src="item.img">
+        <div>
+          <p class="item-title">{{item.title}}</p>
+          <p class="item-subtitle">{{item.subTitle}}</p>
         </div>
       </div>
     </div>
@@ -480,9 +478,17 @@
       .product-content-item {
         .product-item-header {
           //height: 0.88rem;
+          font-size: 0px;
           padding: .21rem .27rem;
           border-bottom: 1px solid #e7e7e7;
+          display: flex;
+          img {
+            width: .64rem;
+            height: .64rem;
+            margin-right: .2rem;
+          }
           p {
+            line-height: .64rem;
             font-size: 0.32rem;
           }
         }
@@ -629,26 +635,25 @@
   .support-wrapper {
     background-color: #fff;
     margin-bottom: .5rem;
-    padding: .5rem 1rem;
+    padding: .24rem .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     .item {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      > div {
-        display: flex;
-        font-size: .6rem;
-        align-items: center;
-        margin-bottom: 1rem;
-        padding-left: 1rem;
-        .item-title {
-          color: rgba(51, 51, 51, 1);
-        }
-        .item-subtitle {
-          color: rgba(153, 153, 153, 1);
-        }
-        img {
-          width: 1.5rem;
-          margin-right: .5rem;
+      width: 50%;
+      font-size: 0px;
+      margin-bottom: .25rem;
+      img {
+        vertical-align: middle;
+        margin-right: .23rem;
+        width: .4rem;
+        display: inline-block;
+      }
+      div {
+        vertical-align: middle;
+        display: inline-block;
+        p {
+          font-size: .2rem;
         }
       }
     }
