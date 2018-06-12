@@ -50,8 +50,9 @@
         <div v-for="product in productList" class="product-content-item"
              :class="{'product-content-item-active':product.opened}">
           <div class="product-item-header" @click="product.opened=!product.opened">
-            <img :src="product.img">
+            <!--<img style="font-size: 0px" :src="product.img">-->
             <p>{{product.title}}</p>
+            <!--<span>gekki</span>-->
           </div>
           <div class="product-item-content" v-show="product.opened">
             <ul>
@@ -428,11 +429,10 @@
         }
         .showItem {
           ol {
-            padding: .5rem .9rem;
+
             li {
               list-style: none;
-              font-size: .6rem;
-              line-height: 1.3rem;
+
             }
           }
 
@@ -471,73 +471,48 @@
     background-color: #fff;
     margin-bottom: .5rem;
     .product-header {
-      font-size: .9rem;
+      font-size: .36rem;
       color: #222;
-      padding: .5rem 1rem;
+      padding: .21rem .27rem;
       border-bottom: 1px solid #e7e7e7;
     }
     .product-content {
       .product-content-item {
         .product-item-header {
-          position: relative;
+          //height: 0.88rem;
+          padding: .21rem .27rem;
           border-bottom: 1px solid #e7e7e7;
-          img {
-            width: 2rem;
-            position: absolute;
-            left: 1rem;
-            top: .5rem;
-          }
           p {
-            padding-left: 4rem;
-            line-height: 3rem;
-            position: relative;
-            font-size: .8rem;
-            color: #222;
-            &:after {
-              content: '';
-              border-bottom: 1px solid #999;
-              border-left: 1px solid #999;
-              width: .5rem;
-              height: .5rem;
-              display: block;
-              position: absolute;
-              top: 50%;
-              right: 1.2rem;
-              transform-origin: 50% 50%;
-              transform: translateY(-50%) rotate(-45deg);
-            }
+            font-size: 0.32rem;
           }
         }
         .product-item-content {
           background: rgba(245, 245, 245, 1);
-          padding: .5rem 1rem;
           border-bottom: 1px solid #e7e7e7;
           ul {
             .item {
               /*border-bottom: 1px solid #e7e7e7;*/
-              padding: .4rem 0;
               list-style: none;
               display: flex;
               justify-content: space-between;
               align-items: center;
+              padding: .24rem .3rem;
               > div {
                 .item-title {
-                  font-size: .7rem;
+                  font-size: .28rem;
                   color: rgba(51, 51, 51, 1);
                 }
                 .item-desc {
-                  font-size: .6rem;
+                  font-size: .24rem;
                   color: rgba(153, 153, 153, 1);
-                  line-height: 1.2rem;
                 }
               }
               .item-check {
-                font-size: .6rem;
+                font-size: .28rem;
                 color: rgba(153, 153, 153, 1);
               }
             }
           }
-
         }
       }
       .product-content-item-active {
@@ -560,16 +535,15 @@
     background-color: #fff;
     margin-bottom: .5rem;
     .data-header {
-      padding: .5rem 1rem;
+      padding: .24rem .3rem;
       border-bottom: 1px solid #e7e7e7;
       p {
-        font-size: .9rem;
+        font-size: .36rem;
         color: #222;
-
         span {
           color: rgba(136, 136, 136, 1);
-          margin-left: .5rem;
-          font-size: 0.3rem;
+          margin-left: .2rem;
+          font-size: 0.2rem;
           color: #888888;
           display: inline-block;
           vertical-align: middle;
@@ -580,7 +554,7 @@
     img {
       display: block;
       margin: 1rem auto;
-      width: 16rem;
+      width: 100%;
       padding-bottom: 1.2rem;
     }
   }
@@ -590,25 +564,27 @@
     background-color: #fff;
     margin-bottom: .5rem;
     .authority-header {
-      font-size: .9rem;
+      font-size: .36rem;
       color: #222;
-      padding: .5rem 1rem;
+      padding: .24rem .3rem;
       border-bottom: 1px solid #e7e7e7;
     }
     ul {
       .item {
+        padding: .21rem .27rem;
         list-style: none;
-        padding: .5rem 1rem;
         border-bottom: 1px solid #e7e7e7;
+        font-size: 0px;
         img {
           vertical-align: middle;
-          width: 2rem;
+          width: .64rem;
+          margin-right: .2rem;
         }
         .item-desc {
           display: inline-block;
-          font-size: .7rem;
+          font-size: .28rem;
           color: rgba(51, 51, 51, 1);
-          padding-left: .9rem;
+          vertical-align: middle;
           &::after {
             content: '';
             border-bottom: 1px solid #999;
@@ -631,13 +607,13 @@
     background-color: #fff;
     margin-bottom: .5rem;
     .partner-header {
-      font-size: .9rem;
+      font-size: .36rem;
       color: #222;
-      padding: .5rem 1rem;
+      padding: .24rem .3rem;
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: 2rem 1.5rem;
+      padding: .24rem .3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -700,12 +676,12 @@
         }
         p {
           color: rgba(125, 161, 217, 1);
-          font-size: 1rem;
+          font-size: .1rem;
           line-height: 1.8rem;
         }
         span {
           display: block;
-          font-size: .7rem;
+          font-size: .3rem;
           color: rgba(255, 255, 255, 1);
           &:last-of-type {
             font-size: .6rem;
