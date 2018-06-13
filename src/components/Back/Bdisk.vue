@@ -118,47 +118,47 @@
   .box {
     background:rgba(243,243,243,1);
     ul {
-      padding: .8rem .8rem 0 .8rem;
+      padding: .2rem .2rem 0 .2rem;
       background:rgba(255,255,255,1);
       li {
-        padding: .8rem 0;
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .soures {
-          display: flex;
           img {
-            width: 2.5rem;
-            height: 2.5rem;
-            margin-right: .5rem;
-            background: #00aaff;
-            vertical-align: middle;
+            width: .8rem;
+            height: .8rem;
+            margin-right: .24rem;
+            /*background: #00aaff;*/
+            display: inline-block;
           }
           > div {
-            font-size: .7rem;
+            display: inline-block;
+            font-size: .32rem;
             .soures-title {
               color: rgba(34, 34, 34, 1);
             }
             .soures-desc {
               color: rgba(153, 153, 153, 1);
-              line-height: 1.5rem;
+              font-size: .24rem;
+              line-height: .33rem;
             }
           }
         }
         .check {
           color: rgba(102, 102, 102, 1);
-          font-size: .7rem;
+          font-size: .28rem;
           &::after {
             content: '';
-            width: 10px;
-            height: 10px;
+            width: .15rem;
+            height: .15rem;
             border-right: 1px solid #999999;
             border-bottom: 1px solid #999999;
-            transform: translateY(.05rem) rotate(311deg);
+            transform: translateY(-.025rem) rotate(311deg);
             display: inline-block;
-            margin-left: .3rem;
+            margin-left: .2rem;
           }
         }
       }

@@ -25,22 +25,28 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .newdetail {
+    margin: .2rem;
+    height: 3.5rem;
+    background: #FFF;
     text-align: center;
-    padding: 1rem .5rem;
     h6 {
-      font-size: .8rem;
+      font-size: .32rem;
+      padding-top: .25rem;
     }
     p {
-      font-size: .65rem;
+      font-size: .2rem;
       color: rgba(153, 153, 153, 1);
-      line-height: 1.5rem;
+      line-height: .28rem;
+      padding-top: .1rem;
     }
     .content {
+      margin-top: .24rem;
+      border-top: 1px solid #E8E8E8;
       text-align: left;
-      padding: 1rem 0.5rem;
-      font-size:.65rem;
+      font-size:.24rem;
       color:rgba(102,102,102,1);
-      line-height:1.2rem;
+      line-height: .45rem;
+      padding: .24rem;
     }
   }
 </style>

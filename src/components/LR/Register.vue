@@ -39,7 +39,7 @@
         <div style="display: flex">
           <input type="text" v-model="signForm.pictureCode" class="main-input"
                  style="border:1px solid #dfdfdf">
-          <img :src="imgSrc" style="height:2rem;width:30%">
+          <img :src="imgSrc" style="height:.8rem;width:30%">
         </div>
       </alert>
     </div>

@@ -3,7 +3,7 @@
     <x-header></x-header>
     <div class="host">
       <div class="host-item">
-        <h6 class="title">{{$route.query.name}} <span style="float: right;font-size: .8rem;">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span>
+        <h6 class="title">{{$route.query.name}} <span style="float: right;font-size: .28rem;">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span>
         </h6>
         <ul>
           <li>系统镜像 : <span style="float: right;color: #333;">{{details.template}}</span></li>
@@ -11,7 +11,7 @@
           <li style="text-align: right;color: #4A90E2;">{{details.memory}}G</li>
           <li>内网IP : <span style="float: right;color: #333;">{{details.privateIp}}</span></li>
           <li>主机配置 :<span style="float: right;color: #333;">{{$route.query.configs}}</span></li>
-          <li>主机密码 :<span style="float: right;color: #4A90E2;font-size: .7rem">发送密码</span></li>
+          <li>主机密码 :<span style="float: right;color: #4A90E2;font-size: .28rem">发送密码</span></li>
         </ul>
 
 
@@ -111,42 +111,42 @@
     background: rgba(243, 243, 243, 1);
     .host-item {
       .title {
-        padding: .5rem;
+        padding: .2rem;
         background: rgba(255, 255, 255, 1);
-        font-size: .9rem;
+        font-size: .32rem;
         font-weight: normal;
         color: #222;
-        line-height: 1.3rem;
+        line-height: .45rem;
       }
       ul {
         background: rgba(255, 255, 255, 1);
         border-bottom: 1px solid #D9D9D9;
-        margin-bottom: .5rem;
-        padding: .5rem;
+        margin-bottom: .2rem;
+        padding: .3rem;
         li {
           list-style: none;
-          font-size: .8rem;
+          font-size: .28rem;
           color: #999;
-          line-height: 1.5rem;
+          line-height: .8rem;
         }
       }
       .xins {
         background: rgba(255, 255, 255, 1);
-        margin-bottom: .5rem;
+        margin-bottom: .2rem;
         .xin-title {
-          padding: .7rem .5rem;
-          font-size: .9rem;
+          padding: .23rem .3rem;
+          font-size: .32rem;
           color: rgba(51, 51, 51, 1);
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
           li {
-            padding: 0 0.5rem;
+            padding: 0 0.3rem;
             border-bottom: 1px solid #e7e7e7;
             list-style: none;
-            font-size: .8rem;
+            font-size: .28rem;
             color: #333;
-            line-height: 2.5rem;
+            line-height: 1rem;
             span {
               float: right;
               color: #666;
@@ -156,20 +156,20 @@
       }
       .disks {
         background: rgba(255, 255, 255, 1);
-        margin-bottom: .5rem;
+        margin-bottom: .2rem;
         .disks-title {
-          padding: .7rem .5rem;
-          font-size: .9rem;
+          padding: .23rem .3rem;
+          font-size: .32rem;
           color: rgba(51, 51, 51, 1);
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
           li {
-            padding: 0 .5rem;
+            padding: 0 .3rem;
             list-style: none;
-            font-size: .8rem;
+            font-size: .28rem;
             color: #333;
-            line-height: 2.5rem;
+            line-height: 1rem;
             border-bottom: 1px solid #e7e7e7;
             span {
               color: #4A90E2;
@@ -182,17 +182,17 @@
       //主机操作
       .handle {
         background: rgba(255, 255, 255, 1);
-        margin-bottom: 1rem;
+        margin-bottom: .2rem;
         border-top: 1px solid #e7e7e7;
         border-bottom: 1px solid #e7e7e7;
-        padding: 1rem 0;
+        padding: .4rem 0;
         .handle-title {
-          padding: 0.2rem .5rem;
-          font-size: .9rem;
+          padding: 0.2rem .3rem;
+          font-size: .32rem;
           color: rgba(51, 51, 51, 1);
         }
         .handle-content {
-          padding: 1rem;
+          padding: .5rem;
           display: flex;
           flex-wrap: wrap;
           a {
@@ -200,16 +200,16 @@
           }
           div {
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: .5rem;
             img {
-              width: 1.5rem;
-              height: 1.5rem;
+              width: .64rem;
+              height: .64rem;
               margin: 0 auto;
               display: block;
             }
             p {
-              padding-top: 16px;
-              font-size: .8rem;
+              padding-top: .8rem;
+              font-size: .28rem;
               color: #222;
             }
           }
