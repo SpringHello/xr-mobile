@@ -6,7 +6,10 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img class="img" src="" :class="{error:item.status=='error',open:item.status=='open',close:item.status=='close',arrears:item.status=='arrears'}">
+            <img class="img"  v-if="item.status=='error'" src="../../assets/img/back/error.png">
+            <img class="img"  v-if="item.status=='open'" src="../../assets/img/back/open.png">
+            <img class="img"  v-if="item.status=='close'" src="../../assets/img/back/close.png">
+            <img class="img"  v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">
             <div>
               <p class="soures-title">{{item.title}}</p>
               <p class="soures-desc">系统镜像: {{item.desc}}</p>
@@ -86,6 +89,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
     background:rgba(243,243,243,1);
+    margin-bottom: 1rem;
     ul {
       padding: .3rem;
       background:rgba(255,255,255,1);
@@ -98,23 +102,8 @@
         .soures {
           .img {
             width: .8rem;
-            height: .8rem;
-            margin-right: .24rem;
-            /*background: #00aaff;*/
             display: inline-block;
           }
-          /*.error {*/
-            /*background: rgb(242, 71, 71);*/
-          /*}*/
-          /*.open {*/
-            /*background: #00aaff;*/
-          /*}*/
-          /*.close{*/
-            /*background: #ccc;*/
-          /*}*/
-          /*.arrears{*/
-            /*background: yellow;*/
-          /*}*/
           > div {
             display: inline-block;
             .soures-title {
