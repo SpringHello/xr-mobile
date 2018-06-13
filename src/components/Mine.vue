@@ -2,7 +2,7 @@
   <div style="margin-bottom:1.5rem;">
     <header class="header-wrapper">
       <div>
-       <img src="" class="avator">
+       <img src="../assets/img/mine/avatar.png" class="avator">
        <div class="login-right">
          <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo.realname}}</router-link>
          <router-link class="userInfo" to="login?from=Mine" v-else>请点击登录</router-link>
@@ -11,25 +11,26 @@
     </header>
     <div class="accountInfo">
       <div>
-        <p v-if="userInfo">￥{{remainder}}</p>
-        <p v-else>￥0</p>
+        <p v-if="userInfo" class="money">￥{{remainder}}</p>
+        <p v-else class="money">￥0</p>
         <p>账户余额</p>
       </div>
       <div>
-        <p v-if="userInfo">￥{{voucher}}</p>
-        <p v-else>￥0</p>
+        <p v-if="userInfo" class="money">{{voucher}}</p>
+        <p v-else class="money">0</p>
         <p>现金券余额</p>
       </div>
     </div>
     <div class="group">
       <group v-for="(cellList,index) in groupList" :key="index">
         <cell-box v-for="(cell,i) in cellList" :key="i" is-link :link="cell.url">
-          <div class="cell">
-            <img src="">
+            <div class="cell" style="position: relative">
+            <img :src="cell.img">
             <div>
               <p style="font-size: .24rem"><label>{{cell.title}}</label></p>
             </div>
           </div>
+          <span style="position: absolute;right: 1rem" v-if="cell.title=='消息中心'"><badge text="15"></badge></span>
         </cell-box>
       </group>
     </div>
@@ -37,14 +38,15 @@
 </template>
 
 <script>
-  import {Group, CellBox} from 'vux'
+  import {Group, CellBox,Badge} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
   export default {
     components: {
       Group,
-      CellBox
+      CellBox,
+      Badge
     },
     data () {
       scrollTo( 0, 0 )
@@ -53,21 +55,25 @@
         voucher: '',
         groupList: [
           [
-            {title: '实名认证', url: '/home'},
-            {title: '安全设置', url: '/home'}
+            {title: '实名认证', url: '/home',img:require('../assets/img/mine/rezheng.png')},
+            {title: '安全设置', url: '/home',img:require('../assets/img/mine/shezhi.png')}
           ],
           [
-            {title: '订单管理', url: '/home'},
-            {title: '当月消费', url: '/home'}
+            {title: '订单管理', url: '/home',img:require('../assets/img/mine/dingdan.png')},
+            {title: '当月消费', url: '/home',img:require('../assets/img/mine/xiaofei.png')}
           ],
           [
-            {title: '消息中心', url: '/newscenter'}
+            {title: '消息中心', url: '/newscenter',img:require('../assets/img/mine/xiaoxi.png')}
           ],
           [
-            {title: '意见反馈', url: '/home'},
-            {title: '客服电话', url: '/home'}
-          ]
-        ]
+            {title: '意见反馈', url: '/home',img:require('../assets/img/mine/yijian.png')},
+            {title: '客服电话', url: '/home',img:require('../assets/img/mine/dianhua.png')}
+          ],
+          [
+            {title: '安全退出', url: '/login',img:require('../assets/img/mine/tuichu.png')}
+          ],
+        ],
+        newsCounts:null  // 消息个数
       }
     },
     methods: {
@@ -88,24 +94,25 @@
       }).then(response => {
         next(vm => vm.setData(response))
       })
-    }
+    },
   }
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
   .header-wrapper {
-    background-color: #626262;
+    background-color: #081633;
     line-height: 0;
     padding-left: .48rem;
     >div{
       display: flex;
        padding: .4rem 0;
       img{
-          width: .8rem;
-          height: .8rem;
+          width: 1rem;
+          height: 1rem;
           display: block;
       }
       .login-right{
+        line-height: .6rem;
         .userInfo {
           font-size: .24rem;
           color: #fff;
@@ -140,6 +147,10 @@
         font-size: .24rem;
         text-align: center;
       }
+      .money{
+        font-size: .32rem;
+        color: #E6001B;
+      }
     }
   }
 
@@ -148,8 +159,8 @@
       display: flex;
       align-items: center;
       img {
-        width: .64rem;
-        height: .64rem;
+        width: .48rem;
+        height: .48rem;
         display: block;
         margin-right:.24rem
       }

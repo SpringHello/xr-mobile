@@ -30,8 +30,8 @@
         <p>账户余额</p>
       </div>
       <div>
-        <p v-if="userInfo" class="money">￥{{voucher}}</p>
-        <p v-else class="money">￥0.00</p>
+        <p v-if="userInfo" class="money">{{voucher}}</p>
+        <p v-else class="money">0.00</p>
         <p>现金券余额</p>
       </div>
     </div>

@@ -379,12 +379,14 @@
   /*顶部导航*/
   .topNav {
     height: 0.96rem;
-    //padding: .5rem .2rem;
+    padding: .24rem;
     background: rgba(32, 32, 35, 1);
     display: flex;
     justify-content: space-between;
     .top-logo {
-      width: 2rem;
+      width: 1.86rem;
+      height: .48rem;
+      display: block;
     }
     .logo-right {
       padding: .5rem .3rem .5rem;

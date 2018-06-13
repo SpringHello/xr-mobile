@@ -19,7 +19,7 @@
           <!--禁止自动填充-->
           <input type="text" v-model="signForm.vailCode" placeholder="图片验证码" autocomplete="off"
                  class="main-input">
-          <img :src="imgSrc" style="position:absolute;left:6rem;top:0px;height:.8rem;width:30%">
+          <img :src="imgSrc" style="position:absolute;left:5rem;top:0px;height:.8rem;width:30%">
         </div>
         <div class="form-item" style="border:none">
           <x-button type="primary" @click.native.prevent="login">登录</x-button>

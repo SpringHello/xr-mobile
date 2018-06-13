@@ -48,7 +48,7 @@
           <div class="handle-content">
             <router-link v-for="(item,index) in hostHandle" :key="index" :to="item.url">
               <div>
-                <img src="">
+                <img :src="item.img">
                 <p>{{item.title}}</p>
               </div>
             </router-link>
@@ -78,11 +78,11 @@
         details: {},
         //主机操作
         hostHandle: [
-          {img: '', title: '续费', url: '/home'},
-          {img: '', title: '升级', url: '/home'},
-          {img: '', title: '监控', url: '/home'},
-          {img: '', title: '重置主机密码', url: '/home'},
-          {img: '', title: '查看操作日志', url: '/home'}
+          {img:require('../../assets/img/back/xufei.png'), title: '续费', url: '/home'},
+          {img:require('../../assets/img/back/shengji.png'), title: '升级', url: '/home'},
+          {img:require('../../assets/img/back/jkong.png'), title: '监控', url: '/home'},
+          {img:require('../../assets/img/back/mima.png'), title: '重置主机密码', url: '/home'},
+          {img:require('../../assets/img/back/riji.png'), title: '查看操作日志', url: '/home'}
         ]
       }
     },
@@ -202,13 +202,13 @@
             text-align: center;
             margin-bottom: .5rem;
             img {
-              width: .64rem;
-              height: .64rem;
+              width: .8rem;
+              height: .8rem;
               margin: 0 auto;
               display: block;
             }
             p {
-              padding-top: .8rem;
+              padding-top: .32rem;
               font-size: .28rem;
               color: #222;
             }
