@@ -82,7 +82,7 @@
       </div>
       <!--版块四-->
       <div>
-        <div class="r-item">
+        <div class="r-item" @click="feedback">
           <div>
             <img src="../assets/img/mine/yijian.png">
             <p>意见反馈</p>
@@ -169,6 +169,15 @@
           this.voucher = response.data.data.voucher
         }
       },
+      //意见反馈
+      feedback(){
+        if($store.state.userInfo){
+          this.$router.push('feedback')
+        }else{
+          this.$router.push('login')
+        }
+      },
+      //消息中心
       XXclick(){
         if($store.state.userInfo){
           this.$router.push('newscenter')
@@ -227,7 +236,7 @@
             border-left: 1px solid #fff;
             border-bottom: 1px solid #fff;
             transform: translateY(-.05rem) rotate(-135deg);
-            margin-left: 4.3rem;
+            margin-left: 4rem;
           }
         }
       }

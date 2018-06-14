@@ -4,25 +4,25 @@
     <div class="weui-tabbar components-bottom-bar">
       <router-link to="home" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
-          <img src="" class="iconfont icon-home">
+          <img src="../assets/img/home/foot-1.png" class="iconfont icon-home" style="width: .44rem">
         </div>
         <p class="weui-tabbar__label"><span>新睿云</span></p>
       </router-link>
       <router-link to="sort" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
-          <img class="iconfont icon-classify">
+          <img class="iconfont icon-classify" style="width: .44rem" src="../assets/img/home/foot-2.png">
         </div>
         <p class="weui-tabbar__label"><span>活动</span></p>
       </router-link>
       <router-link to="console" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
-          <img class="iconfont icon-mall">
+          <img class="iconfont icon-mall" style="width: .44rem" src="../assets/img/home/foot-3.png">
         </div>
         <p class="weui-tabbar__label"><span>控制台</span></p>
       </router-link>
       <router-link to="mine" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
-          <img class="iconfont icon-mine">
+          <img class="iconfont icon-mine" style="width: .44rem" src="../assets/img/home/foot-4.png">
         </div>
         <p class="weui-tabbar__label"><span>我的</span></p>
       </router-link>

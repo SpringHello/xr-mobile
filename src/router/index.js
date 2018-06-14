@@ -30,6 +30,7 @@ import ddos from '@/components/App/Products/DDOS'
 import Workorder from '@/components/Back/Workorder'
 import Bhost from '@/components/Back/Bhost'//
 import Bdisk from '@/components/Back/Bdisk'//
+import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
@@ -56,6 +57,7 @@ export default new Router({
         {path: 'Mine', name: 'Mine', component: Mine},
         {path: '/Bhost', name: 'Bhost', component: Bhost},
         {path: '/Bdisk', name: 'Bdisk', component: Bdisk},
+        {path: '/feedback', name: 'feedback', component: feedback},
         {path: 'Warn', name: 'Warn', component: Warn},
         {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/Newscenter', name: 'hostDetail', component: Newscenter},

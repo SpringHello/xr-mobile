@@ -49,7 +49,7 @@
     </div>
     <!--备案-->
     <div class="record">
-      <div>
+      <div @click="toRecord">
           <p class="cell-item">查看备案进度</p><span class="link"></span>
       </div>
     </div>
@@ -102,6 +102,14 @@
         } else {
           this.$router.push('login')
         }
+      },
+      //备案
+      toRecord(){
+          if($store.state.userInfo){
+              this.$router.push('records')
+          }else{
+            this.$router.push('login')
+          }
       }
 
     },
@@ -222,6 +230,7 @@
       .cell-item {
         font-size: .28rem;
         color: #222;
+        line-height: .4rem;
       }
       .link{
         display:block;
@@ -229,7 +238,7 @@
         height: .2rem;
         border-left: 1px solid #D9D9D9;
         border-bottom: 1px solid #D9D9D9;
-        transform: translateY(.01rem) rotate(-132deg);
+        transform: translateY(.01rem) rotate(-135deg);
       }
     }
   }
