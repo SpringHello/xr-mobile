@@ -49,11 +49,9 @@
     </div>
     <!--备案-->
     <div class="record">
-      <group>
-        <cell is-link>
-          <span slot="title" class="cell-item">查看备案进度</span>
-        </cell>
-      </group>
+      <div>
+          <p class="cell-item">查看备案进度</p><span class="link"></span>
+      </div>
     </div>
   </div>
 </template>
@@ -178,6 +176,7 @@
 
   .control {
     background: rgba(255, 255, 255, 1);
+    margin-bottom: .2rem;
     .control-header {
       font-size: .32rem;
       color: #000;
@@ -212,11 +211,26 @@
 
   //备案
   .record {
-
-    .cell-item {
-      font-size: .28rem;
-      color: #222;
-      line-height: .4rem;
+    div{
+      border-bottom: 1px solid #D9D9D9;
+      border-top: 1px solid #D9D9D9;
+      padding: .24rem .34rem;
+      background: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .cell-item {
+        font-size: .28rem;
+        color: #222;
+      }
+      .link{
+        display:block;
+        width: .2rem;
+        height: .2rem;
+        border-left: 1px solid #D9D9D9;
+        border-bottom: 1px solid #D9D9D9;
+        transform: translateY(.01rem) rotate(-132deg);
+      }
     }
   }
 </style>

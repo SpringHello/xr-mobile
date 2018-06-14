@@ -72,11 +72,11 @@
       </div>
       <!--版块三-->
       <div>
-        <div class="xx-item" @click="$router.push('newscenter')">
+        <div class="xx-item" @click="XXclick">
           <div>
             <img src="../assets/img/mine/xiaoxi.png">
             <p>消息中心</p>
-           <badge text="15"></badge>
+           <badge text="15" v-if="$store.state.userInfo"></badge>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
             <p>意见反馈</p>
           </div>
         </div>
-        <div class="s-item" @click="showHF=true">
+        <div class="s-item" @click="showKF=true">
           <div>
             <img src="../assets/img/mine/dianhua.png">
             <p>客服电话</p>
@@ -96,8 +96,8 @@
         </div>
       </div>
       <!--版块五-->
-      <div>
-        <div class="xx-item">
+      <div v-if="$store.state.userInfo">
+        <div class="xx-item" @click="showTC=true">
           <div>
             <img src="../assets/img/mine/tuichu.png">
             <p>安全退出</p>
@@ -106,7 +106,8 @@
       </div>
     </div>
 
-    <actionsheet v-model="showHF" :menus="menusKF" show-cancel></actionsheet>
+    <actionsheet v-model="showKF" :menus="menusKF" show-cancel :close-on-clicking-mask="false" ></actionsheet>
+    <actionsheet v-model="showTC" :menus="menusTC" show-cancel :close-on-clicking-mask="false"@on-click-menu="clickExit"></actionsheet>
   </div>
 </template>
 
@@ -148,10 +149,15 @@
           ],
         ],
         newsCounts:null,  // 消息个数
-        showHF:false,
+        //客服电话
+        showKF:false,
         menusKF: {
-          menu1: '客服电话',
-          menu2: '<span style="color:red">拨打 400-050-5565</span>'
+          menu1: '<span style="color:red">拨打 400-050-5565</span>',
+        },
+        //退出
+        showTC:false,
+        menusTC: {
+          menu1: '<span style="color:red">退出当前帐号</span>',
         },
 
       }
@@ -161,6 +167,22 @@
         if (response.status == 200 && response.data.status == 1) {
           this.remainder = response.data.data.remainder
           this.voucher = response.data.data.voucher
+        }
+      },
+      XXclick(){
+        if($store.state.userInfo){
+          this.$router.push('newscenter')
+        }else{
+          this.$router.push('login')
+        }
+      },
+      //退出账号
+      clickExit(key){
+        if(key!='cancel'){
+          axios.get('user/logout.do').then(response => {
+            $store.commit('setAuthInfo', {authInfo: null, userInfo: null})
+          this.$router.push('login')
+        })
         }
       }
     },

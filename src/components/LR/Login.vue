@@ -93,7 +93,7 @@
           }
         }).then((response) => {
           if (response.status == 200 && response.data.status == 1) {
-            this.$router.push({path: this.$route.query.from || 'Home'})
+            this.$router.push({path: 'console'})
           } else {
             this.imgSrc = `user/getKaptchaImage.do?t=${new Date().getTime()}`
             this.$vux.toast.text(response.data.message)
