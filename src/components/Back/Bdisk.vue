@@ -6,11 +6,10 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img src="">
+            <img src="../../assets/img/back/open.png">
             <div>
-              <p class="soures-title">名称:{{item.title}}
-              </p>
-              <span class="soures-desc">硬盘类型:{{item.diskoffer == 'ssd' ? 'SSD存储' : item.diskoffer == 'sas' ? 'SAS存储' : 'SATA存储'}}</span>
+              <p class="soures-title">名称:{{item.title}}</p>
+              <p class="soures-desc">硬盘类型:{{item.diskoffer == 'ssd' ? 'SSD存储' : item.diskoffer == 'sas' ? 'SAS存储' : 'SATA存储'}}</p>
             </div>
           </div>
           <p class="check">详细信息</p>
@@ -92,21 +91,19 @@
         .soures {
           img {
             width: .8rem;
-            height: .8rem;
-            margin-right: .24rem;
-            /*background: #00aaff;*/
             display: inline-block;
           }
           > div {
             display: inline-block;
-            font-size: .32rem;
             .soures-title {
               color: rgba(34, 34, 34, 1);
+              font-size: .32rem;
             }
             .soures-desc {
               color: rgba(153, 153, 153, 1);
               font-size: .24rem;
               line-height: .33rem;
+              padding-top: .08rem;
             }
           }
         }
