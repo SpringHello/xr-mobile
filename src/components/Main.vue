@@ -34,11 +34,10 @@
   import $store from '@/vuex'
   import axios from '@/util/iaxios'
   export default {
-     data (){
-       window.scrollTo(0, 0);
-         return{
-         }
-     },
+    data (){
+      window.scrollTo(0, 0);
+      return {}
+    },
     beforeRouteEnter(to, from, next){
       // 获取所有后台需要的基本信息
       // 获取用户信息

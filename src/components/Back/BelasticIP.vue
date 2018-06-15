@@ -6,13 +6,11 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img class="img"  v-if="item.status=='error'" src="../../assets/img/back/error.png">
-            <img class="img"  v-if="item.status=='open'" src="../../assets/img/back/open.png">
-            <img class="img"  v-if="item.status=='close'" src="../../assets/img/back/close.png">
-            <img class="img"  v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">
+            <img src="">
             <div>
-              <p class="soures-title">名称:{{item.title}}</p>
-              <p class="soures-desc">镜像系统: {{item.desc}}</p>
+              <p class="soures-title">IP地址:{{item.desc}}
+              </p>
+              <span class="soures-desc">所属VPC:{{item.title}}</span>
             </div>
           </div>
           <p class="check">详细信息</p>
@@ -42,16 +40,10 @@
     },
     methods: {
       push(item){
-        if (item.type =='host') {
-            this.address = 'hostDetail'
-               var params = {
-              id: item.id,
-              name: item.title,
-              configs: item.desc,
-              price: item.price,
-              password:item.password
+            this.address = 'ipDetail'
+            var params ={
+              vpcid:item.vpcId,
             }
-        }
         this.$router.push({path: this.address, query: params})
       },
       setData(list){
@@ -61,16 +53,13 @@
     beforeRouteEnter(to, from, next){
       let url = ''
       let list = []
-      let operate = null
-      if(to.query.type =='host') {
-          url = 'information/listVirtualMachines.do'
+      let operate ={}
+      if (to.query.type=='elasticip') {
+          url = 'network/listPublicIp.do'
           operate = (response) => {
-            for (let type in response.data.result) {
-              response.data.result[type].list.forEach(host => {
-                list.push({type: 'host', status: type, title: host.instancename, desc: host.templatename, id: host.computerid, price: host.cpCase, password:host.connectpassword
-                })
-              })
-            }
+            response.data.result.forEach(ip => {
+              list.push({title: ip.vpcname, desc: ip.publicip,vpcId:ip.vpcid,public:ip.publicip})
+            })
           }
       }
       axios.get(url, {
@@ -101,21 +90,23 @@
         align-items: center;
         justify-content: space-between;
         .soures {
-          .img {
+          img {
             width: .8rem;
+            height: .8rem;
+            margin-right: .24rem;
+            /*background: #00aaff;*/
             display: inline-block;
           }
           > div {
             display: inline-block;
+            font-size: .32rem;
             .soures-title {
-              font-size: .32rem;
               color: rgba(34, 34, 34, 1);
             }
             .soures-desc {
               color: rgba(153, 153, 153, 1);
-              line-height: .33rem;
               font-size: .24rem;
-              padding-top: .08rem;
+              line-height: .33rem;
             }
           }
         }

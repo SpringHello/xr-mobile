@@ -1,7 +1,6 @@
 @text-color-active: #0af;
 @text-color-normal: #999;
 
-
 @button-tab-border-color: red;
 
 @import '~vux/src/styles/reset.less';
@@ -36,9 +35,8 @@ body {
       position: absolute;
       width: .4rem;
       height: .4rem;
-      //background-color: #ccc;
       top: 17%;
-      left: 47%;
+      left: 50%;
       transform: translate(-50%, -50%);
     }
     .weui-tabbar__label {
@@ -48,7 +46,10 @@ body {
     }
   }
   .router-link-active {
-    color:#4768B0;
+    img{
+      color: red;
+    }
+    color: #4768B0;
   }
 }
 
