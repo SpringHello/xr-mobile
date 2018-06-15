@@ -80,6 +80,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .newscenter {
+    margin-bottom: 1rem;
     .news-nav {
       line-height: 0;
       ul {

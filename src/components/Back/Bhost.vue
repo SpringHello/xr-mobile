@@ -2,7 +2,7 @@
   <!--资源详情页面-->
   <div class="resouredetail">
     <x-header></x-header>
-    <div class="box">
+    <div class="box" v-if="list!=''">
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
@@ -18,8 +18,8 @@
           <p class="check">详细信息</p>
         </li>
       </ul>
-      <p v-if="list==''" style="color: #ccc;text-align: center;font-size: .3rem;">暂无数据</p>
     </div>
+    <p v-else style="color: #ccc;text-align: center;font-size: .3rem;margin: 50% auto;">暂无数据</p>
   </div>
 </template>
 

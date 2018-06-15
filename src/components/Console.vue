@@ -80,12 +80,12 @@
         remainder: '',
         voucher: '',
         controls: [
-          {img: require('../assets/img/console/Group62@2x.png'), title: '云服务器', type: 'host', url: 'bhost'},
-          {img: require('../assets/img/console/Group63@2x.png'), title: '云硬盘', type: 'disk', url: 'bdisk'},
-          {img: require('../assets/img/console/Group67@2x.png'), title: '弹性IP', type: 'elasticip', url: 'belasticip'},
-          {img: require('../assets/img/console/Group65@2x.png'), title: '负载均衡', type: 'balance', url: 'bbalance'},
-          {img: require('../assets/img/console/Group36@2x.png'), title: '镜像服务', type: 'mirror', url: 'bmirror'},
-          {img: require('../assets/img/console/Group38@2x.png'), title: 'NAT网关', type: 'nat', url: 'bnat'},
+          {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', type: 'host', url: 'bhost'},
+          {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', type: 'disk', url: 'bdisk'},
+          {img: require('../assets/img/console/tanip.png'), title: '弹性IP', type: 'elasticip', url: 'belasticip'},
+          {img: require('../assets/img/console/fuzaijunh.png'), title: '负载均衡', type: 'balance', url: 'bbalance'},
+          {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', type: 'mirror', url: 'bmirror'},
+          {img: require('../assets/img/console/nat.png'), title: 'NAT网关', type: 'nat', url: 'bnat'},
         ],
       }
     },

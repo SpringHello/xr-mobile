@@ -48,7 +48,6 @@
 <style rel="stylesheet/less" lang="less" scoped>
   #feedback {
     background: rgba(243, 243, 243, 1);
-    margin-bottom: .5rem;
     .annotation {
       background: rgba(247, 251, 255, 1);
       margin-bottom: .2rem;

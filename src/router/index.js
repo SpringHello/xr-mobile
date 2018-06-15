@@ -31,8 +31,8 @@ import Workorder from '@/components/Back/Workorder'
 import Bhost from '@/components/Back/Bhost'//
 import Bdisk from '@/components/Back/Bdisk'//
 import Belasticip from '@/components/Back/BelasticIP'//
-import Bbalance from '@/components/Back/Bbalance'//
 import Bmirror from '@/components/Back/Bmirror'//
+import Bbalance from '@/components/Back/Bbalance'//
 import Bnat from '@/components/Back/Bnat'//
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
@@ -62,8 +62,8 @@ export default new Router({
         {path: '/Bhost', name: 'Bhost', component: Bhost},
         {path: '/Bdisk', name: 'Bdisk', component: Bdisk},
         {path: '/Belasticip', name: 'Belasticip', component: Belasticip},
-        {path: '/Bbalance', name: 'Bbalance', component: Bbalance},
         {path: '/Bmirror', name: 'Bmirror', component: Bmirror},
+        {path: '/Bbalance', name: 'Bbalance', component: Bbalance},
         {path: '/Bnat', name: 'Bnat', component: Bnat},
         {path: '/feedback', name: 'feedback', component: feedback},
         {path: 'Warn', name: 'Warn', component: Warn},
