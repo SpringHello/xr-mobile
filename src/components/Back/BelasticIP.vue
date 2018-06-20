@@ -6,7 +6,7 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img src="../../assets/img/back/open.png">
+            <!--<img src="../../assets/img/back/open.png">-->
             <div>
               <p class="soures-title">IP地址:{{item.desc}}
               </p>
@@ -40,9 +40,9 @@
     },
     methods: {
       push(item){
-            this.address = 'ipDetail'
+            this.address = 'elasticipdetail'
             var params ={
-              vpcid:item.vpcId,
+              id:item.id,
             }
         this.$router.push({path: this.address, query: params})
       },
@@ -58,7 +58,7 @@
           url = 'network/listPublicIp.do'
           operate = (response) => {
             response.data.result.forEach(ip => {
-              list.push({title: ip.vpcname, desc: ip.publicip,vpcId:ip.vpcid,public:ip.publicip})
+              list.push({title: ip.vpcname, desc: ip.publicip,id:ip.id})
             })
           }
       }

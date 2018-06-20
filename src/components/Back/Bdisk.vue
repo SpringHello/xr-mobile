@@ -6,10 +6,13 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img src="../../assets/img/back/open.png">
+            <!--<img src="../../assets/img/back/open.png">-->
             <div>
-              <p class="soures-title">名称:{{item.title}}</p>
-              <p class="soures-desc">硬盘类型:{{item.diskoffer == 'ssd' ? 'SSD存储' : item.diskoffer == 'sas' ? 'SAS存储' : 'SATA存储'}}</p>
+              <p class="soures-title">名称: {{item.title}}</p>
+              <p class="soures-desc">
+                <span>硬盘类型: {{item.desc == 'ssd' ? 'SSD' : item.desc == 'sas' ? 'SAS' : 'SATA'}}</span>
+                <span>磁盘容量: {{item.capacity}}G</span>
+              </p>
             </div>
           </div>
           <p class="check">详细信息</p>
@@ -39,7 +42,7 @@
     },
     methods: {
       push(item){
-            this.address = 'diskDetail'
+            this.address = 'diskdetail'
             var params={
               id:item.id
             }
@@ -57,7 +60,7 @@
           url = 'Disk/listDisk.do'
           operate = (response) => {
             response.data.result.forEach(disk => {
-              list.push({title: disk.diskname, desc: disk.diskoffer,id:disk.diskid})
+              list.push({title: disk.diskname, desc: disk.diskoffer,id:disk.id,capacity:disk.disksize})
             })
           }
       }
@@ -104,6 +107,12 @@
               font-size: .24rem;
               line-height: .33rem;
               padding-top: .08rem;
+              span{
+                &:last-of-type{
+                  display: inline-block;
+                  padding-left: .25rem;
+                }
+              }
             }
           }
         }

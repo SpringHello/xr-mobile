@@ -6,7 +6,7 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <img src="../../assets/img/back/open.png">
+            <!--<img src="../../assets/img/back/open.png">-->
             <div>
               <p class="soures-title">名称:{{item.title}}
               </p>

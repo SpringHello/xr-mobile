@@ -11,7 +11,7 @@
             <img class="img"  v-if="item.status=='close'" src="../../assets/img/back/close.png">
             <img class="img"  v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">
             <div>
-              <p class="soures-title">名称:{{item.title}}</p>
+              <p class="soures-title">名称: {{item.title}}</p>
               <p class="soures-desc">镜像系统: {{item.desc}}</p>
             </div>
           </div>
@@ -43,7 +43,7 @@
     methods: {
       push(item){
         if (item.type =='host') {
-            this.address = 'hostDetail'
+            this.address = 'hostdetail'
                var params = {
               id: item.id,
               name: item.title,

@@ -50,7 +50,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/ruicloud',
       name: 'Main',
       component: Main,
       children: [
@@ -68,8 +68,8 @@ export default new Router({
         {path: '/feedback', name: 'feedback', component: feedback},
         {path: 'Warn', name: 'Warn', component: Warn},
         {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
-        {path: '/Newscenter', name: 'hostDetail', component: Newscenter},
-        {path: '/Newdetail', name: 'hostDetail', component: Newdetail},
+        {path: '/Newscenter', name: 'Newscenter', component: Newscenter},
+        {path: '/Newdetail', name: 'Newdetail', component: Newdetail},
       ]
     },
     {
