@@ -3,19 +3,19 @@
     <header class="header-wrapper">
       <p>控制台</p>
       <div style="display: flex">
-        <router-link class="userInfo" to="ruicloud/home">
+        <router-link class="userInfo" to="home">
           <div>
             <span>0</span>
             <span>告警</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="ruicloud/home">
+        <router-link class="userInfo" to="home">
           <div>
             <span>0</span>
             <span>工单</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="ruicloud/login">
+        <router-link class="userInfo" to="login">
           <div>
             <span>0</span>
             <span>待续费</span>
