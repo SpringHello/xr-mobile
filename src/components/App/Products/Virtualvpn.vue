@@ -149,7 +149,7 @@
     methods:{
       buy(){
         if ($store.state.userInfo){
-          this.$router.go(0)
+          this.$router.push('console')
         }else{
           this.$router.push('login')
         }

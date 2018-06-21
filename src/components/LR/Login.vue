@@ -25,9 +25,9 @@
           <x-button type="primary" @click.native.prevent="login">登录</x-button>
         </div>
         <div class="form-item" style="border:none;">
-          <router-link to="reset" style="font-size: .3rem;float:left;color:#1AAD19">忘记密码</router-link>
+          <router-link to="/ruicloud/reset" style="font-size: .3rem;float:left;color:#1AAD19">忘记密码</router-link>
           <p style="float:right;font-size: .3rem;">还没有帐号?
-            <router-link to="register" style="color:#1AAD19">立即注册</router-link>
+            <router-link to="/ruicloud/register" style="color:#1AAD19">立即注册</router-link>
           </p>
           <div style="clear:both"></div>
         </div>

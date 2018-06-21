@@ -4,8 +4,8 @@
       <div>
        <img src="../assets/img/mine/avatar.png" class="avator">
        <div class="login-right">
-         <router-link class="userInfo" to="home" v-if="userInfo">{{userInfo.realname}}</router-link>
-         <router-link class="userInfo" to="login?from=Mine" v-else>请点击登录</router-link>
+         <router-link class="userInfo" to="/ruicloud/home" v-if="userInfo">{{userInfo.realname}}</router-link>
+         <router-link class="userInfo" to="/ruicloud/login?from=Mine" v-else>请点击登录</router-link>
        </div>
       </div>
     </header>

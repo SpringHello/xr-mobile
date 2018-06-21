@@ -43,7 +43,7 @@
     methods: {
       push(item){
         if (item.type =='host') {
-            this.address = 'hostdetail'
+            this.address = '/ruicloud/hostdetail'
                var params = {
               id: item.id,
               name: item.title,

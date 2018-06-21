@@ -78,11 +78,11 @@
         details: {},
         //主机操作
         hostHandle: [
-          {img:require('../../assets/img/back/xufei.png'), title: '续费', url: '/home'},
-          {img:require('../../assets/img/back/shengji.png'), title: '升级', url: '/home'},
-          {img:require('../../assets/img/back/jkong.png'), title: '监控', url: '/home'},
-          {img:require('../../assets/img/back/mima.png'), title: '重置主机密码', url: '/home'},
-          {img:require('../../assets/img/back/riji.png'), title: '查看操作日志', url: '/home'}
+          {img:require('../../assets/img/back/xufei.png'), title: '续费', url: '/ruicloud/home'},
+          {img:require('../../assets/img/back/shengji.png'), title: '升级', url: '/ruicloud/home'},
+          {img:require('../../assets/img/back/jkong.png'), title: '监控', url: '/ruicloud/home'},
+          {img:require('../../assets/img/back/mima.png'), title: '重置主机密码', url: '/ruicloud/home'},
+          {img:require('../../assets/img/back/riji.png'), title: '查看操作日志', url: '/ruicloud/home'}
         ]
       }
     },

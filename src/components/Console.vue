@@ -3,19 +3,19 @@
     <header class="header-wrapper">
       <p>控制台</p>
       <div style="display: flex">
-        <router-link class="userInfo" to="home">
+        <router-link class="userInfo" to="ruicloud/home">
           <div>
             <span>0</span>
             <span>告警</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="home">
+        <router-link class="userInfo" to="ruicloud/home">
           <div>
             <span>0</span>
             <span>工单</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="login">
+        <router-link class="userInfo" to="ruicloud/login">
           <div>
             <span>0</span>
             <span>待续费</span>
@@ -53,11 +53,13 @@
           <p class="cell-item">查看备案进度</p><span class="link"></span>
       </div>
     </div>
+
+    <toast v-model="showPositionValue" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox} from 'vux'
+  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox,Toast} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
@@ -71,7 +73,8 @@
       GridItem,
       Group,
       Cell,
-      CellBox
+      CellBox,
+      Toast
     },
     data () {
       window.scrollTo(0, 0);
@@ -80,13 +83,14 @@
         remainder: '',
         voucher: '',
         controls: [
-          {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', type: 'host', url: 'bhost'},
-          {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', type: 'disk', url: 'bdisk'},
-          {img: require('../assets/img/console/tanip.png'), title: '弹性IP', type: 'elasticip', url: 'belasticip'},
-          {img: require('../assets/img/console/fuzaijunh.png'), title: '负载均衡', type: 'balance', url: 'bbalance'},
-          {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', type: 'mirror', url: 'bmirror'},
-          {img: require('../assets/img/console/nat.png'), title: 'NAT网关', type: 'nat', url: 'bnat'},
+          {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', type: 'host', url: '/ruicloud/bhost'},
+          {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', type: 'disk', url: '/ruicloud/bdisk'},
+          {img: require('../assets/img/console/tanip.png'), title: '弹性IP', type: 'elasticip', url: '/ruicloud/belasticip'},
+          {img: require('../assets/img/console/fuzaijunh.png'), title: '负载均衡', type: 'balance', url: ''},
+          {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', type: 'mirror', url: ''},
+          {img: require('../assets/img/console/nat.png'), title: 'NAT网关', type: 'nat', url: ''},
         ],
+        showPositionValue:false,
       }
     },
     methods: {
@@ -98,7 +102,10 @@
       },
       conPush(item){
         if ($store.state.userInfo) {
-          this.$router.push({path: item.url, query: {type: item.type}})
+            if(item.url!=''){this.$router.push({path: item.url, query: {type: item.type}})}
+            else{
+              this.showPositionValue = true
+            }
         } else {
           this.$router.push('login')
         }

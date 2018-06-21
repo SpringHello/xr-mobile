@@ -29,10 +29,10 @@
       scrollTo( 0, 0 )
       return {
         actives: [
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/24", url: "/Sortdetail"},
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/25", url: "/Sortdetail"},
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/26", url: "/Sortdetail"},
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/27", url: "/Sortdetail"}
+          {img: "", desc: " 活动时间：2018/5/24~2018/6/24", url: "/ruicloud/Sortdetail"},
+          {img: "", desc: " 活动时间：2018/5/24~2018/6/25", url: "/ruicloud/Sortdetail"},
+          {img: "", desc: " 活动时间：2018/5/24~2018/6/26", url: "/ruicloud/Sortdetail"},
+          {img: "", desc: " 活动时间：2018/5/24~2018/6/27", url: "/ruicloud/Sortdetail"}
         ]
       }
     }
