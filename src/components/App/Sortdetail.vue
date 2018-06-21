@@ -1,6 +1,6 @@
 <template>
   <!--活动详情页面-->
-  <div>活动详情页</div>
+  <div id="sortdetail">活动详情页</div>
 </template>
 
 <script>
@@ -12,5 +12,8 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-
+  #sortdetail{
+    font-size: .28rem;
+    margin: 50%;
+  }
 </style>

@@ -48,7 +48,7 @@
       .item-img {
         height: 3.54rem;
         display: block;
-        background-color: #ccc;
+        background-color: #4767B1;
       }
       h6{
         padding: .19rem 0 .08rem .24rem;

@@ -1,7 +1,7 @@
 <template>
   <!--资源详情页面-->
   <div class="resouredetail">
-    <x-header></x-header>
+    <x-header >云服务器 <a slot="right">批量操作</a></x-header>
     <div class="box" v-if="list!=''">
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
@@ -41,6 +41,7 @@
       }
     },
     methods: {
+      // 查看详情
       push(item){
         if (item.type =='host') {
             this.address = '/ruicloud/hostdetail'

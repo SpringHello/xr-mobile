@@ -1,7 +1,7 @@
 <template>
   <!--资源详情页面-->
   <div class="resouredetail">
-    <x-header></x-header>
+    <x-header>NAT网关</x-header>
     <div class="box" v-if="list!=''">
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
