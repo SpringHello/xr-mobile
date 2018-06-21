@@ -47,13 +47,15 @@
           <p class="handle-title">主机操作</p>
           <div class="handle-content">
             <router-link v-for="(item,index) in hostHandle" :key="index" :to="item.url">
-              <div>
+              <div @click="onOpen(item.url)">
                 <img :src="item.img">
                 <p>{{item.title}}</p>
               </div>
             </router-link>
           </div>
         </div>
+
+        <toast v-model="show" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
       </div>
     </div>
   </div>
@@ -62,7 +64,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader} from 'vux'
+  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader,Toast} from 'vux'
   export default{
     components: {
       Grid,
@@ -71,22 +73,32 @@
       Group,
       Cell,
       XHeader,
+      Toast
     },
     data (){
       window.scrollTo(0, 0);
       return {
+         //暂未开放
+        show:false,
         details: {},
         //主机操作
         hostHandle: [
-          {img:require('../../assets/img/back/xufei.png'), title: '续费', url: '/ruicloud/home'},
-          {img:require('../../assets/img/back/shengji.png'), title: '升级', url: '/ruicloud/home'},
-          {img:require('../../assets/img/back/jkong.png'), title: '监控', url: '/ruicloud/home'},
-          {img:require('../../assets/img/back/mima.png'), title: '重置主机密码', url: '/ruicloud/home'},
-          {img:require('../../assets/img/back/riji.png'), title: '查看操作日志', url: '/ruicloud/home'}
+          {img:require('../../assets/img/back/xufei.png'), title: '续费', url: ''},
+          {img:require('../../assets/img/back/shengji.png'), title: '升级', url: ''},
+          {img:require('../../assets/img/back/jkong.png'), title: '监控', url: ''},
+          {img:require('../../assets/img/back/mima.png'), title: '重置主机密码', url: ''},
+          {img:require('../../assets/img/back/riji.png'), title: '查看操作日志', url: ''}
         ]
       }
     },
-    methods: {},
+    methods: {
+        //暂未开放
+      onOpen(url){
+         if(url==''){
+             this.show=true
+         }
+      }
+    },
     beforeRouteEnter(to, from, next){
       axios.get('information/listVMByComputerId.do', {
         params: {

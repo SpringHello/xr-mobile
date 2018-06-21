@@ -72,7 +72,9 @@
       div{
          font-size: .32rem;
         &:last-of-type{
+          .weui-cells{
 
+          }
         }
       }
 

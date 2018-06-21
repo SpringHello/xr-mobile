@@ -48,11 +48,11 @@
       </div>
     </div>
     <!--备案-->
-    <div class="record">
-      <div @click="toRecord">
-          <p class="cell-item">查看备案进度</p><span class="link"></span>
-      </div>
-    </div>
+    <!--<div class="record">-->
+      <!--<div @click="toRecord">-->
+          <!--<p class="cell-item">查看备案进度</p><span class="link"></span>-->
+      <!--</div>-->
+    <!--</div>-->
 
     <toast v-model="showPositionValue" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
@@ -111,13 +111,13 @@
         }
       },
       //备案
-      toRecord(){
-          if($store.state.userInfo){
-              this.$router.push('records')
-          }else{
-            this.$router.push('login')
-          }
-      }
+//      toRecord(){
+//          if($store.state.userInfo){
+//              this.$router.push('records')
+//          }else{
+//            this.$router.push('login')
+//          }
+//      }
 
     },
     computed: mapState([
@@ -225,29 +225,29 @@
   }
 
   //备案
-  .record {
-    div{
-      border-bottom: 1px solid #D9D9D9;
-      border-top: 1px solid #D9D9D9;
-      padding: .24rem .34rem;
-      background: #FFF;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .cell-item {
-        font-size: .28rem;
-        color: #222;
-        line-height: .4rem;
-      }
-      .link{
-        display:block;
-        width: .2rem;
-        height: .2rem;
-        border-left: 1px solid #D9D9D9;
-        border-bottom: 1px solid #D9D9D9;
-        transform: translateY(.01rem) rotate(-135deg);
-      }
-    }
-  }
+  /*.record {*/
+    /*div{*/
+      /*border-bottom: 1px solid #D9D9D9;*/
+      /*border-top: 1px solid #D9D9D9;*/
+      /*padding: .24rem .34rem;*/
+      /*background: #FFF;*/
+      /*display: flex;*/
+      /*align-items: center;*/
+      /*justify-content: space-between;*/
+      /*.cell-item {*/
+        /*font-size: .28rem;*/
+        /*color: #222;*/
+        /*line-height: .4rem;*/
+      /*}*/
+      /*.link{*/
+        /*display:block;*/
+        /*width: .2rem;*/
+        /*height: .2rem;*/
+        /*border-left: 1px solid #D9D9D9;*/
+        /*border-bottom: 1px solid #D9D9D9;*/
+        /*transform: translateY(.01rem) rotate(-135deg);*/
+      /*}*/
+    /*}*/
+  /*}*/
 </style>
 

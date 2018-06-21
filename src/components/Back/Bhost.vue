@@ -1,22 +1,22 @@
 <template>
   <!--资源详情页面-->
   <div class="resouredetail">
-    <x-header >云服务器 <a slot="right">批量操作</a></x-header>
+    <x-header >云服务器</x-header>
     <div class="box" v-if="list!=''">
       <ul>
-        <li v-for="(item,index) in list" :key="index" @click="push(item)">
-          <div class="soures">
-            <img class="img"  v-if="item.status=='error'" src="../../assets/img/back/error.png">
-            <img class="img"  v-if="item.status=='open'" src="../../assets/img/back/open.png">
-            <img class="img"  v-if="item.status=='close'" src="../../assets/img/back/close.png">
-            <img class="img"  v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">
-            <div>
-              <p class="soures-title">名称: {{item.title}}</p>
-              <p class="soures-desc">镜像系统: {{item.desc}}</p>
-            </div>
-          </div>
-          <p class="check">详细信息</p>
-        </li>
+            <li v-for="(item,index) in list" :key="index">
+              <div class="soures">
+                <img class="img"  v-if="item.status=='error'" src="../../assets/img/back/error.png">
+                <img class="img"  v-if="item.status=='open'" src="../../assets/img/back/open.png">
+                <img class="img"  v-if="item.status=='close'" src="../../assets/img/back/close.png">
+                <img class="img"  v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">
+                <div>
+                  <p class="soures-title">名称: {{item.title}}</p>
+                  <p class="soures-desc">镜像系统: {{item.desc}}</p>
+                </div>
+              </div>
+              <p class="check" @click="push(item)">详细信息</p>
+            </li>
       </ul>
     </div>
     <p v-else style="color: #ccc;text-align: center;font-size: .3rem;margin: 50% auto;">暂无数据</p>
@@ -26,18 +26,21 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Group, Cell, CellBox, XHeader} from 'vux'
+  import {Group, Cell, CellBox, XHeader,Checker, CheckerItem} from 'vux'
   export default {
     components: {
       Group,
       Cell,
       CellBox,
-      XHeader
+      XHeader,
+      Checker,
+      CheckerItem
     },
     data () {
       return {
         list: [],
         address: '',
+        Checkbox:[]
       }
     },
     methods: {
@@ -95,6 +98,9 @@
     ul {
       padding: .3rem;
       background:rgba(255,255,255,1);
+      .vux-tap-active{
+        width: 100%;
+      }
       li {
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
@@ -134,6 +140,9 @@
             margin-left: .2rem;
           }
         }
+      }
+      .item-selected{
+      background: #ccc;
       }
     }
   }

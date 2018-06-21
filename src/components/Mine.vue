@@ -42,7 +42,7 @@
             <p>实名认证</p>
           </div>
         </div>
-        <div class="s-item">
+        <div class="s-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/shezhi.png">
             <p>安全设置</p>
@@ -51,19 +51,19 @@
       </div>
       <!--版块二-->
       <div>
-        <div class="dd-item">
+        <div class="dd-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/dingdan.png">
             <p>订单管理</p>
           </div>
         </div>
-        <div class="xf-item">
+        <div class="xf-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/xiaofei.png">
             <p>当月消费</p>
           </div>
         </div>
-        <div class="fp-item">
+        <div class="fp-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/fapiao.png">
             <p>发票管理</p>
@@ -108,11 +108,13 @@
 
     <actionsheet v-model="showKF" :menus="menusKF" show-cancel :close-on-clicking-mask="false" ></actionsheet>
     <actionsheet v-model="showTC" :menus="menusTC" show-cancel :close-on-clicking-mask="false"@on-click-menu="clickExit"></actionsheet>
+
+    <toast v-model="show" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>
 
 <script>
-  import {Group, CellBox,Badge,Actionsheet} from 'vux'
+  import {Group, CellBox,Badge,Actionsheet,Toast} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
@@ -121,11 +123,14 @@
       Group,
       CellBox,
       Badge,
-      Actionsheet
+      Actionsheet,
+      Toast
     },
     data () {
       scrollTo( 0, 0 )
       return {
+        //未开放
+        show:false,
         remainder: '',
         voucher: '',
         groupList: [
@@ -198,6 +203,10 @@
           this.$router.push('login')
         })
         }
+      },
+      //暂未开放
+      onOpen(){
+          this.show=true
       }
     },
     computed: mapState([
