@@ -76,7 +76,7 @@
           <div>
             <img src="../assets/img/mine/xiaoxi.png">
             <p>消息中心</p>
-           <badge text="15" v-if="$store.state.userInfo"></badge>
+           <badge :text='nums' v-if="$store.state.userInfo"></badge>
           </div>
         </div>
       </div>
@@ -148,7 +148,7 @@
             {title: '安全退出', img:require('../assets/img/mine/tuichu.png')}
           ],
         ],
-        newsCounts:null,  // 消息个数
+        nums:'',  // 消息个数
         //客服电话
         showKF:false,
         menusKF: {
@@ -163,10 +163,15 @@
       }
     },
     methods: {
-      setData(response){
+      setData(values){
+        var response=values[0]
         if (response.status == 200 && response.data.status == 1) {
           this.remainder = response.data.data.remainder
           this.voucher = response.data.data.voucher
+        }
+        var response=values[1]
+        if(response.status == 200 && response.data.status ==1){
+          this.nums=response.data.total
         }
       },
       //意见反馈
@@ -200,10 +205,20 @@
       'userInfo'
     ]),
     beforeRouteEnter(to, from, next){
-      axios.post('device/DescribeWalletsBalance.do', {
+      var device=axios.post('device/DescribeWalletsBalance.do',{
         zoneId: $store.state.zone.zoneid
-      }).then(response => {
-        next(vm => vm.setData(response))
+      })
+      var newcounts=axios.post('user/getEventNotifyList.do',{
+        isRead:'2',
+        zoneId: $store.state.zone.zoneid,
+        page: 1,
+        rows: 15
+      })
+
+      Promise.all([device,newcounts]).then(values =>{
+          next(vm =>{
+              vm.setData(values)
+      })
       })
     },
   }
@@ -402,7 +417,7 @@
         p{
           font-size: .28rem;
           color: #222;
-          padding-right: 3rem;
+          padding-right: 3.5rem;
         }
 
       }
