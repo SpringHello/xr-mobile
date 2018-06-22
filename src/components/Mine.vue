@@ -206,7 +206,11 @@
       },
       //暂未开放
       onOpen(){
+        if($store.state.userInfo){
           this.show=true
+        }else{
+          this.$router.push('login')
+        }
       }
     },
     computed: mapState([

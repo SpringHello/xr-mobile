@@ -6,12 +6,11 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <!--<img src="../../assets/img/back/open.png">-->
             <div>
-              <p class="soures-title">名称: {{item.title}}</p>
+              <p class="soures-title">名称: {{item.diskname}}</p>
               <p class="soures-desc">
-                <span>硬盘类型: {{item.desc == 'ssd' ? 'SSD' : item.desc == 'sas' ? 'SAS' : 'SATA'}}</span>
-                <span>磁盘容量: {{item.capacity}}G</span>
+                <span>硬盘类型: {{item.diskoffer.toUpperCase()}}</span>
+                <span>磁盘容量: {{item.disksize}}G</span>
               </p>
             </div>
           </div>
@@ -37,41 +36,25 @@
     data () {
       return {
         list: [],
-        address: '',
       }
     },
     methods: {
       push(item){
-            this.address = 'diskdetail'
-            var params={
-              id:item.id
-            }
-        this.$router.push({path: this.address, query: params})
+        let address = `diskdetail/${item.diskid}`
+        this.$router.push({path: address})
       },
       setData(list){
         this.list = list
       }
     },
     beforeRouteEnter(to, from, next){
-      let url = ''
-      let list = []
-      let operate = null
-      if (to.query.type=='disk') {
-          url = 'Disk/listDisk.do'
-          operate = (response) => {
-            response.data.result.forEach(disk => {
-              list.push({title: disk.diskname, desc: disk.diskoffer,id:disk.id,capacity:disk.disksize})
-            })
-          }
-      }
-      axios.get(url, {
+      axios.get('Disk/listDisk.do', {
         params: {
           zoneId: $store.state.zone.zoneid
         }
       }).then(response => {
-        operate(response)
         next(vm => {
-          vm.setData(list)
+          vm.setData(response.data.result)
         })
       })
     }
@@ -80,11 +63,11 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
-    background:rgba(243,243,243,1);
+    background: rgba(243, 243, 243, 1);
     margin-bottom: 1rem;
     ul {
       padding: .3rem;
-      background:rgba(255,255,255,1);
+      background: rgba(255, 255, 255, 1);
       li {
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
@@ -107,8 +90,8 @@
               font-size: .24rem;
               line-height: .33rem;
               padding-top: .08rem;
-              span{
-                &:last-of-type{
+              span {
+                &:last-of-type {
                   display: inline-block;
                   padding-left: .25rem;
                 }

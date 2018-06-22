@@ -37,6 +37,7 @@ import Bnat from '@/components/Back/Bnat'//
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
+import Elasticipdetail from '@/components/Back/Elasticipdetail'//云硬盘详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
@@ -69,7 +70,8 @@ export default new Router({
         {path: '/ruicloud/feedback', name: 'feedback', component: feedback},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
-        {path: '/ruicloud/Diskdetail', name: 'diskdetail', component: Diskdetail},
+        {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
+        {path: '/ruicloud/Elasticipdetail', name: 'elasticipdetail', component: Elasticipdetail},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
       ]

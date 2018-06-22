@@ -6,7 +6,6 @@
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
-            <!--<img src="../../assets/img/back/open.png">-->
             <div>
               <p class="soures-title">IP地址:{{item.desc}}
               </p>

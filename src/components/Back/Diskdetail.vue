@@ -7,23 +7,27 @@
         <h6 class="title" v-if="details.mounton && details.mountonname && details.status == 1">负载均衡基础信息</h6>
         <ul>
           <li>硬盘名称 <span>{{details.diskname}}</span></li>
-          <li>硬盘类型 <span>{{details.diskoffer == 'ssd' ? 'SSD' : details.diskoffer == 'sas' ? 'SAS' : 'SATA'}}</span></li>
+          <li>硬盘类型 <span>{{details.diskoffer == 'ssd' ? 'SSD' : details.diskoffer == 'sas' ? 'SAS' : 'SATA'}}</span>
+          </li>
           <li>容量 <span>{{details.disksize}}GB</span></li>
-          <li>状态 <span>{{details.status === 0 ? '欠费' : (details.status === 1 && !details.mounton && !details.mountonname) ? '可挂载' : (details.status === 1 && details.mounton && details.mountonname) ? '已启用（' + details.mountonname + ')' : details.status === -1 ? '异常' : details.status === 2 ? '创建中' : details.status === 3 ? '删除中' : details.status === 4 ? '卸载中' : details.status === 5 ? '挂载中' : details.status === 6 ? '备份中' : '--'}}</span></li>
+          <li>状态 <span>{{details.status === 0 ? '欠费' : (details.status === 1 && !details.mounton && !details.mountonname) ? '可挂载' : (details.status === 1 && details.mounton && details.mountonname) ? '已启用（' + details.mountonname + ')' : details.status === -1 ? '异常' : details.status === 2 ? '创建中' : details.status === 3 ? '删除中' : details.status === 4 ? '卸载中' : details.status === 5 ? '挂载中' : details.status === 6 ? '备份中' : '--'}}</span>
+          </li>
           <li>计费类型 <span>{{details.caseType == 1 ? '包年' : details.caseType == 2 ? '包月' : '实时'}}</span></li>
-          <li>价格 <span>{{details.caseType == 1 ? details.cpCase+'/年' : details.caseType == 2 ? details.cpCase+'/月'  :details.cpCase+'/时' }}</span></li>
+          <li>价格 <span>{{details.caseType == 1 ? details.cpCase+'/年' : details.caseType == 2 ? details.cpCase+'/月'  :details.cpCase+'/时' }}</span>
+          </li>
           <li>创建时间 <span>{{details.createtime}}</span></li>
         </ul>
       </div>
 
-      <group >
-        <x-switch title='挂载'  class="bei" v-if="!details.mounton && !details.mountonname && details.status == 1"></x-switch>
-        <x-switch title="卸载"  class="bei" v-if="details.mounton && details.mountonname && details.status == 1" @click.native="showUnload(details)"></x-switch>
-        <cell title="硬盘备份" link="home" is-link  class="bei"></cell>
+      <group>
+        <x-switch title='挂载' class="bei"
+                  v-if="!details.mounton && !details.mountonname && details.status == 1"></x-switch>
+        <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
+                  @click.native="showUnload(details)"></x-switch>
       </group>
 
-      <toast v-model="showOK" type="text"  is-show-mask :text="messageOK" position="middle" width="35%"></toast>
-      <toast v-model="showError" type="text"  is-show-mask :text="messageError" position="middle" width="35%"></toast>
+      <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="35%"></toast>
+      <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="35%"></toast>
 
     </div>
   </div>
@@ -32,7 +36,21 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader,XSwitch,Confirm,Toast} from 'vux'
+  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast} from 'vux'
+  function getDisk(cb, diskId) {
+    axios.get('Disk/listDiskById.do', {
+      params: {
+        diskId,
+        zoneId: $store.state.zone.zoneid,
+      }
+    }).then(response => {
+      if (response.status == 200 && response.data.status == 1) {
+        let disks = response.data.result[0]
+        cb(disks)
+      }
+    })
+
+  }
   export default{
     components: {
       Grid,
@@ -49,26 +67,38 @@
       window.scrollTo(0, 0);
       return {
         details: {},
-        showOK:false,
-        messageOK:'',
-        showError:false,
-        messageError:''
+        showOK: false,
+        messageOK: '',
+        showError: false,
+        messageError: ''
       }
     },
+    beforeRouteEnter(to, from, next){
+      let cb = (disks) => {
+        next(vm => {
+          vm.setData(disks)
+        })
+      }
+      getDisk(cb, to.params.diskId)
+    },
     methods: {
+      // 获取磁盘数据
+      setData(disks){
+        this.details = disks
+      },
       // 卸载弹窗
       showUnload(details){
-          this.$vux.confirm.show({
-            title: '磁盘卸载',
-            content: '是否将确认将硬盘（'+ details.diskname +'）从主机（'+ details.mountonname+ '）卸载，卸载之后该主机将失去该硬盘所存信息',
-            onConfirm :() =>{
-                this.unloadOk()
-            }
-          })
+        this.$vux.confirm.show({
+          title: '磁盘卸载',
+          content: '是否将确认将硬盘（' + details.diskname + '）从主机（' + details.mountonname + '）卸载，卸载之后该主机将失去该硬盘所存信息',
+          onConfirm: () => {
+            this.unloadOk()
+          }
+        })
       },
       /* 确认卸载磁盘 */
       unloadOk() {
-        this.details.status=4
+        this.details.status = 4
         axios.get('Disk/detachVolume.do', {
           params: {
             zoneId: this.details.zoneid,
@@ -76,48 +106,20 @@
             VMId: this.details.mounton
           }
         }).then(response => {
+          let cb = (data) => {
+            this.setData(data)
+          }
+          getDisk(cb, this.$route.params.diskId)
           if (response.status == 200 && response.statusText == 'OK') {
-              this.showOK=true
-              this.messageOK=response.data.message
-
+            this.showOK = true
+            this.messageOK = response.data.message
           } else {
-            this.showError=true
-              this.messageError=response.data.message
+            this.showError = true
+            this.messageError = response.data.message
           }
         })
       },
     },
-    created(){
-      axios.get('Disk/listDisk.do', {
-      params: {
-        zoneId: $store.state.zone.zoneid,
-      }
-    }).then(response =>{
-        if(response.status ==200 && response.data.status ==1){
-            response.data.result.forEach(item => {
-                if(item.id==this.$route.query.id){
-                    this.details=item
-
-                }
-            })
-        }
-      })
-    }
-//    beforeRouteEnter(to, from, next){
-//      axios.get('Disk/listDisk.do', {
-//        params: {
-//          zoneId: $store.state.zone.zoneid,
-//        }
-//      }).then(response =>
-//        {
-//          next(vm=>
-//            {
-//              vm.details = response.data.result
-//            }
-//          )
-//        }
-//      )
-//    }
   }
 </script>
 
@@ -143,7 +145,7 @@
           list-style: none;
           font-size: .28rem;
           color: #333;
-          span{
+          span {
             display: inline-block;
             font-size: .28rem;
             color: #666;
@@ -151,9 +153,6 @@
           }
         }
       }
-    }
-    .bei{
-      font-size: .28rem;
     }
   }
 </style>
