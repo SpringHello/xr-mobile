@@ -36,9 +36,9 @@
           <x-button type="primary" @click.native.prevent="reset">重置密码</x-button>
         </div>
         <div class="form-item" style="border:none;">
-          <router-link to="login" style="font-size: .7rem;float:left;color:#1AAD19">立即登录</router-link>
-          <p style="float:right;font-size: .7rem;">还没有帐号?
-            <router-link to="register" style="color:#1AAD19">立即注册</router-link>
+          <router-link to="/ruicloud/login" style="font-size: .3rem;float:left;color:#1AAD19">立即登录</router-link>
+          <p style="float:right;font-size: .3rem;">还没有帐号?
+            <router-link to="/ruicloud/register" style="color:#1AAD19">立即注册</router-link>
           </p>
           <div style="clear:both"></div>
         </div>
@@ -51,7 +51,7 @@
         <div style="display: flex">
           <input type="text" v-model="signForm.pictureCode" class="main-input"
                  style="border:1px solid #dfdfdf">
-          <img :src="imgSrc" style="height:2rem;width:30%">
+          <img :src="imgSrc" style="height:.8rem;width:30%">
         </div>
       </alert>
     </div>

@@ -19,15 +19,15 @@
           <!--禁止自动填充-->
           <input type="text" v-model="signForm.vailCode" placeholder="图片验证码" autocomplete="off"
                  class="main-input">
-          <img :src="imgSrc" style="position:absolute;right:0px;top:0px;height:2rem;width:30%">
+          <img :src="imgSrc" style="position:absolute;left:5rem;top:0px;height:.8rem;width:30%">
         </div>
         <div class="form-item" style="border:none">
           <x-button type="primary" @click.native.prevent="login">登录</x-button>
         </div>
         <div class="form-item" style="border:none;">
-          <router-link to="reset" style="font-size: .7rem;float:left;color:#1AAD19">忘记密码</router-link>
-          <p style="float:right;font-size: .7rem;">还没有帐号?
-            <router-link to="register" style="color:#1AAD19">立即注册</router-link>
+          <router-link to="/ruicloud/reset" style="font-size: .3rem;float:left;color:#1AAD19">忘记密码</router-link>
+          <p style="float:right;font-size: .3rem;">还没有帐号?
+            <router-link to="/ruicloud/register" style="color:#1AAD19">立即注册</router-link>
           </p>
           <div style="clear:both"></div>
         </div>
@@ -93,7 +93,7 @@
           }
         }).then((response) => {
           if (response.status == 200 && response.data.status == 1) {
-            this.$router.push({path: this.$route.query.from || 'Home'})
+            this.$router.push({path: 'console'})
           } else {
             this.imgSrc = `user/getKaptchaImage.do?t=${new Date().getTime()}`
             this.$vux.toast.text(response.data.message)

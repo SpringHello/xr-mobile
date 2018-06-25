@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 2.25rem;background:rgba(243,243,243,1);">
+  <div style="margin-bottom: 1.5rem;background:rgba(243,243,243,1);">
     <header class="header-wrapper">
       <p>控制台</p>
       <div style="display: flex">
@@ -25,13 +25,13 @@
     </header>
     <div class="accountInfo">
       <div>
-        <p v-if="userInfo">￥{{remainder}}</p>
-        <p v-else>￥0.00</p>
+        <p v-if="userInfo" class="money">￥{{remainder}}</p>
+        <p v-else class="money">￥0</p>
         <p>账户余额</p>
       </div>
       <div>
-        <p v-if="userInfo">￥{{voucher}}</p>
-        <p v-else>￥0.00</p>
+        <p v-if="userInfo" class="money">{{voucher}}</p>
+        <p v-else class="money">0</p>
         <p>现金券余额</p>
       </div>
     </div>
@@ -48,18 +48,18 @@
       </div>
     </div>
     <!--备案-->
-    <div class="record">
-      <group>
-        <cell is-link>
-          <span slot="title" class="cell-item">查看备案进度</span>
-        </cell>
-      </group>
-    </div>
+    <!--<div class="record">-->
+      <!--<div @click="toRecord">-->
+          <!--<p class="cell-item">查看备案进度</p><span class="link"></span>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <toast v-model="showPositionValue" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox} from 'vux'
+  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox,Toast} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
@@ -73,21 +73,24 @@
       GridItem,
       Group,
       Cell,
-      CellBox
+      CellBox,
+      Toast
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         type: '',
         remainder: '',
         voucher: '',
         controls: [
-          {img: require('../assets/img/console/Group62@2x.png'), title: '云服务器', type: 'host', url: 'host'},
-          {img: require('../assets/img/console/Group63@2x.png'), title: '云硬盘', type: 'disk', url: 'disk'},
-          {img: require('../assets/img/console/Group67@2x.png'), title: '弹性IP', type: 'ip', url: 'host'},
-          {img: require('../assets/img/console/Group65@2x.png'), title: '负载均衡', type: 'balance', url: 'host'},
-          {img: require('../assets/img/console/Group36@2x.png'), title: '镜像服务', type: 'mirror', url: 'host'},
-          {img: require('../assets/img/console/Group38@2x.png'), title: 'NAT网关', type: 'nat', url: 'host'},
+          {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', type: 'host', url: '/ruicloud/bhost'},
+          {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', type: 'disk', url: '/ruicloud/bdisk'},
+          {img: require('../assets/img/console/tanip.png'), title: '弹性IP', type: 'elasticip', url: '/ruicloud/belasticip'},
+          {img: require('../assets/img/console/fuzaijunh.png'), title: '负载均衡', type: 'balance', url: ''},
+          {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', type: 'mirror', url: ''},
+          {img: require('../assets/img/console/nat.png'), title: 'NAT网关', type: 'nat', url: ''},
         ],
+        showPositionValue:false,
       }
     },
     methods: {
@@ -99,11 +102,22 @@
       },
       conPush(item){
         if ($store.state.userInfo) {
-          this.$router.push({path: item.url, query: {type: item.type}})
+            if(item.url!=''){this.$router.push({path: item.url, query: {type: item.type}})}
+            else{
+              this.showPositionValue = true
+            }
         } else {
           this.$router.push('login')
         }
-      }
+      },
+      //备案
+//      toRecord(){
+//          if($store.state.userInfo){
+//              this.$router.push('records')
+//          }else{
+//            this.$router.push('login')
+//          }
+//      }
 
     },
     computed: mapState([
@@ -125,25 +139,28 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .header-wrapper {
     background: url(../assets/img/console/Mask@2x.png) no-repeat center;
-    height: 5.5rem;
     background-size: cover;
-    padding: .5rem 1.2rem;
-    color: #fff;
+    padding: .26rem 1.3rem;
+    color: #FFF;
     p {
+      font-size: .36rem;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: .35rem;
     }
     .userInfo {
-      line-height: 2rem;
-      font-size: .7rem;
       color: #fff;
       width: 100%;
       position: relative;
       div {
         span {
-          line-height: 150%;
+          line-height: .4rem;
           display: block;
           text-align: center;
+          font-size: .28rem;
+          &:first-of-type{
+            font-size: .56rem;
+            line-height: .78rem;
+          }
         }
       }
     }
@@ -151,31 +168,38 @@
 
   .accountInfo {
     display: flex;
-    padding: .5rem;
+    padding: .2rem;
     background-color: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: .2rem;
     > div {
       width: 50%;
       &:first-of-type {
         border-right: 1px solid rgba(216, 216, 216, 1);
       }
       > p {
-        font-size: .7rem;
+        font-size: .24rem;
         text-align: center;
+        color: #222;
       }
+       .money{
+         color: #E6001B;
+         font-size: .32rem;
+         line-height: .45rem;
+       }
     }
   }
 
   .control {
     background: rgba(255, 255, 255, 1);
+    margin-bottom: .2rem;
     .control-header {
-      font-size: .9rem;
+      font-size: .32rem;
       color: #000;
-      padding: .5rem 1rem;
+      padding: .23rem .3rem;
       border-bottom: 1px solid #D9D9D9;
     }
     .control-content {
-      padding: 1.5rem;
+      padding: .24rem .69rem;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -183,29 +207,47 @@
       div {
         width: 30%;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: .4rem;
         img {
           display: block;
-          width: 1.5rem;
-          height: 1.5rem;
+          width: .8rem;
+          height: .8rem;
           margin: 0 auto;
         }
         p {
-          padding-top: 16px;
-          font-size: .8rem;
+          padding-top: .16rem;
+          font-size: .28rem;
           color: #222;
+          line-height: .4rem;
         }
       }
     }
   }
 
   //备案
-  .record {
-
-    .cell-item {
-      font-size: .8rem;
-      color: #222;
-    }
-  }
+  /*.record {*/
+    /*div{*/
+      /*border-bottom: 1px solid #D9D9D9;*/
+      /*border-top: 1px solid #D9D9D9;*/
+      /*padding: .24rem .34rem;*/
+      /*background: #FFF;*/
+      /*display: flex;*/
+      /*align-items: center;*/
+      /*justify-content: space-between;*/
+      /*.cell-item {*/
+        /*font-size: .28rem;*/
+        /*color: #222;*/
+        /*line-height: .4rem;*/
+      /*}*/
+      /*.link{*/
+        /*display:block;*/
+        /*width: .2rem;*/
+        /*height: .2rem;*/
+        /*border-left: 1px solid #D9D9D9;*/
+        /*border-bottom: 1px solid #D9D9D9;*/
+        /*transform: translateY(.01rem) rotate(-135deg);*/
+      /*}*/
+    /*}*/
+  /*}*/
 </style>
 

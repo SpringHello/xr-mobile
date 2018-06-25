@@ -30,7 +30,14 @@ import ddos from '@/components/App/Products/DDOS'
 import Workorder from '@/components/Back/Workorder'
 import Bhost from '@/components/Back/Bhost'//
 import Bdisk from '@/components/Back/Bdisk'//
+import Belasticip from '@/components/Back/BelasticIP'//
+import Bmirror from '@/components/Back/Bmirror'//
+import Bbalance from '@/components/Back/Bbalance'//
+import Bnat from '@/components/Back/Bnat'//
+import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
+import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
+import Elasticipdetail from '@/components/Back/Elasticipdetail'//云硬盘详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
@@ -45,7 +52,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/ruicloud',
       name: 'Main',
       component: Main,
       children: [
@@ -54,111 +61,118 @@ export default new Router({
         {path: 'Sort', name: 'Sort', component: Sort},
         {path: 'Console', name: 'Console', component: Console},
         {path: 'Mine', name: 'Mine', component: Mine},
-        {path: '/Bhost', name: 'Bhost', component: Bhost},
-        {path: '/Bdisk', name: 'Bdisk', component: Bdisk},
-        {path: 'Warn', name: 'Warn', component: Warn},
-        {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
-        {path: '/Newscenter', name: 'hostDetail', component: Newscenter},
-        {path: '/Newdetail', name: 'hostDetail', component: Newdetail},
+        {path: '/ruicloud/Bhost', name: 'Bhost', component: Bhost},
+        {path: '/ruicloud/Bdisk', name: 'Bdisk', component: Bdisk},
+        {path: '/ruicloud/Belasticip', name: 'Belasticip', component: Belasticip},
+        {path: '/ruicloud/Bmirror', name: 'Bmirror', component: Bmirror},
+        {path: '/ruicloud/Bbalance', name: 'Bbalance', component: Bbalance},
+        {path: '/ruicloud/Bnat', name: 'Bnat', component: Bnat},
+        {path: '/ruicloud/feedback', name: 'feedback', component: feedback},
+        {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
+        {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
+        {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
+        {path: '/ruicloud/Elasticipdetail', name: 'elasticipdetail', component: Elasticipdetail},
+        {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
+        {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
       ]
     },
     {
-      path: '/Login',
+      path: '/ruicloud/Login',
       name: 'Login',
       component: Login,
     },
     {
-      path: '/Register',
+      path: '/ruicloud/Register',
       name: 'Register',
       component: Register,
     },
     {
-      path: '/Reset',
+      path: '/ruicloud/Reset',
       name: 'Reset',
       component: Reset,
     },
     {
-      path: '/Dynamic',
+      path: '/ruicloud/Dynamic',
       name: 'Dynamic',
       component: Dynamic,
     },
     {
-      path: '/Prodetail',
+      path: '/ruicloud/Prodetail',
       name: 'Prodetail',
       component: Prodetail,
     },
     {
-      path: '/Sortdetail',
+      path: '/ruicloud/Sortdetail',
       name: 'Sortdetail',
       component: Sortdetail,
     },
     {
-      path: '/Workorder',
+      path: '/ruicloud/Workorder',
       name: 'Workorder',
       component: Workorder,
     },
     {
-      path: '/host',
+      path: '/ruicloud/host',
       name: 'host',
       component: host,
     },
     {
-      path: '/ecsSnapshot',
+      path: '/ruicloud/ecsSnapshot',
       name: 'ecsSnapshot',
       component: ecsSnapshot,
     },
     {
-      path: '/mirror',
+      path: '/ruicloud/mirror',
       name: 'mirror',
       component: mirror,
     },
     {
-      path: '/disk',
+      path: '/ruicloud/disk',
       name: 'disk',
       component: disk,
     },
     {
-      path: '/diskbackup',
+      path: '/ruicloud/diskbackup',
       name: 'diskbackup',
       component: diskbackup,
     },
     {
-      path: '/vpc',
+      path: '/ruicloud/vpc',
       name: 'vpc',
       component: vpc,
     },
     {
-      path: '/elasticip',
+      path: '/ruicloud/elasticip',
       name: 'elasticip',
       component: elasticip,
     },
     {
-      path: '/balance',
+      path: '/ruicloud/balance',
       name: 'balance',
       component: balance,
     },
     {
-      path: '/natgateway',
+      path: '/ruicloud/natgateway',
       name: 'natgateway',
       component: natgateway,
     },
     {
-      path: '/virtualvpn',
+      path: '/ruicloud/virtualvpn',
       name: 'virtualvpn',
       component: virtualvpn,
     },
     {
-      path: '/cloudmonitoring',
+      path: '/ruicloud/cloudmonitoring',
       name: 'cloudmonitoring',
       component: cloudmonitoring,
     },
     {
-      path: '/firewall',
+      path: '/ruicloud/firewall',
       name: 'firewall',
       component: firewall,
     },
     {
-      path: '/ddos',
+      path: '/ruicloud/ddos',
       name: 'ddos',
       component: ddos,
     },

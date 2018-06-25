@@ -1,7 +1,6 @@
 @text-color-active: #0af;
 @text-color-normal: #999;
 
-
 @button-tab-border-color: red;
 
 @import '~vux/src/styles/reset.less';
@@ -24,31 +23,35 @@ body {
   bottom: 0px;
   width: 100%;
   background-color: #f7f7fa;
-  .weui-tabbar__item {
-    display: block;
-    color: @text-color-normal;
-    position: relative;
+  div {
     width: 25%;
-    text-align: center;
-    font-size: .5rem;
-    height: 2.25rem;
-    .weui-tabbar__icon {
-      position: absolute;
-      width: 1.125rem;
-      height: .9rem;
-      background-color: #ccc;
-      top: 37%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .weui-tabbar__item {
+      display: block;
+      color: #888;
+      position: relative;
+      text-align: center;
+      font-size: .2rem;
+      height: 1rem;
+      .weui-tabbar__icon {
+        position: absolute;
+        width: .4rem;
+        height: .4rem;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .weui-tabbar__label {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+      }
+      .activeColor{
+        color: #4768B0;
+      }
     }
-    .weui-tabbar__label {
-      position: absolute;
-      width: 100%;
-      bottom: 0px;
+    .router-link-active {
+      //color: #4768B0;
     }
-  }
-  .router-link-active {
-    color:#4768B0;
   }
 }
 
@@ -68,25 +71,39 @@ body {
 
 /*登录页面样式*/
 .sign-form {
-  padding: 1rem;
+  padding: .2rem;
+  line-height: 0;
   .form-item {
-    margin-bottom: 1rem;
+    margin-bottom: .24rem;
     border: 1px solid #dfdfdf;
 
     .vailCode-button {
       position: absolute;
       right: .5rem;
       top: 50%;
-      padding: .35rem 1rem;
+      padding: .2rem;
       transform: translateY(-50%);
       border-radius: 3px;
       outline: none;
       border: none;
       background-color: #1AAD19;
-      font-size: .7rem;
+      font-size: .3rem;
       color: #fff;
     }
   }
+}
+
+.vux-x-dialog{
+  .weui-dialog{
+    .weui-dialog__hd{
+      padding: 0;
+    }
+    .weui-dialog__bd{
+      text-align: left;
+      padding: .1rem .8rem .39rem .8rem;
+    }
+  }
+
 }
 
 

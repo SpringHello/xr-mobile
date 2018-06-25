@@ -80,18 +80,19 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .newscenter {
+    margin-bottom: 1rem;
     .news-nav {
-      padding: .4rem 0;
+      line-height: 0;
       ul {
-        border: .05rem solid #e7e7e7;
+        border: 1px solid #e7e7e7;
         li{
+          padding: .35rem 0;
           width: 33.3%;
-          border-right:.05rem solid #e7e7e7;
+          border-right:1px solid #e7e7e7;
           display: inline-block;
           text-align: center;
-          font-size: .8rem;
+          font-size: .32rem;
           color:#353535;
-          line-height: 2.5rem;
           &:last-of-type{
             border-right: none;
           }
@@ -104,27 +105,27 @@
     }
     .content{
       ul{
-        padding: .5rem;
+        padding: .3rem;
         li{
-          padding-bottom: .8rem;
+          padding-bottom: .3rem;
           list-style: none;
           border-bottom: 1px solid #e7e7e7;
           >div{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: .2rem 0;
             .title{
-              font-size: .7rem;
+              font-size: .28rem;
               color:rgba(53,53,53,1);
             }
             .right {
-              font-size: .65rem;
+              font-size: .2rem;
               color:rgba(153,153,153,1);
             }
           }
           .desc{
-            font-size: .65rem;
+            font-size: .24rem;
             color:rgba(153,153,153,1);
             display: block;
             overflow: hidden;
