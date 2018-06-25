@@ -20,8 +20,9 @@
       </div>
 
       <group>
-        <x-switch title='挂载' class="bei"
-                  v-if="!details.mounton && !details.mountonname && details.status == 1"></x-switch>
+        <popup-picker title="挂载" class="bei" :data="mountHostList" v-model="mount" :columns="2"
+                      v-if="!details.mounton && !details.mountonname && details.status == 1"
+                      @on-show="showMount" show-name @on-change="onChange"></popup-picker>
         <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
                   @click.native="showUnload(details)"></x-switch>
       </group>
@@ -36,7 +37,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast} from 'vux'
+  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast, PopupPicker} from 'vux'
   function getDisk(cb, diskId) {
     axios.get('Disk/listDiskById.do', {
       params: {
@@ -61,12 +62,15 @@
       XHeader,
       XSwitch,
       Confirm,
-      Toast
+      Toast,
+      PopupPicker
     },
     data (){
       window.scrollTo(0, 0);
       return {
         details: {},
+        mount: [],
+        mountHostList: [],
         showOK: false,
         messageOK: '',
         showError: false,
@@ -114,6 +118,44 @@
             this.showOK = true
             this.messageOK = response.data.message
           } else {
+            this.showError = true
+            this.messageError = response.data.message
+          }
+        })
+      },
+      //挂载弹窗
+      showMount(){
+        axios.get('Disk/listAttachComputer.do', {
+          params: {
+            diskId: this.details.diskid,
+            zoneId: this.details.zoneid,
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            response.data.result.forEach(list => {
+              this.mountHostList.push({name: list.computername, value: list.computerid,parent:0})
+            })
+          }
+        })
+      },
+      //确认挂载
+      onChange(){
+        this.details.status = 5
+        axios.get('Disk/attachVolume.do', {
+          params: {
+            diskId: this.details.diskid,
+            VMId: this.mount[0],
+            zoneId: this.details.zoneid,
+          }
+        }).then(response =>{
+          let cb = (data) => {
+            this.setData(data)
+          }
+          getDisk(cb, this.$route.params.diskId)
+          if (response.status == 200 && response.statusText == 'OK'){
+            this.showOK = true
+            this.messageOK = response.data.message
+          }else{
             this.showError = true
             this.messageError = response.data.message
           }
