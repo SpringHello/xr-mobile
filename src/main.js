@@ -9,7 +9,7 @@ import App from './App'
 import  {ToastPlugin} from 'vux'
 Vue.use(ToastPlugin)
 
-import  { ConfirmPlugin } from 'vux'
+import  {ConfirmPlugin} from 'vux'
 Vue.use(ConfirmPlugin)
 
 import './assets/less/main.less'
@@ -22,7 +22,7 @@ Vue.directive('transfer-dom', TransferDom)
 Vue.config.productionTip = false
 
 var pxPreRem = 750 / 100;
-console.log(document.documentElement.clientWidth)
+//console.log(document.documentElement.clientWidth)
 var fontSize = document.documentElement.clientWidth / pxPreRem
 document.documentElement.style.fontSize = fontSize + 'px';
 
