@@ -106,7 +106,7 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
+          img: require('../../../assets/img/balance/bg.png'),
           title: '负载均衡',
           desc: '弹性负载均衡将访问流量自动分发到多台云服务器上，扩展应用系统对外的服务能力，实现更高水平的应用容错。弹性负载均衡可以通过监听负载均衡实例上的四层和七层请求，并将这些请求分发到后端服务器上进行处理。',
         },
@@ -184,21 +184,25 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+
+      img{
+        width: 3.01rem;
       }
     }
 

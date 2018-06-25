@@ -94,7 +94,7 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
+          img: require('../../../assets/img/monit/bg.png'),
           title: '云监控',
           desc: '新睿云监控告警服务主要用图表化信息帮助您了解云服务器运行状况和性能。告警推送消息帮助您第一时间了解业务异常，让您无需额外开发，就能全面掌控云服务器资源使用、运行情况。',
         },
@@ -152,21 +152,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width: 3.01rem;
       }
     }
 

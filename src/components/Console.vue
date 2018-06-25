@@ -49,17 +49,17 @@
     </div>
     <!--备案-->
     <!--<div class="record">-->
-      <!--<div @click="toRecord">-->
-          <!--<p class="cell-item">查看备案进度</p><span class="link"></span>-->
-      <!--</div>-->
+    <!--<div @click="toRecord">-->
+    <!--<p class="cell-item">查看备案进度</p><span class="link"></span>-->
+    <!--</div>-->
     <!--</div>-->
 
-    <toast v-model="showPositionValue" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
+    <toast v-model="showPositionValue" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>
 
 <script>
-  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox,Toast} from 'vux'
+  import {Swiper, XButton, Tab, TabItem, Grid, GridItem, Group, Cell, CellBox, Toast} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {mapState} from 'vuex'
@@ -83,14 +83,14 @@
         remainder: '',
         voucher: '',
         controls: [
-          {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', type: 'host', url: '/ruicloud/bhost'},
-          {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', type: 'disk', url: '/ruicloud/bdisk'},
-          {img: require('../assets/img/console/tanip.png'), title: '弹性IP', type: 'elasticip', url: '/ruicloud/belasticip'},
-          {img: require('../assets/img/console/fuzaijunh.png'), title: '负载均衡', type: 'balance', url: ''},
-          {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', type: 'mirror', url: ''},
-          {img: require('../assets/img/console/nat.png'), title: 'NAT网关', type: 'nat', url: ''},
+          {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', url: '/ruicloud/bhost'},
+          {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', url: '/ruicloud/bdisk'},
+          {img: require('../assets/img/console/tanip.png'), title: '弹性IP', url: '/ruicloud/belasticip'},
+          {img: require('../assets/img/console/fuzaijunh.png'), title: '负载均衡', url: ''},
+          {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', url: ''},
+          {img: require('../assets/img/console/nat.png'), title: 'NAT网关', url: ''},
         ],
-        showPositionValue:false,
+        showPositionValue: false,
       }
     },
     methods: {
@@ -102,10 +102,12 @@
       },
       conPush(item){
         if ($store.state.userInfo) {
-            if(item.url!=''){this.$router.push({path: item.url, query: {type: item.type}})}
-            else{
-              this.showPositionValue = true
-            }
+          if (item.url != '') {
+            this.$router.push({path: item.url})
+          }
+          else {
+            this.showPositionValue = true
+          }
         } else {
           this.$router.push('login')
         }
@@ -157,7 +159,7 @@
           display: block;
           text-align: center;
           font-size: .28rem;
-          &:first-of-type{
+          &:first-of-type {
             font-size: .56rem;
             line-height: .78rem;
           }
@@ -181,11 +183,11 @@
         text-align: center;
         color: #222;
       }
-       .money{
-         color: #E6001B;
-         font-size: .32rem;
-         line-height: .45rem;
-       }
+      .money {
+        color: #E6001B;
+        font-size: .32rem;
+        line-height: .45rem;
+      }
     }
   }
 
@@ -226,28 +228,28 @@
 
   //备案
   /*.record {*/
-    /*div{*/
-      /*border-bottom: 1px solid #D9D9D9;*/
-      /*border-top: 1px solid #D9D9D9;*/
-      /*padding: .24rem .34rem;*/
-      /*background: #FFF;*/
-      /*display: flex;*/
-      /*align-items: center;*/
-      /*justify-content: space-between;*/
-      /*.cell-item {*/
-        /*font-size: .28rem;*/
-        /*color: #222;*/
-        /*line-height: .4rem;*/
-      /*}*/
-      /*.link{*/
-        /*display:block;*/
-        /*width: .2rem;*/
-        /*height: .2rem;*/
-        /*border-left: 1px solid #D9D9D9;*/
-        /*border-bottom: 1px solid #D9D9D9;*/
-        /*transform: translateY(.01rem) rotate(-135deg);*/
-      /*}*/
-    /*}*/
+  /*div{*/
+  /*border-bottom: 1px solid #D9D9D9;*/
+  /*border-top: 1px solid #D9D9D9;*/
+  /*padding: .24rem .34rem;*/
+  /*background: #FFF;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: space-between;*/
+  /*.cell-item {*/
+  /*font-size: .28rem;*/
+  /*color: #222;*/
+  /*line-height: .4rem;*/
+  /*}*/
+  /*.link{*/
+  /*display:block;*/
+  /*width: .2rem;*/
+  /*height: .2rem;*/
+  /*border-left: 1px solid #D9D9D9;*/
+  /*border-bottom: 1px solid #D9D9D9;*/
+  /*transform: translateY(.01rem) rotate(-135deg);*/
+  /*}*/
+  /*}*/
   /*}*/
 </style>
 

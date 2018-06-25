@@ -13,7 +13,7 @@
             </span>
           </li>
           <li>IP价格
-            <span>{{details.caseType==1? '包年('+details.cpCase+'/年)':details.caseType==2? '包月('+details.cpCase+'/月)' : '实时('+details.cpCase+'/时)'}}</span>
+            <span v-if="details.caseType!=null">{{details.caseType==1? '包年('+details.cpCase+'/年)':details.caseType==2? '包月('+details.cpCase+'/月)' : '实时('+details.cpCase+'/时)'}}</span>
           </li>
         </ul>
       </div>
@@ -34,40 +34,54 @@
       </div>
     </div>
 
+
     <div class="opreat">
       <h6 class="title">IP操作</h6>
+      <p v-if="details.computername || details.natgatewayname || details.loadbalancerolename" @click="showUnbund(details)" class="unbound">解绑IP <span></span></p>
+      <p v-if="details.usetype==0 " class="unbound">绑定资源 <span></span></p>
     </div>
+
+    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="50%"></toast>
+    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="50%"></toast>
   </div>
 </template>
 
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast} from 'vux'
+  import { CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast,CellBox} from 'vux'
+  function getIP(cb, ipId) {
+    axios.get('network/listPublicIpById.do', {
+      params: {
+        ipId,
+        zoneId: $store.state.zone.zoneid,
+      }
+    }).then(response => {
+      if (response.status == 200 && response.data.status == 1) {
+        let ips = response.data.result[0]
+        cb(ips)
+      }
+    })
+
+  }
   export default{
     components: {
-      Grid,
-      GridItem,
       CellFormPreview,
       Group,
       Cell,
       XHeader,
       XSwitch,
       Confirm,
-      Toast
+      Toast,
+      CellBox
     },
     beforeRouteEnter(to, from, next){
-      axios.get('network/listPublicIp.do', {
-        params: {
-          zoneId: $store.state.zone.zoneid,
-        }
-      }).then(response => {
-          next(vm => {
-              vm.setData(response)
-            }
-          )
-        }
-      )
+      let cb = (ips) => {
+        next(vm => {
+          vm.setData(ips)
+        })
+      }
+      getIP(cb, to.params.ipId)
     },
     data (){
       window.scrollTo(0, 0);
@@ -81,14 +95,60 @@
     },
     methods: {
       //获取数据
-      setData(response){
-        if (response.status == 200 && response.data.status == 1) {
-          response.data.result.forEach(item => {
-            if (item.id == this.$route.query.id) {
-              this.details = item
-            }
-          })
+      setData(ips){
+        if (ips) {
+          this.details = ips
         }
+      },
+      //解绑弹窗
+      showUnbund(details){
+        this.$vux.confirm.show({
+          title: '解绑资源',
+          content: '确认解绑该IP?',
+          onConfirm : ()=> {
+            var url = ''
+            var params = {}
+            switch (details.usetype) {
+              case 4 :
+                url = 'network/unboundElasticIP.do'
+                params = {
+                  zoneId: $store.state.zone.zoneid,
+                  publicIp: details.publicip,
+                  natGatewayId: details.natgatewayid
+                }
+                break
+              case 3 :
+                url = 'network/natGatewayUnboundTargetIP.do'
+                params = {
+                  zoneId: $store.state.zone.zoneid,
+                  publicIp: details.publicip,
+                  natGatewayId: details.natgatewayid
+                }
+                break
+              case 1 :
+                url = 'network/disableStaticNat.do'
+                params = {
+                  zoneId: $store.state.zone.zoneid,
+                  VMId: details.computerid,
+                }
+                break
+            }
+            details.status = 4
+            axios.get(url, {params}).then(response => {
+              let cb = (data) => {
+                this.setData(data)
+              }
+              getIP(cb, this.$route.params.ipId)
+              if (response.status == 200 && response.data.status == 1) {
+                this.showOK = true
+                this.messageOK = response.data.message
+              } else {
+                this.showError = true
+                this.messageError = response.data.message
+              }
+            })
+          }
+        })
       }
     },
 
@@ -129,6 +189,7 @@
   }
 
   .opreat {
+    padding-bottom: 1.5rem;
     .title {
       padding: .23rem 0 .2rem .3rem;
       background: rgba(255, 255, 255, 1);
@@ -138,5 +199,24 @@
       line-height: .45rem;
       border-bottom: 1px solid #D9D9D9;
     }
-  }
+    .unbound{
+          padding: .23rem .25rem .2rem .3rem;
+          background: rgba(255, 255, 255, 1);
+          font-size: .32rem;
+          font-weight: normal;
+          color: #222;
+          line-height: .45rem;
+          border-bottom: 1px solid #D9D9D9;
+         span{
+           width: .15rem;
+           height: .15rem;
+           border-right: 1px solid #999999;
+           border-bottom: 1px solid #999999;
+           transform: translateY(.15rem) rotate(311deg);
+           float: right;
+         }
+      }
+
+    }
+
 </style>

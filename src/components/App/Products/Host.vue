@@ -112,9 +112,9 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
-          title: '弹性云服务器（ECS）',
-          desc: '弹性云服务器是一种可随时自助获取，处理能力可弹性伸缩的计算服务，帮助用户构建可靠、安全、灵活、高效的应用环境，确保服务持久稳定运行，提升运维效率，降低用户的CAPEX和OPEX。',
+          img: require('../../../assets/img/host/bg.png'),
+          title: '弹性云服务器',
+          desc: '弹性云服务器（(Elastic Compute Service,简称 ECS）是一种可随时自助获取，处理能力可弹性伸缩的计算服务，帮助用户构建可靠、安全、灵活、高效的应用环境，确保服务持久稳定运行，提升运维效率，降低用户的CAPEX和OPEX。',
         },
         features: [
           {
@@ -221,21 +221,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width: 3.01rem;
       }
     }
 

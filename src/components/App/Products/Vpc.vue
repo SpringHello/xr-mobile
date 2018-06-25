@@ -106,7 +106,7 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
+          img:require('../../../assets/img/vpc/bg.png'),
           title: '虚拟私有云VPC',
           desc: '基于新睿云给用户构建隔离的、私密的虚拟网络环境，用户可以自由配置VPC内的IP地址范围、子网、路由表、安全组和网关等，用户可以申请弹性带宽和弹性IP搭建业务系统，同时也可以通过专线/VPN等接入方式实现云上VPC与传统IDC的互联，构建混合云系统。',
         },
@@ -199,21 +199,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width: 3.01rem;
       }
     }
 

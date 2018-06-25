@@ -106,8 +106,8 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
-          title: 'DDOS防护',
+          img: require('../../../assets/img/ddos/bg.png'),
+          title: 'DOOS高防IP',
           desc: '新睿云通过专用硬件，针对DDoS攻击，为用户提供高防IP服务。高防IP为用户已备案的域名提供最高40Gbps的DDoS高级防护。用户在遭遇大流量DDoS攻击的情况下，可以在配置高防IP后将攻击流量引至高防IP，确保源站稳定可用。',
         },
         features: [
@@ -164,21 +164,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width:3.01rem;
       }
     }
 

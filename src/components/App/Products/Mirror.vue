@@ -85,7 +85,7 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
+          img: require('../../../assets/img/mirror/bg.png'),
           title: '镜像服务',
           desc: '可以灵活便捷的使用公共镜像或私有镜像创建云服务器，具备完善的镜像管理能力。',
         },
@@ -169,21 +169,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width: 3.01rem;
       }
     }
 

@@ -7,9 +7,9 @@
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
             <div>
-              <p class="soures-title">IP地址:{{item.desc}}
+              <p class="soures-title">IP地址:{{item.publicip}}
               </p>
-              <p class="soures-desc">所属VPC:{{item.title}}</p>
+              <p class="soures-desc">所属VPC:{{item.vpcname}}</p>
             </div>
           </div>
           <p class="check">详细信息</p>
@@ -32,6 +32,7 @@
       XHeader
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         list: [],
         address: '',
@@ -39,36 +40,21 @@
     },
     methods: {
       push(item){
-            this.address = 'elasticipdetail'
-            var params ={
-              id:item.id,
-            }
-        this.$router.push({path: this.address, query: params})
+        let address = `elasticipdetail/${item.publicipid}`
+        this.$router.push({path: address})
       },
       setData(list){
         this.list = list
       }
     },
     beforeRouteEnter(to, from, next){
-      let url = ''
-      let list = []
-      let operate ={}
-      if (to.query.type=='elasticip') {
-          url = 'network/listPublicIp.do'
-          operate = (response) => {
-            response.data.result.forEach(ip => {
-              list.push({title: ip.vpcname, desc: ip.publicip,id:ip.id})
-            })
-          }
-      }
-      axios.get(url, {
+      axios.get('network/listPublicIp.do', {
         params: {
           zoneId: $store.state.zone.zoneid
         }
-      }).then(response => {
-        operate(response)
+      }).then(reponse => {
         next(vm => {
-          vm.setData(list)
+          vm.setData(reponse.data.result)
         })
       })
     }

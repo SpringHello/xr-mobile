@@ -96,8 +96,8 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
-          title: '弹性公网IP',
+          img: require('../../../assets/img/ip/bg.png'),
+          title: '弹性IP',
           desc: '弹性公网IP是互联网上合法的静态公网IP地址。弹性公网IP地址是与用户账户相关联的资源，用户可以将弹性公网IP地址与任意虚拟机实例/NAT网关/VPN/负载均衡绑定，并可以随时解绑对应关系，再分配到其他资源实例上。用户可以按需购买，实时开通，同时配置变更实时生效。',
         },
         features: [
@@ -155,21 +155,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width: 3.01rem;
       }
     }
 

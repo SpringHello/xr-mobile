@@ -33,9 +33,8 @@
   import $store from '@/vuex'
   import {Group, Cell, CellBox, XHeader, Actionsheet, Toast} from 'vux'
   function getHost(cb) {
-    let url = 'information/listVirtualMachines.do'
     let list = []
-    axios.get(url, {
+    axios.get('information/listVirtualMachines.do', {
       params: {
         zoneId: $store.state.zone.zoneid
       }
@@ -77,6 +76,7 @@
       getHost(cb)
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         list: [],
         address: '',
@@ -129,7 +129,6 @@
       },
       // 操作
       operation(id, type, statusL){
-//         console.log(id,type,statusL)
         this.id = id
         switch (type) {
           case 'open':

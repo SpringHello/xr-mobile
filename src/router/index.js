@@ -71,7 +71,7 @@ export default new Router({
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
-        {path: '/ruicloud/Elasticipdetail', name: 'elasticipdetail', component: Elasticipdetail},
+        {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
       ]

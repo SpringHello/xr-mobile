@@ -81,9 +81,9 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img: '',
-          title: '虚拟防火墙',
-          desc: '虚拟防火墙是VPC内部VLAN与VLAN之间的安全组策略，用户根据需要建立访问规则对端口和协议进行进/出站控制。虚拟防火墙通过设置安全组规则对相应VPC下子网的访问进行控制，能够有效阻止非法的服务和进程入侵。云平台为每个VPC提供了独立的虚拟防火墙，用户可以灵活配置虚拟防火墙的规则，在子网上引用相应规则对进站、出站的流量进行匹配，实现子网的防护。虚拟防火墙也可部署在互联网出口，用于阻断互联网上非法的流量和行为，实现对外服务站点的防护。',
+          img: require('../../../assets/img/firewall/bg.png'),
+          title: '防火墙',
+          desc: '虚拟防火墙是VPC内部VLAN与VLAN之间的安全组策略，用户根据需要建立访问规则对端口和协议进行进/出站控制。',
         },
         features: [
           {
@@ -135,21 +135,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background: #081633;
+    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
     .logo-wrapper {
       display: flex;
+      align-items: center;
       padding: .5rem .3rem;
       > div {
-        width: 65%;
         .title {
           color: rgba(255, 255, 255, 1);
-          font-size: .24rem;
+          font-size: .36rem;
           padding-bottom: .15rem;
         }
         .desc {
           font-size: .2rem;
           color: rgba(255, 255, 255, 1);
         }
+      }
+      img{
+        width: 3.01rem;
       }
     }
 
