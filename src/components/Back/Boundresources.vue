@@ -6,7 +6,7 @@
    </group>
    <div v-if="show" class="opreat">
      <group>
-       <popup-picker title="绑定云主机" :data="listHost" :columns="2" v-model="valueHost" show-name></popup-picker>
+       <popup-picker title="绑定云主机" :data="listHost" :columns="2" v-model="valueHost" show-name @on-change="host"></popup-picker>
        <popup-picker title="绑定NAT网关" :data="listNat" :columns="2" v-model="valueNat" show-name></popup-picker>
      </group>
    </div>
@@ -74,6 +74,22 @@
               this.listNat.push({name:list.natname,value:list.vpcid,parent:0})
           })
         }
+      },
+      //绑定主机
+      host(){
+        axios.get('network/enableStaticNat.do', {
+          params: {
+            zoneId: $store.state.zone.zoneid,
+            ipId: this.$route.params.pid,
+//            VMId:
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+
+          } else {
+
+          }
+        })
       },
 
     }

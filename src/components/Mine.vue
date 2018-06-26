@@ -36,7 +36,7 @@
 
       <!--版块一-->
       <div>
-        <div class="r-item">
+        <div class="r-item" @click="approve">
           <div>
             <img src="../assets/img/mine/rezheng.png">
             <p>实名认证</p>
@@ -178,6 +178,10 @@
         if(response.status == 200 && response.data.status ==1){
           this.nums=response.data.total
         }
+      },
+      //实名认证
+      approve(){
+        this.$router.push('certification')
       },
       //意见反馈
       feedback(){

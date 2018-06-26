@@ -5,8 +5,8 @@
       <router-link v-for="(item,index) in actives" :key="index" :to="item.url">
         <div class="active-item">
           <img src="" class="item-img">
-          <h6>企业级云服务 重磅来袭</h6>
-          <p class="item-bottom">{{item.desc}}</p>
+          <h6>{{item.name}}</h6>
+          <p class="item-bottom">{{item.des}}</p>
         </div>
       </router-link>
 
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import axios from '@/util/iaxios'
+  import $store from '@/vuex'
   import {Swiper, XHeader, Flexbox, FlexboxItem} from 'vux'
   import {XButton} from 'vux'
   export default {
@@ -25,17 +27,32 @@
       Flexbox,
       FlexboxItem
     },
+    beforeRouteEnter(to, from, next){
+       axios.get('activity/getActivitys.do',{
+           params:{
+             zoneId: $store.state.zone.zoneid,
+           }
+       }).then(response =>{
+           next(vm =>{
+               vm.setData(response)
+           })
+       })
+    },
     data () {
       scrollTo( 0, 0 )
       return {
-        actives: [
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/24", url: "/ruicloud/Sortdetail"},
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/25", url: "/ruicloud/Sortdetail"},
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/26", url: "/ruicloud/Sortdetail"},
-          {img: "", desc: " 活动时间：2018/5/24~2018/6/27", url: "/ruicloud/Sortdetail"}
-        ]
+        actives: [],
       }
+    },
+    methods:{
+      //获取数据
+      setData(response){
+        if (response.status == 200 && response.data.status == 1){
+            this.actives=response.data.result
+        }
+      },
     }
+
   }
 </script>
 

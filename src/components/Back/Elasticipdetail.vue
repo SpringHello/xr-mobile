@@ -38,7 +38,7 @@
     <div class="opreat">
       <h6 class="title">IP操作</h6>
       <p @click="showUnbund(details)" class="unbound" v-if="details.usetype==1">解绑IP <span></span></p>
-      <p  class="unbound" v-if="details.usetype==0" @click='push(details.vpcid)'>绑定资源 <span></span></p>
+      <p  class="unbound" v-if="details.usetype==0" @click='push(details.vpcid,details.publicip)'>绑定资源 <span></span></p>
       <p  class="unbound" @click="resetIP(details.id)">释放IP <span></span></p>
     </div>
 
@@ -176,8 +176,8 @@
         })
       },
       //跳转绑定资源页面
-      push(id){
-        let address = `/ruicloud/boundresources/${id}`
+      push(id,pid){
+        let address = `/ruicloud/boundresources/${id}/${pid}`
         this.$router.push({path: address})
       }
     },

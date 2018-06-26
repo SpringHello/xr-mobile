@@ -11,7 +11,6 @@ import Warn from '@/components/Back/Warn'
 
 import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
-import Sortdetail from '@/components/App/Sortdetail' //活动详情
 import host from '@/components/App/Products/Host'
 import ecsSnapshot from '@/components/App/Products/EcsSnapshot'
 import mirror from '@/components/App/Products/Mirror'
@@ -34,6 +33,8 @@ import Belasticip from '@/components/Back/BelasticIP'//
 import Bmirror from '@/components/Back/Bmirror'//
 import Bbalance from '@/components/Back/Bbalance'//
 import Bnat from '@/components/Back/Bnat'//
+import certification from '@/components/Back/Certification'//
+import idcard from '@/components/Back/Idcard'//
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -69,11 +70,13 @@ export default new Router({
         {path: '/ruicloud/Bbalance', name: 'Bbalance', component: Bbalance},
         {path: '/ruicloud/Bnat', name: 'Bnat', component: Bnat},
         {path: '/ruicloud/feedback', name: 'feedback', component: feedback},
+        {path: '/ruicloud/certification', name: 'certification', component: certification},
+        {path: '/ruicloud/idcard', name: 'idcard', component: idcard},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
-        {path: '/ruicloud/Boundresources/:id', name: 'boundresources', component: Boundresources},
+        {path: '/ruicloud/Boundresources/:id/:pid', name: 'boundresources', component: Boundresources},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
       ]
@@ -102,11 +105,6 @@ export default new Router({
       path: '/ruicloud/Prodetail',
       name: 'Prodetail',
       component: Prodetail,
-    },
-    {
-      path: '/ruicloud/Sortdetail',
-      name: 'Sortdetail',
-      component: Sortdetail,
     },
     {
       path: '/ruicloud/Workorder',
