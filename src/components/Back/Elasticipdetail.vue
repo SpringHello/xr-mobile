@@ -37,12 +37,13 @@
 
     <div class="opreat">
       <h6 class="title">IP操作</h6>
-      <p v-if="details.computername || details.natgatewayname || details.loadbalancerolename" @click="showUnbund(details)" class="unbound">解绑IP <span></span></p>
-      <p v-if="details.usetype==0 " class="unbound">绑定资源 <span></span></p>
+      <p @click="showUnbund(details)" class="unbound" v-if="details.usetype==1">解绑IP <span></span></p>
+      <p  class="unbound" v-if="details.usetype==0" @click='push(details.vpcid)'>绑定资源 <span></span></p>
+      <p  class="unbound" @click="resetIP(details.id)">释放IP <span></span></p>
     </div>
 
-    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="50%"></toast>
-    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="50%"></toast>
+    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="70%"></toast>
+    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="65%"></toast>
   </div>
 </template>
 
@@ -149,6 +150,35 @@
             })
           }
         })
+      },
+      // 释放弹性IP
+      resetIP(id){
+        axios.get('network/delPublic.do', {
+          params: {
+            id,
+            zoneId: $store.state.zone.zoneid
+
+          }
+        }).then(response => {
+          if (response.status != 200 || response.data.status != 1) {
+            this.showError = true
+            this.messageError = response.data.message
+          } else {
+            this.$vux.confirm.show({
+              title: '确认',
+              content: '您正将“' + this.details.publicip + '”移入回收站，移入回收站之后我们将为您保留两个小时，两小时后我们将自动清空回收站中实时计费资源。',
+              onConfirm: () => {
+                this.showOK = true
+                this.messageOK = response.data.message
+              }
+            })
+          }
+        })
+      },
+      //跳转绑定资源页面
+      push(id){
+        let address = `/ruicloud/boundresources/${id}`
+        this.$router.push({path: address})
       }
     },
 

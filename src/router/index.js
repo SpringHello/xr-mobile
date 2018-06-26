@@ -37,7 +37,8 @@ import Bnat from '@/components/Back/Bnat'//
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
-import Elasticipdetail from '@/components/Back/Elasticipdetail'//云硬盘详情
+import Elasticipdetail from '@/components/Back/Elasticipdetail'//弹性IP详情
+import Boundresources from '@/components/Back/Boundresources'//绑定资源
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
@@ -72,6 +73,7 @@ export default new Router({
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
+        {path: '/ruicloud/Boundresources/:id', name: 'boundresources', component: Boundresources},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
       ]
