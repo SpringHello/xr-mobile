@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -79,7 +79,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -112,22 +112,22 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-danxingguazai',
             title: '弹性挂载',
             desc: '云硬盘可自由挂载、卸载，无需关闭或重启服务器;云硬盘的容量可在线弹性配置，支持实时计费。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-zidongkuaizhao',
             title: '磁盘快照',
             desc: '磁盘快照能对云硬盘某个时刻的数据进行备份和回滚，磁盘快照为全量快照，用户可使用快照创建云硬盘，可批量快速部署或迁移业务。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-cipanbeifen',
             title: '磁盘克隆',
             desc: '对数据盘整体进行克隆和备份，备份数据存储在新睿云的对象存储里面，不占用租户云硬盘空间，用户可以通过克隆的云硬盘创建和原始硬盘一样的数据盘。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuoguanli',
             title: '灵活管理',
             desc: '可以使用界面进行管理配置，操作简单易用。'
           }
@@ -148,22 +148,22 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaokekaogaoxingneng',
             title: '高可靠高性能',
             desc: '自定义备份策略，保障数据安全可靠。超高 IOPS、超高吞吐，可根据业务需要灵活配置。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-darongliang',
             title: '大容量',
             desc: '提供超大容量块存储，可弹性扩容，支持按量付费，性价比高。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-guigefengfu',
             title: '规格丰富',
             desc: '提供普通IO、高IO、超高IO三种性能的硬盘，满足不同业务场景需求，单盘支持在线扩容，即买即用。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-dulichijiuhua',
             title: '独立持久化',
             desc: '设计规格为99.999999999%持久性，数据不丢失。'
           }
@@ -240,11 +240,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -363,11 +358,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

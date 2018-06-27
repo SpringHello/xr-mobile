@@ -12,7 +12,6 @@
         <img :src="logo.img">
       </div>
     </div>
-
     <!--功能描述-->
     <div class="features">
       <div class="features-header">
@@ -20,7 +19,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -85,7 +84,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -118,37 +117,37 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img:'icon-jisuannengli',
             title: '计算能力',
             desc: '提供多种规格、多种类型、多网卡的弹性云服务器，可满足用户不同的使用场景。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-danxingjisuan',
             title: '弹性计算',
             desc: '根据业务需求，可弹性创建与释放云服务器，轻松应对业务的快速变化。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-cunchunengli',
             title: '存储能力',
             desc: '支持云硬盘挂载与备份，通过挂载不同类型云硬盘以实现主机存储能力的快速扩展。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-fengfu',
             title: '丰富的镜像',
             desc: '支持公共系统镜像、服务集成镜像、自定义镜像和用户本地镜像，自定义镜像让您可以随时备份或批量创建云服务器。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img:'icon-beifenyukuaizhao',
             title: '备份与快照',
             desc: '快照能对云服务器某个时刻的数据进行备份和回滚，且快照为全量快照，提升了安全性的同时，降低了快照的管理难度。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-qiangdadeNATnengli',
             title: '强大的网络功能',
             desc: '提供安全、稳定、高速、隔离的网络连接，具有VPC功能，帮助用户构建虚拟私有云，支持二层和三层网络能力，具有防火墙、负载均衡、DDoS、私有网关和VPN等功能，能实现混合云和跨云部署。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-kuaisuhuoqu',
             title: '云监控',
             desc: '提供开放的云监控服务平台，提供资源的实时监控、告警、通知等服务。'
           }
@@ -175,32 +174,32 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-kuaisuhuoqu',
             title: '快速获取',
             desc: '强大的计算和存储资源池，用户可便捷、快速的获取相应云计算服务，能快速实现云服务器的批量创建。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img:'icon-mobanchuangjian',
             title: '模板创建',
             desc: '可依据当前主机的镜像批量生成新的主机。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-danxingshensuo',
             title: '弹性伸缩',
             desc: '性能与规格弹性伸缩，满足业务弹性变化的需求。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-yijianhuifu',
             title: '一键恢复',
             desc: '一键生成备份镜像，可随时恢复到某一个备份点。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-shishijiankong',
             title: '实时监控',
             desc: '历史数据与实时数据双向监控，为您的性能保驾护航。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-huaban',
             title: '在线迁移',
             desc: '云服务器业务不中断，可以在同一可用区下实现热迁移。'
           }
@@ -277,11 +276,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -405,11 +399,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

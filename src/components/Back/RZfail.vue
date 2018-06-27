@@ -18,7 +18,6 @@
 <script>
   import $store from '@/vuex'
   import {XHeader} from 'vux'
-  console.log($store.state.authInfo)
   export default{
     components: {
       XHeader,

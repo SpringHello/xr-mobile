@@ -11,13 +11,15 @@
         </router-link>
         <router-link class="userInfo" to="home">
           <div>
-            <span>0</span>
+            <span v-if="userInfo">{{work}}</span>
+            <span v-else>0</span>
             <span>工单</span>
           </div>
         </router-link>
         <router-link class="userInfo" to="login">
           <div>
-            <span>0</span>
+            <span v-if="userInfo">{{renewal}}</span>
+            <span v-else>0</span>
             <span>待续费</span>
           </div>
         </router-link>
@@ -76,12 +78,29 @@
       CellBox,
       Toast
     },
+    beforeRouteEnter(to, from, next){
+      let wall = axios.post('device/DescribeWalletsBalance.do', {
+        zoneId: $store.state.zone.zoneid
+      })
+      let account = axios.get('user/userAccountInfo.do', {
+        params: {
+          zoneId: $store.state.zone.zoneid
+        }
+      })
+      Promise.all([wall, account]).then(values => {
+        next(vm => {
+          vm.setData(values)
+        })
+      })
+    },
     data () {
       window.scrollTo(0, 0);
       return {
         type: '',
         remainder: '',
         voucher: '',
+        work:'',
+        renewal:'',
         controls: [
           {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', url: '/ruicloud/bhost'},
           {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', url: '/ruicloud/bdisk'},
@@ -94,10 +113,14 @@
       }
     },
     methods: {
-      setData(response){
-        if (response.status == 200 && response.data.status == 1) {
-          this.remainder = response.data.data.remainder
-          this.voucher = response.data.data.voucher
+      setData(values){
+        if (values[0].status == 200 && values[0].data.status == 1) {
+          this.remainder = values[0].data.data.remainder
+          this.voucher = values[0].data.data.voucher
+        }
+        if (values[1].status == 200 && values[1].data.status == 1) {
+          this.work=values[1].data.result[1].items[0].value
+         this.renewal=values[1].data.result[1].items[2].value
         }
       },
       conPush(item){
@@ -125,16 +148,7 @@
     computed: mapState([
       // 映射 this.count 为 store.state.count
       'userInfo'
-    ]),
-    beforeRouteEnter(to, from, next){
-      axios.post('device/DescribeWalletsBalance.do', {
-        zoneId: $store.state.zone.zoneid
-      }).then(response => {
-        next(vm => {
-          vm.setData(response)
-        })
-      })
-    }
+    ])
   }
 </script>
 

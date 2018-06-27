@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -58,7 +58,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -91,27 +91,27 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gonggongjingxiang',
             title: '公共镜像',
             desc: '提供的常见的标准操作系统镜像，所有用户可见。包含操作系统以及预装的公共应用。用户根据实际情况自助配置应用环境或相关软件。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-siyoujingxiang',
             title: '私有镜像',
             desc: '用户基于ECS实例或者外部镜像文件创建的个人镜像，仅用户自己可见。包含操作系统、预装的公共应用以及用户的私有应用。选择私有镜像创建ECS，可以节省用户重复配置ECS的时间。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gongxiangjingxiang',
             title: '共享镜像',
             desc: '包含操作系统、预装的公共应用以及用户的私有应用。共享镜像是某一个租户的私有镜像，只对拥有者及被共享者可见。用户可以选择共享镜像创建ECS。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-jingxiangshichang',
             title: '镜像市场',
             desc: '提供预装操作系统、应用环境和各类软件的优质第三方镜像。无需配置，可一键部署，满足建站、应用开发、可视化管理等个性化需求。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-jingxiangguanli',
             title: '镜像管理',
             desc: '镜像的备份、删除，私有镜像的上传／下载／删除／共享，同时用户可以灵活使用公有镜像或者私有镜像创建ECS实例。'
           }
@@ -128,27 +128,27 @@
 
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-bianjie',
             title: '便捷',
             desc: '用户可通过运行的ECS或使用ECS系统磁盘的备份文件制作私有镜像,用户可通过镜像批量创建ECS。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-anquan',
             title: '安全',
             desc: '整体系统采用专用的存储硬件，保证数据的99.999999999%可用性与持久性。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuo',
             title: '灵活',
             desc: '用户可以通过控制台或开放API，完成对镜像的自定义管理。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-tongyi',
             title: '统一',
             desc: '通过自定义镜象，实现应用系统统一部署与升级，提高维护效率。保证应用环境的一致性， 简化升级维护。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-fengfu',
             title: '丰富',
             desc: '种类繁多的镜像，实现快速部署操作系统与软件。'
           }
@@ -225,11 +225,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -348,11 +343,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

@@ -16,6 +16,8 @@ Vue.use(ConfirmPlugin)
 import './assets/less/main.less'
 import './assets/less/public.less'
 
+import './assets/css/iconfont.css'
+
 //FastClick.attach(document.body)
 import {TransferDom} from 'vux'
 

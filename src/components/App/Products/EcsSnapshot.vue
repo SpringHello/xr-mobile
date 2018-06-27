@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -76,7 +76,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -109,17 +109,17 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-zidongkuaizhao',
             title: '自动快照',
             desc: '自动为用户创建快照。用户需要首先创建自动快照策略，然后再把自动快照策略应用到虚拟机实例或磁盘上，系统按照策略自动为该虚拟机或磁盘创建快照。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-shoudongkuaizhao',
             title: '手动快照',
             desc: '由用户手动创建。可以根据需要，手动为虚拟机实例或磁盘创建快照，作为数据备份。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-cipankelonghuifu',
             title: '磁盘克隆恢复',
             desc: '用户可以通过克隆的云硬盘创建和原始硬盘一样的数据盘。'
           }
@@ -143,22 +143,22 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-quanliangbeifen',
             title: '全量备份',
             desc: '新睿云的快照为全量快照的方式，各快照可以独立存在，方便灵活使用和管理。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-zhichiCPUneicunkuaizhao',
             title: '支持CPU/内存快照',
             desc: '可将ECS的内存状态进行快照，回滚时有利于业务的快速恢复。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-zhichiECSjingmo',
             title: '支持ECS静默',
             desc: '可暂停或改变在ECS上运行的进程的状态，特别是在备份过程中修改存储在磁盘上的信息的进程，以保证一致的可用备份。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-kuaizhaodanducunchu',
             title: '快照单独存储',
             desc: '快照单独存储于新睿云提供的对象存储中，不占用用户的磁盘空间。'
           }
@@ -235,11 +235,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -352,11 +347,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

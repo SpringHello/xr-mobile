@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -59,7 +59,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -92,17 +92,17 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-zidongkuaizhao1',
             title: '自动快照',
             desc: '自动为用户创建的快照。用户首先需要创建自动快照策略，然后再把自动快照策略应用到磁盘上，就会在用户设置的时间，自动为该磁盘创建快照。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-shoudongkuaizhao1',
             title: '手动快照',
             desc: '由用户手动创建。用户可以根据需要，手动为磁盘创建快照，作为数据备份。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-cipankelonghuifu1',
             title: '磁盘克隆恢复',
             desc: '用户可以通过克隆的云硬盘创建和原始硬盘一样的数据盘。'
           }
@@ -117,12 +117,12 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-anquankekao',
             title: '安全可靠',
             desc: '云硬盘备份是提供对公有云环境中基于云硬盘快照技术的本地数据保护服务,使用户的数据更加安全可靠,保护数据安全无忧。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-jiandanyiyong',
             title: '简单易用',
             desc: '简单的备份/恢复界面，只需一键，便可轻松保护用户的数据。'
           }
@@ -199,11 +199,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -322,11 +317,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
