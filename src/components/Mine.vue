@@ -184,12 +184,15 @@
       },
       //实名认证
       approve(){
-        if (this.authInfo.authtype == 0 && this.authInfo.checkstatus == 2) {
-          this.$vux.toast.text('认证中', 'middle')
-        } else {
-          this.$router.push('certification')
+        if($store.state.userInfo){
+          if (this.authInfo.authtype == 0 && this.authInfo.checkstatus == 2) {
+            this.$vux.toast.text('认证中', 'middle')
+          } else {
+            this.$router.push('certification')
+          }
+        } else{
+          this.$router.push('login')
         }
-
       },
       //意见反馈
       feedback(){

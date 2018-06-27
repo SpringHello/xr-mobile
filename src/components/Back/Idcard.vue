@@ -51,18 +51,10 @@
     methods: {
       // 获取手机验证码
       getPhoneCode(){
-        if (!regExp.phoneRegexp.test(this.froms.phone)) {
-          this.$vux.toast.text('请输入正确的手机号码', 'middle')
+        if (!this._validate()) {
           return
         }
-        if (this.froms.code.length != 4) {
-          this.$vux.toast.text('请输入正确的验证码', 'middle')
-          return
-        }
-        if (!regExp.IDCardRegExp.test(this.froms.idCard)) {
-          this.$vux.toast.text('请输入正确的身份证号', 'middle')
-          return
-        }
+        this.message = '验证码发送中'
         axios.get("user/code.do", {
           params: {
             aim: this.froms.phone,
@@ -71,7 +63,6 @@
           }
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            this.message = '验证码发送中'
             //发送验证码倒计时
             let countdown = 60
             this.message = '60s'
@@ -85,12 +76,16 @@
             }, 1000)
             this.$vux.toast.text(response.data.message, 'middle')
           } else {
+            this.message = '获取验证码'
             this.$vux.toast.text(response.data.message, 'middle')
           }
         })
       },
       // 提交信息
       submit(){
+        if (!this._validate()) {
+          return
+        }
         axios.post("user/personalAttest.do", {
           cardID: this.froms.idCard,
           name: this.froms.name,
@@ -105,14 +100,31 @@
                 authInfo: response.data.authInfo,
                 userInfo: response.data.result
               })
+              sessionStorage.setItem('RZsuccess', response.data.status)
+              this.$router.push('RZsuccess')
             })
-            this.$router.push('RZsucess')
-          }
-          else {
-            this.$router.push({path:'RZsucess',query:{message:response.data.message}})
+
+          } else {
+            sessionStorage.setItem('RZfail', response.data.message)
+            this.$router.push({path: 'RZfail'})
           }
         })
       },
+      _validate(){
+        if (!regExp.phoneRegexp.test(this.froms.phone)) {
+          this.$vux.toast.text('请输入正确的手机号码', 'middle')
+          return false
+        }
+        if (this.froms.code.length != 4) {
+          this.$vux.toast.text('请输入正确的验证码', 'middle')
+          return false
+        }
+        if (!regExp.IDCardRegExp.test(this.froms.idCard)) {
+          this.$vux.toast.text('请输入正确的身份证号', 'middle')
+          return false
+        }
+        return true
+      }
     },
 
   }
