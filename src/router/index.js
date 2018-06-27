@@ -35,6 +35,7 @@ import Bbalance from '@/components/Back/Bbalance'//
 import Bnat from '@/components/Back/Bnat'//
 import certification from '@/components/Back/Certification'//
 import idcard from '@/components/Back/Idcard'//
+import RZresult from '@/components/Back/RZresult'//
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -72,6 +73,7 @@ export default new Router({
         {path: '/ruicloud/feedback', name: 'feedback', component: feedback},
         {path: '/ruicloud/certification', name: 'certification', component: certification},
         {path: '/ruicloud/idcard', name: 'idcard', component: idcard},
+        {path: '/ruicloud/RZresult', name: 'RZresult', component: RZresult},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},

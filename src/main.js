@@ -9,6 +9,7 @@ import App from './App'
 import  {ToastPlugin} from 'vux'
 Vue.use(ToastPlugin)
 
+
 import  {ConfirmPlugin} from 'vux'
 Vue.use(ConfirmPlugin)
 

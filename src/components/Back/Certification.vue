@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="authInfo.authtype">
+    <div v-if="authInfo.authtype == 1 && authInfo.checkstatus == 0">
       <x-header>身份证号验证</x-header>
       <p class="title"> <icon type="success"></icon><span >您已通过实名认证</span></p>
       <group>
@@ -86,7 +86,7 @@
       height: .32rem;
     }
     p{
-      padding-left: .12rem;
+      padding-left: .15rem;
       font-size:.24rem;
       color:rgba(125,161,217,1);
     }
