@@ -13,6 +13,10 @@ Vue.use(ToastPlugin)
 import  {ConfirmPlugin} from 'vux'
 Vue.use(ConfirmPlugin)
 
+import  { AlertPlugin } from 'vux'
+Vue.use(AlertPlugin)
+
+
 import './assets/less/main.less'
 import './assets/less/public.less'
 

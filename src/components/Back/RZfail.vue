@@ -8,7 +8,7 @@
         <p class="dec">{{RZfail}}</p>
       </div>
       <div class="btn">
-        <button @click="goRZ">重试</button>
+        <router-link to="certification" class="button">重试</router-link>
       </div>
 
     </div>
@@ -55,7 +55,8 @@
     }
     .btn {
       padding: 0 .3rem;
-      button {
+      .button {
+        display: block;
         width: 100%;
         background: rgba(74, 144, 226, 1);
         border-radius: .1rem;
@@ -64,6 +65,7 @@
         line-height: .5rem;
         color: #FFF;
         padding: .19rem 0;
+        text-align: center;
       }
     }
 

@@ -46,15 +46,17 @@
       </Group>
     </div>
 
-    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="70%" :time="3000"></toast>
-    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="65%" :time="3000"></toast>
+    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="70%"
+           :time="3000"></toast>
+    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="65%"
+           :time="3000"></toast>
   </div>
 </template>
 
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast, PopupPicker} from 'vux'
+  import {CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast, PopupPicker, Alert} from 'vux'
   //  function getIP(cb, ipId) {
   //    axios.get('network/listPublicIpById.do', {
   //      params: {
@@ -78,7 +80,8 @@
       XSwitch,
       Confirm,
       Toast,
-      PopupPicker
+      PopupPicker,
+      Alert
     },
     beforeRouteEnter(to, from, next){
       axios.get('network/listPublicIpById.do', {
@@ -99,6 +102,7 @@
     data (){
       window.scrollTo(0, 0);
       return {
+        show: true,
         value6: [],
         list: [['A', 'B', 'C']],
         details: {},
@@ -122,7 +126,7 @@
         } else {
           this.$vux.confirm.show({
             title: '解绑资源',
-            content: '确认解绑该IP?',
+            content: '<p style="text-align: center;">确认解绑该IP?</p>',
             onConfirm: () => {
               var url = ''
               var params = {}
@@ -134,7 +138,7 @@
                     publicIp: details.publicip,
                     natGatewayId: details.natgatewayid
                   }
-                  break
+                  break;
                 case 3 :
                   url = 'network/natGatewayUnboundTargetIP.do'
                   params = {
@@ -142,7 +146,7 @@
                     publicIp: details.publicip,
                     natGatewayId: details.natgatewayid
                   }
-                  break
+                  break;
                 case 1 :
                   url = 'network/disableStaticNat.do'
                   params = {
@@ -169,33 +173,34 @@
             }
           })
         }
-
       },
-      // 释放弹性IP
+      // 确认释放弹性IP
       resetIP(id){
-        this.$vux.confirm.show({
-          title: '确认',
-          content: '您正将“' + this.details.publicip + '”移入回收站，移入回收站之后我们将为您保留两个小时，两小时后我们将自动清空回收站中实时计费资源。',
-          onConfirm: () => {
-            axios.get('network/delPublic.do', {
-              params: {
-                id,
-                zoneId: $store.state.zone.zoneid
-              }
-            }).then(response => {
-              if (response.status != 200 || response.data.status != 1) {
-                this.showError = true
-                this.messageError = response.data.message
-              } else {
-                this.$router.push('/ruicloud/belasticip')
-                this.showOK = true
-                this.messageOK = response.data.message
-              }
-            })
-          }
-        })
+        if (id != null) {
+          this.$vux.confirm.show({
+            title: '确认',
+            content: '您正将“' + this.details.publicip + '”移入回收站，移入回收站之后我们将为您保留两个小时，两小时后我们将自动清空回收站中实时计费资源。',
+            onConfirm: () => {
+              axios.get('network/delPublic.do', {
+                params: {
+                  id,
+                  zoneId: $store.state.zone.zoneid
+                }
+              }).then(response => {
+                if (response.status == 200 && response.data.status == 1) {
+                  this.$router.push('/ruicloud/belasticip')
+                  this.showOK = true
+                  this.messageOK = response.data.message
+                } else {
+                  this.showError = true
+                  this.messageError = response.data.message
+                }
+              })
+            }
+          })
+        }
       }
-      },
+    },
 
   }
 </script>

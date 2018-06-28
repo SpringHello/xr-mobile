@@ -96,12 +96,12 @@
           title: '磁盘卸载',
           content: '是否将确认将硬盘（' + details.diskname + '）从主机（' + details.mountonname + '）卸载，卸载之后该主机将失去该硬盘所存信息',
           onConfirm: () => {
-            this.unloadOk()
+            this._unloadOk()
           }
         })
       },
       /* 确认卸载磁盘 */
-      unloadOk() {
+      _unloadOk() {
         this.details.status = 4
         axios.get('Disk/detachVolume.do', {
           params: {
