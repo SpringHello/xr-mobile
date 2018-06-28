@@ -28,15 +28,17 @@ import ddos from '@/components/App/Products/DDOS'
 
 import Workorder from '@/components/Back/Workorder'
 import Bhost from '@/components/Back/Bhost'//
-import Bdisk from '@/components/Back/Bdisk'//
-import Belasticip from '@/components/Back/BelasticIP'//
-import Bmirror from '@/components/Back/Bmirror'//
-import Bbalance from '@/components/Back/Bbalance'//
-import Bnat from '@/components/Back/Bnat'//
-import certification from '@/components/Back/Certification'//
-import idcard from '@/components/Back/Idcard'//
-import RZsuccess from '@/components/Back/RZsuccess'//
-import RZfail from '@/components/Back/RZfail'//
+import Bdisk from '@/components/Back/Bdisk'
+import Belasticip from '@/components/Back/BelasticIP'
+import Bmirror from '@/components/Back/Bmirror'
+import Bbalance from '@/components/Back/Bbalance'
+import Bnat from '@/components/Back/Bnat'
+import certification from '@/components/Back/Certification'
+import idcard from '@/components/Back/Idcard'
+import RZsuccess from '@/components/Back/RZsuccess'
+import RZfail from '@/components/Back/RZfail'
+import Setting from '@/components/Back/Setting'
+import ChangePassworld from '@/components/Back/ChangePassworld'
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -75,6 +77,8 @@ export default new Router({
         {path: '/ruicloud/idcard', name: 'idcard', component: idcard},
         {path: '/ruicloud/RZsuccess', name: 'RZsuccess', component: RZsuccess},
         {path: '/ruicloud/RZfail', name: 'RZfail', component: RZfail},
+        {path: '/ruicloud/Setting', name: 'RZfail', component: Setting},
+        {path: '/ruicloud/ChangePassworld', name: 'ChangePassworld', component: ChangePassworld},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},

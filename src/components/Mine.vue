@@ -42,7 +42,7 @@
             <p>实名认证</p>
           </div>
         </div>
-        <div class="s-item" @click="onOpen">
+        <div class="s-item" @click="setUP">
           <div>
             <img src="../assets/img/mine/shezhi.png">
             <p>安全设置</p>
@@ -191,6 +191,14 @@
             this.$router.push('certification')
           }
         } else{
+          this.$router.push('login')
+        }
+      },
+      //安全设置
+      setUP(){
+        if ($store.state.userInfo) {
+          this.$router.push('setting')
+        } else {
           this.$router.push('login')
         }
       },
