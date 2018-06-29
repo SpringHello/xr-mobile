@@ -6,7 +6,7 @@
         <img src="../../assets/img/back/unbound.png" slot="icon">
       </cell>
 
-      <cell title="手机绑定" value="修改" :inline-desc="setup.boundPhone" is-link v-if="users.phone" link="ChangePhone">
+      <cell title="手机绑定" value="修改" :inline-desc="setup.boundPhone" is-link v-if="users.phone" link="home">
         <img src="../../assets/img/back/bound.png" slot="icon">
       </cell>
       <cell title="手机绑定" value="绑定" :inline-desc="setup.unboundPhone" is-link v-else>
@@ -16,7 +16,7 @@
       <cell title="邮箱绑定" value="修改" :inline-desc="setup.boundEmail" is-link v-if="users.loginname">
         <img src="../../assets/img/back/bound.png" slot="icon">
       </cell>
-      <cell title="邮箱绑定" value="绑定" :inline-desc="setup.unboundEmail" is-link v-else>
+      <cell title="邮箱绑定" value="绑定" :inline-desc="setup.unboundEmail" is-link v-else link="home">
         <img src="../../assets/img/back/unbound.png" slot="icon">
       </cell>
 

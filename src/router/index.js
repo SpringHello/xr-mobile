@@ -39,6 +39,7 @@ import idcard from '@/components/Back/Idcard'
 import RZsuccess from '@/components/Back/RZsuccess'
 import RZfail from '@/components/Back/RZfail'
 import Setting from '@/components/Back/Setting'
+import BoundEmail from '@/components/Back/BoundEmail'
 import ChangePassworld from '@/components/Back/ChangePassworld'
 import ChangePhone from '@/components/Back/ChangePhone'
 import feedback from '@/components/Back/Feedback'//意见反馈
@@ -80,7 +81,8 @@ export default new Router({
         {path: '/ruicloud/idcard', name: 'idcard', component: idcard},
         {path: '/ruicloud/RZsuccess', name: 'RZsuccess', component: RZsuccess},
         {path: '/ruicloud/RZfail', name: 'RZfail', component: RZfail},
-        {path: '/ruicloud/Setting', name: 'RZfail', component: Setting},
+        {path: '/ruicloud/Setting', name: 'Setting', component: Setting},
+        {path: '/ruicloud/BoundEmail', name: 'BoundEmail', component: BoundEmail},
         {path: '/ruicloud/ChangePassworld', name: 'ChangePassworld', component: ChangePassworld},
         {path: '/ruicloud/ChangePhone', name: 'ChangePhone', component: ChangePhone},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
