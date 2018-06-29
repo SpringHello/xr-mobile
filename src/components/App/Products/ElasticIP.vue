@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -69,7 +69,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -102,12 +102,12 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-duligongwangipziyuan',
             title: '独立公网IP资源',
             desc: '为用户提供一个单独公网IP和一定速率带宽，实现与互联网的互通。公网IP可与任意虚拟机实例、NAT网关、负载均衡、VPN网关等实例绑定或解绑，并支持带宽速率的提升和降低，灵活匹配用户不同业务场景。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuogoumai',
             title: '按需购买，使用灵活',
             desc: '弹性公网IP支持丰富的付费方案，在满足用户业务需求的前提下帮助用户节约成本。实时开通，配置变更实时生效。'
           }
@@ -124,17 +124,17 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-shiyonglinghuo',
             title: '使用灵活',
             desc: '用户可以通过NAT网关、负载均衡、VPN等功能实现IP地址灵活的使用。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-dichengben',
             title: '低成本',
             desc: '用户按需购买，灵活计费，同时支持多IP共享带宽，有效的降低用户网络使用的费用。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-youzhidegongwangIPdizhi',
             title: '优质的公网IP地址',
             desc: '使用联通、电信两大运营商的公网地址，可以根据用户的需求分配公网IP资源。'
           }
@@ -211,11 +211,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -334,11 +329,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

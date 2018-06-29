@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -69,7 +69,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -102,12 +102,12 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-dianduidianVPN',
             title: '点对点VPN（site2siteVPN）',
             desc: '基于Internet，在客户本地数据中心、第三方公有云（第三方需支持VPC和VPN）和新睿云虚拟私有云（VPC）之间建立的起IPsec加密通信隧道。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-dianduiduoVPN',
             title: '点对多VPN（Remote VPN）',
             desc: '基于Interne，在客户本地主机/第三方公有云主机与新睿云虚拟私有云（VPC）之间建立的起IPsec加密通信隧道。'
           }
@@ -124,22 +124,22 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-wufenglianjie',
             title: '无缝连接',
             desc: '将用户本地数据中心与云上VPC互联，业务快速扩展上云，实现混合云部署。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaoanquan',
             title: '高安全',
             desc: '基于IKE和IPsec对传输数据加密，提供了电信级的高可靠性机制。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-chengbendi',
             title: '成本低',
             desc: '利用Internet构建IPsec加密通道，费用低廉。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-kaitongkuai',
             title: '开通快',
             desc: '对用户本地IDC的VPN设备进行简单配置即可完成对接，即开即用，部署快速，实时生效。'
           }
@@ -216,11 +216,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -339,11 +334,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

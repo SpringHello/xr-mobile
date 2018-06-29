@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -69,7 +69,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -102,17 +102,17 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-SNAT',
             title: 'SNAT',
             desc: 'NAT网关提供SNAT功能，为VPC内无公网IP的主机实例提供访问互联网的代理服务。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-DNAT',
             title: 'DNAT',
             desc: 'NAT网关支持DNAT功能，将NAT网关上的公网IP映射给ECS实例使用，使主机实例能够提供互联网服务。DNAT支持端口映射。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gongxiangkuandai',
             title: '共享带宽',
             desc: '多IP共享公网带宽，对于应用间存在流量错峰效应的业务，可有效降低带宽成本。'
           }
@@ -129,22 +129,22 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuoyiyongdezhuanfanengli',
             title: '灵活易用的转发能力',
             desc: 'NAT网关提供SNAT和DNAT功能。无需用户自己搭建，功能灵活、简单易用、稳定可靠。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaoxingneng',
             title: '高性能',
             desc: 'NAT网关采用SDN技术，支持10Gbps级别的转发能力，为大规模公网应用提供支撑。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaokeyong',
             title: '高可用',
             desc: 'NAT网关采用NFV技术，支持本地再生功能，可用性高。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-anxugoumai',
             title: '按需购买',
             desc: 'NAT网关的规格、带宽和公网IP，均可以随时升降，轻松应对业务变化。'
           }
@@ -221,11 +221,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -344,11 +339,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

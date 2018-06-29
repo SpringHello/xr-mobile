@@ -6,7 +6,7 @@
         <img src="../../assets/img/back/unbound.png" slot="icon">
       </cell>
 
-      <cell title="手机绑定" value="修改" :inline-desc="setup.boundPhone" is-link v-if="users.phone">
+      <cell title="手机绑定" value="修改" :inline-desc="setup.boundPhone" is-link v-if="users.phone" link="ChangePhone">
         <img src="../../assets/img/back/bound.png" slot="icon">
       </cell>
       <cell title="手机绑定" value="绑定" :inline-desc="setup.unboundPhone" is-link v-else>

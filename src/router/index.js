@@ -39,6 +39,7 @@ import RZsuccess from '@/components/Back/RZsuccess'
 import RZfail from '@/components/Back/RZfail'
 import Setting from '@/components/Back/Setting'
 import ChangePassworld from '@/components/Back/ChangePassworld'
+import ChangePhone from '@/components/Back/ChangePhone'
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -79,6 +80,7 @@ export default new Router({
         {path: '/ruicloud/RZfail', name: 'RZfail', component: RZfail},
         {path: '/ruicloud/Setting', name: 'RZfail', component: Setting},
         {path: '/ruicloud/ChangePassworld', name: 'ChangePassworld', component: ChangePassworld},
+        {path: '/ruicloud/ChangePhone', name: 'ChangePhone', component: ChangePhone},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},

@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -54,7 +54,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -87,17 +87,17 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-duankoubaohu',
             title: '端口保护',
             desc: '用户根据需要可建立访问规则对端口和协议进行进/出站控制，最大程度保障主机安全。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-shujubeifen1',
             title: '分层管理',
             desc: '同一VPC下的不同子网可以通过设置防火墙规则实现网络的分层管理。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuopeizhi1',
             title: '灵活配置',
             desc: '虚拟防火墙策略可以设置不同的优先级，实现规则的精确匹配，配置即时生效，使用灵活方便。'
           },
@@ -109,23 +109,23 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaoxingneng',
             title: '高性能防护',
             desc: '防火墙采用高效的NFV技术，独立于主机存在，性能优异，资源占用低，防护更安全。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-jianjieyunwei',
             title: '运维简单',
             desc: '虚拟防火墙界面友好，操作简单，配置即时生效。'
           }
         ],
       }
     },
-    methods:{
+    methods: {
       buy(){
-        if ($store.state.userInfo){
+        if ($store.state.userInfo) {
           this.$router.push('console')
-        }else{
+        } else {
           this.$router.push('login')
         }
       }
@@ -135,7 +135,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
+    background: linear-gradient(90deg, rgba(74, 136, 254, 1), rgba(56, 125, 255, 1));
     .logo-wrapper {
       display: flex;
       align-items: center;
@@ -151,7 +151,7 @@
           color: rgba(255, 255, 255, 1);
         }
       }
-      img{
+      img {
         width: 3.01rem;
       }
     }
@@ -191,11 +191,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -247,7 +242,7 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .3rem;
         .describe {
-          img{
+          img {
             width: 4.71rem;
             display: block;
             margin: 0 auto;
@@ -314,11 +309,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

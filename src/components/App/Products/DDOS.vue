@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -79,7 +79,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -111,10 +111,10 @@
           desc: '新睿云通过专用硬件，针对DDoS攻击，为用户提供高防IP服务。高防IP为用户已备案的域名提供最高40Gbps的DDoS高级防护。用户在遭遇大流量DDoS攻击的情况下，可以在配置高防IP后将攻击流量引至高防IP，确保源站稳定可用。',
         },
         features: [
-          {img: require('../../../assets/img/host/featrue.png'), title: 'DDOS流量清洗', desc: '支持畸形报文过滤，对SYN flood、ACK flood、UDP flood、ICMP flood、RST flood等攻击类型进行清洗。'},
-          {img: require('../../../assets/img/host/featrue.png'), title: '基于应用层的基础防护', desc: '有效抵御HTTP get/post flood攻击；CC 攻击；HTTP slow header/post攻击等。'},
-          {img: require('../../../assets/img/host/featrue.png'), title: '基于网络传输的攻击防护', desc: '有效抵御SYN flood攻击；ACK flood攻击；FIN/RST flood攻击；UDP flood攻击；TCP连接耗尽攻击等。'},
-          {img: require('../../../assets/img/host/featrue.png'), title: '灵活管理', desc: '可以使用界面进行管理配置，操作简单易用。'}
+          {img: 'icon-DDOSliuliangqingxi', title: 'DDOS流量清洗', desc: '支持畸形报文过滤，对SYN flood、ACK flood、UDP flood、ICMP flood、RST flood等攻击类型进行清洗。'},
+          {img: 'icon-jiyuyingyongcengdejichufanghu', title: '基于应用层的基础防护', desc: '有效抵御HTTP get/post flood攻击；CC 攻击；HTTP slow header/post攻击等。'},
+          {img: 'icon-jiyuwangluochuanshudegongjifanghu', title: '基于网络传输的攻击防护', desc: '有效抵御SYN flood攻击；ACK flood攻击；FIN/RST flood攻击；UDP flood攻击；TCP连接耗尽攻击等。'},
+          {img: 'icon-linghuoguanli', title: '灵活管理', desc: '可以使用界面进行管理配置，操作简单易用。'}
         ],
         stageInfo: {
           showYY: true,
@@ -132,17 +132,17 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaoxingnengyingjian',
             title: '高品质硬件',
             desc: '采用华为最新一代DDoS防护硬件，高效稳定。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-lingbushuchengben',
             title: '零部署成本',
             desc: '无需更改网络拓扑，不需要采购设备，只需使用高防IP。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-hailiangqingxinengli',
             title: '海量清洗能力',
             desc: '可防御40G的DDoS攻击流量，支持升级到100G。'
           }
@@ -220,11 +220,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -343,11 +338,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

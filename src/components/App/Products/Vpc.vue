@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -79,7 +79,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -112,32 +112,32 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-wangluogeli',
             title: '网络隔离',
             desc: '利用Vlan/VxLAN协议使得VPC之间严格的逻辑隔离，实现租户间100%隔离。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: "icon-zidingyiwangluo",
             title: '自定义网络',
             desc: '可自定义子网、IP地址段或DHCP等服务，也可自由组合。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-fangwenkongzhi',
             title: '访问控制',
             desc: '通过设置防火墙ACL策略，实现自定义端口和协议的控制。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gongwangjieru',
             title: '公网接入',
             desc: '绑定公网IP到同一可用区下VPC内的云产品实例上，实现公网互通及相关网络功能。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-SNAT',
             title: 'NAT网关',
             desc: '在VPC环境下构建一个公网流量的出入口，通过自定义SourceNAT、DestinationNAT、StaticNAT规则灵活使用网络资源，同时支持多IP共享公网带宽。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-VPNwangguan',
             title: 'VPN网关',
             desc: 'VPN网关是通过互联网，采用IPsec加密技术，实现用户本地数据中心、用户办公网络与新睿云VPC之间安全可靠的连接，使用便捷灵活，即开即用，打造可伸缩的混合云环境。'
           }
@@ -158,27 +158,27 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-zuhujiangeli',
             title: '租户间100%隔离',
             desc: '利用Vlan/VxLAN协议使得VPC之间严格的逻辑隔离，实现租户间100%。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-yonghuzidingyi',
             title: '用户100%自定义',
             desc: '可自定义子网、IP地址段或DHCP等服务，也可自由组合。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-qiangdadeNATnengli',
             title: '强大的NAT能力',
             desc: '自定义Source NAT，Static NAT，Destination NAT，保证网络能力的灵活性。同时支持多IP共享公网带宽。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-qiangdadesiyouwangguan',
             title: '强大的私有网关',
             desc: '可以使用私有IP地址实现两个VPC之间的互通。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-hunheyunjiagou',
             title: '支持混合云架构',
             desc: '提供多种VPN，支持混合云和跨云能力。'
           }
@@ -255,11 +255,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -378,11 +373,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

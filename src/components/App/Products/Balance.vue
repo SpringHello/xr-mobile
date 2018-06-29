@@ -20,7 +20,7 @@
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
@@ -79,7 +79,7 @@
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
-          <img :src="item.img">
+          <i class="iconfont" :class="item.img"></i>
           <div>
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
@@ -112,22 +112,22 @@
         },
         features: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-duoxieyizhichi',
             title: '多协议支持',
             desc: '支持互联网及内网流量的均衡服务，提供4层（TCP、UDP协议）和7层（HTTP、HTTPS协议）监听器。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gaokeyong1',
             title: '高可用',
             desc: '可用多种方法对后端服务器进行健康检查，自动屏蔽异常实例，确保业务可用性。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuopeizhi1',
             title: '灵活配置',
             desc: '可用多种方法对后端服务器进行健康检查，自动屏蔽异常实例，确保业务可用性。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-gongwangfangwen',
             title: '公网访问',
             desc: '通过绑定公网IP，可实现负载均衡的公网服务能力，也可以随时解绑公网IP，让负载均衡仅对内网流量进行均衡。'
           }
@@ -148,22 +148,22 @@
         },
         advantages: [
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-linghuotiaodu',
             title: '灵活调度',
             desc: '支持多种调度算法，包括：轮询，源算法，最小连接数。用户可根据自身实际情况选择更适合的调度算法。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-jiankangjiancha',
             title: '健康检查',
             desc: '定期检查后端运行状况，如有发现宕机，则不再将流量转发到该后端，消除单点故障提升应用系统的可用性。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-daliuliangxuqiu',
             title: '大流量需求',
             desc: '支持最高10万并发连接，满足用户的大流量需求；支持用户使用4层（TCP协议）或7层（HTTP协议、HTTPS协议）的负载分发。'
           },
           {
-            img: require('../../../assets/img/host/featrue.png'),
+            img: 'icon-huihuabaochi',
             title: '会话保持',
             desc: '基于源IP、HTTP Cookie、Application Cookie 将同一客户端发送的多个请求。分发给同一后端服务器处理，保持请求处理逻辑的可持续性。'
           }
@@ -241,11 +241,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -364,11 +359,6 @@
         display: flex;
         padding: .3rem;
         border-bottom: 1px solid #D9D9D9;
-        img {
-          width: .8rem;
-          height: .8rem;
-          margin-right: .25rem;
-        }
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
