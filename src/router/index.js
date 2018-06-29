@@ -34,6 +34,7 @@ import Bmirror from '@/components/Back/Bmirror'
 import Bbalance from '@/components/Back/Bbalance'
 import Bnat from '@/components/Back/Bnat'
 import certification from '@/components/Back/Certification'
+import CertficaOK from '@/components/Back/CertficaOK'
 import idcard from '@/components/Back/Idcard'
 import RZsuccess from '@/components/Back/RZsuccess'
 import RZfail from '@/components/Back/RZfail'
@@ -75,6 +76,7 @@ export default new Router({
         {path: '/ruicloud/Bnat', name: 'Bnat', component: Bnat},
         {path: '/ruicloud/feedback', name: 'feedback', component: feedback},
         {path: '/ruicloud/certification', name: 'certification', component: certification},
+        {path: '/ruicloud/CertficaOK', name: 'CertficaOK', component: CertficaOK},
         {path: '/ruicloud/idcard', name: 'idcard', component: idcard},
         {path: '/ruicloud/RZsuccess', name: 'RZsuccess', component: RZsuccess},
         {path: '/ruicloud/RZfail', name: 'RZfail', component: RZfail},

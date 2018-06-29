@@ -184,13 +184,14 @@
       },
       //实名认证
       approve(){
-        if($store.state.userInfo){
-          if (this.authInfo.authtype == 0 && this.authInfo.checkstatus == 2) {
-            this.$vux.toast.text('认证中', 'middle')
+        if ($store.state.userInfo) {
+          if ($store.state.authInfo) {
+            this.$router.push('CertficaOK')
           } else {
             this.$router.push('certification')
           }
-        } else{
+
+        } else {
           this.$router.push('login')
         }
       },

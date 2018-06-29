@@ -1,6 +1,5 @@
 <template>
   <div style="background: #FFF;">
-    <!--v-if="RZsuccess"-->
     <div id="success">
       <x-header>身份证号验证</x-header>
       <div class="success">
@@ -9,7 +8,7 @@
         <p class="dec">实名认证操作成功</p>
       </div>
       <div class="btn">
-        <router-link to="certification" class="button">完成</router-link>
+        <router-link to="CertficaOK" class="button">完成</router-link>
       </div>
     </div>
   </div>

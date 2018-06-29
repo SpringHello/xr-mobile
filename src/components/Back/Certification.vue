@@ -1,37 +1,27 @@
 <template>
   <div>
-    <div v-if="authInfo.authtype == 1 && authInfo.checkstatus == 0">
-      <x-header>身份证号验证</x-header>
-      <p class="title"> <icon type="success"></icon><span >您已通过实名认证</span></p>
-      <group>
-        <cell title="姓名" :value="authInfo.name" ></cell>
-        <cell title="身份证号" :value="authInfo.personalnumber" ></cell>
-        <cell title="手机号码" :value="authInfo.phone" ></cell>
-      </group>
+    <x-header>实名认证</x-header>
+    <div class="desc">
+      <img src="../../assets/img/back/yjfk.png">
+      <p>
+        根据《中华人民共和国网络安全法》等网络安全相关的法律法规规定，及按网监，公安等有关监管单位要求，云计算资源用户须完成用户实名认证才能使用云服务。请您认真填写相关实名认证信息，完成实名认证申请。
+      </p>
     </div>
-    <div v-else>
-      <x-header>实名认证</x-header>
-      <div class="desc">
-        <img src="../../assets/img/back/yjfk.png">
-        <p>
-          根据《中华人民共和国网络安全法》等网络安全相关的法律法规规定，及按网监，公安等有关监管单位要求，云计算资源用户须完成用户实名认证才能使用云服务。请您认真填写相关实名认证信息，完成实名认证申请。
-        </p>
+    <div class="progress">
+      <div class="progress-title">
+        <h6>身份证号验证</h6>
+        <p>实时审核，无需等待</p>
       </div>
-      <div class="progress">
-        <div class="progress-title">
-          <h6>身份证号验证</h6>
-          <p>实时审核，无需等待</p>
+      <div class="progress-step">
+        <div v-for="(item,index) in steps" :key="index">
+          <p class="num">{{item.num}}</p>
+          <p class="des">{{item.desc}}</p>
         </div>
-        <div class="progress-step">
-            <div v-for="(item,index) in steps" :key="index">
-              <p class="num">{{item.num}}</p>
-              <p class="des">{{item.desc}}</p>
-            </div>
-        </div>
-        <button @click="goCard">立即认证</button>
       </div>
+      <button @click="goCard">立即认证</button>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -66,16 +56,6 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-  .title{
-    text-align: center;
-    span{
-      vertical-align: middle;
-      display: inline-block;
-      font-size:.36rem;
-      color:rgba(51,51,51,1);
-      padding-left: .24rem;
-    }
-  }
 
   .desc{
     background:rgba(247,251,255,1);
