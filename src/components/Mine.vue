@@ -63,7 +63,7 @@
             <p>当月消费</p>
           </div>
         </div>
-        <div class="fp-item" @click="onOpen">
+        <div class="fp-item" @click="invoice">
           <div>
             <img src="../assets/img/mine/fapiao.png">
             <p>发票管理</p>
@@ -199,6 +199,14 @@
       setUP(){
         if ($store.state.userInfo) {
           this.$router.push('setting')
+        } else {
+          this.$router.push('login')
+        }
+      },
+      //发票管理
+      invoice(){
+        if ($store.state.userInfo) {
+          this.$router.push('invoice')
         } else {
           this.$router.push('login')
         }

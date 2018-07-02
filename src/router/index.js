@@ -39,8 +39,14 @@ import idcard from '@/components/Back/Idcard'
 import RZsuccess from '@/components/Back/RZsuccess'
 import RZfail from '@/components/Back/RZfail'
 import Setting from '@/components/Back/Setting'
+import PhoneVali from '@/components/Back/PhoneVali'
+import EmailVali from '@/components/Back/EmailVali'
+import ResetPhone from '@/components/Back/ResetPhone'
+import ResetEmail from '@/components/Back/ResetEmail'
 import BoundEmail from '@/components/Back/BoundEmail'
 import ChangePassworld from '@/components/Back/ChangePassworld'
+import Invoice from '@/components/Back/Invoice'//发票管理
+import Applyinvoice from '@/components/Back/Applyinvoice'
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -81,8 +87,14 @@ export default new Router({
         {path: '/ruicloud/RZsuccess', name: 'RZsuccess', component: RZsuccess},
         {path: '/ruicloud/RZfail', name: 'RZfail', component: RZfail},
         {path: '/ruicloud/Setting', name: 'Setting', component: Setting},
+        {path: '/ruicloud/phonevali', name: 'PhoneVali', component: PhoneVali},
+        {path: '/ruicloud/emailvali', name: 'EmailVali', component: EmailVali},
+        {path: '/ruicloud/resetPhone', name: 'ResetPhone', component: ResetPhone},
+        {path: '/ruicloud/resetEmail', name: 'ResetEmail', component: ResetEmail},
         {path: '/ruicloud/BoundEmail', name: 'BoundEmail', component: BoundEmail},
         {path: '/ruicloud/ChangePassworld', name: 'ChangePassworld', component: ChangePassworld},
+        {path: '/ruicloud/invoice', name: 'Invoice', component: Invoice},
+        {path: '/ruicloud/applyinvoice', name: 'Applyinvoice', component: Applyinvoice},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
