@@ -11,46 +11,62 @@
     </div>
 
     <div>
-      <group title="发票类型" @on-change="change">
+      <group title="发票类型">
         <radio :options="Invoices" v-model="value"></radio>
       </group>
     </div>
 
 
     <div v-if="value=='增值税普通发票'">
-      <group :title="money" label-width="6em" label-align="right" label-margin-right=".45rem">
-        <x-input title="开票金额" placeholder="请输入开票金额"></x-input>
-        <x-input title="发票抬头" placeholder="请输入发票抬头"></x-input>
-        <x-input title="纳税人识别码" placeholder="请输入纳税人识别码"></x-input>
-        <x-input title="收货地址" placeholder="请输入收货地址"></x-input>
+      <p class="money">实际可开发票金额：<span>¥{{invoice}}</span></p>
+      <group label-width="6em" label-align="right" label-margin-right=".45rem">
+        <x-input title="开票金额" placeholder="请输入开票金额" v-model="Froms.pmoney" required ref="from1"></x-input>
+        <x-input title="发票抬头" placeholder="请输入发票抬头" v-model="Froms.ptitle" required ref="from1"></x-input>
+        <x-input title="纳税人识别码" placeholder="请输入纳税人识别码" v-model="Froms.code" required ref="from1"></x-input>
+        <x-input title="收件地址" placeholder="请输入收货地址" v-model="Froms.paddress" required ref="from1"></x-input>
+        <x-input title="收件人" placeholder="请输入收件人名字" v-model="Froms.pname" required ref="from1"></x-input>
+        <x-input title="联系电话" placeholder="请输入联系电话" v-model="Froms.pphone" required ref="from1"></x-input>
       </group>
+
+
+      <div class="btn">
+        <x-button type="primary" @click.native="invoiceMake">确认开票</x-button>
+      </div>
+
     </div>
 
     <div v-else class="middle">
-      <group :title="money">
-        <x-input title="开票金额" placeholder="请输入开票金额"></x-input>
-        <x-input title="发票抬头" placeholder="请输入发票抬头"></x-input>
+      <p class="money">实际可开发票金额：<span>¥{{invoice}}</span></p>
+      <group>
+        <x-input title="开票金额" placeholder="请输入开票金额" v-model="Froms.pmoney" required ref="from2"></x-input>
+        <x-input title="发票抬头" placeholder="请输入发票抬头" v-model="Froms.ptitle" required ref="from2"></x-input>
       </group>
-      <!--v-if="details==null"-->
-      <p >您需要通过增票资质认证才能开具增值税专用 <span>点击认证></span></p>
-      <Group>
+      <Group v-if='details!=null'>
         <cell title="发票信息"></cell>
         <Group label-width="6em" label-align="right" label-margin-right=".45rem" class="details">
-          <cell title="单位名称" value-align="left" :value="details.companyname" ></cell>
-          <cell title="注册地址" value-align="left" :value="details.address" ></cell>
-          <cell title="注册电话" value-align="left" :value="details.phone" ></cell>
-          <cell title="纳税人识别码" value-align="left" :value="details.identicode" ></cell>
-          <cell title="开户银行" value-align="left" :value="details.bankname" ></cell>
-          <cell title="银行账户" value-align="left" :value="details.banknum" ></cell>
+          <cell title="单位名称" value-align="left" :value="details.companyname"></cell>
+          <cell title="注册地址" value-align="left" :value="details.address"></cell>
+          <cell title="注册电话" value-align="left" :value="details.phone"></cell>
+          <cell title="纳税人识别码" value-align="left" :value="details.identicode"></cell>
+          <cell title="开户银行" value-align="left" :value="details.bankname"></cell>
+          <cell title="银行账户" value-align="left" :value="details.banknum"></cell>
         </Group>
       </Group>
+      <p v-else class="ticket">您需要通过增票资质认证才能开具增值税专用
+        <router-link to="ticketVali">点击认证></router-link>
+      </p>
+
       <group>
-        <x-input title="收货地址" placeholder="请输入收货地址"></x-input>
+        <x-input title="收件地址" placeholder="请输入收货地址" v-model="Froms.paddress" required ref="from2"></x-input>
+        <x-input title="收件人" placeholder="请输入收件人名字" v-model="Froms.pname" required ref="from2"></x-input>
+        <x-input title="联系电话" placeholder="请输入联系电话" v-model="Froms.pphone" required ref="from2"></x-input>
       </group>
+
+      <div class="btn">
+        <x-button type="primary" @click.native="invoiceMake"  :disabled="details==null">确认开票</x-button>
+      </div>
     </div>
 
-
-    <button class="btns">确认开票</button>
 
   </div>
 </template>
@@ -58,21 +74,24 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Group, Cell, XHeader, XInput, Radio} from 'vux'
+  import {Group, Cell, XHeader, XInput, Radio, XButton} from 'vux'
   export default{
     components: {
       Group,
       Cell,
       XHeader,
       XInput,
-      Radio
+      Radio,
+      XButton
     },
     beforeRouteEnter(to, from, next){
-      axios.get('user/getExamine.do', {
+      var detail = axios.get('user/getExamine.do', {
         zoneId: $store.state.zone.zoneid
-      }).then(response => {
+      })
+      var invoice = axios.get('user/invoiceLimit.do')
+      Promise.all([detail, invoice]).then(values => {
         next(vm => {
-         vm.details=response.data.result.result
+          vm.setData(values)
         })
       })
     },
@@ -82,12 +101,74 @@
         //发票类型
         Invoices: ['增值税普通发票', '增值税专用发票'],
         value: '增值税普通发票',
-        money: `实际可开发票金额：<span style="color:#E6001B;">¥10000.35</span>`,
+        invoice: '',//实际可开票金额
+        //开票表单
+        Froms: {
+          pmoney: '',
+          ptitle: '',
+          pcode: '',
+          paddress: '',
+          pname: '',
+          pphone: ''
+        }
       }
     },
     methods: {
-      //发票类型选择
-      change(){
+      //获取数据
+      setData(values){
+        var response = values[0]
+        if (response.status == 200 && response.data.status == 1) {
+          this.details = response.data.result.result
+        }
+        var response = values[1]
+        if (response.status == 200 && response.data.status == 1) {
+          this.invoice = response.data.result.result
+        }
+      },
+      //确认开票
+      invoiceMake(){
+        if (this.Froms.pmoney > this.invoice || this.Froms.pmoney < 1000) {
+          this.$vux.toast.text('开票金额不能少于1000或者多于实际可开金额', 'middle')
+        }
+        if (this.value == '增值税普通发票') {
+          if (this.$refs.from1.valid) {
+            axios.post('user/applyInvoice.do', {
+              amount: this.Froms.pmoney,//开票金额
+              type: 0,//发票类型
+              title: this.Froms.ptitle,//发票抬头
+              recipients: this.Froms.pname, //收件人
+              address: this.Froms.paddress,//收件地址,
+              phone: this.Froms.pphone,//电话
+            }).then(response => {
+              if (response.status == 2 && response.data.status == 1) {
+                this.$router.push('invoice')
+                this.$vux.toast.text(response.data.message, 'middle')
+              } else {
+                this.$vux.toast.text(response.data.message, 'middle')
+              }
+            })
+          }
+
+        }
+        if (this.value == '增值税专用发票') {
+          if (this.$refs.from2.valid) {
+            axios.post('user/applyInvoice.do', {
+              amount: this.Froms.pmoney,//开票金额
+              type: 1,//发票类型
+              title: this.Froms.ptitle,//发票抬头
+              recipients: this.Froms.pname, //收件人
+              address: this.Froms.paddress,//收件地址,
+              phone: this.Froms.pphone,//电话
+            }).then(response => {
+              if (response.status == 2 && response.data.status == 1) {
+                this.$router.push('invoice')
+                this.$vux.toast.text(response.data.message, 'middle')
+              } else {
+                this.$vux.toast.text(response.data.message, 'middle')
+              }
+            })
+          }
+        }
 
       },
     },
@@ -113,30 +194,36 @@
     }
   }
 
+  .money {
+    padding: .15rem .3rem 0 .31rem;
+    font-size: .26rem;
+    color: rgba(178, 178, 178, 1);
+    line-height: .33rem;
+    span {
+      color: #E6001B;
+    }
+  }
+
   .middle {
-    p {
+    .ticket {
       padding: .15rem .3rem 0 .31rem;
-      font-size: .24rem;
+      font-size: .26rem;
       color: rgba(178, 178, 178, 1);
       line-height: .33rem;
-      span {
+      a {
         float: right;
         color: rgba(74, 144, 226, 1);
       }
     }
   }
 
-  .btns {
-    margin: 15% 5%;
-    width: 90%;
-    display: block;
-    background: rgba(74, 144, 226, 1);
-    border-radius: .1rem;
-    border: 1px solid rgba(71, 104, 177, 1);
-    font-size: .36rem;
-    line-height: .5rem;
-    color: #FFF;
-    padding: .19rem 0;
-    text-align: center;
+  .btn {
+    padding: 1.5rem .3rem;
+    .weui-btn_primary{
+      background: #4A90E2;
+    }
+    .weui-btn_primary:active{
+      background: #4A90E2;
+    }
   }
 </style>
