@@ -40,7 +40,8 @@
           <p class="unbound" @click="showUnbund(details)">解绑资源 <span class="span"></span></p>
         </div>
         <div v-else>
-          <popup-picker title="绑定资源" :data="list" v-model="value6" :columns="2" value-text-align="right" @on-show="showBound(details.vpcid)"></popup-picker>
+          <popup-picker title="绑定资源" :data="list" v-model="value6" :columns="3" value-text-align="right"
+                        @on-show="showBound()" show-name @on-change="Bounded"></popup-picker>
           <p class="unbound" @click="resetIP(details.id)">释放弹性IP <span class="span"></span></p>
         </div>
       </Group>
@@ -201,24 +202,73 @@
         }
       },
       //显示绑定资源
-      showBound(vpcid){
-          if(vpcid!=null){
-              axios.get('information/listVirtualMachines.do',{
-                params: {
-                  vpcId: vpcid,
-                  num: 0,
-                  zoneId: $store.state.zone.zoneid
-                }
-              }).then(response =>{
-                if (response.status == 200 && response.data.status == 1){
-                   let hostlists=[]
-                  response.data.result.open.list.forEach(item=>{
-                    hostlists.push({name:item.instancename,value:item.computerid,parent:'host'})
-                  })
-
-                }
+      showBound(){
+        if (this.details.status == 3) {
+          this.$vux.toast.text('绑定中', 'middle')
+        } else {
+          //获取绑定主机列表
+          axios.get('information/listVirtualMachines.do', {
+            params: {
+              vpcId: this.details.vpcid,
+              num: 0,
+              zoneId: $store.state.zone.zoneid
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              response.data.result.open.list.forEach(item => {
+                this.list.push({name: item.instancename, value: item.computerid, parent: 'host'})
               })
-          }
+            }
+          })
+          //获取绑定nata网关列表
+          axios.get('network/listNatGateway.do', {
+            params: {
+              vpcId: this.details.vpcid,
+              zoneId: $store.state.zone.zoneid
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              response.data.result.forEach(item => {
+                this.list.push({name: item.natname, value: (item.id).toString(), parent: 'NAT'})
+              })
+            }
+          })
+        }
+      },
+      //确认绑定
+      Bounded(key){
+        if (key[0] == 'host') {
+          axios.get('network/enableStaticNat.do', {
+            params: {
+              ipId: this.details.publicipid,
+              VMId: key[1],
+              zoneId: $store.state.zone.zoneid
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.$router.push('/ruicloud/belasticip')
+              this.$vux.toast.text(response.data.message, 'middle')
+            } else {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        }
+        else if (key[0] == 'NAT') {
+          axios.get('network/bindingElasticIP.do', {
+            params: {
+              publicIp: this.details.publicip,
+              natGatewayId: key[1],
+              zoneId: $store.state.zone.zoneid
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.$router.push('/ruicloud/belasticip')
+              this.$vux.toast.text(response.data.message, 'middle')
+            } else {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        }
       },
     },
 
