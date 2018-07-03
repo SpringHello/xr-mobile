@@ -235,16 +235,16 @@
         swiperList: [
           {
             url: 'javascript:',
-            img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vvsr72j20p00gogo2.jpg'
+            img:require('../assets/img/home/banner-1.png')
           },
           {
             url: 'javascript:',
-            img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw1k2wj20p00goq7n.jpg'
+            img:require('../assets/img/home/banner-2.png')
           },
           {
             url: 'javascript:',
-            img: 'https://static.vux.li/demo/5.jpg',
-            fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
+            img:require('../assets/img/home/banner-3.png'),
+           fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
           }
         ],
         // 走马灯下方介绍
@@ -370,7 +370,6 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-
   /*顶部介绍条*/
   .vux-header {
     background: linear-gradient(180deg, rgba(44, 45, 49, 1), rgba(16, 16, 19, 1));

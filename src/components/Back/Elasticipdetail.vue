@@ -40,7 +40,7 @@
           <p class="unbound" @click="showUnbund(details)">解绑资源 <span class="span"></span></p>
         </div>
         <div v-else>
-          <popup-picker title="绑定资源" :data="list" v-model="value6" value-text-align="right"></popup-picker>
+          <popup-picker title="绑定资源" :data="list" v-model="value6" :columns="2" value-text-align="right" @on-show="showBound(details.vpcid)"></popup-picker>
           <p class="unbound" @click="resetIP(details.id)">释放弹性IP <span class="span"></span></p>
         </div>
       </Group>
@@ -104,7 +104,7 @@
       return {
         show: true,
         value6: [],
-        list: [['A', 'B', 'C']],
+        list: [{name: '绑定云主机', value: 'host', parent: 0}, {name: '绑定NAT网关', value: 'NAT', parent: 0},],
         details: {},
         showOK: false,
         messageOK: '',
@@ -131,7 +131,7 @@
               var url = ''
               var params = {}
               switch (details.usetype) {
-                case 4 :
+                case 4:
                   url = 'network/unboundElasticIP.do'
                   params = {
                     zoneId: $store.state.zone.zoneid,
@@ -139,7 +139,7 @@
                     natGatewayId: details.natgatewayid
                   }
                   break;
-                case 3 :
+                case 3:
                   url = 'network/natGatewayUnboundTargetIP.do'
                   params = {
                     zoneId: $store.state.zone.zoneid,
@@ -147,7 +147,7 @@
                     natGatewayId: details.natgatewayid
                   }
                   break;
-                case 1 :
+                case 1:
                   url = 'network/disableStaticNat.do'
                   params = {
                     zoneId: $store.state.zone.zoneid,
@@ -157,19 +157,17 @@
               }
               details.status = 4
               axios.get(url, {params}).then(response => {
-//                let cb = (data) => {
-//                  this.setData(data)
-//                }
-//                getIP(cb, this.$route.params.ipId)
-                if (response.status == 200 && response.data.status == 1) {
-                  this.$router.push('/ruicloud/belasticip')
-                  this.showOK = true
-                  this.messageOK = response.data.message
-                } else {
-                  this.showError = true
-                  this.messageError = response.data.message
+                  if (response.status == 200 && response.data.status == 1) {
+                    this.$router.push('/ruicloud/belasticip')
+                    this.showOK = true
+                    this.messageOK = response.data.message
+                  }
+                  else {
+                    this.showError = true
+                    this.messageError = response.data.message
+                  }
                 }
-              })
+              )
             }
           })
         }
@@ -187,19 +185,41 @@
                   zoneId: $store.state.zone.zoneid
                 }
               }).then(response => {
-                if (response.status == 200 && response.data.status == 1) {
-                  this.$router.push('/ruicloud/belasticip')
-                  this.showOK = true
-                  this.messageOK = response.data.message
-                } else {
-                  this.showError = true
-                  this.messageError = response.data.message
+                  if (response.status == 200 && response.data.status == 1) {
+                    this.$router.push('/ruicloud/belasticip')
+                    this.showOK = true
+                    this.messageOK = response.data.message
+                  }
+                  else {
+                    this.showError = true
+                    this.messageError = response.data.message
+                  }
                 }
-              })
+              )
             }
           })
         }
-      }
+      },
+      //显示绑定资源
+      showBound(vpcid){
+          if(vpcid!=null){
+              axios.get('information/listVirtualMachines.do',{
+                params: {
+                  vpcId: vpcid,
+                  num: 0,
+                  zoneId: $store.state.zone.zoneid
+                }
+              }).then(response =>{
+                if (response.status == 200 && response.data.status == 1){
+                   let hostlists=[]
+                  response.data.result.open.list.forEach(item=>{
+                    hostlists.push({name:item.instancename,value:item.computerid,parent:'host'})
+                  })
+
+                }
+              })
+          }
+      },
     },
 
   }
