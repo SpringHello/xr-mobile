@@ -48,7 +48,7 @@
 
 <script>
   import {XHeader, XButton, Alert} from 'vux'
-  import regexp from '@/util/RegExp'
+  import RegExp from '@/util/RegExp'
   import axios from '@/util/iaxios'
   export default {
     components: {
@@ -86,7 +86,7 @@
           return
         }
         // 展现图片验证码前先校验手机/邮箱
-        if (!regexp.phoneRegexp.test(this.signForm.username) && !regexp.emailRegexp.test(this.signForm.username)) {
+        if (!RegExp.phoneRegexp.test(this.signForm.username) && !RegExp.emailRegexp.test(this.signForm.username)) {
           // 既不是手机也不是邮箱
           this.$vux.toast.text('手机/邮箱格式错误')
           return
@@ -111,7 +111,7 @@
         }
         // 默认邮箱注册
         let isemail = '1'
-        if (regexp.phoneRegexp.test(this.signForm.username)) {
+        if (RegExp.phoneRegexp.test(this.signForm.username)) {
           // 如果是手机注册
           isemail = '0'
         }
@@ -155,7 +155,7 @@
           this.$vux.toast.text('请输入密码')
           return
         }
-        if (!regexp.registerPassword.test(this.signForm.password)) {
+        if (!RegExp.registerPassword.test(this.signForm.password)) {
           this.$vux.toast.text('密码格式错误')
           return
         }

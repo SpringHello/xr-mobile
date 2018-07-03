@@ -18,7 +18,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import regExp from '@/util/regExp'
+  import RegExp from '@/util/RegExp'
   import {Group, Cell, XHeader, XInput} from 'vux'
   export default{
     components: {
@@ -39,7 +39,7 @@
     methods: {
 //      // 获取验证码
       getCode(){
-        if (regExp.emailRegexp.test(this.froms.email)) {
+        if (RegExp.emailRegexp.test(this.froms.email)) {
           axios.get('user/code.do', {
             params: {
               type: 1,
@@ -72,7 +72,7 @@
       },
 //      //绑定新邮箱
       resetEmail(){
-        if (regExp.emailRegexp.test(this.froms.email) && this.froms.emailcode.length == 6) {
+        if (RegExp.emailRegexp.test(this.froms.email) && this.froms.emailcode.length == 6) {
           axios.get('user/updateUserInfo.do', {
             params: {
               code: this.froms.emailcode,

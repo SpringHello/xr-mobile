@@ -21,7 +21,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import regExp from '@/util/regExp'
+  import RegExp from '@/util/RegExp'
   import {XInput, Group, XHeader, XButton, Box} from 'vux'
   export default{
     components: {
@@ -111,7 +111,7 @@
         })
       },
       _validate(){
-        if (!regExp.phoneRegexp.test(this.froms.phone)) {
+        if (!RegExp.phoneRegexp.test(this.froms.phone)) {
           this.$vux.toast.text('请输入正确的手机号码', 'middle')
           return false
         }
@@ -119,7 +119,7 @@
           this.$vux.toast.text('请输入正确的验证码', 'middle')
           return false
         }
-        if (!regExp.IDCardRegExp.test(this.froms.idCard)) {
+        if (!RegExp.idcardRegExp.test(this.froms.idCard)) {
           this.$vux.toast.text('请输入正确的身份证号', 'middle')
           return false
         }

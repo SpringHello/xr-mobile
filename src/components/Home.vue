@@ -116,7 +116,7 @@
     <!--页尾-->
     <div class="footer-wrapper">
       <div class="foot-one">
-        <img src="">
+        <img src="../assets/img/home/QR-code.jpg">
         <div class="foot-one-right">
           <h6>联系我们</h6>
           <p>400-0505-565</p>

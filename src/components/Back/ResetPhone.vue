@@ -21,7 +21,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import regExp from '@/util/regExp'
+  import RegExp from '@/util/RegExp'
   import {Group, Cell, XHeader, XInput} from 'vux'
   export default{
     components: {
@@ -44,7 +44,7 @@
     methods: {
       // 获取验证码
       getCode(){
-        if (this.froms.code.length == 4 && regExp.phoneRegexp.test(this.froms.phone)) {
+        if (this.froms.code.length == 4 && RegExp.phoneRegexp.test(this.froms.phone)) {
           axios.get('user/code.do', {
             params: {
               vailCode: this.froms.code,
@@ -78,7 +78,7 @@
       },
       //绑定新手机号
       resetPhone(){
-        if (this.froms.code.length == 4 && regExp.phoneRegexp.test(this.froms.phone) && this.froms.phonecode.length == 6) {
+        if (this.froms.code.length == 4 && RegExp.phoneRegexp.test(this.froms.phone) && this.froms.phonecode.length == 6) {
           axios.get('user/updatePhone.do', {
             params: {
               code: this.froms.phonecode,

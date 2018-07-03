@@ -22,7 +22,7 @@
 
 <script>
   import axios from '@/util/iaxios'
-  import regexp from '@/util/RegExp'
+  import RegExp from '@/util/RegExp'
   import {XHeader, Group, XInput} from 'vux'
 
   export default{
@@ -79,7 +79,7 @@
             this.$vux.toast.text('请输入邮箱', 'middle')
           return false
         }
-        if (!regexp.emailRegexp.test(this.froms.email)) {
+        if (!RegExp.emailRegexp.test(this.froms.email)) {
           this.$vux.toast.text('邮箱格式错误', 'middle')
           return false
         }
