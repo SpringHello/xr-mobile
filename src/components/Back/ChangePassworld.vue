@@ -15,7 +15,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import regExp from '@/util/regExp'
+  import RegExp from '@/util/RegExp'
   import {XInput, Group, XHeader, XButton, Box} from 'vux'
   export default{
     components: {

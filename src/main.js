@@ -19,7 +19,7 @@ Vue.use(AlertPlugin)
 
 import './assets/less/main.less'
 import './assets/less/public.less'
-
+import './assets/less/main.less'
 import './assets/css/iconfont.css'
 
 //FastClick.attach(document.body)
