@@ -28,7 +28,6 @@
 
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
-
     <!--走马灯下方介绍-->
     <div class="banner-introduce">
       <div class="grid">
@@ -186,7 +185,7 @@
       TransferDom,
     },
     data () {
-      scrollTo( 0, 0 )
+      scrollTo(0, 0)
       return {
         DialogStyle: false,
         titleItem: [
@@ -594,16 +593,16 @@
           color: rgba(51, 51, 51, 1);
           vertical-align: middle;
           /*&::after {*/
-            /*content: '';*/
-            /*border-bottom: 1px solid #999;*/
-            /*border-right: 1px solid #999;*/
-            /*width: .5rem;*/
-            /*height: .5rem;*/
-            /*display: inline-block;*/
-            /*position: absolute;*/
-            /*right: 1.3rem;*/
-            /*transform-origin: 50% 50%;*/
-            /*transform: translateY(.3rem) rotate(311deg);*/
+          /*content: '';*/
+          /*border-bottom: 1px solid #999;*/
+          /*border-right: 1px solid #999;*/
+          /*width: .5rem;*/
+          /*height: .5rem;*/
+          /*display: inline-block;*/
+          /*position: absolute;*/
+          /*right: 1.3rem;*/
+          /*transform-origin: 50% 50%;*/
+          /*transform: translateY(.3rem) rotate(311deg);*/
           /*}*/
         }
       }

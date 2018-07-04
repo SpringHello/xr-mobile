@@ -13,7 +13,7 @@ Vue.use(ToastPlugin)
 import  {ConfirmPlugin} from 'vux'
 Vue.use(ConfirmPlugin)
 
-import  { AlertPlugin } from 'vux'
+import  {AlertPlugin} from 'vux'
 Vue.use(AlertPlugin)
 
 
