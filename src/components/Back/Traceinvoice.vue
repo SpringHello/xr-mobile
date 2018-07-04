@@ -3,14 +3,14 @@
     <x-header>发票申请记录</x-header>
     <div class="Trace">
       <Card v-for="(item,index) in invoiceList" :key="index" class="card">
-        <div slot="header" class="header">快递单号：3891610155053</div>
+        <div slot="header" class="header">快递单号： </div>
         <div slot="content" class="content" @click="detele()">
-          <li>发票种类:{{item.type == 0 ? '普通发票' : '增值税专用发票'}}</li>
-          <li>发票抬头:{{item.title}}</li>
-          <li>发票金额:¥{{item.amount}}</li>
+          <li>发票种类： {{item.type == 0 ? '普通发票' : '增值税专用发票'}}</li>
+          <li>发票抬头： {{item.title}}</li>
+          <li>开票金额： ¥{{item.amount}}</li>
         </div>
         <div slot="footer" class="foot">
-          <li>发票申请时间:{{item.createtime}}</li>
+          <li>发票申请时间： {{item.createtime}}</li>
         </div>
       </Card>
     </div>

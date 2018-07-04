@@ -5,7 +5,7 @@
       <Group>
         <cell title="发票申请" is-link link="applyinvoice"></cell>
         <cell title="发票申请记录" is-link link="traceinvoice"></cell>
-        <cell title="增值资质认证" is-link link="ticketVali"></cell>
+        <cell title="增票资质认证" is-link link="ticketVali"></cell>
       </Group>
     </div>
 
