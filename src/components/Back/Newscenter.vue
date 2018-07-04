@@ -4,7 +4,7 @@
     <div class="newscenter">
       <div class="news-nav">
         <ul>
-          <li v-for="(item,index) in news" :key="index" @click="getData(item.type)">{{item.title}}</li>
+          <li v-for="(item,index) in news" :key="index" @click="getData(item.type)">{{item.title}}({{item.num}})</li>
         </ul>
       </div>
       <div class="content">
@@ -21,11 +21,11 @@
     </div>
 
     <actionsheet v-model="showAll" :menus="menusAll" show-cancel :close-on-clicking-mask="false"
-                 @on-click-menu="clickItem"></actionsheet>
+                 @on-click-menu="mark"></actionsheet>
     <actionsheet v-model="showUnread" :menus="menusUnread" show-cancel :close-on-clicking-mask="false"
-                 @on-click-menu="clickItem"></actionsheet>
+                 @on-click-menu="mark"></actionsheet>
     <actionsheet v-model="showIsread" :menus="menusIsread" show-cancel :close-on-clicking-mask="false"
-                 @on-click-menu="clickItem"></actionsheet>
+                 @on-click-menu="mark"></actionsheet>
 
   </div>
 </template>
@@ -44,12 +44,14 @@
     data (){
       return {
         news: [
-          {title: '全部', type: 'all', status: false},
-          {title: '已读', type: 'isread', status: false},
-          {title: '未读', type: 'unread', status: false},
+          {title: '全部', type: 'all', status: false, num: ''},
+          {title: '已读', type: 'isread', status: false, num: ''},
+          {title: '未读', type: 'unread', status: false, num: ''},
         ],
+
         datas: [],
         id: '',
+        type: '',
         showAll: false,
         menusAll: {
           isread: '<span style="color:#4A90E2">标为已读</span>',
@@ -85,7 +87,19 @@
         axios.post('user/getEventNotifyList.do', params).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.datas = response.data.result
-
+            this.news.forEach(item => {
+              switch (item.type) {
+                case 'all':
+                  item.num = response.data.pageTotal
+                  break;
+                case 'isread':
+                  item.num = response.data.alreadyTotal
+                  break;
+                case 'unread':
+                  item.num = response.data.noReadTotal
+                  break;
+              }
+            })
           }
         })
       },
@@ -110,11 +124,29 @@
         }
       },
       //确认信息操作
-      clickItem(key){
-          //删除
-        if(key=='delete'){
-
+      mark(key){
+        switch (key) {
+          case 'delete':
+            this.type = 'del'
+            break;
+          case 'isread':
+            this.type = 'readed'
+            break;
+          case 'unread':
+            this.type = 'unreaded'
+            break;
         }
+        axios.post(`user/${this.type}EventNotify.do`, {
+          list: JSON.stringify([{'id': this.id}])
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.getData('all')
+            this.getData('unread')
+            this.getData('isread')
+          }
+        })
+
+
       }
     },
     created(){
