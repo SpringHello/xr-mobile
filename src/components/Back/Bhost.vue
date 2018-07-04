@@ -18,7 +18,7 @@
         </li>
       </ul>
     </div>
-    <p v-else style="color: #ccc;text-align: center;font-size: .3rem;margin: 50% auto;">暂无数据</p>
+    <p v-else style="color: #ccc;text-align: center;font-size: .28rem;margin: 50% 0;">暂无数据</p>
 
     <actionsheet v-model="showOpera" :menus="menus" @on-click-menu="clickItem" show-cancel
                  :close-on-clicking-mask="false"></actionsheet>

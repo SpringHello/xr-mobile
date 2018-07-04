@@ -14,7 +14,7 @@
         </div>
       </Card>
     </div>
-
+    <p v-show="invoiceList.length==0" class="off">暂无数据</p>
   </div>
 </template>
 
@@ -48,7 +48,6 @@
       },
       //删除
       detele(){
-          
       },
     },
   }
@@ -84,6 +83,13 @@
         }
       }
     }
+  }
+
+  .off {
+    font-size: .28rem;
+    color: #ccc;
+    text-align: center;
+    margin: 50% 0;
   }
 
 </style>

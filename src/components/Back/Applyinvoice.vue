@@ -136,17 +136,19 @@
           switch (this.details.status) {
             case 2:
               this.two = true
+              this.disable = true
               break;
             case 1:
               this.one = true
+              this.disable = true
               break;
             case 0:
               this.detailsShow = true
-              this.disable = true
               break;
           }
         } else {
           this.three = true
+          this.disable = true
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {

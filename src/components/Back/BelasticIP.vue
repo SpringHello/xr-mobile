@@ -16,7 +16,7 @@
         </li>
       </ul>
     </div>
-    <p v-else style="color: #ccc;text-align: center;font-size: .3rem;margin: 50% auto;">暂无数据</p>
+    <p v-else style="color: #ccc;text-align: center;font-size: .28rem;margin: 50% 0;">暂无数据</p>
   </div>
 </template>
 
@@ -63,11 +63,11 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
-    background:rgba(243,243,243,1);
+    background: rgba(243, 243, 243, 1);
     margin-bottom: 1rem;
     ul {
       padding: .3rem;
-      background:rgba(255,255,255,1);
+      background: rgba(255, 255, 255, 1);
       li {
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
