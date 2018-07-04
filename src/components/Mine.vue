@@ -57,7 +57,7 @@
             <p>订单管理</p>
           </div>
         </div>
-        <div class="xf-item" @click="onOpen">
+        <div class="xf-item" @click="expense">
           <div>
             <img src="../assets/img/mine/xiaofei.png">
             <p>当月消费</p>
@@ -207,6 +207,14 @@
       invoice(){
         if ($store.state.userInfo) {
           this.$router.push('invoice')
+        } else {
+          this.$router.push('login')
+        }
+      },
+      //当月消费
+      expense(){
+        if ($store.state.userInfo) {
+          this.$router.push('expense')
         } else {
           this.$router.push('login')
         }

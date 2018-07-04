@@ -49,6 +49,7 @@ import Invoice from '@/components/Back/Invoice'//发票管理
 import TicketVali from '@/components/Back/TicketVali'
 import Applyinvoice from '@/components/Back/Applyinvoice'
 import Traceinvoice from '@/components/Back/Traceinvoice'
+import Expense from '@/components/Back/Expense'//当月消费
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -100,6 +101,7 @@ export default new Router({
         {path: '/ruicloud/ticketVali', name: 'TicketVali', component: TicketVali},
         {path: '/ruicloud/traceinvoice', name: 'Traceinvoice', component: Traceinvoice},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
+        {path: '/ruicloud/expense', name: 'Expense', component: Expense},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
