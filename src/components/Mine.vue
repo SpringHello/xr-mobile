@@ -76,7 +76,7 @@
           <div>
             <img src="../assets/img/mine/xiaoxi.png">
             <p>消息中心</p>
-            <badge :text='nums' v-if="$store.state.userInfo"></badge>
+            <badge :text='nums' v-if="$store.state.userInfo && nums>0"></badge>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
-          this.nums = response.data.total
+          this.nums = response.data.noReadTotal
         }
       },
       //实名认证
