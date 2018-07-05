@@ -51,7 +51,7 @@
       </div>
       <!--版块二-->
       <div>
-        <div class="dd-item" @click="onOpen">
+        <div class="dd-item" @click="orders">
           <div>
             <img src="../assets/img/mine/dingdan.png">
             <p>订单管理</p>
@@ -215,6 +215,14 @@
       expense(){
         if ($store.state.userInfo) {
           this.$router.push('expense')
+        } else {
+          this.$router.push('login')
+        }
+      },
+      //订单管理
+      orders(){
+        if ($store.state.userInfo) {
+          this.$router.push('orders')
         } else {
           this.$router.push('login')
         }

@@ -1,5 +1,6 @@
 <template>
   <div id="expense">
+    <x-header>当月消费</x-header>
     <div class="header">
       <popup-picker title="" :data="lists" v-model='list'></popup-picker>
       <p class="cenetr"></p>
@@ -10,12 +11,13 @@
 </template>
 
 <script>
-  import {Group, Datetime, PopupPicker} from 'vux'
+  import {Group, Datetime, PopupPicker,XHeader} from 'vux'
   export default{
     components: {
       Group,
       Datetime,
-      PopupPicker
+      PopupPicker,
+      XHeader
     },
     data(){
       return {

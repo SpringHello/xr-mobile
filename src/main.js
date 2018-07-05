@@ -9,11 +9,15 @@ import App from './App'
 import  {ToastPlugin} from 'vux'
 Vue.use(ToastPlugin)
 
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
+
 
 import  {ConfirmPlugin} from 'vux'
 Vue.use(ConfirmPlugin)
 
-import  { AlertPlugin } from 'vux'
+import  {AlertPlugin} from 'vux'
 Vue.use(AlertPlugin)
 
 

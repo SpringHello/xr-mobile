@@ -46,6 +46,8 @@ import ResetEmail from '@/components/Back/ResetEmail'
 import BoundEmail from '@/components/Back/BoundEmail'
 import ChangePassworld from '@/components/Back/ChangePassworld'
 import Invoice from '@/components/Back/Invoice'//发票管理
+import Orders from '@/components/Back/Orders'
+import Orderdetail from '@/components/Back/Orderdetail'
 import TicketVali from '@/components/Back/TicketVali'
 import Applyinvoice from '@/components/Back/Applyinvoice'
 import Traceinvoice from '@/components/Back/Traceinvoice'
@@ -102,6 +104,8 @@ export default new Router({
         {path: '/ruicloud/traceinvoice', name: 'Traceinvoice', component: Traceinvoice},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/expense', name: 'Expense', component: Expense},
+        {path: '/ruicloud/orders', name: 'Orders', component: Orders},
+        {path: '/ruicloud/orderdetail', name: 'Orderdetail', component: Orderdetail},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
