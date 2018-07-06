@@ -20,7 +20,7 @@
       <li>订单编号：{{item.ordernumber}}</li>
       <p class="btns">
         <x-button mini @click.native="check(item)">详情</x-button>
-        <x-button type="primary" mini v-show="!item.paymentstatus">支付</x-button>
+        <x-button type="primary" mini v-show="!item.paymentstatus" @click.native="pay">支付</x-button>
       </p>
     </ul>
 
@@ -192,6 +192,10 @@
             }
           })
         }
+      },
+      //支付
+      pay(){
+        this.$router.push('home')
       },
     },
   }

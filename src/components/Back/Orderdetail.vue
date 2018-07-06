@@ -5,7 +5,7 @@
       <ul class='top'>
         <p>{{detailsTOP.title}}</p>
         <div v-for="(item,index) in detailsTOP.资源" :key="index">
-          <li>地域：{{item.地域}}</li>
+          <li v-for="(value,key) of item">{{key}}：{{value}}</li>
         </div>
       </ul>
       <ul class="bom">
