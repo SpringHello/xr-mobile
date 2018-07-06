@@ -8,18 +8,25 @@
         </tab-item>
       </tab>
     </div>
-    <mt-loadmore :bottom-method="loadBottom" ref="loadmore">
-      <ul v-for="(item,index) in lists" :key="index" class="content">
-        <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
-        <li>¥{{item.cost}}</li>
-        <li>创建时间：{{item.ordercreatetime}}</li>
-        <li>订单编号：{{item.ordernumber}}</li>
-        <p class="btns">
-          <x-button mini @click.native="check(item)">详情</x-button>
-          <x-button type="primary" mini v-show="!item.paymentstatus">支付</x-button>
-        </p>
-      </ul>
-    </mt-loadmore>
+
+    <ul v-for="(item,index) in lists" :key="index" class="content"
+        @click="showDel(item.ordernumber)"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance=".2">
+      <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
+      <li>¥{{item.cost}}</li>
+      <li>创建时间：{{item.ordercreatetime}}</li>
+      <li>订单编号：{{item.ordernumber}}</li>
+      <p class="btns">
+        <x-button mini @click.native="check(item)">详情</x-button>
+        <x-button type="primary" mini v-show="!item.paymentstatus">支付</x-button>
+      </p>
+    </ul>
+
+
+    <actionsheet v-model="showDelete" :menus="menusDelete" :close-on-clicking-mask="false" show-cancel
+                 @on-click-menu="deleteOrder"></actionsheet>
 
   </div>
 </template>
@@ -27,14 +34,15 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Group, XHeader, Tab, TabItem, XButton} from 'vux'
+  import {Group, XHeader, Tab, TabItem, XButton, Actionsheet} from 'vux'
   export default{
     components: {
       Group,
       XHeader,
       Tab,
       TabItem,
-      XButton
+      XButton,
+      Actionsheet
     },
     beforeRouteEnter(to, from, next){
       next(vm => {
@@ -43,10 +51,12 @@
     },
     data(){
       return {
+        loading: false,
         type: '',
+        alls: 0,
         order_type: '',
         pageType: {
-          pageSize: '15',
+          pageSize: '10',
           page: '1'
         },
         tabItems: [
@@ -55,6 +65,11 @@
           {name: '未支付', type: 'notpay'},
         ],
         lists: [],
+        showDelete: false,
+        order: '',
+        menusDelete: {
+          del: '<span style="color: red;">删除</span>'
+        },
       }
     },
     methods: {
@@ -68,6 +83,7 @@
         }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
               this.lists = response.data.result.data
+              this.alls = response.data.result.totle
               this.lists.forEach(list => {
                 switch (JSON.parse(list.display).订单类型) {
                   case 'host':
@@ -118,6 +134,7 @@
         }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
               this.lists = response.data.result.data
+              this.alls = response.data.result.totle
               this.lists.forEach(list => {
                 switch (JSON.parse(list.display).订单类型) {
                   case 'host':
@@ -148,49 +165,71 @@
         )
       },
       //上拉刷新
-      loadBottom(){
-        parseInt(this.pageType.page += 1)
-        console.log(this.pageType.page)
-        this.setData(type)
+      loadMore(){
       },
       //详情
       check(item){
         sessionStorage.setItem('order-item', JSON.stringify(item))
         this.$router.push('orderdetail')
       },
+      //订单删除
+      showDel(ordernumber){
+        this.order = ordernumber
+        this.showDelete = true
+      },
+      deleteOrder(key){
+        if (key == 'del') {
+          axios.get('continue/delOrderpay.do', {
+            params: {
+              order: this.order,
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.setData()
+              this.$vux.toast.text(response.data.message, 'middle')
+            } else {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        }
+      },
     },
   }
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-  .content {
-    background: rgba(255, 255, 255, 1);
-    padding: .35rem .3rem .14rem .28rem;
-    margin: .2rem 0;
-    p {
-      font-size: .32rem;
-      color: #000;
-      line-height: .45rem;
-      .paym {
-        float: right;
-        color: #E6001B;
+  #orders {
+    /*padding-bottom: 1rem;*/
+    .content {
+      background: rgba(255, 255, 255, 1);
+      padding: .35rem .3rem .14rem .28rem;
+      margin: .2rem 0;
+      p {
+        font-size: .32rem;
+        color: #000;
+        line-height: .45rem;
+        .paym {
+          float: right;
+          color: #E6001B;
+        }
       }
-    }
-    li {
-      list-style: none;
-      font-size: .28rem;
-      color: rgba(153, 153, 153, 1);
-      line-height: .4rem;
-      padding-top: .24rem;
-      &:first-of-type {
-        color: #E6001B;
-        padding-top: .36rem;
+      li {
+        list-style: none;
+        font-size: .28rem;
+        color: rgba(153, 153, 153, 1);
+        line-height: .4rem;
+        padding-top: .24rem;
+        &:first-of-type {
+          color: #E6001B;
+          padding-top: .36rem;
+        }
       }
-    }
-    .btns {
-      margin-top: .24rem;
-      border-top: 1px solid rgba(217, 217, 217, 1);
-      text-align: right;
+      .btns {
+        margin-top: .24rem;
+        border-top: 1px solid rgba(217, 217, 217, 1);
+        text-align: right;
+      }
     }
   }
+
 </style>

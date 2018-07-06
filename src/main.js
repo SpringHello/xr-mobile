@@ -13,6 +13,9 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
+import {InfiniteScroll} from 'mint-ui';
+Vue.use(InfiniteScroll);
+
 
 import  {ConfirmPlugin} from 'vux'
 Vue.use(ConfirmPlugin)
