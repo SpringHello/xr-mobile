@@ -46,6 +46,8 @@ import ResetEmail from '@/components/Back/ResetEmail'
 import BoundEmail from '@/components/Back/BoundEmail'
 import ChangePassworld from '@/components/Back/ChangePassworld'
 import Invoice from '@/components/Back/Invoice'//发票管理
+import Account from '@/components/Back/Account'//账户余额
+import Vouchers from '@/components/Back/Vouchers'//代金券
 import Orders from '@/components/Back/Orders'
 import Orderdetail from '@/components/Back/Orderdetail'
 import TicketVali from '@/components/Back/TicketVali'
@@ -106,6 +108,8 @@ export default new Router({
         {path: '/ruicloud/expense', name: 'Expense', component: Expense},
         {path: '/ruicloud/orders', name: 'Orders', component: Orders},
         {path: '/ruicloud/orderdetail', name: 'Orderdetail', component: Orderdetail},
+        {path: '/ruicloud/account', name: 'Account', component: Account},
+        {path: '/ruicloud/vouchers', name: 'Vouchers', component: Vouchers},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},

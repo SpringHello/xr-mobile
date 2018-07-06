@@ -10,7 +10,7 @@
       </div>
     </header>
     <div class="accountInfo">
-      <div>
+      <div @click="account">
         <p v-if="userInfo" class="money">￥{{remainder}}</p>
         <p v-else class="money">￥0</p>
         <p>账户余额</p>
@@ -57,7 +57,7 @@
             <p>订单管理</p>
           </div>
         </div>
-        <div class="xf-item" @click="expense">
+        <div class="xf-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/xiaofei.png">
             <p>当月消费</p>
@@ -180,6 +180,15 @@
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
           this.nums = response.data.noReadTotal
+        }
+      },
+      //账户余额
+      account(){
+        if ($store.state.userInfo) {
+          sessionStorage.setItem('money', this.remainder)
+          this.$router.push('account')
+        } else {
+          this.$router.push('login')
         }
       },
       //实名认证
