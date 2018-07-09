@@ -41,7 +41,7 @@
         <x-input title="开票金额" placeholder="请输入开票金额" v-model="Froms.pmoney" required ref="from2"></x-input>
         <x-input title="发票抬头" placeholder="请输入发票抬头" v-model="Froms.ptitle" required ref="from2"></x-input>
       </group>
-      <Group v-if='details!=null'>
+      <Group v-if='detailsShow'>
         <cell title="发票信息"></cell>
         <Group label-width="6em" label-align="right" label-margin-right=".45rem" class="details">
           <cell title="单位名称" value-align="left" :value="details.companyname"></cell>
@@ -52,9 +52,17 @@
           <cell title="银行账户" value-align="left" :value="details.banknum"></cell>
         </Group>
       </Group>
-      <p v-else class="ticket">您需要通过增票资质认证才能开具增值税专用
-        <router-link to="ticketVali">点击认证></router-link>
-      </p>
+      <div v-else>
+        <p class="ticket" v-show="three">您需要通过增票资质认证才能开具增值税专用
+          <router-link to="ticketVali">点击认证></router-link>
+        </p>
+        <p class="ticket" v-show="two">您填写的增票资质认证正在
+          <router-link to="" class="two">审核中…</router-link>
+        </p>
+        <p class="ticket" v-show="one">您填写的增票资质认证审核
+          <router-link to="ticketVali" class="one">未通过.重新认证></router-link>
+        </p>
+      </div>
 
       <group>
         <x-input title="收件地址" placeholder="请输入收货地址" v-model="Froms.paddress" required ref="from2"></x-input>
@@ -63,7 +71,7 @@
       </group>
 
       <div class="btn">
-        <x-button type="primary" @click.native="invoiceMake"  :disabled="details==null">确认开票</x-button>
+        <x-button type="primary" @click.native="invoiceMake" :disabled="disable">确认开票</x-button>
       </div>
     </div>
 
@@ -110,7 +118,13 @@
           paddress: '',
           pname: '',
           pphone: ''
-        }
+        },
+        detailsShow: false,
+        one: false,
+        two: false,
+        three: false,
+        disable: false,
+
       }
     },
     methods: {
@@ -119,6 +133,22 @@
         var response = values[0]
         if (response.status == 200 && response.data.status == 1) {
           this.details = response.data.result.result
+          switch (this.details.status) {
+            case 2:
+              this.two = true
+              this.disable = true
+              break;
+            case 1:
+              this.one = true
+              this.disable = true
+              break;
+            case 0:
+              this.detailsShow = true
+              break;
+          }
+        } else {
+          this.three = true
+          this.disable = true
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
@@ -130,46 +160,27 @@
         if (this.Froms.pmoney > this.invoice || this.Froms.pmoney < 1000) {
           this.$vux.toast.text('开票金额不能少于1000或者多于实际可开金额', 'middle')
         }
-        if (this.value == '增值税普通发票') {
-          if (this.$refs.from1.valid) {
-            axios.post('user/applyInvoice.do', {
-              amount: this.Froms.pmoney,//开票金额
-              type: 0,//发票类型
-              title: this.Froms.ptitle,//发票抬头
-              recipients: this.Froms.pname, //收件人
-              address: this.Froms.paddress,//收件地址,
-              phone: this.Froms.pphone,//电话
-            }).then(response => {
-              if (response.status == 2 && response.data.status == 1) {
-                this.$router.push('invoice')
-                this.$vux.toast.text(response.data.message, 'middle')
-              } else {
-                this.$vux.toast.text(response.data.message, 'middle')
-              }
-            })
-          }
-
+        let params = {
+          amount: this.Froms.pmoney,//开票金额
+          title: this.Froms.ptitle,//发票抬头
+          recipients: this.Froms.pname, //收件人
+          address: this.Froms.paddress,//收件地址,
+          phone: this.Froms.pphone,//电话
         }
-        if (this.value == '增值税专用发票') {
-          if (this.$refs.from2.valid) {
-            axios.post('user/applyInvoice.do', {
-              amount: this.Froms.pmoney,//开票金额
-              type: 1,//发票类型
-              title: this.Froms.ptitle,//发票抬头
-              recipients: this.Froms.pname, //收件人
-              address: this.Froms.paddress,//收件地址,
-              phone: this.Froms.pphone,//电话
-            }).then(response => {
-              if (response.status == 2 && response.data.status == 1) {
-                this.$router.push('invoice')
-                this.$vux.toast.text(response.data.message, 'middle')
-              } else {
-                this.$vux.toast.text(response.data.message, 'middle')
-              }
-            })
-          }
+        if (this.value == '增值税普通发票' && this.$refs.from1.valid) {
+          params.type = 0
         }
-
+        if (this.value == '增值税专用发票' && this.$refs.from2.valid) {
+          params.type = 1
+        }
+        axios.post('user/applyInvoice.do', params).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.$router.push('invoice')
+            this.$vux.toast.text(response.data.message, 'middle')
+          } else {
+            this.$vux.toast.text(response.data.message, 'middle')
+          }
+        })
       },
     },
   }
@@ -214,15 +225,21 @@
         float: right;
         color: rgba(74, 144, 226, 1);
       }
+      .two {
+        color: #FF881C;
+      }
+      .one {
+        color: #E6001B;
+      }
     }
   }
 
   .btn {
     padding: 1.5rem .3rem;
-    .weui-btn_primary{
+    .weui-btn_primary {
       background: #4A90E2;
     }
-    .weui-btn_primary:active{
+    .weui-btn_primary:active {
       background: #4A90E2;
     }
   }

@@ -27,6 +27,7 @@ import ddos from '@/components/App/Products/DDOS'
 
 
 import Workorder from '@/components/Back/Workorder'
+import Work from '@/components/Back/Work'
 import Bhost from '@/components/Back/Bhost'//
 import Bdisk from '@/components/Back/Bdisk'
 import Belasticip from '@/components/Back/BelasticIP'
@@ -46,8 +47,14 @@ import ResetEmail from '@/components/Back/ResetEmail'
 import BoundEmail from '@/components/Back/BoundEmail'
 import ChangePassworld from '@/components/Back/ChangePassworld'
 import Invoice from '@/components/Back/Invoice'//发票管理
+import Account from '@/components/Back/Account'//账户余额
+import Vouchers from '@/components/Back/Vouchers'//代金券
+import Orders from '@/components/Back/Orders'
+import Orderdetail from '@/components/Back/Orderdetail'
 import TicketVali from '@/components/Back/TicketVali'
 import Applyinvoice from '@/components/Back/Applyinvoice'
+import Traceinvoice from '@/components/Back/Traceinvoice'
+import Expense from '@/components/Back/Expense'//当月消费
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
@@ -97,7 +104,15 @@ export default new Router({
         {path: '/ruicloud/invoice', name: 'Invoice', component: Invoice},
         {path: '/ruicloud/applyinvoice', name: 'Applyinvoice', component: Applyinvoice},
         {path: '/ruicloud/ticketVali', name: 'TicketVali', component: TicketVali},
+        {path: '/ruicloud/traceinvoice', name: 'Traceinvoice', component: Traceinvoice},
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
+        {path: '/ruicloud/workorder', name: 'Workorder', component: Workorder,},
+        {path: '/ruicloud/work', name: 'Work', component: Work,},
+        {path: '/ruicloud/expense', name: 'Expense', component: Expense},
+        {path: '/ruicloud/orders', name: 'Orders', component: Orders},
+        {path: '/ruicloud/orderdetail', name: 'Orderdetail', component: Orderdetail},
+        {path: '/ruicloud/account', name: 'Account', component: Account},
+        {path: '/ruicloud/vouchers', name: 'Vouchers', component: Vouchers},
         {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
@@ -129,11 +144,6 @@ export default new Router({
       path: '/ruicloud/Prodetail',
       name: 'Prodetail',
       component: Prodetail,
-    },
-    {
-      path: '/ruicloud/Workorder',
-      name: 'Workorder',
-      component: Workorder,
     },
     {
       path: '/ruicloud/host',

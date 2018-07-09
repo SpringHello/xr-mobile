@@ -64,7 +64,7 @@
             bankNum: this.form.bankNum,
             identicode: this.form.code
           }).then(response => {
-            if (response.status == 2 && response.data.status == 1) {
+            if (response.status == 200 && response.data.status == 1) {
               this.$router.push('applyinvoice')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {

@@ -2,15 +2,16 @@
   <div style="margin-bottom:1.5rem;">
     <header class="header-wrapper">
       <div>
-        <img src="../assets/img/mine/avatar.png" class="avator">
-        <div class="login-right">
+        <div class="login-left">
+          <img src="../assets/img/mine/avatar.png" class="avator">
           <router-link class="userInfo" to="/ruicloud/home" v-if="userInfo">{{userInfo.realname}}</router-link>
           <router-link class="userInfo" to="/ruicloud/login?from=Mine" v-else>请点击登录</router-link>
         </div>
+        <p class="login-right"></p>
       </div>
     </header>
     <div class="accountInfo">
-      <div>
+      <div @click="account">
         <p v-if="userInfo" class="money">￥{{remainder}}</p>
         <p v-else class="money">￥0</p>
         <p>账户余额</p>
@@ -51,7 +52,7 @@
       </div>
       <!--版块二-->
       <div>
-        <div class="dd-item" @click="onOpen">
+        <div class="dd-item" @click="orders">
           <div>
             <img src="../assets/img/mine/dingdan.png">
             <p>订单管理</p>
@@ -76,7 +77,7 @@
           <div>
             <img src="../assets/img/mine/xiaoxi.png">
             <p>消息中心</p>
-            <badge :text='nums' v-if="$store.state.userInfo"></badge>
+            <badge :text='nums' v-if="$store.state.userInfo && nums>0"></badge>
           </div>
         </div>
       </div>
@@ -179,7 +180,16 @@
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
-          this.nums = response.data.total
+          this.nums = response.data.noReadTotal
+        }
+      },
+      //账户余额
+      account(){
+        if ($store.state.userInfo) {
+          sessionStorage.setItem('money', this.remainder)
+          this.$router.push('account')
+        } else {
+          this.$router.push('login')
         }
       },
       //实名认证
@@ -207,6 +217,22 @@
       invoice(){
         if ($store.state.userInfo) {
           this.$router.push('invoice')
+        } else {
+          this.$router.push('login')
+        }
+      },
+      //当月消费
+      expense(){
+        if ($store.state.userInfo) {
+          this.$router.push('expense')
+        } else {
+          this.$router.push('login')
+        }
+      },
+      //订单管理
+      orders(){
+        if ($store.state.userInfo) {
+          this.$router.push('orders')
         } else {
           this.$router.push('login')
         }
@@ -274,31 +300,34 @@
     background-color: #081633;
     line-height: 0;
     padding-left: .48rem;
+    padding-right: .3rem;
     > div {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: .4rem 0;
-      img {
-        width: 1rem;
-        height: 1rem;
-        display: block;
-      }
-      .login-right {
-        line-height: .6rem;
+      .login-left {
+        display: flex;
+        align-items: center;
+        img {
+          width: 1rem;
+          height: 1rem;
+          display: block;
+        }
         .userInfo {
           font-size: .24rem;
           color: #fff;
           padding-left: .32rem;
-          &:after {
-            content: '';
-            display: inline-block;
-            width: .11rem;
-            height: .11rem;
-            border-left: 1px solid #fff;
-            border-bottom: 1px solid #fff;
-            transform: translateY(-.05rem) rotate(-135deg);
-            margin-left: 4rem;
-          }
+
         }
+      }
+      p {
+        display: inline-block;
+        width: .11rem;
+        height: .11rem;
+        border-left: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        transform: translateY(-.05rem) rotate(-135deg);
       }
     }
   }

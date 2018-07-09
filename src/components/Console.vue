@@ -9,14 +9,14 @@
             <span>告警</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="home">
+        <router-link class="userInfo" to="workorder">
           <div>
             <span v-if="userInfo">{{work}}</span>
             <span v-else>0</span>
             <span>工单</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="login">
+        <router-link class="userInfo" to="home">
           <div>
             <span v-if="userInfo">{{renewal}}</span>
             <span v-else>0</span>
@@ -26,7 +26,7 @@
       </div>
     </header>
     <div class="accountInfo">
-      <div>
+      <div @click="account">
         <p v-if="userInfo" class="money">￥{{remainder}}</p>
         <p v-else class="money">￥0</p>
         <p>账户余额</p>
@@ -99,8 +99,8 @@
         type: '',
         remainder: '',
         voucher: '',
-        work:'',
-        renewal:'',
+        work: '',
+        renewal: '',
         controls: [
           {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', url: '/ruicloud/bhost'},
           {img: require('../assets/img/console/yunyipan.png'), title: '云硬盘', url: '/ruicloud/bdisk'},
@@ -119,8 +119,8 @@
           this.voucher = values[0].data.data.voucher
         }
         if (values[1].status == 200 && values[1].data.status == 1) {
-          this.work=values[1].data.result[1].items[0].value
-         this.renewal=values[1].data.result[1].items[2].value
+          this.work = values[1].data.result[1].items[0].value
+          this.renewal = values[1].data.result[1].items[2].value
         }
       },
       conPush(item){
@@ -131,6 +131,15 @@
           else {
             this.showPositionValue = true
           }
+        } else {
+          this.$router.push('login')
+        }
+      },
+      //账户余额
+      account(){
+        if ($store.state.userInfo) {
+          sessionStorage.setItem('money', this.remainder)
+          this.$router.push('account')
         } else {
           this.$router.push('login')
         }
