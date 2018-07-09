@@ -2,11 +2,12 @@
   <div style="margin-bottom:1.5rem;">
     <header class="header-wrapper">
       <div>
-        <img src="../assets/img/mine/avatar.png" class="avator">
-        <div class="login-right">
+        <div class="login-left">
+          <img src="../assets/img/mine/avatar.png" class="avator">
           <router-link class="userInfo" to="/ruicloud/home" v-if="userInfo">{{userInfo.realname}}</router-link>
           <router-link class="userInfo" to="/ruicloud/login?from=Mine" v-else>请点击登录</router-link>
         </div>
+        <p class="login-right"></p>
       </div>
     </header>
     <div class="accountInfo">
@@ -299,31 +300,34 @@
     background-color: #081633;
     line-height: 0;
     padding-left: .48rem;
+    padding-right: .3rem;
     > div {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: .4rem 0;
-      img {
-        width: 1rem;
-        height: 1rem;
-        display: block;
-      }
-      .login-right {
-        line-height: .6rem;
+      .login-left {
+        display: flex;
+        align-items: center;
+        img {
+          width: 1rem;
+          height: 1rem;
+          display: block;
+        }
         .userInfo {
           font-size: .24rem;
           color: #fff;
           padding-left: .32rem;
-          &:after {
-            content: '';
-            display: inline-block;
-            width: .11rem;
-            height: .11rem;
-            border-left: 1px solid #fff;
-            border-bottom: 1px solid #fff;
-            transform: translateY(-.05rem) rotate(-135deg);
-            margin-left: 4rem;
-          }
+
         }
+      }
+      p {
+        display: inline-block;
+        width: .11rem;
+        height: .11rem;
+        border-left: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        transform: translateY(-.05rem) rotate(-135deg);
       }
     }
   }
