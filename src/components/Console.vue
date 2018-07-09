@@ -9,14 +9,14 @@
             <span>告警</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="home">
+        <router-link class="userInfo" to="workorder">
           <div>
             <span v-if="userInfo">{{work}}</span>
             <span v-else>0</span>
             <span>工单</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="login">
+        <router-link class="userInfo" to="home">
           <div>
             <span v-if="userInfo">{{renewal}}</span>
             <span v-else>0</span>
