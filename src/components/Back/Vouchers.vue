@@ -10,7 +10,8 @@
     </div>
 
     <div class="content" v-for="(item,index) in vouchers">
-      <div class="content-top" :class="{yhui:item.operator=='优惠券',xjin:item.operator=='现金券',zkou:item.operator=='折扣卷'}">
+      <div class="content-top"
+           :class="{yhui:item.operator=='优惠券',xjin:item.operator=='现金券',zkou:item.operator=='折扣卷'}">
         <div class="top-left">
           <p>¥ <span>{{item.money}}</span></p>
           <p>{{item.remark}}</p>
@@ -20,9 +21,12 @@
           <p>{{item.starttime}}</p>
           <p>{{item.endtime}}</p>
         </div>
-        <p class="top-right">
-          <button :class="{byhui:item.operator=='优惠券',bxjin:item.operator=='现金券',bzkou:item.operator=='折扣卷'}">立即使用
-          </button>
+        <button
+          :class="{byhui:item.operator=='优惠券',bxjin:item.operator=='现金券',bzkou:item.operator=='折扣卷'}"
+          v-show="!item.maketicketover">立即使用
+        </button>
+        <p class="top-right" v-show="item.maketicketover">
+          <img src="../../assets/img/account/used.png">
         </p>
       </div>
       <p class="content-bottom">
@@ -43,6 +47,18 @@
       Tab,
       TabItem,
       XButton
+    },
+    beforeRouteEnter(to, from, next){
+      axios.get('ticket/getUserTicket.do', {
+        params: {
+          pageSize: 10,
+          page: 1,
+        }
+      }).then(response => {
+        next(vm => {
+          vm.vouchers = response.data.result
+        })
+      })
     },
     data(){
       return {
@@ -129,15 +145,20 @@
     .top-right {
       width: 25%;
       text-align: right;
-      button {
-        border: none;
-        outline: none;
-        background: rgba(255, 255, 255, 1);
-        border-radius: .3rem;
-        font-size: .2rem;
-        line-height: .28rem;
-        padding: .08rem .2rem;
+      img {
+        width: 2rem;
+        position: relative;
+        top: 1rem;
       }
+    }
+    button {
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 1);
+      border-radius: .3rem;
+      font-size: .2rem;
+      line-height: .28rem;
+      padding: .08rem .2rem;
     }
   }
 

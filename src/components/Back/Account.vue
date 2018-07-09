@@ -71,6 +71,9 @@
     .weui-btn_primary {
       background: #4A90E2;
     }
+    .weui-btn_primary:active {
+      background: #4A90E2;
+    }
   }
 
   .cell {

@@ -10,9 +10,9 @@
       <div class="content">
         <ul>
           <li v-for="(item,index) in datas">
-            <div @click="toview(item)">
+            <div>
               <p class="title">{{item.name}} <span> [{{item.actType}}]</span></p>
-              <p class="right">{{item.publishtime}}</p>
+              <p class="right" @click="toview(item)">查看详情</p>
             </div>
             <p class="desc" @click="opration(item.isread,item.id)">{{item.content}}</p>
           </li>

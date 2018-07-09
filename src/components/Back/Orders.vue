@@ -203,7 +203,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   #orders {
-    /*padding-bottom: 1rem;*/
+    padding-bottom: 1rem;
     .content {
       background: rgba(255, 255, 255, 1);
       padding: .35rem .3rem .14rem .28rem;
