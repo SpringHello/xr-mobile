@@ -63,9 +63,15 @@ import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 
+/*登录注册相关*/
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
 import Reset from '@/components/LR/Reset'
+
+
+/*活动相关*/
+import Active1 from '@/components/Active/Active1'
+
 
 Vue.use(Router)
 
@@ -118,6 +124,8 @@ export default new Router({
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
+
+        {path: '/ruicloud/active_1', name: 'active_1', component: Active1},
       ]
     },
     {
