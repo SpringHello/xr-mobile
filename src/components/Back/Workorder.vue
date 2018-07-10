@@ -11,7 +11,7 @@
     </tab>
     <div v-show="indexs" class="work-item">
       <ul>
-        <li v-for="(item,index) in worksItem" :key="index" @click="checkOrder(item.id)">
+        <li v-for="(item,index) in worksItem" :key="index" @click="checkOrder(item.id,item.subdescription)">
           <p>{{item.title}}</p>
           <div>
             <span>{{type=='operating'?'处理中':'已关闭'}}</span>
@@ -60,6 +60,7 @@
         worksItem: [],
         time: '',
         id: '',
+        subdescription: '',
         showOpreation: false,
         menus: {
           del: '<span style="color: red;">删除</span>',
@@ -90,13 +91,14 @@
             this.worksItem = response.data.result
             response.data.result.forEach(item => {
               item.puddate = parseInt(item.puddate)
-              this.time = new Date(item.puddate).format('yyyy年MM月dd日 hh:mm:ss')
+              this.time = new Date(item.puddate).format('yyyy/MM/dd  hh:mm:ss')
             })
           }
         })
       },
       //弹窗显示
-      checkOrder(id){
+      checkOrder(id, subdescription){
+        this.subdescription = subdescription
         this.id = id
         this.showOpreation = true
       },
@@ -117,6 +119,8 @@
           })
         }
         if (key == 'check') {
+          sessionStorage.setItem('workId', this.id)
+          sessionStorage.setItem('subdescription', this.subdescription)
           this.$router.push('workdetail')
         }
       }
