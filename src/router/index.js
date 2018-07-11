@@ -28,6 +28,7 @@ import ddos from '@/components/App/Products/DDOS'
 
 import Workorder from '@/components/Back/Workorder'
 import Work from '@/components/Back/Work'
+import Workdetail from '@/components/Back/Workdetail'
 import Bhost from '@/components/Back/Bhost'//
 import Bdisk from '@/components/Back/Bdisk'
 import Belasticip from '@/components/Back/BelasticIP'
@@ -114,6 +115,7 @@ export default new Router({
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/workorder', name: 'Workorder', component: Workorder,},
         {path: '/ruicloud/work', name: 'Work', component: Work,},
+        {path: '/ruicloud/workdetail', name: 'Workdetail', component: Workdetail,},
         {path: '/ruicloud/expense', name: 'Expense', component: Expense},
         {path: '/ruicloud/orders', name: 'Orders', component: Orders},
         {path: '/ruicloud/orderdetail', name: 'Orderdetail', component: Orderdetail},
