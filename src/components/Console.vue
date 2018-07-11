@@ -5,7 +5,8 @@
       <div style="display: flex">
         <router-link class="userInfo" to="home">
           <div>
-            <span>0</span>
+            <span v-if="userInfo">{{alarm}}</span>
+            <span v-else>0</span>
             <span>告警</span>
           </div>
         </router-link>
@@ -100,6 +101,7 @@
         remainder: '',
         voucher: '',
         work: '',
+        alarm: 0,
         renewal: '',
         controls: [
           {img: require('../assets/img/console/yunfuwu.png'), title: '云服务器', url: '/ruicloud/bhost'},
@@ -121,6 +123,9 @@
         if (values[1].status == 200 && values[1].data.status == 1) {
           this.work = values[1].data.result[1].items[0].value
           this.renewal = values[1].data.result[1].items[2].value
+          values[1].data.result[2].items.forEach(item => {
+            this.alarm += parseInt(item.value)
+        })
         }
       },
       conPush(item){

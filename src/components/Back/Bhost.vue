@@ -4,11 +4,12 @@
     <x-header>云服务器</x-header>
     <div class="box" v-if="list!=''">
       <ul>
-        <li v-for="(item,index) in list" :key="index">
+        <li v-for="(item,index) in list" :key="index" v-show="item.status=='open' || item.status=='close'">
           <div class="soures" @click="operation(item.id,item.status,item.statusL)">
             <img class="img" v-if="item.status=='open'" src="../../assets/img/back/open.png">
             <img class="img" v-if="item.status=='close'" src="../../assets/img/back/close.png">
-            <img class="img" v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">
+            <!--<img class="img" v-if="item.status=='wait'" src="../../assets/img/back/open.png">-->
+            <!--<img class="img" v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">-->
             <div>
               <p class="soures-title">名称: {{item.title}}</p>
               <p class="soures-desc">镜像系统: {{item.desc}}</p>
@@ -40,10 +41,8 @@
       }
     }).then((response) => {
       for (let type in response.data.result) {
-        if (type != 'error') {
           response.data.result[type].list.forEach(host => {
             list.push({
-              type: 'host',
               status: type,
               title: host.instancename,
               desc: host.templatename,
@@ -53,7 +52,6 @@
               statusL: host.status
             })
           })
-        }
       }
       cb(list)
     })
@@ -115,15 +113,13 @@
     methods: {
       // 查看详情
       push(item){
-        if (item.type == 'host') {
-          this.address = '/ruicloud/hostdetail'
-          var params = {
-            id: item.id,
-            name: item.title,
-            configs: item.desc,
-            price: item.price,
-            password: item.password
-          }
+        this.address = '/ruicloud/hostdetail'
+        var params = {
+          id: item.id,
+          name: item.title,
+          configs: item.desc,
+          price: item.price,
+          password: item.password
         }
         this.$router.push({path: this.address, query: params})
       },

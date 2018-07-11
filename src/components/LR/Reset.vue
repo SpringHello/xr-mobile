@@ -119,22 +119,20 @@
           }
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            this.$vux.toast.show({
-              text: response.data.message
-            })
+            this.$vux.toast.text(response.data.message, 'middle')
             // 倒计时
             let countDown = 60
-            this.sendButtonText = countDown + 's'
-            let interval = setInterval(() => {
+            this.sendButtonText = '60s'
+            var interval = setInterval(() => {
               countDown--
+              this.sendButtonText = countDown + 's'
               if (countDown == 0) {
                 this.sendButtonText = '获取验证码'
                 clearInterval(interval)
               }
-              this.sendButtonText = countDown + 's'
             }, 1000)
           } else {
-            this.$vux.toast.text(response.data.message)
+            this.$vux.toast.text(response.data.message, 'middle')
           }
         })
       },
