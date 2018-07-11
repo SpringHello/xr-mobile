@@ -94,11 +94,9 @@ body {
 .sign-form {
   padding: .2rem;
   line-height: 0;
-  background:rgba(255,255,255,1);
   .form-item {
     margin-bottom: .24rem;
     border: 1px solid #dfdfdf;
-
     .vailCode-button {
       width: 2rem;
       position: absolute;
@@ -112,6 +110,39 @@ body {
       background-color: #1AAD19;
       font-size: .3rem;
       color: #fff;
+    }
+  }
+}
+
+#register {
+  .sign-form {
+    padding: 0 .75rem;
+    line-height: 0;
+    .form-item {
+      margin-bottom: .8rem;
+      border: none;
+      border-bottom: 1px solid #dfdfdf;
+      .vailCode-button {
+        width: 2rem;
+        position: absolute;
+        right: .5rem;
+        top: 45%;
+        transform: translateY(-50%);
+        outline: none;
+        border: none;
+        background: rgba(255, 255, 255, 1);
+        font-size: .24rem;
+        color: rgba(73, 144, 226, 1);
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+        padding-bottom: .8rem;
+      }
+      .main-input {
+        text-indent: 0;
+        font-size: .24rem;
+
+      }
     }
   }
 }
