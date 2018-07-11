@@ -43,7 +43,7 @@
   import axios from '@/util/iaxios'
   export default {
     beforeRouteEnter(to, from, next){
-      console.log(to)
+//      console.log(to)
       next()
     },
     components: {
