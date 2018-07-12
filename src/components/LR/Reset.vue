@@ -117,7 +117,7 @@
           this.$vux.toast.text('输入手机验证码', 'middle')
           return
         }
-        if (!RegExp.registerPassword.test(this.signForm.password) && this.signForm.password) {
+        if (!RegExp.registerPassword.test(this.signForm.password)) {
           this.$vux.toast.text('请输入至少8位包含大小写字母与数字的密码', 'middle')
           return
         }
