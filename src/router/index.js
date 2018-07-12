@@ -67,6 +67,7 @@ import Newdetail from '@/components/Back/Newdetail'//消息详情
 /*登录注册相关*/
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
+import RegisterSuccess from '@/components/LR/RegisterSuccess'
 import Reset from '@/components/LR/Reset'
 
 
@@ -141,6 +142,11 @@ export default new Router({
       path: '/ruicloud/Register',
       name: 'Register',
       component: Register,
+    },
+    {
+      path: '/ruicloud/registerSuccess',
+      name: 'RegisterSuccess',
+      component: RegisterSuccess,
     },
     {
       path: '/ruicloud/Reset',

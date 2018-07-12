@@ -1,6 +1,8 @@
 <template>
   <div style="background:rgba(255,255,255,1)" id="register">
-    <x-header :right-options="{showMore: true}">注册</x-header>
+    <x-header>注册
+      <router-link slot="right" to="login">登录</router-link>
+    </x-header>
     <div class="regs-top">
       <h3>新睿云</h3>
       <p>注册享60天免费试用</p>
@@ -22,16 +24,13 @@
         </div>
         <div class="form-item item-last" style="position: relative">
           <Group>
-            <popup-picker title="您的职位" :data="lists" v-model="questionnaire.professional" @on-show="" @on-change=""
+            <popup-picker title="请选择职位" :data="lists" v-model="questionnaire.professional" @on-show="" @on-change=""
                           :columns="3"
                           show-name></popup-picker>
           </Group>
         </div>
         <div class="form-item btn-last" style="border:none">
           <button class="nextStep" @click.prevent="nextStep">下一步</button>
-        </div>
-        <div class="checks">
-          <check-icon :value.sync="demo">我已阅读并同意 <span class="checkColor">《新睿云用户使用协议》</span></check-icon>
         </div>
       </form>
     </div>
@@ -58,8 +57,11 @@
             {{sendButtonText}}
           </button>
         </div>
-        <div class="form-item" style="border:none">
+        <div class="form-item btn-last" style="border:none">
           <button class="nextStep" @click.prevent="register">注册</button>
+        </div>
+        <div class="checks">
+          <check-icon :value.sync="demo">我已阅读并同意 <span class="checkColor">《新睿云用户使用协议》</span></check-icon>
         </div>
       </form>
     </div>
@@ -173,8 +175,8 @@
       },
       // 发送手机验证码
       sendCode(){
-        // 没有输入验证码默认退出
         if (this.signForm.pictureCode == '') {
+          this.$vux.toast.text('输入图片验证码', 'middle')
           return
         }
         // 默认邮箱注册
@@ -211,10 +213,25 @@
       },
       //下一步
       nextStep(){
-        if (this.questionnaire.uname && this.questionnaire.uphone && this.questionnaire.company && this.questionnaire.professional && this.demo) {
-          this.signForm.username = this.questionnaire.uphone
-          this.currentStep = 2
+        if (this.questionnaire.uname == '') {
+          this.$vux.toast.text('请输入您的姓名', 'middle')
+          return
         }
+        if (this.questionnaire.uphone == '') {
+          this.$vux.toast.text('请输入电话号码', 'middle')
+          return
+        }
+        if (this.questionnaire.company == '') {
+          this.$vux.toast.text('请输入公司名称', 'middle')
+          return
+        }
+        if (this.questionnaire.professional == '') {
+          this.$vux.toast.text('请选择职位', 'middle')
+          return
+        }
+        this.signForm.username = this.questionnaire.uphone
+        this.currentStep = 2
+
       },
       //注册
       register(){
@@ -243,7 +260,7 @@
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.$vux.toast.text(response.data.message, 'middle')
-            this.$router.push('mine')
+            this.$router.push('mine ')
           } else {
             this.$vux.toast.text(response.data.message, 'middle')
           }
@@ -254,14 +271,18 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
+  #register {
+    height: 100%
+  }
+
   .regs-top {
     text-align: center;
     color: rgba(73, 144, 226, 1);
     line-height: 0;
-    padding-bottom: 1.17rem;
+    padding-bottom: 1rem;
     h3 {
       font-size: .68rem;
-      padding-top: 1.2rem;
+      padding-top: .8rem;
       line-height: .68rem;
     }
     p {
@@ -280,8 +301,7 @@
     font-size: .24rem;
     color: #000;
     line-height: .33rem;
-    padding-top: .3rem;
-    padding-bottom: 1.31rem;
+    margin-top: .3rem;
     .checkColor {
       color: #2A99F2;
     }
