@@ -1,59 +1,127 @@
 <template>
   <div style="background:rgba(255,255,255,1)" id="register">
     <x-header :right-options="{showMore: true}">注册</x-header>
-    <div>
-      <div class="regs-top">
-        <h3>新睿云</h3>
-        <p>注册享60天免费试用</p>
-        <span>再送158元新手礼包</span>
-      </div>
+    <div class="regs-top">
+      <h3>新睿云</h3>
+      <p>注册享60天免费试用</p>
+      <span>再送158元新手礼包</span>
+    </div>
+    <div v-if="currentStep==1">
+      <!--问卷调查-->
       <form class="sign-form">
         <div class="form-item">
-          <!--禁止自动填充-->
-          <input type="text" style="height: 0;opacity: 0;position: absolute;padding:0px;">
+          <input type="text" v-model="questionnaire.uname" placeholder="请输入您的姓名" autocomplete="off" class="main-input">
+        </div>
+        <div class="form-item">
+          <input type="text" v-model="questionnaire.uphone" placeholder="请输入电话号码" autocomplete="off" class="main-input"
+                 @blur="phoneIsReg">
+        </div>
+        <div class="form-item" style="position: relative">
+          <input type="text" v-model="questionnaire.company" placeholder="请输入公司名称" autocomplete="off"
+                 class="main-input">
+        </div>
+        <div class="form-item item-last" style="position: relative">
+          <Group>
+            <popup-picker title="您的职位" :data="lists" v-model="questionnaire.professional" @on-show="" @on-change=""
+                          :columns="3"
+                          show-name></popup-picker>
+          </Group>
+        </div>
+        <div class="form-item btn-last" style="border:none">
+          <button class="nextStep" @click.prevent="nextStep">下一步</button>
+        </div>
+        <div class="checks">
+          <check-icon :value.sync="demo">我已阅读并同意 <span class="checkColor">《新睿云用户使用协议》</span></check-icon>
+        </div>
+      </form>
+    </div>
+    <div v-else>
+      <!--用户注册-->
+      <form class="sign-form">
+        <div class="form-item">
           <input type="text" v-model="signForm.username" placeholder="输入邮箱/手机号" autocomplete="off" class="main-input"
                  @blur="isRegs">
         </div>
         <div class="form-item">
-          <input type="password" style="height: 0;opacity: 0;position: absolute;z-index: -999;padding:0px;"
-                 autocomplete="off">
-          <input type="password" v-model="signForm.password" placeholder="输入密码" autocomplete="off" class="main-input">
+          <input type="password" v-model="signForm.password" placeholder="请输入至少8位包含大小写字母与数字的密码" autocomplete="off"
+                 class="main-input"
+                 @blur="passwordReg">
         </div>
         <div class="form-item" style="position: relative">
-          <!--禁止自动填充-->
           <input type="text" v-model="signForm.pictureCode" placeholder="输入图片验证码" autocomplete="off"
                  class="main-input">
           <img :src="imgSrc" style="position:absolute;left:4rem;top:0px;height:.5rem;width:30%">
         </div>
         <div class="form-item" style="position: relative">
-          <!--禁止自动填充-->
-          <input type="text" style="height: 0;opacity: 0;position: absolute;padding:0px;">
           <input type="text" v-model="signForm.vailCode" placeholder="输入手机验证码" autocomplete="off" class="main-input">
           <button class="vailCode-button" @click.prevent="sendCode">
             {{sendButtonText}}
           </button>
         </div>
         <div class="form-item" style="border:none">
-          <x-button type="primary" @click.native.prevent="next">下一步</x-button>
+          <button class="nextStep" @click.prevent="register">注册</button>
         </div>
       </form>
     </div>
-
   </div>
 </template>
 
 <script>
-  import {XHeader, XButton, Alert} from 'vux'
+  import {XHeader, XButton, Alert, PopupPicker, Group, CheckIcon} from 'vux'
   import RegExp from '@/util/RegExp'
   import axios from '@/util/iaxios'
   export default {
     components: {
       XHeader,
       XButton,
-      Alert
+      Alert,
+      PopupPicker,
+      Group,
+      CheckIcon
     },
     data () {
       return {
+        // 1、问卷调查  2、注册
+        currentStep: 1,
+        questionnaire: {
+          uname: '',
+          uphone: '',
+          company: '',
+          professional: []
+        },
+        lists: [
+          {
+            name: 'CEO/CTO/CIO',
+            value: 'CEO/CTO/CIO',
+            parent: 0
+          },
+          {
+            name: '项目经理',
+            value: '项目经理',
+            parent: 0
+          },
+          {
+            name: '产品经理',
+            value: '产品经理',
+            parent: 0
+          },
+          {
+            name: '研发',
+            value: '研发',
+            parent: 0
+          },
+          {
+            name: '运维人员',
+            value: '运维人员',
+            parent: 0
+          },
+          {
+            name: '其他',
+            value: '其他',
+            parent: 0
+          }
+        ],
+        demo: true,
         signForm: {
           username: '',
           // 图片验证码
@@ -69,6 +137,20 @@
 
     },
     methods: {
+      //问卷手机校验
+      phoneIsReg(){
+        if (this.questionnaire.uphone) {
+          axios.get('user/isRegister.do', {
+            params: {
+              username: this.questionnaire.uphone
+            }
+          }).then(response => {
+            if (response.status != 200 || response.data.status != 1) {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        }
+      },
       //校验手机号码是否已注册
       isRegs(){
         if (this.signForm.username) {
@@ -83,32 +165,11 @@
           })
         }
       },
-      // 展示图片验证码
-      showPictureCode(){
-        if (this.sendButtonText != '获取验证码') {
-          return
+      //密码格式校验
+      passwordReg(){
+        if (!RegExp.registerPassword.test(this.signForm.password) && this.signForm.password) {
+          this.$vux.toast.text('请输入至少8位包含大小写字母与数字的密码', 'middle')
         }
-        if (this.signForm.username.trim() == '') {
-          this.$vux.toast.text('请输入手机/邮箱')
-          return
-        }
-        // 展现图片验证码前先校验手机/邮箱
-        if (!RegExp.phoneRegexp.test(this.signForm.username) && !RegExp.emailRegexp.test(this.signForm.username)) {
-          // 既不是手机也不是邮箱
-          this.$vux.toast.text('手机/邮箱格式错误')
-          return
-        }
-        axios.get('user/isRegister.do', {
-          params: {
-            username: this.signForm.username
-          }
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.showAlert = true
-          } else {
-            this.$vux.toast.text(response.data.message)
-          }
-        })
       },
       // 发送手机验证码
       sendCode(){
@@ -148,21 +209,29 @@
           }
         })
       },
+      //下一步
+      nextStep(){
+        if (this.questionnaire.uname && this.questionnaire.uphone && this.questionnaire.company && this.questionnaire.professional && this.demo) {
+          this.signForm.username = this.questionnaire.uphone
+          this.currentStep = 2
+        }
+      },
+      //注册
       register(){
         if (this.signForm.username == '') {
-          this.$vux.toast.text('请输入手机/邮箱')
-          return
-        }
-        if (this.signForm.vailCode == '') {
-          this.$vux.toast.text('请输入验证码')
+          this.$vux.toast.text('请输入手机/邮箱', 'middle')
           return
         }
         if (this.signForm.password == '') {
-          this.$vux.toast.text('请输入密码')
+          this.$vux.toast.text('请输入密码', 'middle')
           return
         }
-        if (!RegExp.registerPassword.test(this.signForm.password)) {
-          this.$vux.toast.text('密码格式错误')
+        if (this.signForm.pictureCode == '') {
+          this.$vux.toast.text('请输入图片验证码', 'middle')
+          return
+        }
+        if (this.signForm.vailCode == '') {
+          this.$vux.toast.text('请输入手机验证码', 'middle')
           return
         }
         axios.get('user/register.do', {
@@ -173,15 +242,12 @@
           }
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            this.$vux.toast.text(response.data.message)
+            this.$vux.toast.text(response.data.message, 'middle')
+            this.$router.push('mine')
           } else {
-            this.$vux.toast.text(response.data.message)
+            this.$vux.toast.text(response.data.message, 'middle')
           }
         })
-      },
-      //下一步
-      next(){
-        this.$router.push('home')
       },
     }
   }
@@ -207,6 +273,17 @@
       font-size: .26rem;
       padding-top: .16rem;
       line-height: .37rem;
+    }
+  }
+
+  .checks {
+    font-size: .24rem;
+    color: #000;
+    line-height: .33rem;
+    padding-top: .3rem;
+    padding-bottom: 1.31rem;
+    .checkColor {
+      color: #2A99F2;
     }
   }
 </style>
