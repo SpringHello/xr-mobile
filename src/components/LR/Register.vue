@@ -15,8 +15,7 @@
           <input type="text" v-model="questionnaire.uname" placeholder="请输入您的姓名" autocomplete="off" class="main-input">
         </div>
         <div class="form-item">
-          <input type="text" v-model="questionnaire.uphone" placeholder="请输入电话号码" autocomplete="off" class="main-input"
-                 @blur="phoneIsReg">
+          <input type="text" v-model="questionnaire.uphone" placeholder="请输入电话号码" autocomplete="off" class="main-input">
         </div>
         <div class="form-item" style="position: relative">
           <input type="text" v-model="questionnaire.company" placeholder="请输入公司名称" autocomplete="off"
@@ -43,8 +42,7 @@
         </div>
         <div class="form-item">
           <input type="password" v-model="signForm.password" placeholder="请输入至少8位包含大小写字母与数字的密码" autocomplete="off"
-                 class="main-input"
-                 @blur="passwordReg">
+                 class="main-input">
         </div>
         <div class="form-item" style="position: relative">
           <input type="text" v-model="signForm.pictureCode" placeholder="输入图片验证码" autocomplete="off"
@@ -84,7 +82,7 @@
     data () {
       return {
         // 1、问卷调查  2、注册
-        currentStep: 2,
+        currentStep: 1,
         questionnaire: {
           uname: '',
           uphone: '',
@@ -139,20 +137,6 @@
 
     },
     methods: {
-      //问卷手机校验
-      phoneIsReg(){
-        if (this.questionnaire.uphone) {
-          axios.get('user/isRegister.do', {
-            params: {
-              username: this.questionnaire.uphone
-            }
-          }).then(response => {
-            if (response.status != 200 || response.data.status != 1) {
-              this.$vux.toast.text(response.data.message, 'middle')
-            }
-          })
-        }
-      },
       //校验手机号码是否已注册
       isRegs(){
         if (this.signForm.username) {
@@ -183,15 +167,11 @@
           this.$vux.toast.text('不是手机号也不是邮箱', 'middle')
           return
         }
-        if (RegExp.phoneRegexp.test(this.signForm.username)) {
-          // 如果是手机注册
-          isemail = '0'
-        }
+        var isemail = '0'
         if (RegExp.emailRegexp.test(this.signForm.username)) {
           // 如果是邮箱注册
           isemail = '1'
         }
-
         axios.get('user/code.do', {
           params: {
             type: '0',
@@ -220,15 +200,19 @@
       },
       //下一步
       nextStep(){
-        if (this.questionnaire.uname == '') {
+        if (this.questionnaire.uname.trim() == '') {
           this.$vux.toast.text('请输入您的姓名', 'middle')
           return
         }
-        if (this.questionnaire.uphone == '') {
+        if (this.questionnaire.uphone.trim() == '') {
           this.$vux.toast.text('请输入电话号码', 'middle')
           return
         }
-        if (this.questionnaire.company == '') {
+        if (!RegExp.phoneRegexp.test(this.questionnaire.uphone)) {
+          this.$vux.toast.text('请输入正确手机号', 'middle')
+          return
+        }
+        if (this.questionnaire.company.trim() == '') {
           this.$vux.toast.text('请输入公司名称', 'middle')
           return
         }
@@ -238,23 +222,30 @@
         }
         this.signForm.username = this.questionnaire.uphone
         this.currentStep = 2
-
       },
       //注册
       register(){
-        if (this.signForm.username == '') {
+        if (this.signForm.username.trim() == '') {
           this.$vux.toast.text('请输入手机/邮箱', 'middle')
           return
         }
-        if (this.signForm.password == '') {
+        if (!RegExp.phoneRegexp.test(this.signForm.username) && !RegExp.emailRegexp.test(this.signForm.username)) {
+          this.$vux.toast.text('不是手机号也不是邮箱', 'middle')
+          return
+        }
+        if (this.signForm.password.trim() == '') {
           this.$vux.toast.text('请输入密码', 'middle')
           return
         }
-        if (this.signForm.pictureCode == '') {
+        if (!RegExp.registerPassword.test(this.signForm.password)) {
+          this.$vux.toast.text('请输入至少8位包含大小写字母与数字的密码', 'middle')
+          return
+        }
+        if (this.signForm.pictureCode.trim() == '') {
           this.$vux.toast.text('请输入图片验证码', 'middle')
           return
         }
-        if (this.signForm.vailCode == '') {
+        if (this.signForm.vailCode.trim() == '') {
           this.$vux.toast.text('请输入手机验证码', 'middle')
           return
         }
