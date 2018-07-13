@@ -43,7 +43,6 @@
   import axios from '@/util/iaxios'
   export default {
     beforeRouteEnter(to, from, next){
-      console.log(to)
       next()
     },
     components: {
@@ -77,10 +76,10 @@
           this.$vux.toast.text('请输入密码')
           return
         }
-        if (!RegExp.loginPassword.test(this.signForm.password)) {
+        /*if (!RegExp.loginPassword.test(this.signForm.password)) {
           this.$vux.toast.text('密码格式错误')
           return
-        }
+        }*/
         if (this.signForm.vailCode == '') {
           this.$vux.toast.text('请输入验证码')
           return
