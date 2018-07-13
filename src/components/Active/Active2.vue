@@ -1,5 +1,6 @@
 <template>
   <div id="page-active">
+    <x-header>注册领红包</x-header>
     <div class="banner">
       <div>
         <p style="font-size:.5rem;font-family:PingFangSC-Regular;color:rgba(51,51,51,1);margin-bottom: .17rem">[<span
@@ -60,7 +61,7 @@
 <script>
   import axios from '@/util/iaxios'
   import {MessageBox} from 'mint-ui'
-
+  import {XHeader} from 'vux'
   const secondInMillisecond = 1000,
     minuteInMillisecond = secondInMillisecond * 60,
     hourInMillisecond = minuteInMillisecond * 60
@@ -154,6 +155,9 @@
         }
         return startIndex
       }
+    },
+    components: {
+      XHeader
     }
   }
 </script>
