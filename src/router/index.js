@@ -28,6 +28,7 @@ import ddos from '@/components/App/Products/DDOS'
 
 import Workorder from '@/components/Back/Workorder'
 import Work from '@/components/Back/Work'
+import Workdetail from '@/components/Back/Workdetail'
 import Bhost from '@/components/Back/Bhost'//
 import Bdisk from '@/components/Back/Bdisk'
 import Belasticip from '@/components/Back/BelasticIP'
@@ -66,11 +67,13 @@ import Newdetail from '@/components/Back/Newdetail'//消息详情
 /*登录注册相关*/
 import Login from '@/components/LR/Login'
 import Register from '@/components/LR/Register'
+import RegisterSuccess from '@/components/LR/RegisterSuccess'
 import Reset from '@/components/LR/Reset'
 
 
 /*活动相关*/
 import Active1 from '@/components/Active/Active1'
+import Active2 from '@/components/Active/Active2'
 
 
 Vue.use(Router)
@@ -114,6 +117,7 @@ export default new Router({
         {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
         {path: '/ruicloud/workorder', name: 'Workorder', component: Workorder,},
         {path: '/ruicloud/work', name: 'Work', component: Work,},
+        {path: '/ruicloud/workdetail', name: 'Workdetail', component: Workdetail,},
         {path: '/ruicloud/expense', name: 'Expense', component: Expense},
         {path: '/ruicloud/orders', name: 'Orders', component: Orders},
         {path: '/ruicloud/orderdetail', name: 'Orderdetail', component: Orderdetail},
@@ -126,6 +130,7 @@ export default new Router({
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
 
         {path: '/ruicloud/active_1', name: 'active_1', component: Active1},
+        {path: '/ruicloud/active_2', name: 'active_2', component: Active2},
       ]
     },
     {
@@ -137,6 +142,11 @@ export default new Router({
       path: '/ruicloud/Register',
       name: 'Register',
       component: Register,
+    },
+    {
+      path: '/ruicloud/registerSuccess',
+      name: 'RegisterSuccess',
+      component: RegisterSuccess,
     },
     {
       path: '/ruicloud/Reset',
