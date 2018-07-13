@@ -84,7 +84,7 @@
     data () {
       return {
         // 1、问卷调查  2、注册
-        currentStep: 1,
+        currentStep: 2,
         questionnaire: {
           uname: '',
           uphone: '',
@@ -179,12 +179,19 @@
           this.$vux.toast.text('输入图片验证码', 'middle')
           return
         }
-        // 默认邮箱注册
-        let isemail = '1'
+        if (!RegExp.phoneRegexp.test(this.signForm.username) && !RegExp.emailRegexp.test(this.signForm.username)) {
+          this.$vux.toast.text('不是手机号也不是邮箱', 'middle')
+          return
+        }
         if (RegExp.phoneRegexp.test(this.signForm.username)) {
           // 如果是手机注册
           isemail = '0'
         }
+        if (RegExp.emailRegexp.test(this.signForm.username)) {
+          // 如果是邮箱注册
+          isemail = '1'
+        }
+
         axios.get('user/code.do', {
           params: {
             type: '0',
@@ -251,12 +258,18 @@
           this.$vux.toast.text('请输入手机验证码', 'middle')
           return
         }
+        let params = {
+          questionId: '4',
+          msg: '',
+          username: this.signForm.username,
+          password: this.signForm.password,
+          code: this.signForm.vailCode
+        }
+        for (var key in this.questionnaire) {
+          params.msg += this.questionnaire[key] + '###'
+        }
         axios.get('user/register.do', {
-          params: {
-            username: this.signForm.username,
-            password: this.signForm.password,
-            code: this.signForm.vailCode
-          }
+          params
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.$vux.toast.text(response.data.message, 'middle')
