@@ -64,11 +64,15 @@
     methods: {
       // 发送手机验证码
       sendCode(){
-        if (this.signForm.username == '') {
+        if (this.signForm.username.trim() == '') {
           this.$vux.toast.text('已验证邮箱/注册手机号', 'middle')
           return
         }
-        if (this.signForm.pictureCode == '') {
+        if (!RegExp.phoneRegexp.test(this.signForm.username) && !RegExp.emailRegexp.test(this.signForm.username)) {
+          this.$vux.toast.text('不是手机号也不是邮箱', 'middle')
+          return
+        }
+        if (this.signForm.pictureCode.trim() == '') {
           this.$vux.toast.text('输入图片验证码', 'middle')
           return
         }
@@ -105,15 +109,19 @@
       },
       //重置密码确认
       reset(){
-        if (this.signForm.username == '') {
+        if (this.signForm.username.trim() == '') {
           this.$vux.toast.text('已验证邮箱/注册手机号', 'middle')
           return
         }
-        if (this.signForm.pictureCode == '') {
+        if (!RegExp.phoneRegexp.test(this.signForm.username) && !RegExp.emailRegexp.test(this.signForm.username)) {
+          this.$vux.toast.text('不是手机号也不是邮箱', 'middle')
+          return
+        }
+        if (this.signForm.pictureCode.trim() == '') {
           this.$vux.toast.text('输入图片验证码', 'middle')
           return
         }
-        if (this.signForm.vailCode == '') {
+        if (this.signForm.vailCode.trim() == '') {
           this.$vux.toast.text('输入手机验证码', 'middle')
           return
         }

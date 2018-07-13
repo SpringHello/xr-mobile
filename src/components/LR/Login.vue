@@ -63,7 +63,7 @@
     },
     methods: {
       login(){
-        if (this.signForm.username == '') {
+        if (this.signForm.username.trim() == '') {
           this.$vux.toast.text('请输入手机/邮箱', 'middle')
           return
         }
@@ -73,7 +73,7 @@
           this.$vux.toast.text('手机/邮箱格式错误', 'middle')
           return
         }
-        if (this.signForm.password == '') {
+        if (this.signForm.password.trim() == '') {
           this.$vux.toast.text('请输入密码', 'middle')
           return
         }
@@ -81,7 +81,7 @@
           this.$vux.toast.text('密码格式错误', 'middle')
           return
         }
-        if (this.signForm.vailCode == '') {
+        if (this.signForm.vailCode.trim() == '') {
           this.$vux.toast.text('请输入验证码', 'middle')
           return
         }
