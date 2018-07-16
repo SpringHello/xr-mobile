@@ -37,7 +37,7 @@ Vue.config.productionTip = false
 
 var pxPreRem = 750 / 100;
 //console.log(document.documentElement.clientWidth)
-var fontSize = document.documentElement.clientWidth / pxPreRem
+var fontSize = document.documentElement.clientWidth / pxPreRem || document.body.clientWidth / pxPreRem
 document.documentElement.style.fontSize = fontSize + 'px';
 
 // 日期原型对象拓展
