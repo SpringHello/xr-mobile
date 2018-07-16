@@ -457,11 +457,11 @@
             this.sendButtonText = countDown + 's'
             let interval = setInterval(() => {
               countDown--
+              this.sendButtonText = countDown + 's'
               if (countDown == 0) {
                 this.sendButtonText = '获取验证码'
                 clearInterval(interval)
               }
-              this.sendButtonText = countDown + 's'
             }, 1000)
           } else {
             this.$vux.toast.text(response.data.message, 'middle')
@@ -581,7 +581,7 @@
   }
 
   .checks {
-    font-size: .24rem;
+    font-size: .28rem;
     color: #000;
     line-height: .33rem;
     margin-top: .3rem;
