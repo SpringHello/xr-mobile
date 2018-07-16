@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import App from '@/App'
 import Main from '@/components/Main'
 import Home from '@/components/Home'
 import Sort from '@/components/Sort'
@@ -84,14 +85,21 @@ export default new Router({
   routes: [
     {
       path: '/ruicloud',
-      name: 'Main',
-      component: Main,
+      name: 'App',
+      component: App,
       children: [
-        {path: '/', component: Home},
-        {path: 'Home', name: 'Home', component: Home},
-        {path: 'Sort', name: 'Sort', component: Sort},
-        {path: 'Console', name: 'Console', component: Console},
-        {path: 'Mine', name: 'Mine', component: Mine},
+        {
+          path: '/',
+          name: 'Main',
+          component: Main,
+          children: [
+            {path: '/', name: 'Home', component: Home},
+            {path: 'Home', name: 'Home', component: Home},
+            {path: 'Sort', name: 'Sort', component: Sort},
+            {path: 'Console', name: 'Console', component: Console},
+            {path: 'Mine', name: 'Mine', component: Mine},
+          ]
+        },
         {path: '/ruicloud/Bhost', name: 'Bhost', component: Bhost},
         {path: '/ruicloud/Bdisk', name: 'Bdisk', component: Bdisk},
         {path: '/ruicloud/Belasticip', name: 'Belasticip', component: Belasticip},
@@ -129,110 +137,109 @@ export default new Router({
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
-
         {path: '/ruicloud/active_1', name: 'active_1', component: Active1},
         {path: '/ruicloud/active_2', name: 'active_2', component: Active2},
+        {
+          path: '/ruicloud/Login',
+          name: 'Login',
+          component: Login,
+        },
+        {
+          path: '/ruicloud/agreement',
+          name: 'Agreement',
+          component: Agreement,
+        },
+        {
+          path: '/ruicloud/Register',
+          name: 'Register',
+          component: Register,
+        },
+        {
+          path: '/ruicloud/registerSuccess',
+          name: 'RegisterSuccess',
+          component: RegisterSuccess,
+        },
+        {
+          path: '/ruicloud/Reset',
+          name: 'Reset',
+          component: Reset,
+        },
+        {
+          path: '/ruicloud/Dynamic',
+          name: 'Dynamic',
+          component: Dynamic,
+        },
+        {
+          path: '/ruicloud/Prodetail',
+          name: 'Prodetail',
+          component: Prodetail,
+        },
+        {
+          path: '/ruicloud/host',
+          name: 'host',
+          component: host,
+        },
+        {
+          path: '/ruicloud/ecsSnapshot',
+          name: 'ecsSnapshot',
+          component: ecsSnapshot,
+        },
+        {
+          path: '/ruicloud/mirror',
+          name: 'mirror',
+          component: mirror,
+        },
+        {
+          path: '/ruicloud/disk',
+          name: 'disk',
+          component: disk,
+        },
+        {
+          path: '/ruicloud/diskbackup',
+          name: 'diskbackup',
+          component: diskbackup,
+        },
+        {
+          path: '/ruicloud/vpc',
+          name: 'vpc',
+          component: vpc,
+        },
+        {
+          path: '/ruicloud/elasticip',
+          name: 'elasticip',
+          component: elasticip,
+        },
+        {
+          path: '/ruicloud/balance',
+          name: 'balance',
+          component: balance,
+        },
+        {
+          path: '/ruicloud/natgateway',
+          name: 'natgateway',
+          component: natgateway,
+        },
+        {
+          path: '/ruicloud/virtualvpn',
+          name: 'virtualvpn',
+          component: virtualvpn,
+        },
+        {
+          path: '/ruicloud/cloudmonitoring',
+          name: 'cloudmonitoring',
+          component: cloudmonitoring,
+        },
+        {
+          path: '/ruicloud/firewall',
+          name: 'firewall',
+          component: firewall,
+        },
+        {
+          path: '/ruicloud/ddos',
+          name: 'ddos',
+          component: ddos,
+        },
       ]
-    },
-    {
-      path: '/ruicloud/Login',
-      name: 'Login',
-      component: Login,
-    },
-    {
-      path: '/ruicloud/agreement',
-      name: 'Agreement',
-      component: Agreement,
-    },
-    {
-      path: '/ruicloud/Register',
-      name: 'Register',
-      component: Register,
-    },
-    {
-      path: '/ruicloud/registerSuccess',
-      name: 'RegisterSuccess',
-      component: RegisterSuccess,
-    },
-    {
-      path: '/ruicloud/Reset',
-      name: 'Reset',
-      component: Reset,
-    },
-    {
-      path: '/ruicloud/Dynamic',
-      name: 'Dynamic',
-      component: Dynamic,
-    },
-    {
-      path: '/ruicloud/Prodetail',
-      name: 'Prodetail',
-      component: Prodetail,
-    },
-    {
-      path: '/ruicloud/host',
-      name: 'host',
-      component: host,
-    },
-    {
-      path: '/ruicloud/ecsSnapshot',
-      name: 'ecsSnapshot',
-      component: ecsSnapshot,
-    },
-    {
-      path: '/ruicloud/mirror',
-      name: 'mirror',
-      component: mirror,
-    },
-    {
-      path: '/ruicloud/disk',
-      name: 'disk',
-      component: disk,
-    },
-    {
-      path: '/ruicloud/diskbackup',
-      name: 'diskbackup',
-      component: diskbackup,
-    },
-    {
-      path: '/ruicloud/vpc',
-      name: 'vpc',
-      component: vpc,
-    },
-    {
-      path: '/ruicloud/elasticip',
-      name: 'elasticip',
-      component: elasticip,
-    },
-    {
-      path: '/ruicloud/balance',
-      name: 'balance',
-      component: balance,
-    },
-    {
-      path: '/ruicloud/natgateway',
-      name: 'natgateway',
-      component: natgateway,
-    },
-    {
-      path: '/ruicloud/virtualvpn',
-      name: 'virtualvpn',
-      component: virtualvpn,
-    },
-    {
-      path: '/ruicloud/cloudmonitoring',
-      name: 'cloudmonitoring',
-      component: cloudmonitoring,
-    },
-    {
-      path: '/ruicloud/firewall',
-      name: 'firewall',
-      component: firewall,
-    },
-    {
-      path: '/ruicloud/ddos',
-      name: 'ddos',
-      component: ddos,
     },
   ]
 })
