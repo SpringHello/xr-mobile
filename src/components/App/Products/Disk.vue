@@ -106,7 +106,7 @@
       window.scrollTo(0, 0);
       return {
         logo: {
-          img:require('../../../assets/img/disk/bg.png'),
+          img: require('../../../assets/img/disk/bg.png'),
           title: '云硬盘',
           desc: '云硬盘是为云服务器实例提供持久性块存储的服务，可以挂载到同一可用区下的云服务器实例上，云硬盘具有高可靠、高性能、灵活易用等特点，同时云硬盘支持在线操作和管理。',
         },
@@ -184,7 +184,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
+    background: linear-gradient(90deg, rgba(74, 136, 254, 1), rgba(56, 125, 255, 1));
     .logo-wrapper {
       display: flex;
       align-items: center;
@@ -200,7 +200,7 @@
           color: rgba(255, 255, 255, 1);
         }
       }
-      img{
+      img {
         width: 3.01rem;
       }
     }
@@ -291,7 +291,7 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .3rem;
         .describe {
-          img{
+          img {
             width: 4.71rem;
             display: block;
             margin: 0 auto;
@@ -327,6 +327,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
+    margin-bottom: 1.32rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -376,6 +377,8 @@
   }
 
   button {
+    position: fixed;
+    bottom: 0;
     font-size: .32rem;
     color: #FFF;
     background: #4A90E2;

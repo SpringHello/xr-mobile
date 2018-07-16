@@ -111,9 +111,21 @@
           desc: '新睿云通过专用硬件，针对DDoS攻击，为用户提供高防IP服务。高防IP为用户已备案的域名提供最高40Gbps的DDoS高级防护。用户在遭遇大流量DDoS攻击的情况下，可以在配置高防IP后将攻击流量引至高防IP，确保源站稳定可用。',
         },
         features: [
-          {img: 'icon-DDOSliuliangqingxi', title: 'DDOS流量清洗', desc: '支持畸形报文过滤，对SYN flood、ACK flood、UDP flood、ICMP flood、RST flood等攻击类型进行清洗。'},
-          {img: 'icon-jiyuyingyongcengdejichufanghu', title: '基于应用层的基础防护', desc: '有效抵御HTTP get/post flood攻击；CC 攻击；HTTP slow header/post攻击等。'},
-          {img: 'icon-jiyuwangluochuanshudegongjifanghu', title: '基于网络传输的攻击防护', desc: '有效抵御SYN flood攻击；ACK flood攻击；FIN/RST flood攻击；UDP flood攻击；TCP连接耗尽攻击等。'},
+          {
+            img: 'icon-DDOSliuliangqingxi',
+            title: 'DDOS流量清洗',
+            desc: '支持畸形报文过滤，对SYN flood、ACK flood、UDP flood、ICMP flood、RST flood等攻击类型进行清洗。'
+          },
+          {
+            img: 'icon-jiyuyingyongcengdejichufanghu',
+            title: '基于应用层的基础防护',
+            desc: '有效抵御HTTP get/post flood攻击；CC 攻击；HTTP slow header/post攻击等。'
+          },
+          {
+            img: 'icon-jiyuwangluochuanshudegongjifanghu',
+            title: '基于网络传输的攻击防护',
+            desc: '有效抵御SYN flood攻击；ACK flood攻击；FIN/RST flood攻击；UDP flood攻击；TCP连接耗尽攻击等。'
+          },
           {img: 'icon-linghuoguanli', title: '灵活管理', desc: '可以使用界面进行管理配置，操作简单易用。'}
         ],
         stageInfo: {
@@ -150,11 +162,11 @@
         ],
       }
     },
-    methods:{
+    methods: {
       buy(){
-        if ($store.state.userInfo){
+        if ($store.state.userInfo) {
           this.$router.push('console')
-        }else{
+        } else {
           this.$router.push('login')
         }
       }
@@ -164,7 +176,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
+    background: linear-gradient(90deg, rgba(74, 136, 254, 1), rgba(56, 125, 255, 1));
     .logo-wrapper {
       display: flex;
       align-items: center;
@@ -180,8 +192,8 @@
           color: rgba(255, 255, 255, 1);
         }
       }
-      img{
-        width:3.01rem;
+      img {
+        width: 3.01rem;
       }
     }
 
@@ -271,7 +283,7 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .3rem;
         .describe {
-          img{
+          img {
             width: 4.71rem;
             display: block;
             margin: 0 auto;
@@ -307,6 +319,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
+    margin-bottom: 1.32rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -356,6 +369,8 @@
   }
 
   button {
+    position: fixed;
+    bottom: 0;
     font-size: .32rem;
     color: #FFF;
     background: #4A90E2;

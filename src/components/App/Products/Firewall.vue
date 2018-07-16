@@ -278,6 +278,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
+    margin-bottom: 1.32rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -327,6 +328,8 @@
   }
 
   button {
+    position: fixed;
+    bottom: 0;
     font-size: .32rem;
     color: #FFF;
     background: #4A90E2;

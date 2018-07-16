@@ -117,7 +117,7 @@
         },
         features: [
           {
-            img:'icon-jisuannengli',
+            img: 'icon-jisuannengli',
             title: '计算能力',
             desc: '提供多种规格、多种类型、多网卡的弹性云服务器，可满足用户不同的使用场景。'
           },
@@ -137,7 +137,7 @@
             desc: '支持公共系统镜像、服务集成镜像、自定义镜像和用户本地镜像，自定义镜像让您可以随时备份或批量创建云服务器。'
           },
           {
-            img:'icon-beifenyukuaizhao',
+            img: 'icon-beifenyukuaizhao',
             title: '备份与快照',
             desc: '快照能对云服务器某个时刻的数据进行备份和回滚，且快照为全量快照，提升了安全性的同时，降低了快照的管理难度。'
           },
@@ -179,7 +179,7 @@
             desc: '强大的计算和存储资源池，用户可便捷、快速的获取相应云计算服务，能快速实现云服务器的批量创建。'
           },
           {
-            img:'icon-mobanchuangjian',
+            img: 'icon-mobanchuangjian',
             title: '模板创建',
             desc: '可依据当前主机的镜像批量生成新的主机。'
           },
@@ -206,11 +206,11 @@
         ],
       }
     },
-    methods:{
+    methods: {
       buy(){
-        if ($store.state.userInfo){
+        if ($store.state.userInfo) {
           this.$router.push('console')
-        }else{
+        } else {
           this.$router.push('login')
         }
       }
@@ -220,7 +220,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
+    background: linear-gradient(90deg, rgba(74, 136, 254, 1), rgba(56, 125, 255, 1));
     .logo-wrapper {
       display: flex;
       align-items: center;
@@ -236,7 +236,7 @@
           color: rgba(255, 255, 255, 1);
         }
       }
-      img{
+      img {
         width: 3.01rem;
       }
     }
@@ -327,7 +327,7 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .3rem;
         .describe {
-          img{
+          img {
             width: 4.71rem;
             display: block;
             margin: 0 auto;
@@ -368,6 +368,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
+    margin-bottom: 1.32rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -417,6 +418,8 @@
   }
 
   button {
+    position: fixed;
+    bottom: 0;
     font-size: .32rem;
     color: #FFF;
     background: #4A90E2;
