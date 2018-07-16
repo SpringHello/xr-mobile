@@ -6,21 +6,22 @@
       <p class="title">感谢您关注新睿云，请告诉我们您对新睿云的意见和建议，我们会参考您的反馈不断优化我们的产品和服务，您留下的每一个反馈都是对新入云的宝贵财富。</p>
     </div>
     <div class="content">
-         <group>
-           <popup-picker title="反馈类型" :data="list1" v-model="value1" placeholder="请选择" @on-change="onChange"></popup-picker>
-         </group>
       <group>
-        <x-textarea :max="500" placeholder="请输入投诉的内容"></x-textarea>
+        <popup-picker title="反馈类型" :data="list1" v-model="value1" placeholder="请选择"
+                      @on-change="onChange"></popup-picker>
+      </group>
+      <group class="text">
+        <x-textarea :max="150" placeholder="请输入投诉的内容" :rows="5"></x-textarea>
       </group>
     </div>
-     <div class="btn">
-       <x-button type="primary">确认提交</x-button>
-     </div>
+    <div class="btn">
+      <x-button type="primary">确认提交</x-button>
+    </div>
   </div>
 </template>
 
 <script>
-  import {XHeader,Group,Cell,PopupPicker,XTextarea,XButton } from 'vux'
+  import {XHeader, Group, Cell, PopupPicker, XTextarea, XButton} from 'vux'
   export default{
     components: {
       XHeader,
@@ -32,15 +33,15 @@
     },
     data (){
       return {
-        value1:[],
-        list1:[['对产品的意见和建议','对服务的意见和建议','投诉','其他' ]]
+        value1: [],
+        list1: [['对产品的意见和建议', '对服务的意见和建议', '投诉', '其他']]
       }
     },
-    methods:{
-        //反馈类型
-     onChange(val){
-       console.log( val)
-     }
+    methods: {
+      //反馈类型
+      onChange(val){
+        console.log(val[0])
+      }
     }
   }
 </script>
@@ -66,20 +67,15 @@
         display: block;
       }
     }
-    .content{
+    .content {
       background: #FFF;
       margin-bottom: .2rem;
-      div{
-         font-size: .32rem;
-        &:last-of-type{
-          .weui-cells{
-
-          }
-        }
+      div {
+        font-size: .32rem;
       }
 
     }
-    .btn{
+    .btn {
       padding: .47rem .3rem;
     }
   }
