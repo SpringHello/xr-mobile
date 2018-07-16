@@ -371,10 +371,18 @@ html {
 
 }
 
-.feedback {
+#feedback {
+  .weui-cells .vux-cell-box .weui-cell__hd {
+    font-size: .32rem;
+  }
   .text {
-    .weui-cells:before {
-      border-top: 0 !important;
+    .weui-cells::before {
+      border-top: 0;
+    }
+  }
+  .btn {
+    .weui-btn_primary {
+      background-color: rgba(74, 144, 226, 1);
     }
   }
 }

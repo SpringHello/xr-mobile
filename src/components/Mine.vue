@@ -161,7 +161,7 @@
         //客服电话
         showKF: false,
         menusKF: {
-          menu1: '<span style="color:red">拨打 400-050-5565</span>',
+          menu1: '<span style="color:red">热线 400-050-5565</span>',
         },
         //退出
         showTC: false,

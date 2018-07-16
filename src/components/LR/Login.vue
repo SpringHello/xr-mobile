@@ -24,7 +24,8 @@
         <div class="form-item" style="position: relative">
           <input type="text" v-model="signForm.vailCode" placeholder="图片验证码" autocomplete="off"
                  class="main-input">
-          <img :src="imgSrc" style="position:absolute;left:5rem;top:0px;height:.5rem;width:30%">
+          <img :src="imgSrc" style="position:absolute;right: 0;top:0px;height:.5rem;width:30%"
+               @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`">
         </div>
         <div class="form-item" style="border:none">
           <button class="nextStep" @click.prevent="login">登录</button>

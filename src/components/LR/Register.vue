@@ -52,7 +52,9 @@
         <div class="form-item" style="position: relative">
           <input type="text" v-model="signForm.pictureCode" placeholder="输入图片验证码" autocomplete="off"
                  class="main-input">
-          <img :src="imgSrc" style="position:absolute;left:4rem;top:0px;height:.5rem;width:30%">
+          <img :src="imgSrc" style="position:absolute;right:0;top:0px;height:.5rem;width:30%"
+               @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`"
+          >
         </div>
         <div class="form-item" style="position: relative">
           <input type="text" v-model="signForm.vailCode" placeholder="输入手机验证码" autocomplete="off" class="main-input">
