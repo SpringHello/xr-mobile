@@ -113,7 +113,7 @@
     .btn {
       padding: .47rem .3rem;
       position: relative;
-      top: 1rem;
+      top: 2rem;
     }
   }
 </style>
