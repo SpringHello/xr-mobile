@@ -4,8 +4,9 @@
     <div class="middle">
       <Group>
         <x-input title="输入邮箱" placeholder="请输入邮箱" placeholder-align="left" v-model="froms.email"></x-input>
-        <x-input title="邮箱验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.emailcode"></x-input>
-        <button class="button" @click.prevent="getCode">{{message}}</button>
+        <x-input title="邮箱验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.emailcode">
+          <button  slot="right"class="button" @click.prevent="getCode">{{message}}</button>
+        </x-input>
       </Group>
 
     </div>
@@ -122,9 +123,6 @@
     color: #FFF;
     line-height: .33rem;
     outline: none;
-    position: relative;
-    bottom: .6rem;
-    left: 5.5rem;
   }
 
   .btns {
