@@ -257,7 +257,7 @@ export default {
     // 免费领取主机
     freeReceive (item) {
       if (this.$store.state.userInfo == null) {
-        MessageBox({ title: '提示', message: response.data.message, confirmButtonText: '立即登录' }).then(() => {
+        MessageBox({ title: '提示', message: '未登录，请先登录', confirmButtonText: '立即登录' }).then(() => {
           this.$router.push('login')
         })
         return

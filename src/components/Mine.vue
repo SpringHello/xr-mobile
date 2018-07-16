@@ -83,7 +83,7 @@
       </div>
       <!--版块四-->
       <div>
-        <div class="r-item" @click="onOpen">
+        <div class="r-item" @click="feedback">
           <div>
             <img src="../assets/img/mine/yijian.png">
             <p>意见反馈</p>
@@ -161,7 +161,7 @@
         //客服电话
         showKF: false,
         menusKF: {
-          menu1: '<span style="color:red">拨打 400-050-5565</span>',
+          menu1: '<span style="color:red">热线 400-050-5565</span>',
         },
         //退出
         showTC: false,
