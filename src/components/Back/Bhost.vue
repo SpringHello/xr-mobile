@@ -113,7 +113,7 @@
     methods: {
       // 查看详情
       push(item){
-        this.address = '/ruicloud/hostdetail'
+        this.address = '/hostdetail'
         var params = {
           id: item.id,
           name: item.title,

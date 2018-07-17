@@ -159,7 +159,7 @@
               details.status = 4
               axios.get(url, {params}).then(response => {
                   if (response.status == 200 && response.data.status == 1) {
-                    this.$router.push('/ruicloud/belasticip')
+                    this.$router.push('/belasticip')
                     this.showOK = true
                     this.messageOK = response.data.message
                   }
@@ -187,7 +187,7 @@
                 }
               }).then(response => {
                   if (response.status == 200 && response.data.status == 1) {
-                    this.$router.push('/ruicloud/belasticip')
+                    this.$router.push('/belasticip')
                     this.showOK = true
                     this.messageOK = response.data.message
                   }
@@ -246,7 +246,7 @@
             }
           }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
-              this.$router.push('/ruicloud/belasticip')
+              this.$router.push('/belasticip')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {
               this.$vux.toast.text(response.data.message, 'middle')
@@ -262,7 +262,7 @@
             }
           }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
-              this.$router.push('/ruicloud/belasticip')
+              this.$router.push('/belasticip')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {
               this.$vux.toast.text(response.data.message, 'middle')
