@@ -1,15 +1,17 @@
 <template>
   <div style="margin-bottom:1.5rem;">
-    <header class="header-wrapper">
-      <div>
-        <div class="login-left">
-          <img src="../assets/img/mine/avatar.png" class="avator">
-          <router-link class="userInfo" to="/ruicloud/home" v-if="userInfo">{{userInfo.realname}}</router-link>
-          <router-link class="userInfo" to="/ruicloud/login?from=Mine" v-else>请点击登录</router-link>
+    <router-link :to="userInfo?'account':'login'">
+      <header class="header-wrapper">
+        <div>
+          <div class="login-left">
+            <img src="../assets/img/mine/avatar.png" class="avator">
+            <span class="userInfo" v-if="userInfo">{{userInfo.realname}}</span>
+            <span class="userInfo" v-else>请点击登录</span>
+          </div>
+          <p class="login-right"></p>
         </div>
-        <p class="login-right"></p>
-      </div>
-    </header>
+      </header>
+    </router-link>
     <div class="accountInfo">
       <div @click="account">
         <p v-if="userInfo" class="money">￥{{remainder}}</p>

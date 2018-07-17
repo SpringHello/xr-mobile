@@ -541,7 +541,7 @@
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.$vux.toast.text(response.data.message, 'middle')
-            this.$router.push('mine')
+            this.$router.push('registerSuccess')
           } else {
             this.$vux.toast.text(response.data.message, 'middle')
           }
