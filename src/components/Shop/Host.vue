@@ -11,9 +11,8 @@
         <popup-picker title="地域选择" :data="regionaList" v-model="regional" :columns="3" show-name></popup-picker>
       </Group>
       <Group>
-        <radio :options="radio" v-model="str" @on-change="change1"></radio>
-        <popup-picker title="包年包月计费(惠)" :data="chargeType" v-model="charges" :columns="3" show-name
-                      @on-change="change2"></popup-picker>
+        <radio :options="radio" v-model="str"></radio>
+        <popup-picker title="包年包月计费(惠)" :data="chargeType" :columns="2" v-model="charges" show-name></popup-picker>
       </Group>
     </div>
     <div v-show="index==0"></div>
@@ -81,9 +80,9 @@
       change2(value){
         console.log(this.str)
         console.log(this.charges)
-        /*if (value.length != 0) {
-         this.str = ''
-         }*/
+        if (value.length != 0) {
+          this.str = ''
+        }
       }
 
     },
@@ -93,13 +92,20 @@
      ])*/
     watch: {
       str(val, old){
-        console.log(val, old)
+        if (val != old) {
+          this.charges = []
+        }
+
+        //console.log(val, old)
       },
-      /*charges(old, value){
-       console.log(this.str)
-       this.$set(this, 'str', '')
-       console.log(this.str)
-       }*/
+      charges(old, value){
+        console.log(this.str)
+        if (this.str != '') {
+          this.str = ''
+        }
+
+        console.log(this.str)
+      }
     }
   }
 </script>

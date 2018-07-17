@@ -10,7 +10,7 @@ import Mine from '@/components/Mine'
 
 import Warn from '@/components/Back/Warn'
 
-import Dynamic from '@/components/App/Dynamic'  //公告详情
+//import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
 import host from '@/components/App/Products/Host'
 import ecsSnapshot from '@/components/App/Products/EcsSnapshot'
@@ -140,9 +140,9 @@ export default new Router({
         {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
         {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
-        {path: '/ruicloud/active_1', name: 'active_1', component: Active1},
-        {path: '/ruicloud/active_2', name: 'active_2', component: Active2},
-        {path: '/ruicloud/active_3', name: 'active_3', component: Active3},
+        {path: '/ruicloud/dynamic', name: 'active_1', component: Active1},
+        {path: '/ruicloud/active_1', name: 'active_2', component: Active2},
+        {path: '/ruicloud/active_2', name: 'active_3', component: Active3},
         {
           path: '/ruicloud/Login',
           name: 'Login',
@@ -168,11 +168,11 @@ export default new Router({
           name: 'Reset',
           component: Reset,
         },
-        {
+        /*{
           path: '/ruicloud/Dynamic',
           name: 'Dynamic',
           component: Dynamic,
-        },
+        },*/
         {
           path: '/ruicloud/Prodetail',
           name: 'Prodetail',
