@@ -1,6 +1,6 @@
 <template>
-  <div>
-
+  <div class="header">
+    <div></div>
   </div>
 </template>
 
@@ -13,5 +13,6 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-
+  .header {
+  }
 </style>
