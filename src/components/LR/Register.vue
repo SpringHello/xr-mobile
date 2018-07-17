@@ -23,9 +23,8 @@
         </div>
         <div class="form-item item-last" style="position: relative">
           <Group>
-            <popup-picker title="请选择职位" :data="lists" v-model="questionnaire.professional" @on-show="" @on-change=""
-                          :columns="3"
-                          show-name></popup-picker>
+            <popup-picker :class="{selected:title!='请选择职位'}" :title="title" :data="lists"
+                          v-model="questionnaire.professional" @on-change="pick" :columns="3" show-name></popup-picker>
           </Group>
         </div>
         <div class="form-item btn-last" style="border:none">
@@ -351,6 +350,7 @@
     },
     data () {
       return {
+        title: '请选择职位',
         // 1、问卷调查  2、注册  3、用户协议
         currentStep: 1,
         questionnaire: {
@@ -407,6 +407,9 @@
 
     },
     methods: {
+      pick(){
+        this.title = this.questionnaire.professional[0]
+      },
       //校验手机号码是否已注册
       isRegs(){
         if (this.signForm.username) {
