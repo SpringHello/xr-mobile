@@ -253,20 +253,6 @@ export default {
       })
       this.serverTime += 1000
     },
-    getTicket () {
-      axios.get('ticket/takeTicket.do').then(response => {
-        if (response.status == 200 && response.data.status == 1) {
-          MessageBox('提示', response.data.message)
-          //2 已经领取
-        } else if (response.status == 200 && response.data.status == 2) {
-          MessageBox('提示', response.data.message)
-        } else if (response.status == 200 && response.data.status == 3) {
-          MessageBox({ title: '提示', message: response.data.message, confirmButtonText: '立即登录' }).then(() => {
-            this.$router.push('login')
-          })
-        }
-      })
-    },
     setRemainder (response) {
       console.log(response)
     },
