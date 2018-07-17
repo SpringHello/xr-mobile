@@ -74,7 +74,6 @@
           </div>
         </div>
       </div>
-      <div class="advantage-bottom"></div>
     </div>
 
     <!--购买-->
@@ -305,7 +304,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
-    margin-bottom: 1.32rem;
+    margin-bottom: 2.1rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -348,9 +347,6 @@
           word-wrap: break-word;
         }
       }
-    }
-    .advantage-bottom {
-      height: .69rem;
     }
   }
 
