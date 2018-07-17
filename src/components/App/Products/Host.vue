@@ -94,7 +94,7 @@
     </div>
 
     <!--购买-->
-    <button @click="buy">立即购买</button>
+    <router-link :to="$store.state.userInfo?'hostShop':'login'" class="buy">立即购买</router-link>
   </div>
 </template>
 
@@ -205,15 +205,7 @@
         ],
       }
     },
-    methods: {
-      buy(){
-        if ($store.state.userInfo) {
-          this.$router.push('console')
-        } else {
-          this.$router.push('login')
-        }
-      }
-    }
+    methods: {}
   }
 </script>
 
@@ -413,7 +405,7 @@
     }
   }
 
-  button {
+  .buy {
     position: fixed;
     bottom: 0;
     font-size: .32rem;
