@@ -80,13 +80,13 @@
         <div>
             <img src="../../assets/img/active/icon-auth-3.png" alt="" v-if="isReceive==0">
             <img src="../../assets/img/active/icon-auth-31.png" alt="" v-else>
-            <div>③ 完成实名认证</div>
+            <div>③ 免费领取企业云主机</div>
         </div>
         
       </div>
     </div>
-    <div id="foot">
-      <div class="wrap">  
+    <div class="rules">
+      <div class="content">  
         <div class="header-g">·活动规则·</div>
         <h3>1.活动时间： </h3>
         <p>2018年4月29日开始，数量有限，送完为止。 </p>
@@ -103,6 +103,19 @@
         <p>2）在各产品免费使用期间，若对免费资源进行了销毁，则视为放弃免费使用权。 </p>
         <h3>6.为保证活动的公平公正，新睿云有权对恶意刷抢（如通过程序等技术手段）活动资源，领取后7天内未使用资源、利用资源从事违法违规行为的用户收回免费套餐使用资格。 </h3>
         <h3>7.活动最终解释权在法律范围内归新睿云所有。</h3>         
+      </div>
+    </div>
+    <div class="recommend">
+      <p class="join">推荐</p>
+      <span>您还可以参加</span>
+      <div class="attend">
+        <li v-for="(item,index) in attends" :key="index">
+          <div>
+            <p>{{item.name}}</p>
+            <p class="desc">{{item.desc}}</p>
+          </div>
+          <p>前往参加></p>
+        </li>
       </div>
     </div>
   </div>
@@ -181,7 +194,11 @@ export default {
       ],
       serverTime: '',
       // 四个抢券的时间点
-      time: []
+      time: [],
+      attends: [
+        {name: '0元购主机 注册领现金', desc: '198元现金大礼包免费领'},
+        {name: '新手上云 一律免费', desc: '服务器免费试用60天 带你体验飞一般的感觉'}
+      ],
     }
   },
   created () {
@@ -204,7 +221,6 @@ export default {
       this.time = [10, 12, 15, 17].map((item, index) => {
         return { time: item, timestamp: date.setHours(item, 0, 0, 0), remainder: v[1].data.data[index], selectedConfig: 31, selectedSystem: 'windows' }
       })
-      console.log(this.time)
       this._calculation()
       setInterval(() => {
         this._calculation()
@@ -257,6 +273,7 @@ export default {
     // 免费领取主机
     freeReceive (item) {
       if (this.$store.state.userInfo == null) {
+        console.log('null')
         MessageBox({ title: '提示', message: '未登录，请先登录', confirmButtonText: '立即登录' }).then(() => {
           this.$router.push('login')
         })
@@ -313,7 +330,6 @@ export default {
   .pink-text {
     color: @pink;
   }
-  padding-bottom: 1rem;
   .wrap {
     padding: 0.5rem 0.3rem;
   }
@@ -462,10 +478,13 @@ export default {
       }
     }
   }
-  #foot {
+  .rules {
+    padding: 0.5rem;
+    padding-bottom: 0;
     background-color: rgba(255, 248, 246, 1);
-    .wrap {
-      padding: 0.5rem;
+    .content {
+      padding-bottom: .5rem;
+      border-bottom: dashed .02rem @pink;
     }
     h3 {
       color: #333;
@@ -479,4 +498,47 @@ export default {
     }
   }
 }
+ .recommend {
+    line-height: 0;
+    padding: .48rem .3rem .44rem .3rem;
+    .join {
+      display: inline-block;
+      font-size: .2rem;
+      color: #F37B72;
+      line-height: .28rem;
+    }
+    span {
+      font-size: .2rem;
+      color: #000;
+      line-height: .28rem;
+    }
+    .attend {
+      margin-top: .32rem;
+      li {
+        list-style: none;
+        background: linear-gradient(90deg, rgba(243, 183, 104, 1), rgba(243, 112, 104, 1));
+        border-radius: .05rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .24rem .3rem;
+        margin-bottom: .2rem;
+        > div {
+          p {
+            font-size: .28rem;
+            color: rgba(255, 255, 255, 1);
+            line-height: .4rem;
+          }
+          .desc {
+            font-size: .2rem;
+          }
+        }
+        p {
+          font-size: .2rem;
+          color: rgba(255, 240, 50, 1);
+          line-height: .28rem;
+        }
+      }
+    }
+  }
 </style>

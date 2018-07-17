@@ -78,10 +78,10 @@
           this.$vux.toast.text('请输入密码', 'middle')
           return
         }
-        if (!RegExp.loginPassword.test(this.signForm.password)) {
-          this.$vux.toast.text('密码格式错误', 'middle')
-          return
-        }
+        /* if (!RegExp.loginPassword.test(this.signForm.password)) {
+         this.$vux.toast.text('密码格式错误', 'middle')
+         return
+         }*/
         if (this.signForm.vailCode.trim() == '') {
           this.$vux.toast.text('请输入验证码', 'middle')
           return
@@ -94,6 +94,12 @@
           }
         }).then((response) => {
           if (response.status == 200 && response.data.status == 1) {
+            axios.get('user/GetUserInfo.do').then(response => {
+                if (response.status == 200 && response.data.status == 1) {
+                  $store.commit('setAuthInfo', {authInfo: response.data.authInfo, userInfo: response.data.result})
+                }
+              }
+            )
             this.$router.push({path: 'console'})
           } else {
             this.imgSrc = `user/getKaptchaImage.do?t=${new Date().getTime()}`
