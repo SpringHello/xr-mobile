@@ -14,7 +14,7 @@
               <p class="title">{{item.name}} <span> [{{item.actType}}]</span></p>
               <p class="right" @click="toview(item)">查看详情</p>
             </div>
-            <p class="desc" @click="opration(item.isread,item.id)">{{item.content}}</p>
+            <p class="desc" @click="opration(item.id)">{{item.content}}</p>
           </li>
         </ul>
       </div>
@@ -79,9 +79,12 @@
         }
         if (type == 'isread') {
           params.isRead = '1'
+          this.type = 'isread'
         } else if (type == 'unread') {
           params.isRead = '0'
+          this.type = 'unread'
         } else if (type == 'all') {
+          this.type = 'all'
           params.isRead = '2'
         }
         axios.post('user/getEventNotifyList.do', params).then(response => {
@@ -109,16 +112,16 @@
         this.$router.push('Newdetail')
       },
       //信息操作
-      opration(isread, id){
-        if (isread == 2) {
+      opration(id){
+        if (this.type = 'all') {
           this.showAll = true
           this.id = id
         }
-        if (isread == 0) {
+        if (this.type = 'unread') {
           this.showUnread = true
           this.id = id
         }
-        if (isread == 1) {
+        if (this.type = 'isread') {
           this.showIsread = true
           this.id = id
         }
