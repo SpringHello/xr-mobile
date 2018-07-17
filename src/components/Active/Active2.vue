@@ -165,7 +165,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/less" lang="less" scoped>
   #page-active {
-    padding-bottom: 1rem;
+    padding-bottom: .5rem;
     .headline-g{
       &:before{
         content: url(../../assets/img/active/triangle-down.png);
