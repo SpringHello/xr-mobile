@@ -170,11 +170,11 @@
         ],
       }
     },
-    methods:{
+    methods: {
       buy(){
-        if ($store.state.userInfo){
+        if ($store.state.userInfo) {
           this.$router.push('console')
-        }else{
+        } else {
           this.$router.push('login')
         }
       }
@@ -184,7 +184,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
+    background: linear-gradient(90deg, rgba(74, 136, 254, 1), rgba(56, 125, 255, 1));
     .logo-wrapper {
       display: flex;
       align-items: center;
@@ -201,7 +201,7 @@
         }
       }
 
-      img{
+      img {
         width: 3.01rem;
       }
     }
@@ -292,7 +292,7 @@
         background: rgba(250, 250, 250, 1);
         padding: .5rem .3rem;
         .describe {
-          img{
+          img {
             width: 4.71rem;
             display: block;
             margin: 0 auto;
@@ -303,7 +303,7 @@
             color: #333;
           }
           ul {
-            height:3rem;
+            height: 3rem;
             li {
               list-style: none;
               font-size: .2rem;
@@ -328,6 +328,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
+    margin-bottom: 1.32rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -377,6 +378,8 @@
   }
 
   button {
+    position: fixed;
+    bottom: 0;
     font-size: .32rem;
     color: #FFF;
     background: #4A90E2;

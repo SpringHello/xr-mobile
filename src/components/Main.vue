@@ -2,44 +2,44 @@
   <div id="app">
     <router-view></router-view>
     <div class="weui-tabbar components-bottom-bar">
-      <div @click="active(1)">
+      <div>
         <router-link to="/ruicloud/home" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
-            <img v-if="index==1" class=" icon-classify" style="width: .44rem"
+            <img v-if="active=='Home'" class=" icon-classify" style="width: .44rem"
                  src="../assets/img/home/foot-1-active.png">
             <img v-else class=" icon-classify" style="width: .44rem" src="../assets/img/home/foot-1.png">
           </div>
-          <p class="weui-tabbar__label" :class="{activeColor:index==1}"><span>新睿云</span></p>
+          <p class="weui-tabbar__label" :class="{activeColor:active=='Home'}"><span>新睿云</span></p>
         </router-link>
       </div>
-      <div @click="active(2)">
+      <div>
         <router-link to="/ruicloud/sort" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
-            <img v-if="index==2" class=" icon-classify" style="width: .44rem"
+            <img v-if="active=='Sort'" class=" icon-classify" style="width: .44rem"
                  src="../assets/img/home/foot-2-active.png">
             <img v-else class=" icon-classify" style="width: .44rem" src="../assets/img/home/foot-2.png">
           </div>
-          <p class="weui-tabbar__label" :class="{activeColor:index==2}"><span>活动</span></p>
+          <p class="weui-tabbar__label" :class="{activeColor:active=='Sort'}"><span>活动</span></p>
         </router-link>
       </div>
-      <div @click="active(3)">
+      <div>
         <router-link to="/ruicloud/console" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
-            <img v-if="index==3" class=" icon-mall" style="width: .44rem"
+            <img v-if="active=='Console'" class=" icon-mall" style="width: .44rem"
                  src="../assets/img/home/foot-3-active.png">
             <img v-else class=" icon-mall" style="width: .44rem" src="../assets/img/home/foot-3.png">
           </div>
-          <p class="weui-tabbar__label" :class="{activeColor:index==3}"><span>控制台</span></p>
+          <p class="weui-tabbar__label" :class="{activeColor:active=='Console'}"><span>控制台</span></p>
         </router-link>
       </div>
-      <div @click="active(4)">
+      <div>
         <router-link to="/ruicloud/mine" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
-            <img v-if="index==4" class=" icon-mine" style="width: .44rem"
+            <img v-if="active=='Mine'" class=" icon-mine" style="width: .44rem"
                  src="../assets/img/home/foot-4-active.png">
             <img v-else class=" icon-mine" style="width: .44rem" src="../assets/img/home/foot-4.png">
           </div>
-          <p class="weui-tabbar__label" :class="{activeColor:index==4}"><span>我的</span></p>
+          <p class="weui-tabbar__label" :class="{activeColor:active=='Mine'}"><span>我的</span></p>
         </router-link>
       </div>
     </div>
@@ -50,32 +50,19 @@
   import $store from '@/vuex'
   import axios from '@/util/iaxios'
   export default {
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.active = to.name
+      })
+    },
+    beforeRouteUpdate(to, from, next){
+      this.active = to.name
+      next()
+    },
     data (){
       window.scrollTo(0, 0);
       return {
-        index: 1
-      }
-    },
-    beforeRouteEnter(to, from, next){
-      // 获取所有后台需要的基本信息
-      // 获取用户信息
-      var userInfo = axios.get('user/GetUserInfo.do')
-      // 获取zone信息
-      var zoneList = axios.get('information/zone.do')
-      Promise.all([userInfo, zoneList]).then(values => {
-        if (values[0].data.status == 1 && values[0].status == 200) {
-          $store.commit('setAuthInfo', {authInfo: values[0].data.authInfo, userInfo: values[0].data.result})
-        }
-        if (values[1].data.status == 1 && values[1].status == 200) {
-          $store.commit('setZoneList', values[1].data.result)
-        }
-        next()
-      })
-    },
-    methods: {
-      active(index){
-         sessionStorage.setItem('index',this.index)
-        this.index = index
+        active: 'Home',
       }
     }
   }

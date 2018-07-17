@@ -10,10 +10,12 @@
     <div class="middle">
       <Group>
         <cell title="原手机号" :value="oldPhone" value-align="left"></cell>
-        <x-input title="图形验证码" placeholder="请输入图形验证码" placeholder-align="left" v-model="froms.code"></x-input>
-        <img :src="imgSrc" style="position: relative;bottom: .6rem;left: 6rem;">
-        <x-input title="手机验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.phoneCode"></x-input>
-        <button class="button" @click.prevent="getPhoneCode">{{message}}</button>
+        <x-input title="图形验证码" placeholder="请输入图形验证码" placeholder-align="left" v-model="froms.code">
+          <img :src="imgSrc" @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`"  slot="right">
+        </x-input>
+        <x-input title="手机验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.phoneCode">
+          <button class="button" @click.prevent="getPhoneCode" slot="right">{{message}}</button>
+        </x-input>
       </Group>
 
     </div>
@@ -127,9 +129,6 @@
     color: #FFF;
     line-height: .33rem;
     outline: none;
-    position: relative;
-    bottom: .6rem;
-    left: 5.5rem;
   }
 
   .btns {

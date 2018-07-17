@@ -64,8 +64,6 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
-    background: rgba(243, 243, 243, 1);
-    margin-bottom: 1rem;
     ul {
       padding: .3rem;
       background: rgba(255, 255, 255, 1);

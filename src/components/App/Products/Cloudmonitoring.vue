@@ -99,10 +99,26 @@
           desc: '新睿云监控告警服务主要用图表化信息帮助您了解云服务器运行状况和性能。告警推送消息帮助您第一时间了解业务异常，让您无需额外开发，就能全面掌控云服务器资源使用、运行情况。',
         },
         features: [
-          {img: 'icon-shujuzidongfenxijisuan', title: '数据自动分析计算', desc: '拥有强大的后台处理集群，自动汇总、聚合、统计数据，统计分析后的数据存入数据库，以此作为基础数据给用户展示使用。'},
-          {img: 'icon-fengfudetubiaozhanxianxingshi', title: '丰富的图标展现形式', desc: '除支持单实例查看多个指标数据；还能单实例多天对比趋势查看，以及选择某个维度聚合查看图表。'},
-          {img: 'icon-zidingyibushu', title: '自定义配置', desc: '除了新睿云提供的基础告警阈值外，可以根据不同业务需求自定义配置监控告警阈值。新睿云在控制台-用户中心提供了方便的入口，简单的操作，方便用户配置。'},
-          {img: 'icon-yichanggaojingtongzhi', title: '异常告警通知', desc: '用户对某个指标特别关注，则可使用提供的告警通知功能。不必每时每刻都关注指标，只用先配置好告警阈值条件，则指标异常后第一时间自动通过邮件、短信方式通知到用户。'}
+          {
+            img: 'icon-shujuzidongfenxijisuan',
+            title: '数据自动分析计算',
+            desc: '拥有强大的后台处理集群，自动汇总、聚合、统计数据，统计分析后的数据存入数据库，以此作为基础数据给用户展示使用。'
+          },
+          {
+            img: 'icon-fengfudetubiaozhanxianxingshi',
+            title: '丰富的图标展现形式',
+            desc: '除支持单实例查看多个指标数据；还能单实例多天对比趋势查看，以及选择某个维度聚合查看图表。'
+          },
+          {
+            img: 'icon-zidingyibushu',
+            title: '自定义配置',
+            desc: '除了新睿云提供的基础告警阈值外，可以根据不同业务需求自定义配置监控告警阈值。新睿云在控制台-用户中心提供了方便的入口，简单的操作，方便用户配置。'
+          },
+          {
+            img: 'icon-yichanggaojingtongzhi',
+            title: '异常告警通知',
+            desc: '用户对某个指标特别关注，则可使用提供的告警通知功能。不必每时每刻都关注指标，只用先配置好告警阈值条件，则指标异常后第一时间自动通过邮件、短信方式通知到用户。'
+          }
         ],
         stageInfo: {
           showYY: true,
@@ -138,11 +154,11 @@
         ],
       }
     },
-    methods:{
+    methods: {
       buy(){
-        if ($store.state.userInfo){
+        if ($store.state.userInfo) {
           this.$router.push('console')
-        }else{
+        } else {
           this.$router.push('login')
         }
       }
@@ -152,7 +168,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .logo {
-    background:linear-gradient(90deg,rgba(74,136,254,1),rgba(56,125,255,1));
+    background: linear-gradient(90deg, rgba(74, 136, 254, 1), rgba(56, 125, 255, 1));
     .logo-wrapper {
       display: flex;
       align-items: center;
@@ -168,7 +184,7 @@
           color: rgba(255, 255, 255, 1);
         }
       }
-      img{
+      img {
         width: 3.01rem;
       }
     }
@@ -289,6 +305,7 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
+    margin-bottom: 1.32rem;
     .advantage-header {
       text-align: center;
       border-bottom: 1px solid #D9D9D9;
@@ -338,6 +355,8 @@
   }
 
   button {
+    position: fixed;
+    bottom: 0;
     font-size: .32rem;
     color: #FFF;
     background: #4A90E2;
