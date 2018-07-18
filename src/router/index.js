@@ -64,6 +64,8 @@ import Elasticipdetail from '@/components/Back/Elasticipdetail'//弹性IP详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
+// 购买页面
+import HostShop from '@/components/Shop/Host'
 
 /*登录注册相关*/
 import Login from '@/components/LR/Login'
@@ -250,6 +252,12 @@ export default new Router({
           path: '/ruicloud/ddos',
           name: 'ddos',
           component: ddos,
+        },
+        // 所有购买页面
+        {
+          path: '/ruicloud/hostShop',
+          name: 'HostShop',
+          component: HostShop,
         },
       ]
     },

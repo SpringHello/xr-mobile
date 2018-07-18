@@ -96,7 +96,7 @@
           if (response.status == 200 && response.data.status == 1) {
             axios.get('user/GetUserInfo.do').then(response => {
                 if (response.status == 200 && response.data.status == 1) {
-                  $store.commit('setAuthInfo', {authInfo: response.data.authInfo, userInfo: response.data.result})
+                  this.$store.commit('setAuthInfo', {authInfo: response.data.authInfo, userInfo: response.data.result})
                 }
               }
             )

@@ -64,7 +64,7 @@
     </div>
 
     <!--购买-->
-    <button @click="buy">立即购买</button>
+    <router-link :to="$store.state.userInfo?'home':'login'" class="buy">立即购买</router-link>
   </div>
 </template>
 
@@ -167,19 +167,15 @@
         font-size: .36rem;
         color: rgba(74, 144, 226, 1);
         &::before {
-          content: '';
-          width: .2rem;
-          height: .2rem;
-          border: 1px solid #4A90E2;
-          display: inline-block;
+          vertical-align: middle;
+          content: url('../../../assets/img/balance/Fill.png');
+          width: .21rem;
           margin-right: .2rem;
         }
         &::after {
-          content: '';
-          width: .2rem;
-          height: .2rem;
-          border: 1px solid #4A90E2;
-          display: inline-block;
+          vertical-align: middle;
+          content: url('../../../assets/img/balance/Fill.png');
+          width: .21rem;
           margin-left: .2rem;
         }
       }
@@ -214,19 +210,15 @@
         font-size: .36rem;
         color: rgba(74, 144, 226, 1);
         &::before {
-          content: '';
-          width: .2rem;
-          height: .2rem;
-          border: 1px solid #4A90E2;
-          display: inline-block;
+          vertical-align: middle;
+          content: url('../../../assets/img/balance/Fill.png');
+          width: .21rem;
           margin-right: .2rem;
         }
         &::after {
-          content: '';
-          width: .2rem;
-          height: .2rem;
-          border: 1px solid #4A90E2;
-          display: inline-block;
+          vertical-align: middle;
+          content: url('../../../assets/img/balance/Fill.png');
+          width: .21rem;
           margin-left: .2rem;
         }
       }
@@ -286,19 +278,15 @@
         font-size: .36rem;
         color: rgba(74, 144, 226, 1);
         &::before {
-          content: '';
-          width: .2rem;
-          height: .2rem;
-          border: 1px solid #4A90E2;
-          display: inline-block;
+          vertical-align: middle;
+          content: url('../../../assets/img/balance/Fill.png');
+          width: .21rem;
           margin-right: .2rem;
         }
         &::after {
-          content: '';
-          width: .2rem;
-          height: .2rem;
-          border: 1px solid #4A90E2;
-          display: inline-block;
+          vertical-align: middle;
+          content: url('../../../assets/img/balance/Fill.png');
+          width: .21rem;
           margin-left: .2rem;
         }
       }
@@ -323,7 +311,7 @@
     }
   }
 
-  button {
+  .buy {
     position: fixed;
     bottom: 0;
     font-size: .32rem;
