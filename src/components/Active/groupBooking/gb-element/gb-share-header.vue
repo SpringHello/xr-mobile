@@ -3,7 +3,7 @@
     <div class="center">
       <p class="pb">分享赠时长进行中</p>
       <div class="banner-button" v-if="d=='00'&&h=='00'&&m=='00'&&s=='00'">
-        <span @click="openGroup">重新开团</span>
+        <p @click="openGroup">重新开团</p>
       </div>
       <div class="timer" v-else>
         剩余： <span>{{ d }}</span>天
@@ -18,7 +18,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+  import axios from '../../../../util/iaxios'
   export default {
     data() {
       return {
@@ -60,14 +60,12 @@
 
       },
       openGroup() {
-        this.$http.get('activity/createTeam.do').then(res => {
+        axios.get('activity/createTeam.do').then(res => {
           if (res.data.status == 1) {
-            this.$Message.success('开团成功')
+            this.$vux.toast.text('开团成功')
             this.$router.go(0)
           } else {
-            this.$message.info({
-              content: res.data.result.info
-            })
+            this.$vux.toast.text(res.data.message)
           }
         })
       },
@@ -99,7 +97,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .background {
     height: 3rem;
-    background:  #FA846E url('../../../../assets/img/active/groupBooking/gb-banner2.png') no-repeat center;
+    background: #FA846E url('../../../../assets/img/active/groupBooking/gb-banner2.png') no-repeat center;
     background-size: 7.5rem 3rem;
     .center {
       margin: 0 auto;
@@ -111,11 +109,11 @@
         color: rgba(255, 255, 255, 1);
         font-size: 0.24rem;
         line-height: 0.48rem;
-        width:2.6rem;
-        height:.48rem;
-        background:linear-gradient(90deg,rgba(252,92,125,1),rgba(106,130,251,1));
+        width: 2.6rem;
+        height: .48rem;
+        background: linear-gradient(90deg, rgba(252, 92, 125, 1), rgba(106, 130, 251, 1));
         margin: 0 auto;
-        border-radius:.27rem;
+        border-radius: .27rem;
       }
       .p1 {
         font-family: "Microsoft YaHei", "微软雅黑";
@@ -134,7 +132,7 @@
           width: 0.72rem;
           height: 0.72rem;
           background: rgba(255, 255, 255, 1);
-          box-shadow: 0 0 0.04rem 0 rgba(252, 139, 114, 1);
+          box-shadow: 0rem 0rem 0.04rem 0rem rgba(252, 139, 114, 1);
           border: 0.03rem solid rgba(228, 42, 42, 1);
           font-size: 0.4rem;
           font-family: "Microsoft YaHei", "微软雅黑";
@@ -143,12 +141,16 @@
         }
       }
       .banner-button {
-        margin-top: 0.6rem;
-        position: relative;
-        > span {
-          font-size: 0.24rem;
+        > p {
           font-family: "Microsoft YaHei", "微软雅黑";
           color: rgba(255, 255, 255, 1);
+          font-size: 0.24rem;
+          line-height: 0.48rem;
+          width: 2rem;
+          height: .48rem;
+          background: #fe544d;
+          margin: 0.4rem auto 0.25rem;
+          border-radius: .27rem;
         }
       }
     }
