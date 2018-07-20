@@ -34,7 +34,6 @@
         ],
         charge: [],
         money: 10,
-        type: '',
       }
     },
     methods: {
@@ -55,14 +54,20 @@
         }
         switch (this.charge[0]) {
           case 'wxpay':
-            this.type = 'wxpay'
+            axios.get('wx/wxpayapi.do', {
+              params: {
+                total_fee: this.money,
+                type: 'h5'
+              }
+            }).then(response => {
+              window.open(response.data.result.codeUrl)
+            })
             break;
           case 'alipay':
-            this.type = 'alipay'
+            window.open(`https://pan.xrcloud.net/ruicloud/zfb/appzf.do?total_fee=${this.money}`)
             break;
         }
-        console.log(this.type)
-        axios.get(``, {}).then()
+
       },
     },
   }
