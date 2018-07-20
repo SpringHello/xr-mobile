@@ -47,7 +47,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .background {
-    padding-top: 0.5rem;
+    padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     h2 {
       font-size: .36rem;

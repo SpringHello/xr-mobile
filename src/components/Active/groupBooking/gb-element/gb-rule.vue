@@ -74,7 +74,9 @@
           font-size: .24rem;
           color: rgba(102, 102, 102, 1);
           line-height: .33rem;
+          margin-bottom: .2rem;
         }
+
       }
     }
   }
