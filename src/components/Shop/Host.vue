@@ -686,9 +686,9 @@
           // 0代表系统镜像
           user: val[0] == 'public' ? '0' : '1'
         }
-        this.mirrorCustomList = []
         axios.get(url, {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
+            this.mirrorCustomList = []
             for (let type in response.data.result) {
               this.mirrorCustomList.push({name: type, value: type, parent: 0})
               response.data.result[type].forEach(e => {
