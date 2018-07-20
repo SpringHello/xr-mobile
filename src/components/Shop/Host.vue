@@ -25,7 +25,8 @@
         <popup-picker title="镜像系统" :data="mirrorCustomList" v-model="mirrorCustom" :columns="3"
                       @on-change="mirrorValue" show-name></popup-picker>
 
-        <x-switch title="购买公网IP" v-model="buyIP" @on-change="BuyIp"></x-switch>
+        <checklist label-position="left" :options="IP"
+                   v-model="checkIp" @on-change="BuyIp"></checklist>
 
         <popup-picker title="配置" :data="configs" v-model="config" :columns="3" show-name></popup-picker>
       </Group>
@@ -78,17 +79,24 @@
 
         <popup-picker title="网卡" :data="networkCardList" v-model="networkCard" :columns="3" show-name></popup-picker>
 
-        <x-switch title="购买公网IP" v-model="buyIP" @on-change="BuyIp"></x-switch>
+        <checklist label-position="left" :options="IP"
+                   v-model="checkIp"></checklist>
         <x-number title="带宽(MB)" v-model="bandwidth" :min="1" :max="100" class="number" button-style="round"
-                  :fillable='true' v-show="buyIP"></x-number>
+                  :fillable='true' v-show="checkIp[0]"></x-number>
       </Group>
 
       <Group>
-        <cell title="云硬盘"></cell>
-
-        <div style="padding: 0 .3rem">
-          <x-button type="primary">添加数据盘</x-button>
-        </div>
+        <cell title='云硬盘' value="添加数据盘" :inline-desc="'可添加数量：'+diskListNums" @click.native="addDisk"
+              class="Cdisk"></cell>
+        <popup-picker v-for="(disk,index) in diskList" :key="index" :data="diskType" v-model="disk.value"
+                      :columns="3"
+                      show-name>
+          <template slot="title">
+            <span>数据盘</span>
+            <img src="../../assets/img/back/del.png" style="width: .32rem;vertical-align: middle;"
+                 @click.stop.prevent="delDisk(index)">
+          </template>
+        </popup-picker>
       </Group>
 
 
@@ -120,7 +128,20 @@
   import RegExp from '@/util/RegExp'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {XHeader, Tab, TabItem, PopupPicker, Group, Radio, Cell, XSwitch, XInput, XNumber, XButton} from 'vux'
+  import {
+    XHeader,
+    Tab,
+    TabItem,
+    PopupPicker,
+    Group,
+    Radio,
+    Cell,
+    XSwitch,
+    XInput,
+    XNumber,
+    XButton,
+    Checklist
+  } from 'vux'
   export default {
     components: {
       XHeader,
@@ -133,7 +154,8 @@
       XSwitch,
       XInput,
       XNumber,
-      XButton
+      XButton,
+      Checklist
     },
     beforeRouteEnter(to, from, next){
       next(vm => {
@@ -148,6 +170,16 @@
           regional[0] = zone.zoneid
         }
         regionaList.push({name: zone.zonename, value: zone.zoneid})
+      })
+      let diskType = [
+        {name: 'SATA存储', value: 'sata', parent: 0},
+        {name: 'SAS存储', value: 'sas', parent: 0},
+        {name: 'SSD存储', value: 'ssd', parent: 0},
+      ];
+      diskType.forEach(type => {
+        for (let i = 20; i <= 1000; i += 10) {
+          diskType.push({name: `${i}GB`, value: `${i}`, parent: type.value})
+        }
       })
       return {
         index: 0,
@@ -183,7 +215,8 @@
         mirrorCustomList: [],
         mirrorCustom: [],
         //是否购买IP
-        buyIP: true,
+        IP: ['购买公网IP'],
+        checkIp: ['购买公网IP'],
         //配置
         config: ['1'],
         configs: [],
@@ -556,6 +589,10 @@
         networkCard: [],
         //带宽
         bandwidth: 20,
+        //数据盘
+        diskListNums: '4',
+        diskType,
+        diskList: [{value: ['sata', '20']}],
       }
     },
     methods: {
@@ -579,7 +616,7 @@
       //镜像系统
       //配置
       BuyIp(value){
-        if (value) {
+        if (value[0] == '购买公网IP') {
           this.configs = this.isBuyConfig
         } else {
           this.configs = this.unBuyConfig
@@ -622,7 +659,20 @@
           })
         })
       },
-
+      // 添加磁盘
+      addDisk(){
+        if (this.diskList.length < 5) {
+          this.diskList.push({value: ['sata', '20']})
+          this.diskListNums = 5 - this.diskList.length
+        } else {
+          this.$vux.toast.text('数据盘最多5个', 'middle')
+        }
+      },
+      //删除数据盘
+      delDisk(index){
+        this.diskList.splice(index, 1)
+        this.diskListNums = 5 - this.diskList.length
+      },
     },
     /*computed: mapState([
      // 映射 this.count 为 store.state.count
@@ -636,9 +686,9 @@
           // 0代表系统镜像
           user: val[0] == 'public' ? '0' : '1'
         }
+        this.mirrorCustomList = []
         axios.get(url, {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            this.mirrorCustomList = []
             for (let type in response.data.result) {
               this.mirrorCustomList.push({name: type, value: type, parent: 0})
               response.data.result[type].forEach(e => {
