@@ -11,22 +11,22 @@
         <popup-picker title="地域选择" :data="regionaList" v-model="regional" :columns="3" show-name></popup-picker>
       </Group>
       <Group>
-        <radio :options="radio" v-model="str" @on-change="change1"></radio>
-        <popup-picker title="包年包月计费(惠)" :data="chargeType" v-model="charges" :columns="3" show-name
-                      @on-change="change2"></popup-picker>
+        <radio :options="radio" v-model="str"></radio>
+        <popup-picker title="包年包月计费(惠)" :data="chargeType" v-model="charges" :columns="3" show-name></popup-picker>
       </Group>
     </div>
     <div v-show="index==0" class="qucikly">
       <Group>
         <cell title="主机规格选择"></cell>
 
-        <popup-picker title="镜像类型" :data="mirrorTypelist" v-model="mirrorType" :columns="3" show-name
+        <popup-picker title="镜像类型" :data="mirrorTypeList" v-model="mirrorType" :columns="3" show-name
                       @on-change="changeType"></popup-picker>
 
-        <popup-picker title="镜像系统" :data="mirrorCustomlist" v-model="mirrorCustom" :columns="3"
+        <popup-picker title="镜像系统" :data="mirrorCustomList" v-model="mirrorCustom" :columns="3"
                       @on-change="mirrorValue" show-name></popup-picker>
 
-        <x-switch title="购买公网IP" v-model="buyIP" @on-change="BuyIp"></x-switch>
+        <checklist label-position="left" :options="IP"
+                   v-model="checkIp" @on-change="BuyIp"></checklist>
 
         <popup-picker title="配置" :data="configs" v-model="config" :columns="3" show-name></popup-picker>
       </Group>
@@ -47,13 +47,79 @@
 
         <x-switch title="自动续费"></x-switch>
       </Group>
-      <div class="qucikly-bottom">
+      <div class="bottom">
         <p>配置价格：<span>¥ 0.00</span></p>
-        <button>立即购买</button>
+        <button @click="publicBuy">立即购买</button>
       </div>
     </div>
     <div v-show="index==1" class="custom">
+      <Group>
+        <cell title="主机规格选择"></cell>
+        <popup-picker title="类型" :data="genreList" v-model="genre" :columns="3" show-name></popup-picker>
 
+        <popup-picker title="镜像类型" :data="mirrorTypeList" v-model="mirrorType" :columns="3" show-name
+                      @on-change="changeType"></popup-picker>
+
+        <popup-picker title="镜像系统" :data="mirrorCustomList" v-model="mirrorCustom" :columns="3"
+                      @on-change="mirrorValue" show-name></popup-picker>
+
+        <popup-picker title="系统盘" :data="systemDiskList" v-model="systemDisk" :columns="3" show-name></popup-picker>
+
+        <popup-picker title="核心数" :data="coreList" v-model="cores" :columns="3" show-name
+                      @on-show="showCore" @on-change="coreValue"></popup-picker>
+
+        <popup-picker title="内存" :data="memoryList" v-model="memory" :columns="3" show-name
+                      @on-show="showCore"></popup-picker>
+      </Group>
+
+      <Group>
+        <cell title="网络与带宽"></cell>
+
+        <popup-picker title="私有云VPC" :data="vpcList" v-model="vpc" :columns="3" show-name></popup-picker>
+
+        <popup-picker title="网卡" :data="networkCardList" v-model="networkCard" :columns="3" show-name></popup-picker>
+
+        <checklist label-position="left" :options="IP"
+                   v-model="checkIp"></checklist>
+        <x-number title="带宽(MB)" v-model="bandwidth" :min="1" :max="100" class="number" button-style="round"
+                  :fillable='true' v-show="checkIp[0]"></x-number>
+      </Group>
+
+      <Group>
+        <cell title='云硬盘' value="添加数据盘" :inline-desc="'可添加数量：'+diskListNums" @click.native="addDisk"
+              class="Cdisk"></cell>
+        <popup-picker v-for="(disk,index) in diskList" :key="index" :data="diskType" v-model="disk.value"
+                      :columns="3"
+                      show-name>
+          <template slot="title">
+            <span>数据盘</span>
+            <img src="../../assets/img/back/del.png" style="width: .32rem;vertical-align: middle;"
+                 @click.stop.prevent="delDisk(index)">
+          </template>
+        </popup-picker>
+      </Group>
+
+
+      <Group>
+        <cell title="登录设置"></cell>
+
+        <popup-picker title="主机信息" :data="hostMsg" v-model="hostmsg" :columns="3" show-name></popup-picker>
+
+        <x-input title="主机名称" v-model="hostName" placeholder="请输入主机名称" v-show="hostmsg[0]=='custom'"
+                 placeholder-align="right" text-align="right"></x-input>
+
+        <cell title="系统用户名" :value="userName"></cell>
+
+        <cell title="登录密码" v-show="hostmsg[0]=='default'" inline-desc="密码为默认密码，创建成功后通过短信和站内信查看"></cell>
+        <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
+                 placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
+
+        <x-switch title="自动续费"></x-switch>
+      </Group>
+      <div class="bottom">
+        <p>配置价格：<span>¥ 0.00</span></p>
+        <button>立即购买</button>
+      </div>
     </div>
   </div>
 </template>
@@ -62,7 +128,20 @@
   import RegExp from '@/util/RegExp'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {XHeader, Tab, TabItem, PopupPicker, Group, Radio, Cell, XSwitch, XInput} from 'vux'
+  import {
+    XHeader,
+    Tab,
+    TabItem,
+    PopupPicker,
+    Group,
+    Radio,
+    Cell,
+    XSwitch,
+    XInput,
+    XNumber,
+    XButton,
+    Checklist
+  } from 'vux'
   export default {
     components: {
       XHeader,
@@ -73,7 +152,10 @@
       Radio,
       Cell,
       XSwitch,
-      XInput
+      XInput,
+      XNumber,
+      XButton,
+      Checklist
     },
     beforeRouteEnter(to, from, next){
       next(vm => {
@@ -82,13 +164,26 @@
       )
     },
     data () {
-      let regionaList = []
+      let regionaList = [], regional = []
       this.$store.state.zoneList.forEach(zone => {
+        if (zone.isdefault == 1) {
+          regional[0] = zone.zoneid
+        }
         regionaList.push({name: zone.zonename, value: zone.zoneid})
+      })
+      let diskType = [
+        {name: 'SATA存储', value: 'sata', parent: 0},
+        {name: 'SAS存储', value: 'sas', parent: 0},
+        {name: 'SSD存储', value: 'ssd', parent: 0},
+      ];
+      diskType.forEach(type => {
+        for (let i = 20; i <= 1000; i += 10) {
+          diskType.push({name: `${i}GB`, value: `${i}`, parent: type.value})
+        }
       })
       return {
         index: 0,
-        regional: [''],
+        regional,
         regionaList,
         chargeType: [
           {name: '1月', value: 'Month#1', parent: 0},
@@ -105,24 +200,25 @@
           {name: '2年', value: 'Year#2', parent: 0},
           {name: '3年', value: 'Year#3', parent: 0}
         ],
-        str: '',
+        str: 'real',
         charges: [],
         radio: [
           {key: 'real', value: '实时计费'}
         ],
         //镜像类型
-        mirrorTypelist: [
+        mirrorTypeList: [
           {name: '公共镜像', value: 'public', parent: 0},
           {name: '自定义镜像', value: 'custom', parent: 0}
         ],
         mirrorType: [],
         //镜像系统
-        mirrorCustomlist: [],
+        mirrorCustomList: [],
         mirrorCustom: [],
         //是否购买IP
-        buyIP: true,
+        IP: ['购买公网IP'],
+        checkIp: ['购买公网IP'],
         //配置
-        config: [],
+        config: ['1'],
         configs: [],
         isBuyConfig: [
           {name: '1核  1G  1Mbps  40GB', value: '1', parent: 0},
@@ -141,34 +237,386 @@
           {name: '自定义设置', value: 'custom', parent: 0},
           {name: '默认设置', value: 'default', parent: 0}
         ],
-        hostmsg: [],
+        hostmsg: ['default'],
         //系统用户名
-        userName: "",
+        userName: "Administrator",
         //主机名称
         hostName: '',
         //登录密码
         loginPassword: '',
+        //类型
+        genreList: [
+          {name: '标准型', value: 'standard'},
+          {name: '内存优化型', value: 'optimization'},
+          {name: '高I/O型', value: 'IO',}
+        ],
+        genre: [],
+        //系统盘
+        systemDiskList: [
+          {name: 'SAS存储', value: 'sas'},
+          {name: 'SSD存储', value: 'ssd'}
+        ],
+        systemDisk: [],
+        //核心数
+        info: [
+          {
+            zoneId: '39a6af0b-6624-4194-b9d5-0c552d903858',
+            kernelList: [
+              {
+                name: '1核',
+                value: '1',
+                RAMList: [
+                  {name: '1G', value: '1'},
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'}
+                ]
+              },
+              {
+                name: '2核',
+                value: '2',
+                RAMList: [
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'}
+                ]
+              },
+              {
+                name: '4核',
+                value: '4',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '8核',
+                value: '8',
+                RAMList: [
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'},
+                  {name: '64G', value: '64'}
+                ]
+              },
+              {
+                name: '16核',
+                value: '16',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'},
+                  {name: '64G', value: '64'},
+                  {name: '128G', value: '128'}
+                ]
+              },
+              {
+                name: '32核',
+                value: '32',
+                RAMList: [
+                  {name: '64G', value: '64'},
+                  {name: '128G', value: '128'}
+                ]
+              },
+              {
+                name: '64核',
+                value: '64',
+                RAMList: [
+                  {name: '128G', value: '128'},
+                  {name: '256G', value: '256'},
+                ]
+              }
+            ],
+          },
+          {
+            zoneId: '1ce0d0b9-a964-432f-8078-a61100789e30',
+            kernelList: [
+              {
+                name: '1核',
+                value: '1',
+                RAMList: [
+                  {name: '1G', value: '1'},
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'}
+                ]
+              },
+              {
+                name: '2核',
+                value: '2',
+                RAMList: [
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'}
+                ]
+              },
+              {
+                name: '4核',
+                value: '4',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '8核',
+                value: '8',
+                RAMList: [
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'},
+                  {name: '64G', value: '64'}
+                ]
+              },
+              {
+                name: '16核',
+                value: '16',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'},
+                  {name: '64G', value: '64'},
+                  {name: '128G', value: '128'}
+                ]
+              },
+              {
+                name: '32核',
+                value: '32',
+                RAMList: [
+                  {name: '64G', value: '64'},
+                  {name: '128G', value: '128'}
+                ]
+              },
+              {
+                name: '64核',
+                value: '64',
+                RAMList: [
+                  {name: '128G', value: '128'},
+                  {name: '256G', value: '256'},
+                ]
+              }
+            ],
+          },
+          {
+            zoneId: 'a0a7df65-dec3-48da-82cb-cff9a55a4b6d',
+            kernelList: [
+              {
+                name: '1核',
+                value: '1',
+                RAMList: [
+                  {name: '1G', value: '1'},
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'}
+                ]
+              },
+              {
+                name: '2核',
+                value: '2',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '12G', value: '12'},
+                ]
+              },
+              {
+                name: '4核',
+                value: '4',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '12G', value: '12'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '8核',
+                value: '8',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '24G', value: '24'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '16核',
+                value: '16',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '24G', value: '24'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '32核',
+                value: '32',
+                RAMList: [
+                  {name: '32G', value: '32'}
+                ]
+              }
+            ],
+          },
+          {
+            zoneId: '3205dbc5-2cba-4d16-b3f5-9229d2cfd46c',
+            kernelList: [
+              {
+                name: '1核',
+                value: '1',
+                RAMList: [
+                  {name: '1G', value: '1'},
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'}
+                ]
+              },
+              {
+                name: '2核',
+                value: '2',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '12G', value: '12'},
+                ]
+              },
+              {
+                name: '4核',
+                value: '4',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '12G', value: '12'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '8核',
+                value: '8',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '24G', value: '24'},
+                  {name: '32G', value: '32'},
+                ]
+              },
+              {
+                name: '16核',
+                value: '16',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '24G', value: '24'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '32核',
+                value: '32',
+                RAMList: [
+                  {name: '32G', value: '32'}
+                ]
+              }
+            ],
+          },
+          {
+            zoneId: '75218bb2-9bfe-4c87-91d4-0b90e86a8ff2',
+            kernelList: [
+              {
+                name: '1核',
+                value: '1',
+                RAMList: [
+                  {name: '1G', value: '1'},
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'}
+                ]
+              },
+              {
+                name: '2核',
+                value: '2',
+                RAMList: [
+                  {name: '2G', value: '2'},
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'}
+                ]
+              },
+              {
+                name: '4核',
+                value: '4',
+                RAMList: [
+                  {name: '4G', value: '4'},
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'}
+                ]
+              },
+              {
+                name: '8核',
+                value: '8',
+                RAMList: [
+                  {name: '8G', value: '8'},
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '16核',
+                value: '16',
+                RAMList: [
+                  {name: '16G', value: '16'},
+                  {name: '32G', value: '32'}
+                ]
+              },
+              {
+                name: '32核',
+                value: '32',
+                RAMList: [
+                  {name: '32G', value: '32'}
+                ]
+              }
+            ],
+          }
+        ],
+        coreList: [],
+        cores: [],
+        //内存
+        memoryList: [],
+        memory: [],
+        //私有云VPC
+        vpcList: [],
+        vpc: [],
+        //网卡
+        networkCardList: [],
+        networkCard: [],
+        //带宽
+        bandwidth: 20,
+        //数据盘
+        diskListNums: '4',
+        diskType,
+        diskList: [{value: ['sata', '20']}],
       }
     },
     methods: {
+      publicBuy(){
+        if (this.mirrorType.length == 0) {
+          this.$vux.toast.text('请选择一个镜像类型', 'middle')
+          return
+        }
+        if (this.mirrorCustom.length == 0) {
+          this.$vux.toast.text('请选择一个镜像系统', 'middle')
+          return
+        }
+
+      },
       //切换导航
       click(value){
         this.index = value
       },
-      changeRegion(value){
-        console.log(this.mirrorType)
-        console.log(value)
-      },
       //实际计费
-      change1 (value, label) {
-      },
       //包年包月
-      change2(value){
-      },
       //镜像系统
       //配置
       BuyIp(value){
-        if (value) {
+        if (value[0] == '购买公网IP') {
           this.configs = this.isBuyConfig
         } else {
           this.configs = this.unBuyConfig
@@ -194,6 +642,37 @@
           return
         }
       },
+      //核心数
+      showCore(){
+        this.info.forEach(e => {
+          if (e.zoneId == this.regional[0]) {
+            this.coreList = e.kernelList
+          }
+        })
+      },
+      coreValue(){
+        this.info.forEach(e => {
+          e.kernelList.forEach(i => {
+            if (i.value == this.cores[0]) {
+              this.memoryList = i.RAMList
+            }
+          })
+        })
+      },
+      // 添加磁盘
+      addDisk(){
+        if (this.diskList.length < 5) {
+          this.diskList.push({value: ['sata', '20']})
+          this.diskListNums = 5 - this.diskList.length
+        } else {
+          this.$vux.toast.text('数据盘最多5个', 'middle')
+        }
+      },
+      //删除数据盘
+      delDisk(index){
+        this.diskList.splice(index, 1)
+        this.diskListNums = 5 - this.diskList.length
+      },
     },
     /*computed: mapState([
      // 映射 this.count 为 store.state.count
@@ -207,16 +686,16 @@
           // 0代表系统镜像
           user: val[0] == 'public' ? '0' : '1'
         }
+        this.mirrorCustomList = []
         axios.get(url, {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            this.mirrorCustomlist = []
             for (let type in response.data.result) {
-              this.mirrorCustomlist.push({name: type, value: type, parent: 0})
+              this.mirrorCustomList.push({name: type, value: type, parent: 0})
               response.data.result[type].forEach(e => {
-                this.mirrorCustomlist.push({name: e.templatename, value: e.templateid, parent: type})
+                this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
               })
-              if (this.mirrorCustomlist.length == 4) {
-                this.mirrorCustomlist = [{name: '暂无数据', value: '暂无数据', parent: 0}]
+              if (this.mirrorCustomList.length == 4) {
+                this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
               }
             }
           }
@@ -224,8 +703,48 @@
 
       },
       mirrorCustom(val, old){
-        this.userName = val.length == 0 ? '' : val[0] == 'window' ? 'Administrator' : 'root'
+        this.userName = val.length == 0 ? '' : val[0] == 'window' ? 'Administrator' : 'Root'
       },
+      str(){
+        if (this.str != '') {
+          this.charges = []
+        }
+      },
+      charges(){
+        if (this.charges.length != 0) {
+          this.str = ''
+        }
+
+      },
+      regional(val){
+        axios.get('network/listVpcBuyComputer.do', {
+          params: {
+            zoneId: val[0],
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.vpcList = []
+            response.data.result.forEach(e => {
+              this.vpcList.push({name: e.vpcname, value: e.vpcid,})
+            })
+          }
+        })
+      },
+      vpc(val){
+        axios.get('network/listNetworkBuyComputer.do', {
+          params: {
+            zoneId: this.regional[0],
+            vpcId: val[0]
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.networkCardList = []
+            response.data.result.forEach(e => {
+              this.networkCardList.push({name: e.name, value: e.ipsegmentid,})
+            })
+          }
+        })
+      }
     }
   }
 </script>
@@ -240,7 +759,7 @@
     }
   }
 
-  .qucikly-bottom {
+  .bottom {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -268,9 +787,6 @@
     }
   }
 
-  .custom {
-
-  }
 
 </style>
 
