@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view style="margin-bottom:1rem"></router-view>
     <div class="weui-tabbar components-bottom-bar">
       <div>
         <router-link to="/home" class="weui-tabbar__item">

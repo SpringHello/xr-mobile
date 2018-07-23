@@ -89,7 +89,7 @@
     </div>
 
     <!--购买-->
-    <button @click="buy">立即购买</button>
+    <router-link :to="$store.state.userInfo?'home':'login'" class="buy">立即购买</router-link>
   </div>
 </template>
 
@@ -361,7 +361,7 @@
     }
   }
 
-  button {
+  .buy {
     position: fixed;
     bottom: 0;
     font-size: .32rem;
