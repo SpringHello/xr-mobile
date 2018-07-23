@@ -18,6 +18,8 @@
           <p class="des">{{item.desc}}</p>
         </div>
       </div>
+    </div>
+    <div class="btn">
       <button @click="goCard">立即认证</button>
     </div>
   </div>
@@ -27,7 +29,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Group, Cell,XHeader,Icon } from 'vux'
+  import {Group, Cell, XHeader, Icon} from 'vux'
   export default{
     components: {
       Group,
@@ -39,17 +41,17 @@
       return {
         //认证信息
         authInfo: $store.state.authInfo,
-        steps:[
-          {num:'1',desc:'填写个人资料'},
-          {num:'2',desc:'提交审核'},
-          {num:'3',desc:'认证完成'},
+        steps: [
+          {num: '1', desc: '填写个人资料'},
+          {num: '2', desc: '提交审核'},
+          {num: '3', desc: '认证完成'},
         ],
       }
     },
-    methods:{
-     // 跳转到认证页面
+    methods: {
+      // 跳转到认证页面
       goCard(){
-          this.$router.push('idcard')
+        this.$router.push('idcard')
       },
     }
   }
@@ -57,71 +59,103 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
 
-  .desc{
-    background:rgba(247,251,255,1);
+  .desc {
+    background: rgba(247, 251, 255, 1);
     padding: .24rem .32rem .24rem .16rem;
     display: flex;
-    img{
+    justify-content: center;
+    img {
       width: .32rem;
       height: .32rem;
     }
-    p{
+    p {
       padding-left: .15rem;
-      font-size:.24rem;
-      color:rgba(125,161,217,1);
+      font-size: .24rem;
+      color: rgba(125, 161, 217, 1);
     }
   }
-  .progress{
+
+  .progress {
     margin: .2rem .1rem;
-    background:rgba(255,255,255,1);
-    .progress-title{
+    background: rgba(255, 255, 255, 1);
+    .progress-title {
       text-align: center;
       padding-top: .34rem;
-      h6{
-        font-size:.36rem;
-        color:rgba(51,51,51,1);
+      h6 {
+        font-size: .36rem;
+        color: rgba(51, 51, 51, 1);
         font-weight: normal;
         line-height: .5rem;
       }
-     p{
+      p {
         padding-top: .16rem;
         font-size: .2rem;
-        color:rgba(153,153,153,1);
+        color: rgba(153, 153, 153, 1);
       }
 
     }
-    .progress-step{
-      padding: .48rem .55rem;
+    .progress-step {
+      margin: .4rem .55rem;
       display: flex;
       font-size: .2rem;
-      color:rgba(51,51,51,1);
+      color: rgba(51, 51, 51, 1);
       justify-content: space-between;
-      div{
-        .num{
-          text-align: center;
-          line-height: .28rem;
-          width:.32rem;
-          height:.32rem;
-          background:rgba(74,144,226,1);
+      align-items: center;
+      position: relative;
+      &::after {
+        position: absolute;
+        top: 19%;
+        right: 19%;
+        content: '';
+        width: 1.5rem;
+        height: .02rem;
+        background-color: #d8d8d8;
+        display: inline-block;
+      }
+      &::before {
+        position: absolute;
+        top: 19%;
+        left: 19%;
+        content: '';
+        width: 1.5rem;
+        height: .02rem;
+        background-color: #d8d8d8;
+        display: inline-block;
+      }
+      div {
+        width: 1.7rem;
+        text-align: center;
+        .num {
+          line-height: .3rem;
+          width: .32rem;
+          height: .32rem;
+          background: rgba(74, 144, 226, 1);
           border-radius: 50%;
           color: #FFF;
           margin: 0 auto;
         }
-        .des{
+        .des {
           padding-top: .24rem;
         }
+
       }
 
     }
-    button{
-      width: 100%;
-      padding: .17rem 0 .21rem 0;
+  }
+
+  .btn {
+    padding: 0 1%;
+    button {
+      position: fixed;
+      bottom: 0;
+      width: 98%;
+      padding: .19rem 0;
       border: none;
       outline: none;
-      background:rgba(74,144,226,1);
-      font-size:.36rem;
-      color:rgba(255,255,255,1);
-      line-height:.5rem;
+      background: rgba(74, 144, 226, 1);
+      font-size: .36rem;
+      color: rgba(255, 255, 255, 1);
+      line-height: .5rem;
     }
   }
 
