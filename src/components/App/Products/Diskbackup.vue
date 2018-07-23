@@ -16,12 +16,14 @@
     <!--功能描述-->
     <div class="features">
       <div class="features-header">
+        <img src="../../../assets/img/balance/Fill.png" style="width: .21rem;height: .19rem;">
         <h6>功能描述</h6>
+        <img src="../../../assets/img/balance/Fill.png" style="width: .21rem;height: .19rem;">
       </div>
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
           <i class="iconfont" :class="item.img"></i>
-          <div>
+          <div style="padding: .15rem 0">
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
           </div>
@@ -32,7 +34,9 @@
     <!--应用场景-->
     <div class="stageInfo">
       <div class="stageInfo-header">
+        <img src="../../../assets/img/balance/Fill.png" style="width: .21rem;height: .19rem;">
         <h6>应用场景</h6>
+        <img src="../../../assets/img/balance/Fill.png" style="width: .21rem;height: .19rem;">
       </div>
       <div class="stageInfo-content">
         <tab :line-width="2" active-color="#4A90E2" custom-bar-width="50%">
@@ -55,12 +59,14 @@
     <!--产品优势-->
     <div class="advantage">
       <div class="advantage-header">
+        <img src="../../../assets/img/balance/Fill.png" style="width: .21rem;height: .19rem;">
         <h6>产品优势</h6>
+        <img src="../../../assets/img/balance/Fill.png" style="width: .21rem;height: .19rem;">
       </div>
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
           <i class="iconfont" :class="item.img"></i>
-          <div>
+          <div style="padding: .15rem 0">
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
           </div>
@@ -146,8 +152,10 @@
     .logo-wrapper {
       display: flex;
       align-items: center;
-      padding: .5rem .3rem;
+      padding: .46rem .23rem .4rem .39rem;
+      justify-content: space-around;
       > div {
+        width: 3.64rem;
         .title {
           color: rgba(255, 255, 255, 1);
           font-size: .36rem;
@@ -168,31 +176,22 @@
   .features {
     background: rgba(243, 243, 243, 1);
     .features-header {
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-bottom: 1px solid #D9D9D9;
       padding: .43rem 0;
       h6 {
         font-size: .36rem;
         color: rgba(74, 144, 226, 1);
-        &::before {
-          vertical-align: middle;
-          content: url('../../../assets/img/balance/Fill.png');
-          width: .21rem;
-          margin-right: .2rem;
-        }
-        &::after {
-          vertical-align: middle;
-          content: url('../../../assets/img/balance/Fill.png');
-          width: .21rem;
-          margin-left: .2rem;
-        }
+        margin: 0 .2rem;
       }
     }
     .features-content {
       background: rgba(255, 255, 255, 1);
       .item {
         display: flex;
-        padding: .3rem;
+        padding: .24rem .3rem;
         border-bottom: 1px solid #D9D9D9;
         .features-title {
           font-size: .32rem;
@@ -211,24 +210,15 @@
   .stageInfo {
     background: rgba(243, 243, 243, 1);
     .stageInfo-header {
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-bottom: 1px solid #D9D9D9;
       padding: .43rem 0;
       h6 {
         font-size: .36rem;
         color: rgba(74, 144, 226, 1);
-        &::before {
-          vertical-align: middle;
-          content: url('../../../assets/img/balance/Fill.png');
-          width: .21rem;
-          margin-right: .2rem;
-        }
-        &::after {
-          vertical-align: middle;
-          content: url('../../../assets/img/balance/Fill.png');
-          width: .21rem;
-          margin-left: .2rem;
-        }
+        margin: 0 .2rem;
       }
     }
     .stageInfo-content {
@@ -239,20 +229,21 @@
       }
       .stageInfo-item {
         background: rgba(250, 250, 250, 1);
-        padding: .5rem .3rem;
+        padding: .5rem .3rem 0 .3rem;
         .describe {
           img {
+            background-color: #FAFAFA;
             width: 4.71rem;
             display: block;
             margin: 0 auto;
-            padding-bottom: .3rem;
+            margin-bottom: .65rem;
           }
           h6 {
             font-size: .32rem;
             color: #333;
           }
           ul {
-            height: 1.5rem;
+            height: 1rem;
             li {
               list-style: none;
               font-size: .2rem;
@@ -279,31 +270,22 @@
     background: rgba(243, 243, 243, 1);
     margin-bottom: 2.1rem;
     .advantage-header {
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-bottom: 1px solid #D9D9D9;
       padding: .43rem 0;
       h6 {
         font-size: .36rem;
         color: rgba(74, 144, 226, 1);
-        &::before {
-          vertical-align: middle;
-          content: url('../../../assets/img/balance/Fill.png');
-          width: .21rem;
-          margin-right: .2rem;
-        }
-        &::after {
-          vertical-align: middle;
-          content: url('../../../assets/img/balance/Fill.png');
-          width: .21rem;
-          margin-left: .2rem;
-        }
+        margin: 0 .2rem;
       }
     }
     .advantage-content {
       background: rgba(255, 255, 255, 1);
       .item {
         display: flex;
-        padding: .3rem;
+        padding: .24rem .3rem;
         border-bottom: 1px solid #D9D9D9;
         .advantage-title {
           font-size: .32rem;

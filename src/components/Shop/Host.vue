@@ -200,20 +200,20 @@
           {name: '2年', value: 'Year#2', parent: 0},
           {name: '3年', value: 'Year#3', parent: 0}
         ],
-        str: 'real',
+        str: 'current',
         charges: [],
         radio: [
-          {key: 'real', value: '实时计费'}
+          {key: 'current', value: '实时计费'}
         ],
         //镜像类型
         mirrorTypeList: [
           {name: '公共镜像', value: 'public', parent: 0},
           {name: '自定义镜像', value: 'custom', parent: 0}
         ],
-        mirrorType: [],
+        mirrorType: ['public'],
         //镜像系统
         mirrorCustomList: [],
-        mirrorCustom: [],
+        mirrorCustom: ['window', '6dbacf6d-68d5-4d5e-b763-24ffc1b2902b'],
         //是否购买IP
         IP: ['购买公网IP'],
         checkIp: ['购买公网IP'],
@@ -250,13 +250,13 @@
           {name: '内存优化型', value: 'optimization'},
           {name: '高I/O型', value: 'IO',}
         ],
-        genre: [],
+        genre: ['standard'],
         //系统盘
         systemDiskList: [
           {name: 'SAS存储', value: 'sas'},
           {name: 'SSD存储', value: 'ssd'}
         ],
-        systemDisk: [],
+        systemDisk: ['sas'],
         //核心数
         info: [
           {
@@ -577,16 +577,16 @@
           }
         ],
         coreList: [],
-        cores: [],
+        cores: ['1'],
         //内存
         memoryList: [],
-        memory: [],
+        memory: ['1'],
         //私有云VPC
         vpcList: [],
-        vpc: [],
+        vpc: ['no'],
         //网卡
         networkCardList: [],
-        networkCard: [],
+        networkCard: ['no'],
         //带宽
         bandwidth: 20,
         //数据盘
@@ -605,7 +605,20 @@
           this.$vux.toast.text('请选择一个镜像系统', 'middle')
           return
         }
+        axios.get('information/deployVirtualMachine.do',{
+            params:{
+              zoneId: $store.state.zone.zoneid,
+              timeType:this.str,
+              timeValue:'',
+              templateId:this.mirrorCustom[1],
+              isAutoRenew:'',
+            }
+        }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
 
+            }
+          }
+        )
       },
       //切换导航
       click(value){

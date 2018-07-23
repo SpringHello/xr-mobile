@@ -34,24 +34,24 @@
         },
       }
     },
-    methods:{
+    methods: {
       //提交修改
       fixup(){
-          if(this.froms.nowKey!='' && this.froms.newKey!='' && this.froms.keyOk!=''){
-            axios.get("user/updatePassword.do", {
-                params: {
-                  password: this.froms.newKey,
-                  oldpassword: this.froms.nowKey,
-                }
-              }).then(response =>{
-              if (response.status == 200 && response.data.status == 1){
-                this.$vux.toast.text(response.data.message, 'middle')
-                this.$router.push('setting')
-              }else{
-                this.$vux.toast.text(response.data.message, 'middle')
-              }
-            })
-          }
+        if (this.froms.nowKey != '' && this.froms.newKey != '' && this.froms.keyOk != '') {
+          axios.get("user/updatePassword.do", {
+            params: {
+              password: this.froms.newKey,
+              oldpassword: this.froms.nowKey,
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.$vux.toast.text(response.data.message, 'middle')
+              this.$router.push('setting')
+            } else {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        }
       },
     },
   }
