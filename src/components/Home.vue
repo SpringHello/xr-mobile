@@ -503,8 +503,8 @@
           }
           span {
             display: block;
-            border-bottom: 1px solid #999;
-            border-right: 1px solid #999;
+            border-bottom: 1px solid #C7C7CC;
+            border-right: 1px solid #C7C7CC;
             width: .2rem;
             height: .2rem;
             transform: translateY(0rem) rotate(-315deg);
@@ -654,13 +654,12 @@
   //support
   .support-wrapper {
     background-color: #fff;
-    padding: .23rem .87rem .2rem .89rem;
+    padding: .23rem .2rem .2rem .87rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     .item {
-      position: relative;
-      top: 50%;
+      width: 50%;
       font-size: 0px;
       margin-bottom: .25rem;
       img {

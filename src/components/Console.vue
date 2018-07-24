@@ -204,7 +204,7 @@
     > div {
       width: 50%;
       &:first-of-type {
-        border-right: 1px solid rgba(216, 216, 216, 1);
+        border-right: 1px solid #e7e7e7;
       }
       > p {
         font-size: .24rem;
@@ -226,14 +226,14 @@
       font-size: .32rem;
       color: #000;
       padding: .23rem .3rem;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
     }
     .control-content {
       padding: .24rem .69rem;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      border-bottom: 1px solid #d9d9d9;
+      border-bottom: 1px solid #e7e7e7;
       div {
         width: 30%;
         text-align: center;

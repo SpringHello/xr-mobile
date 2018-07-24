@@ -201,7 +201,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
       padding: .43rem 0;
       h6 {
         font-size: .36rem;
@@ -214,7 +214,7 @@
       .item {
         display: flex;
         padding: .24rem .3rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -235,7 +235,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
       padding: .43rem 0;
       h6 {
         font-size: .36rem;
@@ -250,14 +250,13 @@
         color: #333;
       }
       .stageInfo-item {
-        background: rgba(250, 250, 250, 1);
+        background: rgba(255, 255, 255, 1);
         padding: .5rem .3rem .2rem .3rem;
         .describe {
           img {
             background-color: #FAFAFA;
-            width: 4.71rem;
+            width: 100%;
             display: block;
-            margin: 0 auto;
             margin-bottom: .65rem;
           }
           h6 {
@@ -294,7 +293,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
       padding: .43rem 0;
       h6 {
         font-size: .36rem;
@@ -307,7 +306,7 @@
       .item {
         display: flex;
         padding: .24rem .3rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
