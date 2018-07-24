@@ -68,8 +68,7 @@
         <popup-picker title="核心数" :data="coreList" v-model="cores" :columns="3" show-name
                       @on-show="showCore" @on-change="coreValue"></popup-picker>
 
-        <popup-picker title="内存" :data="memoryList" v-model="memory" :columns="3" show-name
-                      @on-show="showCore"></popup-picker>
+        <popup-picker title="内存" :data="memoryList" v-model="memory" :columns="3" show-name></popup-picker>
       </Group>
 
       <Group>
@@ -605,20 +604,15 @@
           this.$vux.toast.text('请选择一个镜像系统', 'middle')
           return
         }
-        axios.get('information/deployVirtualMachine.do',{
-            params:{
-              zoneId: $store.state.zone.zoneid,
-              timeType:this.str,
-              timeValue:'',
-              templateId:this.mirrorCustom[1],
-              isAutoRenew:'',
-            }
-        }).then(response => {
-            if (response.status == 200 && response.data.status == 1) {
-
-            }
+        axios.get('information/deployVirtualMachine.do', {
+          params: {
+            zoneId: $store.state.zone.zoneid,
+            timeType: this.str,
+            timeValue: '',
+            templateId: this.mirrorCustom[1],
+            isAutoRenew: '',
           }
-        )
+        })
       },
       //切换导航
       click(value){
@@ -658,7 +652,8 @@
       //核心数
       showCore(){
         this.info.forEach(e => {
-          if (e.zoneId == this.regional[0]) {
+          if (e.zoneId == this.regional[0]
+          ) {
             this.coreList = e.kernelList
           }
         })
@@ -666,7 +661,8 @@
       coreValue(){
         this.info.forEach(e => {
           e.kernelList.forEach(i => {
-            if (i.value == this.cores[0]) {
+            if (i.value == this.cores[0]
+            ) {
               this.memoryList = i.RAMList
             }
           })
@@ -700,19 +696,21 @@
           user: val[0] == 'public' ? '0' : '1'
         }
         axios.get(url, {params}).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.mirrorCustomList = []
-            for (let type in response.data.result) {
-              this.mirrorCustomList.push({name: type, value: type, parent: 0})
-              response.data.result[type].forEach(e => {
-                this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
-              })
-              if (this.mirrorCustomList.length == 4) {
-                this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
+            if (response.status == 200 && response.data.status == 1) {
+              this.mirrorCustomList = []
+              for (let type in response.data.result) {
+                this.mirrorCustomList.push({name: type, value: type, parent: 0})
+                response.data.result[type].forEach(e => {
+                    this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
+                  }
+                )
+                if (this.mirrorCustomList.length == 4) {
+                  this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
+                }
               }
             }
           }
-        })
+        )
 
       },
       mirrorCustom(val, old){
@@ -735,13 +733,15 @@
             zoneId: val[0],
           }
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.vpcList = []
-            response.data.result.forEach(e => {
-              this.vpcList.push({name: e.vpcname, value: e.vpcid,})
-            })
+            if (response.status == 200 && response.data.status == 1) {
+              this.vpcList = []
+              response.data.result.forEach(e => {
+                  this.vpcList.push({name: e.vpcname, value: e.vpcid,})
+                }
+              )
+            }
           }
-        })
+        )
       },
       vpc(val){
         axios.get('network/listNetworkBuyComputer.do', {
@@ -750,13 +750,15 @@
             vpcId: val[0]
           }
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.networkCardList = []
-            response.data.result.forEach(e => {
-              this.networkCardList.push({name: e.name, value: e.ipsegmentid,})
-            })
+            if (response.status == 200 && response.data.status == 1) {
+              this.networkCardList = []
+              response.data.result.forEach(e => {
+                  this.networkCardList.push({name: e.name, value: e.ipsegmentid,})
+                }
+              )
+            }
           }
-        })
+        )
       }
     }
   }

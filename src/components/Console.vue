@@ -10,7 +10,7 @@
             <span>告警</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="workorder">
+        <router-link class="userInfo" :to="$store.state.userInfo?'workorder':'login'">
           <div>
             <span v-if="userInfo">{{work}}</span>
             <span v-else>0</span>
@@ -125,7 +125,7 @@
           this.renewal = values[1].data.result[1].items[2].value
           values[1].data.result[2].items.forEach(item => {
             this.alarm += parseInt(item.value)
-        })
+          })
         }
       },
       conPush(item){
