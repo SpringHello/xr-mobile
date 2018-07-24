@@ -246,21 +246,20 @@
       }
       .stageInfo-item {
         background: rgba(250, 250, 250, 1);
-        padding: .5rem .3rem 0 .3rem;
+        padding: .5rem .3rem .2rem .3rem;
         .describe {
           img {
             background-color: #FAFAFA;
             width: 4.71rem;
             display: block;
             margin: 0 auto;
-           margin-bottom: .65rem;
+            margin-bottom: .65rem;
           }
           h6 {
             font-size: .32rem;
             color: #333;
           }
           ul {
-            height: 1rem;
             li {
               list-style: none;
               font-size: .2rem;

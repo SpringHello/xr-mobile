@@ -221,7 +221,7 @@
       }
       .stageInfo-item {
         background: rgba(250, 250, 250, 1);
-        padding: .5rem .3rem 0 .3rem;
+        padding: .5rem .3rem .2rem .3rem;
         .describe {
           img {
             background-color: #FAFAFA;
@@ -235,7 +235,6 @@
             color: #333;
           }
           ul {
-            height: 3.4rem;
             li {
               list-style: none;
               font-size: .2rem;

@@ -60,7 +60,7 @@
   //活动页面样式
   .active-box {
     padding: .2rem;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     .active-item {
       margin-bottom: .2rem;
       .item-img {

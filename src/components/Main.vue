@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view style="margin-bottom:1rem"></router-view>
+    <router-view></router-view>
     <div class="weui-tabbar components-bottom-bar">
       <div>
         <router-link to="/ruicloud/home" class="weui-tabbar__item">

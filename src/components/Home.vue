@@ -684,7 +684,7 @@
     background: rgba(67, 67, 67, 1);
     .foot-one {
       border-bottom: 1px solid #666;
-      padding: .33rem .4rem .38rem .97rem;
+      padding: .33rem .3rem .38rem .8rem;
       display: flex;
       align-items: center;
       justify-content: space-between;

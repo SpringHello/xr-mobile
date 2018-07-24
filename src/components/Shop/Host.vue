@@ -752,16 +752,18 @@
       //查询价格
       queryPrice(){
         var param = this.config[0].split('#')
-        var times = this.charges[0].split('#')
-        console.log(param)
+        if (this.charges.length != 0) {
+          var times = this.charges[0].split('#')
+        }
+        console.log(param, times)
         axios.get('device/QueryBillingPrice.do', {
           params: {
             cpuNum: param[0],
             diskSize: param[3],
             diskType: param[4],
             memory: param[1],
-            timeType: this.str ? 'current' : times[0],
-            timeValue: times[0]
+            timeType: this.str == 'current' ? 'current' : times[0],
+            timeValue: this.str == 'current' ? '1' : times[1]
           }
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
