@@ -99,7 +99,9 @@
         <p>合作伙伴</p>
       </div>
       <div class="item">
-        <img v-for="(item,index) in partners" :src="item">
+        <div v-for="(item,index) in partners" style="width:25%;position: relative;height:1rem;">
+          <img :src="item.img" :style="{width:`${item.width}rem`}">
+        </div>
       </div>
     </div>
 
@@ -318,14 +320,14 @@
         ],
         //合作伙伴
         partners: [
-          require('../assets/img/home/partner-dell.png'),
-          require('../assets/img/home/partner-huawei.png'),
-          require('../assets/img/home/partner-cooce.png'),
-          require('../assets/img/home/partner-telecom.png'),
-          require('../assets/img/home/partner-sugon.png'),
-          require('../assets/img/home/partner-hitachi.png'),
-          require('../assets/img/home/partner-unicom.png'),
-          require('../assets/img/home/partner-vmware.png'),
+          {img: require('../assets/img/home/partner-dell.png'), width: 0.6},
+          {img: require('../assets/img/home/partner-huawei.png'), width: 0.6},
+          {img: require('../assets/img/home/partner-cooce.png'), width: .68},
+          {img: require('../assets/img/home/partner-telecom.png'), width: 1.2},
+          {img: require('../assets/img/home/partner-sugon.png'), width: 1.2},
+          {img: require('../assets/img/home/partner-hitachi.png'), width: 1.2},
+          {img: require('../assets/img/home/partner-unicom.png'), width: .87},
+          {img: require('../assets/img/home/partner-vmware.png'), width: 1.2}
         ],
         //
         support: [
@@ -635,15 +637,16 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: .86rem .59rem .15rem .6rem;
+      padding: .86rem .59rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       img {
-        margin-right: .44rem;
-        width: 18%;
-        margin-bottom: .71rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
   }
@@ -656,7 +659,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     .item {
-      width: 50%;
+      position: relative;
+      top: 50%;
       font-size: 0px;
       margin-bottom: .25rem;
       img {
@@ -680,7 +684,7 @@
     background: rgba(67, 67, 67, 1);
     .foot-one {
       border-bottom: 1px solid #666;
-      padding: .33rem .97rem .38rem .97rem;
+      padding: .33rem .4rem .38rem .97rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -688,9 +692,9 @@
         border: 2px solid rgba(125, 161, 217, 1);
         width: 1.6rem;
         height: 1.6rem;
+        padding: .02rem;
       }
       .foot-one-right {
-        width: 65%;
         h6 {
           font-weight: normal;
           font-size: .32rem;
