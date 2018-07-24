@@ -18,10 +18,9 @@
           <p class="des">{{item.desc}}</p>
         </div>
       </div>
-    </div>
-    <div class="btn">
       <button @click="goCard">立即认证</button>
     </div>
+
   </div>
 
 </template>
@@ -143,20 +142,16 @@
     }
   }
 
-  .btn {
-    padding: 0 1%;
-    button {
-      position: fixed;
-      bottom: 0;
-      width: 98%;
-      padding: .19rem 0;
-      border: none;
-      outline: none;
-      background: rgba(74, 144, 226, 1);
-      font-size: .36rem;
-      color: rgba(255, 255, 255, 1);
-      line-height: .5rem;
-    }
+  button {
+    border: 1px solid rgba(74, 144, 226, 1);
+    width: 100%;
+    padding: .19rem 0;
+    outline: none;
+    background: rgba(74, 144, 226, 1);
+    font-size: .36rem;
+    color: rgba(255, 255, 255, 1);
+    line-height: .5rem;
   }
+
 
 </style>

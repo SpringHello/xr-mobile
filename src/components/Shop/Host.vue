@@ -65,11 +65,9 @@
 
         <popup-picker title="系统盘" :data="systemDiskList" v-model="systemDisk" :columns="3" show-name></popup-picker>
 
-        <popup-picker title="核心数" :data="coreList" v-model="cores" :columns="3" show-name
-                      @on-show="showCore" @on-change="coreValue"></popup-picker>
+        <popup-picker title="核心数" :data="coreList" v-model="cores" :columns="3" show-name></popup-picker>
 
-        <popup-picker title="内存" :data="memoryList" v-model="memory" :columns="3" show-name
-                      @on-show="showCore"></popup-picker>
+        <popup-picker title="内存" :data="memoryList" v-model="memory" :columns="3" show-name></popup-picker>
       </Group>
 
       <Group>
@@ -186,19 +184,19 @@
         regional,
         regionaList,
         chargeType: [
-          {name: '1月', value: 'Month#1', parent: 0},
-          {name: '2月', value: 'Month#2', parent: 0},
-          {name: '3月', value: 'Month#3', parent: 0},
-          {name: '4月', value: 'Month#4', parent: 0},
-          {name: '5月', value: 'Month#5', parent: 0},
-          {name: '6月', value: 'Month#6', parent: 0},
-          {name: '7月', value: 'Month#7', parent: 0},
-          {name: '8月', value: 'Month#8', parent: 0},
-          {name: '9月', value: 'Month#9', parent: 0},
-          {name: '10月', value: 'Month#10', parent: 0},
-          {name: '1年', value: 'Year#1', parent: 0},
-          {name: '2年', value: 'Year#2', parent: 0},
-          {name: '3年', value: 'Year#3', parent: 0}
+          {name: '1月', value: 'month#1', parent: 0},
+          {name: '2月', value: 'month#2', parent: 0},
+          {name: '3月', value: 'month#3', parent: 0},
+          {name: '4月', value: 'month#4', parent: 0},
+          {name: '5月', value: 'month#5', parent: 0},
+          {name: '6月', value: 'month#6', parent: 0},
+          {name: '7月', value: 'month#7', parent: 0},
+          {name: '8月', value: 'month#8', parent: 0},
+          {name: '9月', value: 'month#9', parent: 0},
+          {name: '10月', value: 'month#10', parent: 0},
+          {name: '1年', value: 'year#1', parent: 0},
+          {name: '2年', value: 'year#2', parent: 0},
+          {name: '3年', value: 'year#3', parent: 0}
         ],
         str: 'current',
         charges: [],
@@ -218,19 +216,19 @@
         IP: ['购买公网IP'],
         checkIp: ['购买公网IP'],
         //配置
-        config: ['1'],
+        config: ['1#1#1#40#sas'],
         configs: [],
         isBuyConfig: [
-          {name: '1核  1G  1Mbps  40GB', value: '1', parent: 0},
-          {name: '2核  4G  1Mbps  40GB', value: '2', parent: 0},
-          {name: '4核  4G  2Mbps  40GB', value: '4', parent: 0},
-          {name: '4核  8G  2Mbps  40GB', value: '4', parent: 0},
+          {name: '1核  1G  1Mbps  40GB(SAS存储)', value: '1#1#1#40#sas', parent: 0},
+          {name: '2核  4G  1Mbps  40GB(SAS存储)', value: '2#4#1#40#sas', parent: 0},
+          {name: '4核  4G  2Mbps  40GB(SSD存储)', value: '4#4#2#40#ssd', parent: 0},
+          {name: '4核  8G  2Mbps  40GB(SSD存储)', value: '4#8#2#40#ssd', parent: 0},
         ],
         unBuyConfig: [
-          {name: '1核  1G  0Mbps 40GB', value: '1', parent: 0},
-          {name: '2核  4G  0Mbps 40GB', value: '2', parent: 0},
-          {name: '4核  4G  0Mbps 40GB', value: '4', parent: 0},
-          {name: '4核  8G  0Mbps 40GB', value: '4', parent: 0},
+          {name: '1核  1G  0Mbps 40GB(SAS存储)', value: '1#1#0#40#sas', parent: 0},
+          {name: '2核  4G  0Mbps 40GB(SAS存储)', value: '2#4#0#40#sas', parent: 0},
+          {name: '4核  4G  0Mbps 40GB(SSD存储)', value: '4#4#0#40#ssd', parent: 0},
+          {name: '4核  8G  0Mbps 40GB(SSD存储)', value: '4#8#0#40#ssd', parent: 0},
         ],
         //主机信息
         hostMsg: [
@@ -595,8 +593,17 @@
         diskList: [{value: ['sata', '20']}],
       }
     },
+    created(){
+      this.changeMirrorType();
+      this.showCore();
+      this.coreValue();
+      this.vpcChange();
+      this.networkCardChange();
+      this.queryPrice();
+    },
     methods: {
       publicBuy(){
+        console.log(this.mirrorCustom)
         if (this.mirrorType.length == 0) {
           this.$vux.toast.text('请选择一个镜像类型', 'middle')
           return
@@ -605,20 +612,15 @@
           this.$vux.toast.text('请选择一个镜像系统', 'middle')
           return
         }
-        axios.get('information/deployVirtualMachine.do',{
-            params:{
-              zoneId: $store.state.zone.zoneid,
-              timeType:this.str,
-              timeValue:'',
-              templateId:this.mirrorCustom[1],
-              isAutoRenew:'',
-            }
-        }).then(response => {
-            if (response.status == 200 && response.data.status == 1) {
-
-            }
+        axios.get('information/deployVirtualMachine.do', {
+          params: {
+            zoneId: $store.state.zone.zoneid,
+            timeType: this.str,
+            timeValue: '',
+            templateId: this.mirrorCustom[1],
+            isAutoRenew: '',
           }
-        )
+        })
       },
       //切换导航
       click(value){
@@ -658,7 +660,8 @@
       //核心数
       showCore(){
         this.info.forEach(e => {
-          if (e.zoneId == this.regional[0]) {
+          if (e.zoneId == this.regional[0]
+          ) {
             this.coreList = e.kernelList
           }
         })
@@ -666,7 +669,8 @@
       coreValue(){
         this.info.forEach(e => {
           e.kernelList.forEach(i => {
-            if (i.value == this.cores[0]) {
+            if (i.value == this.cores[0]
+            ) {
               this.memoryList = i.RAMList
             }
           })
@@ -686,6 +690,87 @@
         this.diskList.splice(index, 1)
         this.diskListNums = 5 - this.diskList.length
       },
+      //镜像类型
+      changeMirrorType(){
+        let url = 'information/listTemplates.do'
+        let params = {
+          zoneId: $store.state.zone.zoneid,
+          // 0代表系统镜像
+          user: this.mirrorType[0] == 'public' ? '0' : '1'
+        }
+        axios.get(url, {params}).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.mirrorCustomList = []
+              for (let type in response.data.result) {
+                this.mirrorCustomList.push({name: type, value: type, parent: 0})
+                response.data.result[type].forEach(e => {
+                    this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
+                  }
+                )
+                if (this.mirrorCustomList.length == 4) {
+                  this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
+                }
+              }
+            }
+          }
+        )
+      },
+      //VPC
+      vpcChange(){
+        axios.get('network/listVpcBuyComputer.do', {
+          params: {
+            zoneId: this.regional[0],
+          }
+        }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.vpcList = []
+              response.data.result.forEach(e => {
+                  this.vpcList.push({name: e.vpcname, value: e.vpcid,})
+                }
+              )
+            }
+          }
+        )
+      },
+      networkCardChange(){
+        axios.get('network/listNetworkBuyComputer.do', {
+          params: {
+            zoneId: this.regional[0],
+            vpcId: this.vpc[0]
+          }
+        }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.networkCardList = []
+              response.data.result.forEach(e => {
+                  this.networkCardList.push({name: e.name, value: e.ipsegmentid,})
+                }
+              )
+            }
+          }
+        )
+      },
+      //查询价格
+      queryPrice(){
+        var param = this.config[0].split('#')
+        if (this.charges.length != 0) {
+          var times = this.charges[0].split('#')
+        }
+        console.log(param, times)
+        axios.get('device/QueryBillingPrice.do', {
+          params: {
+            cpuNum: param[0],
+            diskSize: param[3],
+            diskType: param[4],
+            memory: param[1],
+            timeType: this.str == 'current' ? 'current' : times[0],
+            timeValue: this.str == 'current' ? '1' : times[1]
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            console.log(response)
+          }
+        })
+      },
     },
     /*computed: mapState([
      // 映射 this.count 为 store.state.count
@@ -693,27 +778,7 @@
      ])*/
     watch: {
       mirrorType(val, old){
-        let url = 'information/listTemplates.do'
-        let params = {
-          zoneId: $store.state.zone.zoneid,
-          // 0代表系统镜像
-          user: val[0] == 'public' ? '0' : '1'
-        }
-        axios.get(url, {params}).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.mirrorCustomList = []
-            for (let type in response.data.result) {
-              this.mirrorCustomList.push({name: type, value: type, parent: 0})
-              response.data.result[type].forEach(e => {
-                this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
-              })
-              if (this.mirrorCustomList.length == 4) {
-                this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
-              }
-            }
-          }
-        })
-
+        this.changeMirrorType();
       },
       mirrorCustom(val, old){
         this.userName = val.length == 0 ? '' : val[0] == 'window' ? 'Administrator' : 'Root'
@@ -729,35 +794,16 @@
         }
 
       },
-      regional(val){
-        axios.get('network/listVpcBuyComputer.do', {
-          params: {
-            zoneId: val[0],
-          }
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.vpcList = []
-            response.data.result.forEach(e => {
-              this.vpcList.push({name: e.vpcname, value: e.vpcid,})
-            })
-          }
-        })
+      regional(){
+        this.vpcChange();
       },
-      vpc(val){
-        axios.get('network/listNetworkBuyComputer.do', {
-          params: {
-            zoneId: this.regional[0],
-            vpcId: val[0]
-          }
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.networkCardList = []
-            response.data.result.forEach(e => {
-              this.networkCardList.push({name: e.name, value: e.ipsegmentid,})
-            })
-          }
-        })
-      }
+      vpc(){
+        this.networkCardChange();
+      },
+      cores(){
+        this.showCore();
+        this.coreValue();
+      },
     }
   }
 </script>
