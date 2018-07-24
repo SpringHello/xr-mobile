@@ -38,7 +38,8 @@
               <button v-else @click="getTicket">立即领取</button>
             </div>
           </div>
-          <div style="text-align:center;font-size:.24rem;"><img src="../../assets/img/active/arrow-down.png" alt=""></div>
+          <div style="text-align:center;font-size:.24rem;"><img src="../../assets/img/active/arrow-down.png" alt="">
+          </div>
         </div>
       </div>
     </div>
@@ -165,13 +166,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/less" lang="less" scoped>
   #page-active {
+    background-color: #FFF;
     padding-bottom: .5rem;
-    .headline-g{
-      &:before{
+    .headline-g {
+      &:before {
         content: url(../../assets/img/active/triangle-down.png);
         padding: .1rem;
       }
-       &:after{
+      &:after {
         content: url(../../assets/img/active/triangle-up.png);
         padding: .1rem;
       }
@@ -196,7 +198,7 @@
       }
     }
     .body {
-      background-color: #F9AF80; 
+      background-color: #F9AF80;
       .flex-item {
         width: 50%;
         height: .6rem;
@@ -221,7 +223,7 @@
         #time {
           margin-bottom: .42rem;
           background: url(../../assets/img/active/rectangle.png) no-repeat center;
-          background-size: 5.68rem; 
+          background-size: 5.68rem;
           > p {
             text-align: center;
             font-size: .24rem;
@@ -232,7 +234,7 @@
         }
         .coupon {
           .coupon-item {
-            &:nth-child(1){
+            &:nth-child(1) {
               margin-bottom: .24rem;
             }
             height: 2rem;
@@ -244,32 +246,32 @@
               float: left;
               p {
                 font-size: .25rem;
-                text-align: center; 
+                text-align: center;
                 font-family: PingFangSC-Medium;
                 color: rgba(242, 102, 103, 1);
                 margin-bottom: .25rem;
               }
-              div{
+              div {
                 display: flex;
                 font-size: .32rem;
                 text-align: center;
-                span{
+                span {
                   color: #F26667;
                   width: .43rem;
                   height: .7rem;
                   line-height: .7rem;
                 }
-                .square{
-                  margin:0;
+                .square {
+                  margin: 0;
                   display: inline-block;
                   width: .73rem;
                   background-color: #F26667;
                   font-size: .32rem;
                   color: #fff;
                 }
-                
+
               }
-              
+
             }
             .right {
               float: right;
@@ -285,7 +287,7 @@
                   font-style: normal;
                 }
                 span {
-                  padding-left:.1rem; 
+                  padding-left: .1rem;
                   font-size: .2rem;
                 }
               }

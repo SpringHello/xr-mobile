@@ -7,7 +7,7 @@
         <p>账户可用余额</p>
       </div>
       <p>
-        <x-button mini type="primary">充值</x-button>
+        <x-button mini type="primary" link="Charge">充值</x-button>
       </p>
     </header>
     <Group>
@@ -41,7 +41,7 @@
       return {
         remainder: sessionStorage.getItem('money'),
         cellList: [
-          {img: require('../../assets/img/account/money.png'), title: '充值中心', url: ''},
+          {img: require('../../assets/img/account/money.png'), title: '充值中心', url: 'Charge'},
           {img: require('../../assets/img/account/chagre.png'), title: '代金券', url: 'vouchers'}
         ],
       }

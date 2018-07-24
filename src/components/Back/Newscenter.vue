@@ -3,9 +3,12 @@
     <x-header></x-header>
     <div class="newscenter">
       <div class="news-nav">
-        <ul>
-          <li v-for="(item,index) in news" :key="index" @click="getData(item.type)">{{item.title}}({{item.num}})</li>
-        </ul>
+        <tab active-color="#4A90E2">
+          <tab-item @on-item-click="getData(item.type)" v-for="(item,index) in news"
+                    class="tab-item" :key="index">
+            {{item.title}}({{item.num}})
+          </tab-item>
+        </tab>
       </div>
       <div class="content">
         <ul>
@@ -31,7 +34,7 @@
 </template>
 
 <script>
-  import {XHeader, Grid, GridItem, Actionsheet} from 'vux'
+  import {XHeader, Grid, GridItem, Actionsheet, Tab, TabItem} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   export default{
@@ -39,7 +42,9 @@
       XHeader,
       Grid,
       GridItem,
-      Actionsheet
+      Actionsheet,
+      Tab,
+      TabItem
     },
     data (){
       return {
@@ -48,10 +53,10 @@
           {title: '已读', type: 'isread', status: false, num: ''},
           {title: '未读', type: 'unread', status: false, num: ''},
         ],
-
         datas: [],
         id: '',
         type: '',
+        urltype: '',
         showAll: false,
         menusAll: {
           isread: '<span style="color:#4A90E2">标为已读</span>',
@@ -113,49 +118,45 @@
       },
       //信息操作
       opration(id){
-        if (this.type = 'all') {
+        this.id = id
+        if (this.type == 'all') {
           this.showAll = true
-          this.id = id
         }
-        if (this.type = 'unread') {
+        if (this.type == 'unread') {
           this.showUnread = true
-          this.id = id
         }
-        if (this.type = 'isread') {
+        if (this.type == 'isread') {
           this.showIsread = true
-          this.id = id
         }
       },
       //确认信息操作
       mark(key){
-        switch (key) {
-          case 'delete':
-            this.type = 'del'
-            break;
-          case 'isread':
-            this.type = 'readed'
-            break;
-          case 'unread':
-            this.type = 'unreaded'
-            break;
-        }
-        axios.post(`user/${this.type}EventNotify.do`, {
-          list: JSON.stringify([{'id': this.id}])
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.getData('all')
-            this.getData('unread')
-            this.getData('isread')
+        if (key != 'cancel') {
+          switch (key) {
+            case 'delete':
+              this.urltype = 'del'
+              break;
+            case 'isread':
+              this.urltype = 'readed'
+              break;
+            case 'unread':
+              this.urltype = 'unreaded'
+              break;
           }
-        })
+          axios.post(`user/${this.urltype}EventNotify.do`, {
+            list: JSON.stringify([{'id': this.id}])
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1
+            ) {
+              this.getData(this.type)
+            }
+          })
 
-
+        }
       }
     },
     created(){
       this.getData('all')
-      this.getData('unread')
-      this.getData('isread')
     },
 
   }
@@ -163,28 +164,9 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .newscenter {
-    margin-bottom: 1rem;
-    .news-nav {
-      line-height: 0;
-      ul {
-        border: 1px solid #e7e7e7;
-        li {
-          padding: .35rem 0;
-          width: 33.3%;
-          border-right: 1px solid #e7e7e7;
-          display: inline-block;
-          text-align: center;
-          font-size: .32rem;
-          color: #353535;
-          &:last-of-type {
-            border-right: none;
-          }
-          &:hover {
-            background: rgba(234, 234, 234, 1)
-          }
-        }
-      }
-
+    .tab-item {
+      font-size: .3rem;
+      color: #000;
     }
     .content {
       ul {
