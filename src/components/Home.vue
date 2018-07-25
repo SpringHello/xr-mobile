@@ -88,10 +88,12 @@
     <!--support-->
     <div class="support-wrapper">
       <div class="item" v-for="(item,index) in support" :key="index">
-        <img :src="item.img">
         <div>
-          <p class="item-title">{{item.title}}</p>
-          <p class="item-subtitle">{{item.subTitle}}</p>
+          <img :src="item.img">
+          <div>
+            <p class="item-title">{{item.title}}</p>
+            <p class="item-subtitle">{{item.subTitle}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -330,7 +332,7 @@
             border-right: 1px solid #C7C7CC;
             width: .2rem;
             height: .2rem;
-            transform: translateY(0rem) rotate(-315deg);
+            transform: translate(-.1rem, -.05rem) rotate(-315deg);
           }
         }
         .product-item-content {
@@ -371,7 +373,7 @@
           span {
             border-bottom: 1px solid #4A90E2;
             border-right: 1px solid #4A90E2;
-            transform: translateX(0rem) rotate(225deg);
+            transform: translate(-.1rem, .1rem) rotate(225deg);
           }
         }
       }
@@ -477,27 +479,31 @@
   //support
   .support-wrapper {
     background-color: #fff;
-    padding: .23rem .2rem .2rem .87rem;
+    padding: .23rem .87rem 0 .87rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     .item {
-      width: 50%;
       font-size: 0px;
-      margin-bottom: .25rem;
-      img {
-        vertical-align: middle;
-        margin-right: .23rem;
-        width: .4rem;
-        display: inline-block;
-      }
+      padding-bottom: .25rem;
+      width: 50%;
       div {
-        vertical-align: middle;
-        display: inline-block;
-        p {
-          font-size: .2rem;
+        img {
+          vertical-align: middle;
+          margin-right: .23rem;
+          width: .4rem;
+          display: inline-block;
+        }
+        div {
+          text-align: left;
+          vertical-align: middle;
+          display: inline-block;
+          p {
+            font-size: .2rem;
+          }
         }
       }
+
     }
   }
 
@@ -506,15 +512,16 @@
     background: rgba(67, 67, 67, 1);
     .foot-one {
       border-bottom: 1px solid #666;
-      padding: .33rem .3rem .38rem .8rem;
+      padding: .33rem .6rem .38rem .6rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       img {
         border: 2px solid rgba(125, 161, 217, 1);
         width: 1.6rem;
         height: 1.6rem;
-        padding: .02rem;
+        padding: .05rem;
+        margin-right: .5rem;
       }
       .foot-one-right {
         h6 {
