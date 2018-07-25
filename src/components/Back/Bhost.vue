@@ -41,17 +41,17 @@
       }
     }).then((response) => {
       for (let type in response.data.result) {
-          response.data.result[type].list.forEach(host => {
-            list.push({
-              status: type,
-              title: host.instancename,
-              desc: host.templatename,
-              id: host.computerid,
-              price: host.cpCase,
-              password: host.connectpassword,
-              statusL: host.status
-            })
+        response.data.result[type].list.forEach(host => {
+          list.push({
+            status: type,
+            title: host.instancename,
+            desc: host.templatename,
+            id: host.computerid,
+            price: host.cpCase,
+            password: host.connectpassword,
+            statusL: host.status
           })
+        })
       }
       cb(list)
     })
@@ -113,6 +113,7 @@
     methods: {
       // 查看详情
       push(item){
+        console.log(item)
         this.address = '/hostdetail'
         var params = {
           id: item.id,
