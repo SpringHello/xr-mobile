@@ -5,16 +5,16 @@
       <div class="news-nav">
         <tab active-color="#4A90E2">
           <tab-item @on-item-click="getData(item.type)" v-for="(item,index) in news"
-                    class="tab-item" :key="index">
+                    class="tab-item" :key="index" :selected="index==0">
             {{item.title}}({{item.num}})
           </tab-item>
         </tab>
       </div>
-      <div class="content">
+      <div class="content" v-show="datas.length!=0">
         <ul>
           <li v-for="(item,index) in datas">
             <div>
-              <p class="title">{{item.name}} <span> [{{item.actType}}]</span></p>
+              <p class="title"><span> [{{item.actType}}]</span>{{item.name}}</p>
               <p class="right" @click="toview(item)">查看详情</p>
             </div>
             <p class="desc" @click="opration(item.id)">{{item.content}}</p>
@@ -170,24 +170,27 @@
       color: #000;
     }
     .content {
+      margin-top: .2rem;
       ul {
-        padding: .3rem;
+        padding: .24rem .31rem;
+        background-color: #FFF;
+        border-bottom: 1px solid #e7e7e7;
         li {
-          padding-bottom: .3rem;
           list-style: none;
-          border-bottom: 1px solid #e7e7e7;
           > div {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: .2rem 0;
+            margin-bottom: .12rem;
             .title {
               font-size: .28rem;
               color: rgba(53, 53, 53, 1);
+              line-height: .4rem;
             }
             .right {
               font-size: .2rem;
               color: rgba(153, 153, 153, 1);
+              line-height: .28rem;
             }
           }
           .desc {

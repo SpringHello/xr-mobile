@@ -1,8 +1,8 @@
 <template>
-  <div style="margin-bottom: 1.5rem;background:rgba(245,245,245,1);">
+  <div style="background:rgba(245,245,245,1);">
     <!--顶部logo-->
-    <x-header :right-options="{showMore: true}" :left-options="{backText: ''}">
-      <a slot="left" style="margin-left: .3rem;">
+    <x-header :left-options="{backText: '',showBack: false}" style="padding: .1rem;">
+      <a slot="left">
         <img src="../assets/img/home/logo.png" style="width: 1.86rem;height: .48rem;"></a>
     </x-header>
 
@@ -114,6 +114,8 @@
         <p>北京允睿讯通科技有限公司</p>
       </div>
     </div>
+
+    <div style="height: 1.2rem;"></div>
   </div>
 </template>
 
@@ -462,7 +464,7 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: .86rem .59rem;
+      padding: .4rem .59rem;
       display: flex;
       justify-content: space-between;
       align-items: center;

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 1.5rem;background:rgba(243,243,243,1);">
+  <div style="background:rgba(243,243,243,1);">
     <header class="header-wrapper">
       <p>控制台</p>
       <div style="display: flex">
@@ -50,13 +50,8 @@
         </div>
       </div>
     </div>
-    <!--备案-->
-    <!--<div class="record">-->
-    <!--<div @click="toRecord">-->
-    <!--<p class="cell-item">查看备案进度</p><span class="link"></span>-->
-    <!--</div>-->
-    <!--</div>-->
 
+    <div style="height: 1.2rem;"></div>
     <toast v-model="showPositionValue" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>

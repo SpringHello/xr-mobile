@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom:1.5rem;" id="mine">
+  <div id="mine">
     <router-link :to="userInfo?'account':'login'">
       <header class="header-wrapper">
         <div>
@@ -108,7 +108,7 @@
         </div>
       </div>
     </div>
-
+    <div style="height: 1.2rem;"></div>
     <actionsheet v-model="showKF" :menus="menusKF" show-cancel :close-on-clicking-mask="false"></actionsheet>
     <actionsheet v-model="showTC" :menus="menusTC" show-cancel :close-on-clicking-mask="false"
                  @on-click-menu="clickExit"></actionsheet>
