@@ -48,8 +48,8 @@
         <x-switch title="自动续费"></x-switch>
       </Group>
       <div class="bottom">
-        <p>配置价格：<span>¥ 0.00</span></p>
-        <button @click="publicBuy">立即购买</button>
+        <p>配置价格：<span>¥ {{Qprices.toFixed(2)}}</span></p>
+        <button @click="">立即购买</button>
       </div>
     </div>
     <div v-show="index==1" class="custom">
@@ -591,6 +591,8 @@
         diskListNums: '4',
         diskType,
         diskList: [{value: ['sata', '20']}],
+        //价格
+        Qprices: 0.00,
       }
     },
     created(){
@@ -755,19 +757,30 @@
         if (this.charges.length != 0) {
           var times = this.charges[0].split('#')
         }
-        console.log(param, times)
-        axios.get('device/QueryBillingPrice.do', {
-          params: {
+        this.Qprices = 0
+        axios.post('device/QueryBillingPrice.do',
+          {
             cpuNum: param[0],
             diskSize: param[3],
             diskType: param[4],
             memory: param[1],
             timeType: this.str == 'current' ? 'current' : times[0],
-            timeValue: this.str == 'current' ? '1' : times[1]
+            timeValue: this.str == 'current' ? '1' : times[1],
+            zoneId: $store.state.zone.zoneid,
           }
+        ).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.Qprices += response.data.cost
+          }
+        })
+        axios.post('device/queryIpPrice.do', {
+          brand: param[2],
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          zoneId: $store.state.zone.zoneid,
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            console.log(response)
+            this.Qprices += response.data.cost
           }
         })
       },
@@ -789,10 +802,10 @@
         }
       },
       charges(){
+        this.queryPrice();
         if (this.charges.length != 0) {
           this.str = ''
         }
-
       },
       regional(){
         this.vpcChange();
