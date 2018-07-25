@@ -39,6 +39,9 @@
         type: Number
       }
     },
+    created(){
+      this.setTime()
+    },
     methods: {
       setTime() {
         let limitTime = this.endTime - this.startTime

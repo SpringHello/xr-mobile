@@ -4,11 +4,8 @@
     <h2 v-else>特惠产品 你我共享</h2>
     <div class="center">
       <div class="item" :class="{onSelect: select == index}" v-for="(item,index) in productGroups" @click="selectItem(index)">
-        <div class="item-title" v-if="isCloud">
-          云朵特惠专享
-        </div>
-        <div class="item-title" v-else>
-          云客特惠专享
+        <div class="item-title">
+          {{ isCloudText }}
         </div>
         <ul>
           <li>{{ item.cpu}}核<span>CPU</span></li>
@@ -31,17 +28,34 @@
       <p>价格：<span>¥{{currentPrice}}</span><span>/月</span><span>¥{{ originalCost}}/月</span></p>
       <button @click="buyNow(select)">立即购买</button>
     </div>
+    <!--  老用户弹窗 只有写内联样式才生效 以后再改 -->
+    <div v-transfer-dom>
+      <x-dialog v-model="oldUser" :hide-on-blur="true">
+        <div>
+          <img src="../../../../assets/img/active/groupBooking/gb-icon13.png" style="max-width:100%">
+          <p style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;">您已经是新睿云的常客啦，</p>
+          <p style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;margin-bottom: .5rem"> 可59元直接购买云主机啦！</p>
+        </div>
+        <div style="border: .01rem solid #D8D8D8;display: flex">
+          <span @click="oldUser=false"
+                style="width:50%;border-right: .01rem solid #D8D8D8;color:rgba(153,153,153,1);font-size: .36rem;font-family: 'Microsoft YaHei', '微软雅黑';line-height: 1rem">取消</span>
+          <span @click="$router.push('groupBooking')"
+                style="width:50%;color:rgba(74,144,226,1);font-size: .36rem;font-family: 'Microsoft YaHei', '微软雅黑';line-height: 1rem">立即购买</span>
+        </div>
+      </x-dialog>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import axios from '../../../../util/iaxios'
-  import {Group, PopupPicker} from 'vux'
+  import {Group, PopupPicker, XDialog} from 'vux'
 
   export default {
     components: {
       PopupPicker,
-      Group
+      Group,
+      XDialog
     },
     data() {
       return {
@@ -54,7 +68,7 @@
             system: ['windows'],
             currentPrice: 59,
             originalCost: 98.72,
-            area: ['1ce0d0b9-a964-432f-8078-a61100789e30']
+            area: []
           }, {
             cpu: 2,
             memory: 4,
@@ -63,7 +77,7 @@
             system: ['windows'],
             currentPrice: 98,
             originalCost: 176.72,
-            area: ['1ce0d0b9-a964-432f-8078-a61100789e30']
+            area: []
           }],
         systemGroup: [
           {
@@ -74,24 +88,9 @@
             name: 'Windows',
             value: 'windows'
           },],
-        areaData: [{
-          name: '北京一区',
-          value: '39a6af0b-6624-4194-b9d5-0c552d903858'
-        }, {
-          name: '北方一区',
-          value: 'a0a7df65-dec3-48da-82cb-cff9a55a4b6d'
-        }, {
-          name: '北方二区',
-          value: '1ce0d0b9-a964-432f-8078-a61100789e30'
-        }, {
-          name: '华中一区',
-          value: '3205dbc5-2cba-4d16-b3f5-9229d2cfd46c'
-        }, {
-          name: '华中二区',
-          value: '75218bb2-9bfe-4c87-91d4-0b90e86a8ff2'
-        }
-        ],
+        areaData: [],
         select: 0,
+        oldUser: false
       }
     },
     props: {
@@ -103,6 +102,16 @@
         type: String,
         default: ''
       }
+    },
+    created() {
+      this.$store.state.zoneList.forEach(zone => {
+        this.areaData.push({name: zone.zonename, value: zone.zoneid})
+      })
+      if (this.areaData.length != 0) {
+        this.productGroups[0].area[0] = this.areaData[0].value
+        this.productGroups[1].area[0] = this.areaData[0].value
+      }
+      this.getoriginalPrice(0)
     },
     methods: {
       buyNow(index) {
@@ -145,6 +154,7 @@
                 })
               } else {
                 // 判断老用户
+                this.oldUser = true
               }
             } else {
               this.$vux.toast.text(res.data.message)
@@ -175,6 +185,9 @@
       },
       originalCost() {
         return this.productGroups[this.select].originalCost
+      },
+      isCloudText() {
+        return this.isCloud ? '云朵特惠专享' : '云客特惠专享'
       }
     }
   }
@@ -244,11 +257,11 @@
             font-size: .32rem;
             font-family: "Microsoft YaHei", "微软雅黑";
             color: rgba(254, 79, 74, 1);
-            span{
+            span {
               font-size: .2rem;
               color: #666666;
             }
-            span:nth-child(2){
+            span:nth-child(2) {
               margin-left: .2rem;
               text-decoration: line-through;
             }
@@ -266,6 +279,7 @@
       background-color: #FFF;
       position: fixed;
       bottom: 0;
+      right: 0;
       font-family: "Microsoft YaHei", "微软雅黑";
       p {
         padding: .27rem .3rem;
