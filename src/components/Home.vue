@@ -49,9 +49,11 @@
         <div v-for="product in productList" class="product-content-item"
              :class="{'product-content-item-active':product.opened}">
           <div class="product-item-header" @click="product.opened=!product.opened">
-            <img style="font-size: 0px" :src="product.img">
-            <p>{{product.title}}</p>
-            <!--<span>gekki</span>-->
+            <div>
+              <img style="font-size: 0px" :src="product.img">
+              <p>{{product.title}}</p>
+            </div>
+            <span></span>
           </div>
           <div class="product-item-content" v-show="product.opened">
             <ul>
@@ -97,7 +99,9 @@
         <p>合作伙伴</p>
       </div>
       <div class="item">
-        <img v-for="(item,index) in partners" :src="item">
+        <div v-for="(item,index) in partners" style="width:25%;position: relative;height:1rem;">
+          <img :src="item.img" :style="{width:`${item.width}rem`}">
+        </div>
       </div>
     </div>
 
@@ -234,16 +238,16 @@
         swiperList: [
           {
             url: 'javascript:',
-            img:require('../assets/img/home/banner-1.png')
+            img: require('../assets/img/home/banner-1.png')
           },
           {
             url: 'javascript:',
-            img:require('../assets/img/home/banner-2.png')
+            img: require('../assets/img/home/banner-2.png')
           },
           {
             url: 'javascript:',
-            img:require('../assets/img/home/banner-3.png'),
-           fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
+            img: require('../assets/img/home/banner-3.png'),
+            fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
           }
         ],
         // 走马灯下方介绍
@@ -316,14 +320,14 @@
         ],
         //合作伙伴
         partners: [
-          require('../assets/img/home/partner-dell.png'),
-          require('../assets/img/home/partner-huawei.png'),
-          require('../assets/img/home/partner-cooce.png'),
-          require('../assets/img/home/partner-telecom.png'),
-          require('../assets/img/home/partner-sugon.png'),
-          require('../assets/img/home/partner-hitachi.png'),
-          require('../assets/img/home/partner-unicom.png'),
-          require('../assets/img/home/partner-vmware.png'),
+          {img: require('../assets/img/home/partner-dell.png'), width: 0.6},
+          {img: require('../assets/img/home/partner-huawei.png'), width: 0.6},
+          {img: require('../assets/img/home/partner-cooce.png'), width: .68},
+          {img: require('../assets/img/home/partner-telecom.png'), width: 1.2},
+          {img: require('../assets/img/home/partner-sugon.png'), width: 1.2},
+          {img: require('../assets/img/home/partner-hitachi.png'), width: 1.2},
+          {img: require('../assets/img/home/partner-unicom.png'), width: .87},
+          {img: require('../assets/img/home/partner-vmware.png'), width: 1.2}
         ],
         //
         support: [
@@ -442,7 +446,7 @@
 
   .banner-introduce {
     background-color: #fff;
-    margin-bottom: .5rem;
+    margin-bottom: .2rem;
     .grid {
       display: flex;
       align-items: center;
@@ -468,7 +472,7 @@
   //云产品目录
   .product-wrapper {
     background-color: #fff;
-    margin-bottom: .5rem;
+    margin-bottom: .2rem;
     .product-header {
       font-size: .36rem;
       color: #222;
@@ -478,25 +482,39 @@
     .product-content {
       .product-content-item {
         .product-item-header {
-          //height: 0.88rem;
           font-size: 0px;
           padding: .21rem .27rem;
           border-bottom: 1px solid #e7e7e7;
           display: flex;
-          img {
-            width: .64rem;
-            height: .64rem;
-            margin-right: .2rem;
+          justify-content: space-between;
+          align-items: center;
+          > div {
+            display: flex;
+            align-items: center;
+            img {
+              width: .64rem;
+              height: .64rem;
+              margin-right: .2rem;
+            }
+            p {
+              line-height: .64rem;
+              font-size: 0.32rem;
+            }
           }
-          p {
-            line-height: .64rem;
-            font-size: 0.32rem;
+          span {
+            display: block;
+            border-bottom: 1px solid #C7C7CC;
+            border-right: 1px solid #C7C7CC;
+            width: .2rem;
+            height: .2rem;
+            transform: translateY(0rem) rotate(-315deg);
           }
         }
         .product-item-content {
           background: rgba(245, 245, 245, 1);
           border-bottom: 1px solid #e7e7e7;
           ul {
+            background-color: #FAFAFA;
             .item {
               /*border-bottom: 1px solid #e7e7e7;*/
               list-style: none;
@@ -526,11 +544,11 @@
         .product-item-header {
           p {
             color: #4A90E2;
-            &:after {
-              transform: rotate(135deg);
-              border-bottom: 1px solid #4A90E2;
-              border-left: 1px solid #4A90E2;
-            }
+          }
+          span {
+            border-bottom: 1px solid #4A90E2;
+            border-right: 1px solid #4A90E2;
+            transform: translateX(0rem) rotate(225deg);
           }
         }
       }
@@ -540,7 +558,7 @@
   //数据中心
   .data-wrapper {
     background-color: #fff;
-    margin-bottom: .5rem;
+    margin-bottom: .2rem;
     .data-header {
       padding: .24rem .3rem;
       border-bottom: 1px solid #e7e7e7;
@@ -568,7 +586,7 @@
   //权威认证
   .authority-wrapper {
     background-color: #fff;
-    margin-bottom: .5rem;
+    margin-bottom: .2rem;
     .authority-header {
       font-size: .36rem;
       color: #222;
@@ -611,7 +629,7 @@
   //合作伙伴
   .partner-wrapper {
     background-color: #fff;
-    margin-bottom: .5rem;
+    margin-bottom: .2rem;
     .partner-header {
       font-size: .36rem;
       color: #222;
@@ -619,14 +637,16 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: .24rem .3rem;
+      padding: .86rem .59rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       img {
-        width: 20.1%;
-        margin-bottom: 1rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
   }
@@ -634,8 +654,7 @@
   //support
   .support-wrapper {
     background-color: #fff;
-    margin-bottom: .5rem;
-    padding: .24rem .5rem;
+    padding: .23rem .2rem .2rem .87rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -664,14 +683,15 @@
     background: rgba(67, 67, 67, 1);
     .foot-one {
       border-bottom: 1px solid #666;
+      padding: .33rem .3rem .38rem .8rem;
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      padding: .33rem 0 .38rem .97rem;
+      justify-content: space-between;
       img {
+        border: 2px solid rgba(125, 161, 217, 1);
         width: 1.6rem;
         height: 1.6rem;
-        display: block;
+        padding: .02rem;
       }
       .foot-one-right {
         h6 {

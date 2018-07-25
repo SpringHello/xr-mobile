@@ -25,14 +25,22 @@ html {
   box-sizing: border-box;
 }
 
+#mine {
+  .vux-badge-single {
+    position: absolute;
+    right: .8rem;
+  }
+}
+
 /*底部导航条*/
 .weui-tabbar {
+  background-color: #ffffff;
   display: flex;
   position: fixed;
   z-index: 500;
   bottom: 0px;
   width: 100%;
-  background-color: #f7f7fa;
+  border-top: 1px solid #e7e7e7;
   div {
     width: 25%;
     .weui-tabbar__item {
@@ -96,7 +104,7 @@ html {
     }
   }
   .vux-indicator-center {
-    bottom: -10px !important;
+    bottom: -16px !important;
   }
 }
 
@@ -363,9 +371,25 @@ html {
 
 .work {
   .weui-cells {
+    .weui-cell__bd {
+      color: #333;
+    }
     .vux-cell-box {
       .vux-popup-picker-select {
         text-align: left !important;
+      }
+      .weui-cell__hd {
+        font-size: .32rem;
+      }
+      .vux-popup-picker-value {
+        color: #333;
+      }
+    }
+    .vux-x-textarea {
+      .weui-cell__bd {
+        .weui-textarea-counter {
+          font-size: .2rem;
+        }
       }
     }
   }
@@ -377,7 +401,11 @@ html {
   .weui-btn_primary {
     background: rgba(74, 144, 226, 1) !important;
   }
-
+  .vux-x-textarea {
+    display: block;
+    align-items: none;
+    box-align: none;
+  }
 }
 
 //意见反馈
@@ -512,6 +540,27 @@ html {
         }
       }
     }
+  }
+}
+
+#charges {
+  .weui-cells {
+    .vux-x-input {
+      .weui-cell__bd {
+        font-size: .28rem;
+      }
+    }
+    .vux-cell-box {
+      .weui-cell__hd {
+        font-size: .32rem;
+      }
+      .vux-cell-primary {
+        font-size: .28rem;
+      }
+    }
+  }
+  .weui-btn_primary {
+    background: rgba(74, 144, 226, 1);
   }
 }
 

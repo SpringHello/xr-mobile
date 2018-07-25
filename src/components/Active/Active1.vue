@@ -82,6 +82,7 @@
     padding-bottom: 1rem;
     background: rgba(255, 255, 255, 1);
     .wrap {
+      background-color: #FFF;
       padding: 0 0.3rem;
     }
   }
@@ -157,6 +158,7 @@
   }
 
   .recommend {
+    background-color: #FFF;
     line-height: 0;
     padding: .48rem .3rem .44rem .3rem;
     .join {

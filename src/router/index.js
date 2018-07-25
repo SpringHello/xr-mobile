@@ -66,6 +66,7 @@ import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 // 购买页面
 import HostShop from '@/components/Shop/Host'
+import Charge from '@/components/Shop/Charge'
 
 /*登录注册相关*/
 import Login from '@/components/LR/Login'
@@ -258,6 +259,11 @@ export default new Router({
           path: '/ruicloud/hostShop',
           name: 'HostShop',
           component: HostShop,
+        },
+        {
+          path: '/ruicloud/Charge',
+          name: 'Charge',
+          component: Charge,
         },
       ]
     },

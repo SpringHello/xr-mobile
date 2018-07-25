@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom:1.5rem;">
+  <div style="margin-bottom:1.5rem;" id="mine">
     <router-link :to="userInfo?'account':'login'">
       <header class="header-wrapper">
         <div>
@@ -317,7 +317,7 @@
           display: block;
         }
         .userInfo {
-          font-size: .24rem;
+          font-size: .36rem;
           color: #fff;
           padding-left: .32rem;
 
@@ -325,8 +325,8 @@
       }
       p {
         display: inline-block;
-        width: .11rem;
-        height: .11rem;
+        width: .2rem;
+        height: .2rem;
         border-left: 1px solid #fff;
         border-bottom: 1px solid #fff;
         transform: translateY(-.05rem) rotate(-135deg);
@@ -343,7 +343,7 @@
       width: 50%;
       color: #222;
       &:first-of-type {
-        border-right: 1px solid rgba(216, 216, 216, 1);
+        border-right: 1px solid #e7e7e7;
       }
       > p {
         font-size: .24rem;
@@ -366,7 +366,24 @@
     /*margin-right:.24rem*/
     /*}*/
     /*}*/
-
+    > div {
+      & {
+        border-top: 1px solid #e7e7e7;
+      }
+      p {
+        &::after {
+          content: '';
+          display: inline-block;
+          width: .14rem;
+          height: .14rem;
+          border-left: 1px solid #C7C7CC;
+          border-bottom: 1px solid #C7C7CC;
+          transform: translateY(.16rem) rotate(-135deg);
+          position: absolute;
+          right: .4rem;
+        }
+      }
+    }
     .r-item {
       padding-top: .2rem;
       background: #FFF;
@@ -375,7 +392,7 @@
         display: flex;
         align-items: center;
         padding-bottom: .2rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
         img {
           width: .48rem;
           display: block;
@@ -391,7 +408,7 @@
     .s-item {
       padding-top: .2rem;
       background: #FFF;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
       margin-bottom: .2rem;
       div {
         display: flex;
@@ -418,7 +435,7 @@
         display: flex;
         align-items: center;
         padding-bottom: .2rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
         img {
           width: .48rem;
           display: block;
@@ -439,7 +456,7 @@
         display: flex;
         align-items: center;
         padding-bottom: .2rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
         img {
           width: .48rem;
           display: block;
@@ -455,7 +472,7 @@
     .fp-item {
       padding-top: .2rem;
       background: #FFF;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
       margin-bottom: .2rem;
       div {
         display: flex;
@@ -477,7 +494,7 @@
     .xx-item {
       padding-top: .2rem;
       background: #FFF;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
       margin-bottom: .2rem;
       div {
         display: flex;

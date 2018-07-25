@@ -10,7 +10,7 @@
             <span>告警</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="workorder">
+        <router-link class="userInfo" :to="$store.state.userInfo?'workorder':'login'">
           <div>
             <span v-if="userInfo">{{work}}</span>
             <span v-else>0</span>
@@ -125,7 +125,7 @@
           this.renewal = values[1].data.result[1].items[2].value
           values[1].data.result[2].items.forEach(item => {
             this.alarm += parseInt(item.value)
-        })
+          })
         }
       },
       conPush(item){
@@ -204,7 +204,7 @@
     > div {
       width: 50%;
       &:first-of-type {
-        border-right: 1px solid rgba(216, 216, 216, 1);
+        border-right: 1px solid #e7e7e7;
       }
       > p {
         font-size: .24rem;
@@ -226,14 +226,14 @@
       font-size: .32rem;
       color: #000;
       padding: .23rem .3rem;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
     }
     .control-content {
       padding: .24rem .69rem;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      border-bottom: 1px solid #d9d9d9;
+      border-bottom: 1px solid #e7e7e7;
       div {
         width: 30%;
         text-align: center;
