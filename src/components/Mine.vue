@@ -85,7 +85,7 @@
       </div>
       <!--版块四-->
       <div>
-        <div class="r-item" @click="feedback">
+        <div class="r-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/yijian.png">
             <p>意见反馈</p>

@@ -5,28 +5,26 @@
       <cell title="修改密码" value="修改" inline-desc="建议您定期更换密码使账号更安全" is-link link="ChangePassworld">
         <img src="../../assets/img/back/unbound.png" slot="icon">
       </cell>
-      <div v-if="users.phone" @click="openChoose(typeP)">
-        <cell title="手机绑定" value="修改" :inline-desc="setup.boundPhone" is-link>
-          <img src="../../assets/img/back/bound.png" slot="icon">
-        </cell>
-      </div>
-      <div v-else @click="openChoose(typeP)">
-        <cell title="手机绑定" value="绑定" :inline-desc="setup.unboundPhone" is-link>
-          <img src="../../assets/img/back/unbound.png" slot="icon">
-        </cell>
-      </div>
 
-      <div v-if="users.loginname" @click="openChoose(typeE)">
-        <cell title="邮箱绑定" value="修改" :inline-desc="setup.boundEmail" is-link>
-          <img src="../../assets/img/back/bound.png" slot="icon">
-        </cell>
-      </div>
+      <cell v-if="users.phone" title="手机绑定" value="修改" :inline-desc="setup.boundPhone" is-link
+            @click.native="openChoose(typeP)">
+        <img src="../../assets/img/back/bound.png" slot="icon">
+      </cell>
+      
+      <cell v-else @click.native="openChoose(typeP)" title="手机绑定" value="绑定" :inline-desc="setup.unboundPhone"
+            is-link>
+        <img src="../../assets/img/back/unbound.png" slot="icon">
+      </cell>
 
-      <div v-else @click="openChoose(typeE)">
-        <cell title="邮箱绑定" value="绑定" :inline-desc="setup.unboundEmail" is-link>
-          <img src="../../assets/img/back/unbound.png" slot="icon">
-        </cell>
-      </div>
+      <cell v-if="users.loginname" @click.native="openChoose(typeE)" title="邮箱绑定" value="修改"
+            :inline-desc="setup.boundEmail" is-link>
+        <img src="../../assets/img/back/bound.png" slot="icon">
+      </cell>
+
+      <cell v-else @click.native="openChoose(typeE)" title="邮箱绑定" value="绑定" :inline-desc="setup.unboundEmail" is-link>
+        <img src="../../assets/img/back/unbound.png" slot="icon">
+      </cell>
+
     </Group>
     <actionsheet v-model="showCall" :menus="menusAll" show-cancel :close-on-clicking-mask="false"
                  @on-click-menu="clickItem"></actionsheet>
