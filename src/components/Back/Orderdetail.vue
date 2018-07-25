@@ -32,6 +32,7 @@
       XButton
     },
     data(){
+      window.scrollTo(0, 0);
       let details = JSON.parse(sessionStorage.getItem('order-item'))
       let detailsTOP = JSON.parse(details.display)
       return {

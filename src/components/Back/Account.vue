@@ -38,6 +38,7 @@
       next()
     },
     data(){
+      window.scrollTo(0, 0);
       return {
         remainder: sessionStorage.getItem('money'),
         cellList: [

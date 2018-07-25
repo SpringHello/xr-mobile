@@ -84,7 +84,7 @@
       TabItem
     },
     data ()  {
-      scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return {
         title: sessionStorage.getItem('title'),
         desc: sessionStorage.getItem('desc'),

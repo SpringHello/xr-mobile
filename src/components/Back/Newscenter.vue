@@ -47,6 +47,7 @@
       TabItem
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         news: [
           {title: '全部', type: 'all', status: false, num: ''},

@@ -162,6 +162,7 @@
       )
     },
     data () {
+      window.scrollTo(0, 0);
       let regionaList = [], regional = []
       this.$store.state.zoneList.forEach(zone => {
         if (zone.isdefault == 1) {

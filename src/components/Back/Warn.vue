@@ -25,6 +25,7 @@
       ButtonTabItem
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         currentTab: 0
       }
