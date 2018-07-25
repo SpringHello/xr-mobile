@@ -10,7 +10,7 @@
             @click.native="openChoose(typeP)">
         <img src="../../assets/img/back/bound.png" slot="icon">
       </cell>
-      
+
       <cell v-else @click.native="openChoose(typeP)" title="手机绑定" value="绑定" :inline-desc="setup.unboundPhone"
             is-link>
         <img src="../../assets/img/back/unbound.png" slot="icon">
@@ -53,6 +53,7 @@
       })
     },
     data(){
+      window.scrollTo(0, 0);
       return {
         users: $store.state.userInfo,
         setup: {

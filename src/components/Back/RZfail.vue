@@ -23,7 +23,7 @@
       XHeader,
     },
     data (){
-
+      window.scrollTo(0, 0);
       return {
         RZfail: sessionStorage.getItem('RZfail')
       }

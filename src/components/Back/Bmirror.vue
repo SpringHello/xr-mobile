@@ -33,6 +33,7 @@
       XHeader
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         list: [],
         address: '',

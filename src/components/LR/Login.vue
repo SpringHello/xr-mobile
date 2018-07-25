@@ -52,6 +52,7 @@
       XButton
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         signForm: {
           username: '',
@@ -100,7 +101,7 @@
                 }
               }
             )
-            this.$router.push({path: 'console'})
+            this.$router.go(-1)
           } else {
             this.imgSrc = `user/getKaptchaImage.do?t=${new Date().getTime()}`
             this.$vux.toast.text(response.data.message)

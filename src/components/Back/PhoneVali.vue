@@ -38,6 +38,7 @@
       XInput
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         oldPhone: this.$store.state.userInfo.phone,
         froms: {

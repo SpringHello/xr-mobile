@@ -48,6 +48,7 @@
       next()
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         priceList: [
           {renew: '20', reduction: '6'},

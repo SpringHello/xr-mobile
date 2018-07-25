@@ -265,6 +265,7 @@
 <script>
   export default{
     data (){
+      window.scrollTo(0, 0);
       return {
         allow: true,
       }

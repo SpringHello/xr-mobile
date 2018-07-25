@@ -39,6 +39,7 @@
       XInput
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         oldEmail: this.$store.state.userInfo.loginname,
         froms: {

@@ -349,6 +349,7 @@
       CheckIcon
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         title: '请选择职位',
         // 1、问卷调查  2、注册  3、用户协议

@@ -37,6 +37,7 @@
       Icon
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         //认证信息
         authInfo: $store.state.authInfo,

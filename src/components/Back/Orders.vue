@@ -50,6 +50,7 @@
       })
     },
     data(){
+      window.scrollTo(0, 0);
       return {
         loading: false,
         type: '',

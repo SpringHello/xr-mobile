@@ -26,6 +26,7 @@
       Box
     },
     data(){
+      window.scrollTo(0, 0);
       return {
         froms: {
           nowKey: "",

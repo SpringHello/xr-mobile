@@ -27,6 +27,7 @@
       XButton
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         chargeType: [
           {name: '微信支付', value: 'wxpay'},

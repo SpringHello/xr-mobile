@@ -104,6 +104,7 @@
       })
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         details: null,
         //发票类型
