@@ -85,7 +85,7 @@
       </div>
       <!--版块四-->
       <div>
-        <div class="r-item" @click="feedback">
+        <div class="r-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/yijian.png">
             <p>意见反馈</p>
@@ -378,7 +378,7 @@
           height: .14rem;
           border-left: 1px solid #C7C7CC;
           border-bottom: 1px solid #C7C7CC;
-          transform: translateY(.16rem) rotate(-135deg);
+          transform: translateY(.165rem) rotate(-135deg);
           position: absolute;
           right: .4rem;
         }

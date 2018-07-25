@@ -23,7 +23,7 @@
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
           <i class="iconfont" :class="item.img"></i>
-          <div style="padding: .15rem 0">
+          <div style="padding: .15rem 0;width: 84%;">
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
           </div>
@@ -66,7 +66,7 @@
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
           <i class="iconfont" :class="item.img"></i>
-          <div style="padding: .15rem 0">
+          <div style="padding: .15rem 0;width: 84%;">
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
           </div>
@@ -193,6 +193,7 @@
         display: flex;
         padding: .24rem .3rem;
         border-bottom: 1px solid #e7e7e7;
+        justify-content: space-between;
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -285,6 +286,7 @@
         display: flex;
         padding: .24rem .3rem;
         border-bottom: 1px solid #e7e7e7;
+        justify-content: space-between;
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

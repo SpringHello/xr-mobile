@@ -590,7 +590,7 @@
         //数据盘
         diskListNums: '4',
         diskType,
-        diskList: [{value: ['sata', '20']}],
+        diskList: [{value: ['ssd', '20']}],
         //价格
         Qprices: 0.00,
       }
@@ -681,7 +681,7 @@
       // 添加磁盘
       addDisk(){
         if (this.diskList.length < 5) {
-          this.diskList.push({value: ['sata', '20']})
+          this.diskList.push({value: ['ssd', '20']})
           this.diskListNums = 5 - this.diskList.length
         } else {
           this.$vux.toast.text('数据盘最多5个', 'middle')
@@ -751,7 +751,7 @@
           }
         )
       },
-      //查询价格
+      //查询价格(quickly)
       queryPrice(){
         var param = this.config[0].split('#')
         if (this.charges.length != 0) {
@@ -799,12 +799,13 @@
       str(){
         if (this.str != '') {
           this.charges = []
+          this.queryPrice();
         }
       },
       charges(){
-        this.queryPrice();
         if (this.charges.length != 0) {
           this.str = ''
+          this.queryPrice();
         }
       },
       regional(){
