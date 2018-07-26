@@ -33,7 +33,7 @@
               <img :src="item.src"/>
               <li>{{item.text}}</li>
             </ul>
-            <ul style="margin-top: .3rem" v-clipboard="activeLink" @success="onCopy" @error="onError">
+            <ul v-clipboard="activeLink" @success="onCopy" @error="onError">
               <img src="../../../../assets/img/active/groupBooking/gb-icon16.png"/>
               <li>复制链接</li>
             </ul>
@@ -72,12 +72,14 @@
             src: require('../../../../assets/img/active/groupBooking/gb-icon19.png'),
             text: '朋友圈'
           },
-          {
+/*          {
             src: require('../../../../assets/img/active/groupBooking/gb-icon18.png'),
             text: '微博'
-          }
+          }*/
         ]
       }
+    },
+    created(){
     },
     props: {
       participationPersonColumns: {
@@ -105,19 +107,82 @@
       shareLink(val) {
         switch (val) {
           case 0:
+            this.$wechat.onMenuShareQQ({ // 分享给QQ  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+              title: '分享', // 分享标题
+              desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+              link: this.activeLink, // 分享链接
+              imgUrl: '', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function() {
+                this.$vux.toast.text('分享成功')
+                this.shareAlert = false
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function() {
+                // 用户取消分享后执行的回调函数
+              }
+            });
             break
           case 1:
+            this.$wechat.onMenuShareQZone({ // 分享给空间  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+              title: '分享', // 分享标题
+              desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+              link: this.activeLink, // 分享链接
+              imgUrl: '', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function() {
+                this.$vux.toast.text('分享成功')
+                this.shareAlert = false
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function() {
+                // 用户取消分享后执行的回调函数
+              }
+            });
             break
           case 2:
+            this.$wechat.onMenuShareAppMessage({ // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+              title: '分享', // 分享标题
+              desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+              link: this.activeLink, // 分享链接
+              imgUrl: '', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function() {
+                this.$vux.toast.text('分享成功')
+                this.shareAlert = false
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function() {
+                // 用户取消分享后执行的回调函数
+              }
+            });
             break
           case 3:
-            break
-          case 4:
+            this.$wechat.onMenuShareTimeline({ // 分享给朋友圈  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+              title: '分享', // 分享标题
+              desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+              link: this.activeLink, // 分享链接
+              imgUrl: '', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function() {
+                this.$vux.toast.text('分享成功')
+                this.shareAlert = false
+                // 用户确认分享后执行的回调函数
+              },
+              cancel: function() {
+                // 用户取消分享后执行的回调函数
+              }
+            });
             break
         }
       },
       onCopy() {
         this.$vux.toast.text('复制成功')
+        this.shareAlert = false
       },
       onError() {
         this.$vux.toast.text('复制失败')
