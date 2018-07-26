@@ -5,7 +5,9 @@
     <gb-member :active-link="activeLink" :host-duration="hostDuration" :participation-person-columns="participationPersonColumns"
                :participation-person-data="participationPersonData"></gb-member>
     <div class="center">
+      <gb-myhost :product-groups="productGroups"></gb-myhost>
       <gb-award></gb-award>
+      <gb-rule></gb-rule>
       <gb-footer></gb-footer>
     </div>
     <!-- 支付成功弹窗 只有写内联样式才生效 以后再改 -->
@@ -28,7 +30,9 @@
 <script type="text/ecmascript-6">
   import shareHeader from '../../../components/Active/groupBooking/gb-element/gb-share-header'
   import gbMember from '../../../components/Active/groupBooking/gb-element/gb-member'
+  import gbMyhost from '../../../components/Active/groupBooking/gb-element/gb-myhost'
   import gbAward from '../../../components/Active/groupBooking/gb-element/gb-award'
+  import gbRule from '../../../components/Active/groupBooking/gb-element/gb-rule'
   import gbFooter from '../../../components/Active/groupBooking/gb-element/gb-footer'
   import {XDialog, XHeader} from 'vux'
   import axios from '../../../util/iaxios'
@@ -37,8 +41,10 @@
     components: {
       XHeader,
       shareHeader,
+      gbMyhost,
       gbMember,
       gbAward,
+      gbRule,
       gbFooter,
       XDialog
     },
@@ -60,7 +66,18 @@
     data() {
       return {
         paySuccess: false,
-        productGroups: [],
+        productGroups: [
+          {
+            cpu: 5,
+            mem: 2,
+            bandwith: 2,
+            disksize: 50,
+            zonename: '北京一区',
+            templatename: 'centos',
+            cost: 213,
+            originalPrice: 4654
+          }
+        ],
         startTime: 0,
         endTime: 1564153131,
         activeLink: 'https://pan.xrcloud.net/ruicloud/activity?token=151203854566',
@@ -118,6 +135,15 @@
     background: #FFF;
     .center {
       padding: 0rem .24rem;
+      > p {
+        text-align: right;
+        font-size: .24rem;
+        font-family: "Microsoft YaHei", "微软雅黑";
+        color: rgba(102, 102, 102, 1);
+        >span{
+          color: #5893FF;
+        }
+      }
     }
   }
 </style>

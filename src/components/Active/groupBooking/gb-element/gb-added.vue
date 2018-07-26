@@ -2,52 +2,37 @@
   <div class="background">
     <div class="center">
       <h2>云朵成员</h2>
-      <div class="participation" v-if="someoneParticipation">
-        <p>已满1人，分享成功。继续邀请好友享受福利吧！</p>
+      <p v-if="!isBuy">您已获得云主机特惠活动购买资格，请点击购买即可。</p>
+      <div class="participation">
         <div class="member">
           <div class="title">
-            <p>您已获赠优惠时长：<span>{{ hostDuration }}</span>个月</p>
-            <ul>
-              <li v-for="title in participationPersonColumns">{{ title}}</li>
-            </ul>
-            <ul v-for="member in participationPersonData">
-              <li>{{member.companyname}}</li>
-              <li>{{member.jointime}}</li>
-              <li>已支付</li>
-            </ul>
+            <p>云客：<span>{{ commander }}</span></p>
+            <p>创建时间：<span>{{ createTime }} </span></p>
           </div>
+          <ul>
+            <li v-for="title in participationPersonColumns">{{ title}}</li>
+          </ul>
+          <ul v-if="participationPersonData.length == 0">
+            <li style="width: 100%">暂无数据</li>
+          </ul>
+          <ul v-else v-for="member in participationPersonData">
+            <li>{{member.companyname}}</li>
+            <li>{{member.jointime}}</li>
+            <li>已支付</li>
+          </ul>
         </div>
       </div>
-      <div class="participation" v-else>
-        <p>还差1人即可获得赠送资格，赶快分享吧。</p>
-      </div>
-      <p>参团链接：<span>{{ activeLink }}</span></p>
-      <button @click="shareAlert = true">分享链接</button>
     </div>
-    <actionsheet
-      v-model="shareAlert"
-      :menus="shareGroup"></actionsheet>
+
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {Actionsheet, XTable} from 'vux'
 
   export default {
-    components: {
-      Actionsheet,
-      XTable
-    },
+    components: {},
     data() {
-      return {
-        someoneParticipation: true,
-        shareGroup: {
-          menu1: '北京烤鸭',
-          menu2: '陕西油泼面',
-          menu3: '西安肉夹馍'
-        },
-        shareAlert: false
-      }
+      return {}
     },
     props: {
       participationPersonColumns: {
@@ -64,21 +49,20 @@
           return Array
         }
       },
-      activeLink: {
+      createTime: {
         type: String
       },
-      hostDuration: {
-        type: Number
+      commander: {
+        type: String
+      },
+      isBuy: {
+        type: Boolean
       }
     },
     methods: {},
     watch: {
-      participationPersonData() {
-        if (this.participationPersonData.length == 0) {
-          this.someoneParticipation = false
-        } else {
-          this.someoneParticipation = true
-        }
+      participationPersonColumns() {
+        console.log(this.participationPersonColumns)
       }
     }
   }
@@ -87,7 +71,6 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .background {
     padding: .25rem 0;
-    background: linear-gradient(180deg, rgba(254, 237, 228, 1), rgba(255, 255, 255, 1));
     .center {
       text-align: center;
       padding: 0 0.24rem;
@@ -109,10 +92,11 @@
         }
         .member {
           margin-top: .3rem;
+          box-shadow: 0 0.02rem 0.09rem 0 rgba(214, 84, 86, 0.3);
           .title {
-            box-shadow: 0 0.02rem 0.09rem 0 rgba(214, 84, 86, 0.3);
-            margin-bottom: .2rem;
+            display: flex;
             > p {
+              width: 50%;
               background: #FFF;
               padding: .19rem .23rem;
               font-size: .24rem;
@@ -123,22 +107,22 @@
                 color: #FF5C57;
               }
             }
-            ul {
-              background: #FFF;
-              list-style: none;
-              display: flex;
-              padding: .19rem 0;
-              li {
-                width: 33.3%;
-                font-size: .24rem;
-                font-family: "Microsoft YaHei", "微软雅黑";
-                color: rgba(51, 51, 51, 1);
-                line-height: .33rem;
-              }
+          }
+          ul {
+            background: #FFF;
+            list-style: none;
+            display: flex;
+            padding: .19rem 0;
+            li {
+              width: 33.3%;
+              font-size: .24rem;
+              font-family: "Microsoft YaHei", "微软雅黑";
+              color: rgba(51, 51, 51, 1);
+              line-height: .33rem;
             }
-            ul:nth-child(2){
-              background: rgba(255, 227, 216, 1);
-            }
+          }
+          ul:nth-child(2) {
+            background: rgba(255, 227, 216, 1);
           }
         }
       }
