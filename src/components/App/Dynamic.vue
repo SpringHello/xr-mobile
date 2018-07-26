@@ -37,7 +37,7 @@
       Actionsheet
     },
     data () {
-      scrollTo( 0, 0 )
+      window.scrollTo(0, 0);
       return {
         //  公告内容
         annContent: null,

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 1.5rem;">
+  <div>
     <x-header :left-options="{showBack: false}">活动</x-header>
     <div class="active-box">
       <router-link v-for="(item,index) in actives" :key="index" :to="item.url">
@@ -11,6 +11,7 @@
       </router-link>
 
     </div>
+    <div style="height: 1.2rem;"></div>
   </div>
 </template>
 
@@ -39,7 +40,7 @@
       })
     },
     data () {
-      scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return {
         actives: [],
       }

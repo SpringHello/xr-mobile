@@ -26,6 +26,7 @@
   export default {
     name: 'RegisterSuccess',
     data () {
+      window.scrollTo(0, 0);
       return {}
     }
   }

@@ -20,6 +20,7 @@
       XHeader
     },
     data(){
+      window.scrollTo(0, 0);
       return {
         time: '2018年7月',
         lists: [['全部', '包年包月计费', '实时计费']],

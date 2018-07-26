@@ -46,6 +46,7 @@
       XInput
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         value1: [],
         list1: [['对产品的意见和建议', '对服务的意见和建议', '投诉', '其他']],

@@ -77,6 +77,7 @@
       })
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         serverTime: '',
         // 四个抢券的时间点

@@ -141,6 +141,7 @@
       })
     },
     data () {
+      window.scrollTo(0, 0);
       return {
         radioselected: '',
         personalauth: 1,

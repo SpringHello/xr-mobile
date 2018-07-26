@@ -39,6 +39,7 @@
 
     },
     data (){
+      window.scrollTo(0, 0);
       return {
         listType: [],
         wtype: [],

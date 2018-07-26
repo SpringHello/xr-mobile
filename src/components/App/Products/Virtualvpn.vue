@@ -23,7 +23,7 @@
       <div class="features-content">
         <div v-for="(item,index) in features" :key="index" class="item">
           <i class="iconfont" :class="item.img"></i>
-          <div style="padding: .15rem 0">
+          <div style="padding: .15rem 0;width: 84%;">
             <p class="features-title">{{item.title}}</p>
             <p class="features-desc">{{item.desc}}</p>
           </div>
@@ -76,14 +76,14 @@
       <div class="advantage-content">
         <div v-for="(item,index) in advantages" :key="index" class="item">
           <i class="iconfont" :class="item.img"></i>
-          <div style="padding: .15rem 0">
+          <div style="padding: .15rem 0;width: 84%;">
             <p class="advantage-title">{{item.title}}</p>
             <p class="advantage-desc">{{item.desc}}</p>
           </div>
         </div>
       </div>
     </div>
-
+    <div style="height: 1.2rem;"></div>
     <!--购买-->
     <router-link :to="$store.state.userInfo?'home':'login'" class="buy">立即购买</router-link>
   </div>
@@ -210,6 +210,7 @@
         display: flex;
         padding: .24rem .3rem;
         border-bottom: 1px solid #e7e7e7;
+        justify-content: space-between;
         .features-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);
@@ -283,7 +284,6 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
-    margin-bottom: 2.1rem;
     .advantage-header {
       display: flex;
       justify-content: center;
@@ -302,6 +302,7 @@
         display: flex;
         padding: .24rem .3rem;
         border-bottom: 1px solid #e7e7e7;
+        justify-content: space-between;
         .advantage-title {
           font-size: .32rem;
           color: rgba(34, 34, 34, 1);

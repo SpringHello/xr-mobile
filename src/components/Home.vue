@@ -1,30 +1,10 @@
 <template>
-  <div style="margin-bottom: 1.5rem;background:rgba(245,245,245,1);">
+  <div style="background:rgba(245,245,245,1);">
     <!--顶部logo-->
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
-    <div class="topNav">
-      <img class="top-logo" src="../assets/img/home/logo.png">
-      <!--<div class="logo-right" @click="DialogStyle = true">
-        <span class="span"></span>
-        <span class="span"></span>
-        <span class="span"></span>
-      </div>-->
-    </div>
-    <div v-if="DialogStyle" class="showMenu">
-      <ul>
-        <li v-for="(item,index) in titleItem" :key="index">
-          <div @click="item.open=!item.open"><p class="ftitle">{{item.title}}</p></div>
-          <div class="showItem" v-show="item.open">
-            <div v-for="(subItem,index) in item.content" :key="index">
-              <p class="ntitle">{{subItem.prod}}</p>
-              <ol>
-                <li v-for="(content,index) in subItem.prodItem" @click="push(content.path)">{{content.title}}</li>
-              </ol>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <x-header :left-options="{backText: '',showBack: false}" style="padding: .1rem;">
+      <a slot="left">
+        <img src="../assets/img/home/logo.png" style="width: 1.86rem;height: .48rem;"></a>
+    </x-header>
 
     <!--走马灯-->
     <swiper :list="swiperList" dots-position="center" :auto="true" :interval="5000"></swiper>
@@ -108,10 +88,12 @@
     <!--support-->
     <div class="support-wrapper">
       <div class="item" v-for="(item,index) in support" :key="index">
-        <img :src="item.img">
         <div>
-          <p class="item-title">{{item.title}}</p>
-          <p class="item-subtitle">{{item.subTitle}}</p>
+          <img :src="item.img">
+          <div>
+            <p class="item-title">{{item.title}}</p>
+            <p class="item-subtitle">{{item.subTitle}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -133,31 +115,7 @@
       </div>
     </div>
 
-    <!--动态-->
-    <!--<div class="dynamic-wrapper">-->
-    <!--<h6 class="title">新睿云动态</h6>-->
-    <!--<tab :line-width="2" active-color="#00aaff" custom-bar-width="80%">-->
-    <!--<tab-item selected @on-item-click="dynamicContent.showNews = false ,dynamicContent.showOffices = true">官方公告-->
-    <!--</tab-item>-->
-    <!--<tab-item @on-item-click="dynamicContent.showNews = true ,dynamicContent.showOffices = false">业界新闻</tab-item>-->
-    <!--</tab>-->
-    <!--<div class="dynamic-content">-->
-    <!--<ul v-if="dynamicContent.showOffices">-->
-    <!--<li v-for="(item,index) in dynamicContent.offices"-->
-    <!--@click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">-->
-    <!--<h6 class="dynamic-content-item-title">{{item.title}}</h6><span class="item-time">{{item.createtime}}</span>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--<ul v-if="dynamicContent.showNews">-->
-    <!--<li v-for="(item,index) in dynamicContent.News">-->
-    <!--<h6 class="dynamic-content-item-title"-->
-    <!--@click="$router.push({path:'dynamic',query:{id:item.id,type:item.type}})">{{item.title}}</h6><span-->
-    <!--class="item-time">{{item.createtime}}</span>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-
+    <div style="height: 1.2rem;"></div>
   </div>
 </template>
 
@@ -189,51 +147,8 @@
       TransferDom,
     },
     data () {
-      scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return {
-        DialogStyle: false,
-        titleItem: [
-          {
-            title: '产品',
-            path: '',
-            open: false,
-            content: [
-              {
-                prod: '云计算',
-                prodItem: [
-                  {title: '弹性云服务器（ECS）', path: '/host'},
-                  {title: '镜像服务', path: '/mirror'},
-                  {title: 'ECS快照', path: '/ecsSnapshot'},
-                ]
-              },
-              {
-                prod: '云网络',
-                prodItem: [
-                  {title: '虚拟私有云VPC', path: '/vpc'},
-                  {title: '弹性IP', path: '/elasticip'},
-                  {title: '负载均衡', path: '/balance'},
-                  {title: 'NAT网关', path: '/natgateway'},
-                  {title: '虚拟专网VPN', path: '/virtualvpn'},
-                ]
-              },
-            ]
-          },
-          {
-            title: '动态',
-            path: '',
-            open: false,
-          },
-          {
-            title: '关于',
-            path: '',
-            open: false,
-          },
-          {
-            title: '文档',
-            path: '',
-            open: false,
-          },
-        ], // banner item
         // 轮播图资料
         swiperList: [
           {
@@ -336,13 +251,6 @@
           {img: require('../assets/img/home/suport-3.png'), title: '1V1', subTitle: '专项服务'},
           {img: require('../assets/img/home/suport-4.png'), title: '退款', subTitle: '7天无理由退款'}
         ],
-        //动态集合
-//        dynamicContent: {
-//          showOffices: true,
-//          showNews: false,
-//          offices: [],
-//          News: [],
-//        },
       }
     },
     methods: {
@@ -350,24 +258,9 @@
         this.DialogStyle = false
         this.$router.push(url)
       }
-//      setData(response){
-//        if (response.status == 200 && response.data.status == 1) {
-//          this.dynamicContent.offices = response.data.result.announcement_list
-//          this.dynamicContent.News = response.data.result.news_list
-//        }
-//      },
     },
     beforeRouteEnter(to, from, next){
-      axios.get('user/getAnnouncement.do', {
-        params: {
-          listAll: -1,
-        }
-      }).then(response => {
-        next(vm => {
-//          vm.setData(response)
-        })
-      })
-
+      next()
     }
   }
 </script>
@@ -376,72 +269,6 @@
   /*顶部介绍条*/
   .vux-header {
     background: linear-gradient(180deg, rgba(44, 45, 49, 1), rgba(16, 16, 19, 1));
-  }
-
-  /*顶部导航*/
-  .topNav {
-    height: 0.96rem;
-    padding: .24rem;
-    background: rgba(32, 32, 35, 1);
-    display: flex;
-    justify-content: space-between;
-    .top-logo {
-      width: 1.86rem;
-      height: .48rem;
-      display: block;
-    }
-    .logo-right {
-      padding: .5rem .3rem .5rem;
-      .span {
-        display: block;
-        width: 1.2rem;
-        height: .08rem;
-        background: #FFF;
-        margin-bottom: .2rem;
-        border-radius: 1rem;
-      }
-    }
-  }
-
-  .showMenu {
-    position: absolute;
-    width: 100%;
-    background: rgba(55, 56, 59, 1);
-    left: 0;
-    z-index: 1000;
-    color: rgba(255, 255, 255, 1);
-    padding: .5rem .8rem;
-    ul {
-      li {
-        list-style: none;
-        > div {
-          font-size: .7rem;
-          margin-bottom: .5rem;
-          P.ftitle {
-            &::after {
-              content: '';
-              width: 10px;
-              height: 10px;
-              border-right: 1px solid #FFF;
-              border-bottom: 1px solid #FFF;
-              transform: translateY(.4rem) rotate(311deg);
-              display: inline-block;
-              float: right;
-            }
-          }
-        }
-        .showItem {
-          ol {
-
-            li {
-              list-style: none;
-
-            }
-          }
-
-        }
-      }
-    }
   }
 
   .banner-introduce {
@@ -507,7 +334,7 @@
             border-right: 1px solid #C7C7CC;
             width: .2rem;
             height: .2rem;
-            transform: translateY(0rem) rotate(-315deg);
+            transform: translate(-.1rem, -.05rem) rotate(-315deg);
           }
         }
         .product-item-content {
@@ -548,7 +375,7 @@
           span {
             border-bottom: 1px solid #4A90E2;
             border-right: 1px solid #4A90E2;
-            transform: translateX(0rem) rotate(225deg);
+            transform: translate(-.1rem, .1rem) rotate(225deg);
           }
         }
       }
@@ -637,7 +464,7 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: .86rem .59rem;
+      padding: .4rem .59rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -654,27 +481,31 @@
   //support
   .support-wrapper {
     background-color: #fff;
-    padding: .23rem .2rem .2rem .87rem;
+    padding: .23rem .87rem 0 .87rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     .item {
-      width: 50%;
       font-size: 0px;
-      margin-bottom: .25rem;
-      img {
-        vertical-align: middle;
-        margin-right: .23rem;
-        width: .4rem;
-        display: inline-block;
-      }
+      padding-bottom: .25rem;
+      width: 50%;
       div {
-        vertical-align: middle;
-        display: inline-block;
-        p {
-          font-size: .2rem;
+        img {
+          vertical-align: middle;
+          margin-right: .23rem;
+          width: .4rem;
+          display: inline-block;
+        }
+        div {
+          text-align: left;
+          vertical-align: middle;
+          display: inline-block;
+          p {
+            font-size: .2rem;
+          }
         }
       }
+
     }
   }
 
@@ -683,15 +514,16 @@
     background: rgba(67, 67, 67, 1);
     .foot-one {
       border-bottom: 1px solid #666;
-      padding: .33rem .3rem .38rem .8rem;
+      padding: .33rem .6rem .38rem .6rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       img {
         border: 2px solid rgba(125, 161, 217, 1);
         width: 1.6rem;
         height: 1.6rem;
-        padding: .02rem;
+        padding: .05rem;
+        margin-right: .5rem;
       }
       .foot-one-right {
         h6 {
@@ -724,57 +556,6 @@
       }
     }
   }
-
-  //动态
-  /*.dynamic-wrapper {*/
-  /*background-color: #FFF;*/
-  /*margin-bottom: .5rem;*/
-  /*.title {*/
-  /*padding: .5rem 1rem;*/
-  /*font-size: .9rem;*/
-  /*font-weight: normal;*/
-  /*color: #000;*/
-  /*border-bottom: 1px solid #e7e7e7;*/
-  /*}*/
-  /*.dynamic-content {*/
-  /*ul {*/
-  /*padding: .375rem .725rem;*/
-  /*li {*/
-  /*list-style: none;*/
-  /*border-bottom: .025rem solid #e7e7e7;*/
-  /*padding-top: .8rem;*/
-  /*height: 2.8rem;*/
-  /*.dynamic-content-item-title {*/
-  /*font-weight: normal;*/
-  /*overflow: hidden;*/
-  /*text-overflow: ellipsis;*/
-  /*white-space: nowrap;*/
-  /*line-height: .65rem;*/
-  /*font-size: .65rem;*/
-  /*color: #333;*/
-  /*margin-bottom: .5rem;*/
-  /*}*/
-  /*.dynamic-content-item-content {*/
-  /*overflow: hidden;*/
-  /*text-overflow: ellipsis;*/
-  /*white-space: nowrap;*/
-  /*line-height: .65rem;*/
-  /*font-size: .65rem;*/
-  /*color: #999;*/
-  /*}*/
-  /*.item-time {*/
-  /*float: right;*/
-  /*line-height: .8rem;*/
-  /*font-size: .65rem;*/
-  /*color: #999;*/
-
-  /*}*/
-  /*}*/
-  /*}*/
-  /*}*/
-
-  /*}*/
-
 
 </style>
 

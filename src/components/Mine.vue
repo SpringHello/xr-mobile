@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom:1.5rem;" id="mine">
+  <div id="mine">
     <router-link :to="userInfo?'account':'login'">
       <header class="header-wrapper">
         <div>
@@ -85,7 +85,7 @@
       </div>
       <!--版块四-->
       <div>
-        <div class="r-item" @click="feedback">
+        <div class="r-item" @click="onOpen">
           <div>
             <img src="../assets/img/mine/yijian.png">
             <p>意见反馈</p>
@@ -108,7 +108,7 @@
         </div>
       </div>
     </div>
-
+    <div style="height: 1.2rem;"></div>
     <actionsheet v-model="showKF" :menus="menusKF" show-cancel :close-on-clicking-mask="false"></actionsheet>
     <actionsheet v-model="showTC" :menus="menusTC" show-cancel :close-on-clicking-mask="false"
                  @on-click-menu="clickExit"></actionsheet>
@@ -131,7 +131,7 @@
       Toast
     },
     data () {
-      scrollTo(0, 0)
+      window.scrollTo(0, 0);
       return {
         //认证信息
         authInfo: $store.state.authInfo,
@@ -378,7 +378,7 @@
           height: .14rem;
           border-left: 1px solid #C7C7CC;
           border-bottom: 1px solid #C7C7CC;
-          transform: translateY(.16rem) rotate(-135deg);
+          transform: translateY(.165rem) rotate(-135deg);
           position: absolute;
           right: .4rem;
         }
