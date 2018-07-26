@@ -1,8 +1,9 @@
 <template>
-  <div style="margin-bottom: 1.5rem;background:rgba(245,245,245,1);">
+  <div style="background:rgba(245,245,245,1);">
     <!--顶部logo-->
-    <x-header :right-options="{showMore: true}" :left-options="{backText: ''}">
-      <a slot="left" style="margin-left: .3rem;">
+    <x-header :left-options="{backText: '',showBack: false}" style="padding: .1rem;" :right-options="{showMore: true}"
+              @on-click-more="ClikcMore">
+      <a slot="left">
         <img src="../assets/img/home/logo.png" style="width: 1.86rem;height: .48rem;"></a>
     </x-header>
 
@@ -114,6 +115,14 @@
         <p>北京允睿讯通科技有限公司</p>
       </div>
     </div>
+
+    <div style="height: 1.2rem;"></div>
+
+    <div class="mask" :class="{opened:showMask}" ref="mask"
+         style="position:absolute;top:1rem;width:100%;">
+      tdfhdhfuh guug
+    </div>
+
   </div>
 </template>
 
@@ -249,9 +258,13 @@
           {img: require('../assets/img/home/suport-3.png'), title: '1V1', subTitle: '专项服务'},
           {img: require('../assets/img/home/suport-4.png'), title: '退款', subTitle: '7天无理由退款'}
         ],
+        showMask: false
       }
     },
     methods: {
+      ClikcMore(){
+        this.showMask = !this.showMask
+      },
       push(url){
         this.DialogStyle = false
         this.$router.push(url)
@@ -462,7 +475,7 @@
       border-bottom: 1px solid #e7e7e7;
     }
     .item {
-      padding: .86rem .59rem;
+      padding: .4rem .59rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -555,5 +568,15 @@
     }
   }
 
+  .mask {
+    transition: bottom .5s;
+    bottom: 100%;
+    background: rgba(51, 51, 51, .9);
+    z-index: 1000000;
+  }
+
+  .opened {
+    bottom: 0rem;
+  }
 </style>
 

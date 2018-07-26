@@ -296,7 +296,6 @@
 
   .advantage {
     background: rgba(243, 243, 243, 1);
-    margin-bottom: 2.1rem;
     .advantage-header {
       display: flex;
       justify-content: center;

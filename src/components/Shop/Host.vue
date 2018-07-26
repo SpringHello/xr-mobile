@@ -115,7 +115,7 @@
         <x-switch title="自动续费"></x-switch>
       </Group>
       <div class="bottom">
-        <p>配置价格：<span>¥ 0.00</span></p>
+        <p>配置价格：<span>¥ {{Cprices.toFixed(2)}}</span></p>
         <button>立即购买</button>
       </div>
     </div>
@@ -587,13 +587,14 @@
         networkCardList: [],
         networkCard: ['no'],
         //带宽
-        bandwidth: 20,
+        bandwidth: 1,
         //数据盘
         diskListNums: '4',
         diskType,
         diskList: [{value: ['ssd', '20']}],
         //价格
         Qprices: 0.00,
+        Cprices: 0.00,
       }
     },
     created(){
@@ -602,7 +603,7 @@
       this.coreValue();
       this.vpcChange();
       this.networkCardChange();
-      this.queryPrice();
+      this.queryQprices();
     },
     methods: {
       publicBuy(){
@@ -628,6 +629,9 @@
       //切换导航
       click(value){
         this.index = value
+        if (value == 1) {
+          this.queryCprices();
+        }
       },
       //实际计费
       //包年包月
@@ -753,7 +757,7 @@
         )
       },
       //查询价格(quickly)
-      queryPrice(){
+      queryQprices(){
         var param = this.config[0].split('#')
         if (this.charges.length != 0) {
           var times = this.charges[0].split('#')
@@ -785,6 +789,27 @@
           }
         })
       },
+      //查询价格(custom)
+      queryCprices(){
+        /*主机价格*/
+        if (this.charges.length != 0) {
+          var times = this.charges[0].split('#')
+        }
+        this.Cprices = 0
+        axios.post('device/QueryBillingPrice.do', {
+          cpuNum: this.cores[0],
+          diskType: this.systemDisk[0],
+          memory: this.memory[0],
+          diskSize: '40',
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          zoneId: $store.state.zone.zoneid,
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            console.log(response.data.cost)
+          }
+        })
+      },
     },
     /*computed: mapState([
      // 映射 this.count 为 store.state.count
@@ -800,13 +825,13 @@
       str(){
         if (this.str != '') {
           this.charges = []
-          this.queryPrice();
+          this.queryQprices();
         }
       },
       charges(){
         if (this.charges.length != 0) {
           this.str = ''
-          this.queryPrice();
+          this.queryQprices();
         }
       },
       regional(){
@@ -818,6 +843,12 @@
       cores(){
         this.showCore();
         this.coreValue();
+      },
+      bandwidth(){
+          /*IP价格*/
+          axios.post('device/queryIpPrice.do',{
+
+          })
       },
     }
   }

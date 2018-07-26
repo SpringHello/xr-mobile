@@ -2,6 +2,10 @@
   <!--资源详情页面-->
   <div class="resouredetail">
     <x-header>云服务器</x-header>
+    <Group>
+      <popup-picker title="节点选择" :data="nodeList" v-model="nodes" :columns="3"
+                    show-name></popup-picker>
+    </Group>
     <div class="box" v-if="list!=''">
       <ul>
         <li v-for="(item,index) in list" :key="index" v-show="item.status=='open' || item.status=='close'">
@@ -32,7 +36,7 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Group, Cell, CellBox, XHeader, Actionsheet, Toast} from 'vux'
+  import {Group, Cell, CellBox, XHeader, Actionsheet, Toast, PopupPicker} from 'vux'
   function getHost(cb) {
     let list = []
     axios.get('information/listVirtualMachines.do', {
@@ -63,7 +67,8 @@
       CellBox,
       XHeader,
       Actionsheet,
-      Toast
+      Toast,
+      PopupPicker
     },
     beforeRouteEnter(to, from, next){
       let cb = (list) => {
@@ -76,6 +81,9 @@
     data () {
       window.scrollTo(0, 0);
       return {
+        //节点选择
+        nodeList: [],
+        nodes: ['75218bb2-9bfe-4c87-91d4-0b90e86a8ff2'],
         list: [],
         address: '',
         showOpera: false,
@@ -111,6 +119,13 @@
 
     },
     methods: {
+      //节点选择
+      nodeChange(){
+        this.nodeList = []
+        $store.state.zoneList.forEach(e => {
+          this.nodeList.push({name: e.zonename, value: e.zoneid})
+        })
+      },
       // 查看详情
       push(item){
         console.log(item)
@@ -204,6 +219,9 @@
         this.list = list
       }
     },
+    created(){
+      this.nodeChange();
+    },
     beforeDestroy(){
       clearInterval(this.setInt)
     }
@@ -212,6 +230,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
+    margin-top: .2rem;
     ul {
       padding: .3rem;
       background: rgba(255, 255, 255, 1);
@@ -263,4 +282,5 @@
       }
     }
   }
+
 </style>
