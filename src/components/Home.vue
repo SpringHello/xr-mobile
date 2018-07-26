@@ -1,7 +1,8 @@
 <template>
   <div style="background:rgba(245,245,245,1);">
     <!--顶部logo-->
-    <x-header :left-options="{backText: '',showBack: false}" style="padding: .1rem;">
+    <x-header :left-options="{backText: '',showBack: false}" style="padding: .1rem;" :right-options="{showMore: true}"
+              @on-click-more="ClikcMore">
       <a slot="left">
         <img src="../assets/img/home/logo.png" style="width: 1.86rem;height: .48rem;"></a>
     </x-header>
@@ -116,6 +117,12 @@
     </div>
 
     <div style="height: 1.2rem;"></div>
+
+    <div class="mask" :class="{opened:showMask}" ref="mask"
+         style="position:absolute;top:1rem;width:100%;">
+      tdfhdhfuh guug
+    </div>
+
   </div>
 </template>
 
@@ -251,9 +258,13 @@
           {img: require('../assets/img/home/suport-3.png'), title: '1V1', subTitle: '专项服务'},
           {img: require('../assets/img/home/suport-4.png'), title: '退款', subTitle: '7天无理由退款'}
         ],
+        showMask: false
       }
     },
     methods: {
+      ClikcMore(){
+        this.showMask = !this.showMask
+      },
       push(url){
         this.DialogStyle = false
         this.$router.push(url)
@@ -557,5 +568,15 @@
     }
   }
 
+  .mask {
+    transition: bottom .5s;
+    bottom: 100%;
+    background: rgba(51, 51, 51, .9);
+    z-index: 1000000;
+  }
+
+  .opened {
+    bottom: 0rem;
+  }
 </style>
 

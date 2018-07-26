@@ -3,7 +3,8 @@
   <div class="resouredetail">
     <x-header>云服务器</x-header>
     <Group>
-      <popup-picker title="节点选择" :data="nodeList" v-model="nodes" @on-show="nodeChange" :columns="2" show-name></popup-picker>
+      <popup-picker title="节点选择" :data="nodeList" v-model="nodes" :columns="3"
+                    show-name></popup-picker>
     </Group>
     <div class="box" v-if="list!=''">
       <ul>
@@ -216,6 +217,9 @@
       setData(list){
         this.list = list
       }
+    },
+    created(){
+      this.nodeChange();
     },
     beforeDestroy(){
       clearInterval(this.setInt)
