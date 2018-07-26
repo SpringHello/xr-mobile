@@ -19,8 +19,7 @@
           <p style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;margin-bottom: .5rem">分享给好友获得免费赠送时长吧</p>
         </div>
         <div style="border: .01rem solid #D8D8D8;display: flex">
-          <span @click="paySuccess = false"
-                style="width:100%;color:rgba(74,144,226,1);font-size: .36rem;font-family: 'Microsoft YaHei', '微软雅黑';line-height: 1rem">知道了</span>
+          <span style="width:100%;color:rgba(74,144,226,1);font-size: .36rem;font-family: 'Microsoft YaHei', '微软雅黑';line-height: 1rem" @click="iKnow">知道了</span>
         </div>
       </x-dialog>
     </div>
@@ -35,6 +34,7 @@
   import gbRule from '../../../components/Active/groupBooking/gb-element/gb-rule'
   import gbFooter from '../../../components/Active/groupBooking/gb-element/gb-footer'
   import {XDialog, XHeader} from 'vux'
+  import $store from '../../../vuex'
   import axios from '../../../util/iaxios'
 
   export default {
@@ -48,8 +48,8 @@
       gbFooter,
       XDialog
     },
-    /*    beforeRouteEnter(to, from, next) {
-          if (this.$store.state.userInfo) {
+        beforeRouteEnter(to, from, next) {
+          if ($store.state.userInfo) {
             let info = axios.get('activity/teamMemberList.do')
             let start = axios.get('network/getTime.do')
             Promise.all([info, start]).then((result) => {
@@ -62,35 +62,16 @@
           } else{
             next({path: '/ruicloud/groupBooking'})
           }
-        },*/
+        },
     data() {
       return {
         paySuccess: false,
-        productGroups: [
-          {
-            cpu: 5,
-            mem: 2,
-            bandwith: 2,
-            disksize: 50,
-            zonename: '北京一区',
-            templatename: 'centos',
-            cost: 213,
-            originalPrice: 4654
-          }
-        ],
+        productGroups: [],
         startTime: 0,
-        endTime: 1564153131,
-        activeLink: 'https://pan.xrcloud.net/ruicloud/activity?token=151203854566',
+        endTime: 0,
+        activeLink: '',
         participationPersonColumns: ['云朵', '加入时间', '状态'],
         participationPersonData: [
-          {
-            companyname: '1号',
-            jointime: '121213'
-          },
-          {
-            companyname: '2号',
-            jointime: '12121341243'
-          }
         ],
         hostDuration: 0,
       }

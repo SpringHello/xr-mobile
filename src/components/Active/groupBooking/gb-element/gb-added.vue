@@ -103,6 +103,9 @@
               font-family: "Microsoft YaHei", "微软雅黑";
               color: rgba(51, 51, 51, 1);
               text-align: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
               span {
                 color: #FF5C57;
               }
@@ -128,16 +131,12 @@
       }
       > p {
         padding: .14rem .3rem;
-        background: rgba(255, 227, 216, 1);
         border-radius: .02rem;
         width: 7rem;
         font-size: .24rem;
         font-family: "Microsoft YaHei", "微软雅黑";
-        color: rgba(153, 153, 153, 1);
+        color: rgba(75, 19, 43, 1);
         line-height: .33rem;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
         span {
           color: #000000;
         }

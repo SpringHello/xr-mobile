@@ -27,6 +27,7 @@
   import gbRule from '../../../components/Active/groupBooking/gb-element/gb-rule'
   import gbFooter from  '../../../components/Active/groupBooking/gb-element/gb-footer'
   import axios from '../../../util/iaxios'
+  import $store from '../../../vuex'
 
   export default {
     components: {
@@ -41,7 +42,7 @@
       gbRule,
       gbFooter
     },
-    /*    beforeRouteEnter(to, from, next) {
+        beforeRouteEnter(to, from, next) {
           let teamLeaderCompanyId = location.href.match(/=(\S*)/) ? location.href.match(/=(\S*)/)[1] : sessionStorage.getItem('teamLeaderCompanyId')
           //sessionStorage.removeItem('teamLeaderCompanyId')
           sessionStorage.setItem('teamLeaderCompanyId', teamLeaderCompanyId)
@@ -55,7 +56,7 @@
               if (res.data.status == 1) {
                 switch (res.data.result) {
                   case 1:
-                    next({path: '/ruicloud/productShare'})
+                    next({path: '/ruicloud/shareLink'})
                     break
                   case 2:
                     next(vm => {
@@ -79,35 +80,18 @@
               vm.setInfo()
             })
           }
-        },*/
+        },
     data() {
       return {
         isJoin: false,
         isBuy: false,
         participationPersonColumns: ['云朵', '加入时间', '状态'],
         participationPersonData: [
-          {
-            companyname: '1号',
-            jointime: '121213'
-          },
-          {
-            companyname: '2号',
-            jointime: '12121341243'
-          }
         ],
-        createTime: '123213',
-        commander: '曾鑫',
+        createTime: '',
+        commander: '',
         teamLeaderCompanyId: '',
-        productGroups: [{
-          cpu: 5,
-          mem: 2,
-          bandwith: 2,
-          disksize: 50,
-          zonename: '北京一区',
-          templatename: 'centos',
-          cost: 213,
-          originalPrice: 4654
-        }]
+        productGroups: []
       }
     },
     methods: {
