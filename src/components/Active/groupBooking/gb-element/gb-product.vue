@@ -133,7 +133,7 @@
           axios.get(url, {params}).then(res => {
             if (res.data.status == 1) {
               sessionStorage.setItem('currentURL', 'groupBooking')
-              this.$router.push('order')
+              this.$router.push('orders')
             } else {
               this.$vux.toast.text(res.data.message)
             }
@@ -147,7 +147,7 @@
                   if (res.data.status == 1) {
                     sessionStorage.setItem('currentURL', 'activity')
                     sessionStorage.setItem('companyID', this.teamLeaderCompanyId)
-                    this.$router.push('order')
+                    this.$router.push('orders')
                   } else {
                     this.$vux.toast.text(res.data.message)
                   }

@@ -13,6 +13,10 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
+import VueClipboards from 'vue-clipboards'
+Vue.use(VueClipboards)
+
+
 import {InfiniteScroll} from 'mint-ui';
 Vue.use(InfiniteScroll);
 

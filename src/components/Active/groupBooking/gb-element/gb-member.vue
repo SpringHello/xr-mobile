@@ -24,29 +24,59 @@
       <p>参团链接：<span>{{ activeLink }}</span></p>
       <button @click="shareAlert = true">分享链接</button>
     </div>
-    <actionsheet
-      v-model="shareAlert"
-      :menus="shareGroup"></actionsheet>
+    <div v-transfer-dom>
+      <popup v-model="shareAlert" position="bottom">
+        <div style="background: #FFF">
+          <p class="share-title">活动分享到：</p>
+          <div class="share-way">
+            <ul v-for="(item,index) in shareGroup" @click="shareLink(index)">
+              <img :src="item.src"/>
+              <li>{{item.text}}</li>
+            </ul>
+            <ul style="margin-top: .3rem" v-clipboard="activeLink" @success="onCopy" @error="onError">
+              <img src="../../../../assets/img/active/groupBooking/gb-icon16.png"/>
+              <li>复制链接</li>
+            </ul>
+          </div>
+        </div>
+      </popup>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {Actionsheet, XTable} from 'vux'
-
+  import {TransferDom, Popup,} from 'vux'
   export default {
     components: {
-      Actionsheet,
-      XTable
+      TransferDom,
+      Popup,
     },
     data() {
       return {
-        someoneParticipation: true,
-        shareGroup: {
-          menu1: '北京烤鸭',
-          menu2: '陕西油泼面',
-          menu3: '西安肉夹馍'
-        },
-        shareAlert: false
+        someoneParticipation: false,
+        shareAlert: false,
+        shareGroup: [
+          {
+            src: require('../../../../assets/img/active/groupBooking/gb-icon15.png'),
+            text: 'QQ'
+          },
+          {
+            src: require('../../../../assets/img/active/groupBooking/gb-icon14.png'),
+            text: '空间'
+          },
+          {
+            src: require('../../../../assets/img/active/groupBooking/gb-icon17.png'),
+            text: '微信'
+          },
+          {
+            src: require('../../../../assets/img/active/groupBooking/gb-icon19.png'),
+            text: '朋友圈'
+          },
+          {
+            src: require('../../../../assets/img/active/groupBooking/gb-icon18.png'),
+            text: '微博'
+          }
+        ]
       }
     },
     props: {
@@ -71,7 +101,28 @@
         type: Number
       }
     },
-    methods: {},
+    methods: {
+      shareLink(val) {
+        switch (val) {
+          case 0:
+            break
+          case 1:
+            break
+          case 2:
+            break
+          case 3:
+            break
+          case 4:
+            break
+        }
+      },
+      onCopy() {
+        this.$vux.toast.text('复制成功')
+      },
+      onError() {
+        this.$vux.toast.text('复制失败')
+      },
+    },
     watch: {
       participationPersonData() {
         if (this.participationPersonData.length == 0) {
@@ -136,7 +187,7 @@
                 line-height: .33rem;
               }
             }
-            ul:nth-child(2){
+            ul:nth-child(2) {
               background: rgba(255, 227, 216, 1);
             }
           }
@@ -170,6 +221,34 @@
         padding: .19rem .54rem;
         background: rgba(253, 140, 115, 1);
         border-radius: .06rem;
+      }
+    }
+  }
+
+  .share-title {
+    font-size: .24rem;
+    font-family: "Microsoft YaHei", "微软雅黑";
+    color: rgba(51, 51, 51, 1);
+    padding: .3rem;
+  }
+
+  .share-way {
+    display: flex;
+    flex-wrap: wrap;
+    > ul {
+      list-style: none;
+      width: 20%;
+      text-align: center;
+      > img {
+        display: block;
+        width: .8rem;
+        margin: 0 auto;
+      }
+      > li {
+        margin-top: .2rem;
+        font-size: .24rem;
+        font-family: "Microsoft YaHei", "微软雅黑";
+        color: rgba(102, 102, 102, 1);
       }
     }
   }
