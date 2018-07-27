@@ -604,6 +604,7 @@
       this.vpcChange();
       this.networkCardChange();
       this.queryQprices();
+      this.queryCprices();
     },
     methods: {
       publicBuy(){
@@ -809,7 +810,33 @@
             console.log(response.data.cost)
           }
         })
+        /*IP价格*/
+        axios.post('device/queryIpPrice.do', {
+          brand: this.bandwidth.toString(),
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          zoneId: $store.state.zone.zoneid,
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            console.log(response.data.cost)
+          }
+        })
+        /*云硬盘价格*/
+        axios.post('device/QueryBillingPrice.do', {
+          diskSize: '',
+          diskType: '',
+          cpuNum: '0',
+          memory: '0',
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          zoneId: $store.state.zone.zoneid,
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            console.log(response.data.cost)
+          }
+        })
       },
+
     },
     /*computed: mapState([
      // 映射 this.count 为 store.state.count
@@ -826,30 +853,43 @@
         if (this.str != '') {
           this.charges = []
           this.queryQprices();
+          this.queryCprices();
         }
       },
       charges(){
         if (this.charges.length != 0) {
           this.str = ''
           this.queryQprices();
+          this.queryCprices();
         }
       },
       regional(){
         this.vpcChange();
       },
+      genre(){
+        this.queryCprices();
+      },
+      systemDisk(){
+        this.queryCprices();
+      },
+
       vpc(){
         this.networkCardChange();
       },
       cores(){
         this.showCore();
         this.coreValue();
+        this.queryCprices();
+
+      },
+
+      memory(){
+        this.queryCprices();
       },
       bandwidth(){
-          /*IP价格*/
-          axios.post('device/queryIpPrice.do',{
-
-          })
+        this.queryCprices();
       },
+
     }
   }
 </script>
