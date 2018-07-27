@@ -81,6 +81,13 @@ import Active1 from '@/components/Active/Active1'
 import Active2 from '@/components/Active/Active2'
 import Active3 from '@/components/Active/Active3'
 
+/* 拼团活动 */
+import GroupBooking from '@/components/Active/groupBooking/HomePage'
+import ShareLink from '@/components/Active/groupBooking/SharePage'
+import ActivityLink from '@/components/Active/groupBooking/LinkPage'
+
+
+
 
 Vue.use(Router)
 
@@ -144,6 +151,9 @@ export default new Router({
         {path: '/ruicloud/active_1', name: 'active_1', component: Active1},
         {path: '/ruicloud/active_2', name: 'active_2', component: Active2},
         {path: '/ruicloud/active_3', name: 'active_3', component: Active3},
+        {path: '/ruicloud/groupBooking', name: 'groupBooking', component: GroupBooking},
+        {path: '/ruicloud/shareLink', name: 'shareLink', component: ShareLink},
+        {path: '/ruicloud/activityLink', name: 'activityLink', component: ActivityLink},
         {
           path: '/ruicloud/Login',
           name: 'Login',
