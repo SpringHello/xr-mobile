@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div style="height: 1.2rem;"></div>
+    <div style="height: 1rem;"></div>
     <toast v-model="showPositionValue" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>

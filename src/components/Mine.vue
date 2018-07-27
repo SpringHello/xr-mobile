@@ -108,7 +108,7 @@
         </div>
       </div>
     </div>
-    <div style="height: 1.2rem;"></div>
+    <div style="height: 1rem;"></div>
     <actionsheet v-model="showKF" :menus="menusKF" show-cancel :close-on-clicking-mask="false"></actionsheet>
     <actionsheet v-model="showTC" :menus="menusTC" show-cancel :close-on-clicking-mask="false"
                  @on-click-menu="clickExit"></actionsheet>

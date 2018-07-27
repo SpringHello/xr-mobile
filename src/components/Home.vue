@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <div style="height: 1.2rem;"></div>
+    <div style="height: 1rem;"></div>
 
     <div class="mask" :class="{opened:showMask}" ref="mask"
          style="position:absolute;top:46px;width:100%;overflow: hidden">

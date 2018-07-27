@@ -11,7 +11,7 @@
       </router-link>
 
     </div>
-    <div style="height: 1.2rem;"></div>
+    <div style="height: 1rem;"></div>
   </div>
 </template>
 

@@ -3,25 +3,26 @@
     <x-header></x-header>
     <div class="host">
       <div class="host-item">
-        <h6 class="title">{{$route.query.name}} <span style="float: right;font-size: .28rem;">主机状态 : {{details.computerStatus ? "开机" : "关机"}}</span>
-        </h6>
-        <ul>
-          <li>系统镜像 : <span style="float: right;color: #333;">{{details.template}}</span></li>
-          <li>系统盘 : <span style="float: right;color: #333;"></span></li>
-          <li style="text-align: right;color: #4A90E2;">{{details.memory}}G</li>
-          <li>内网IP : <span style="float: right;color: #333;">{{details.privateIp}}</span></li>
-          <li>主机配置 :<span style="float: right;color: #333;">{{$route.query.configs}}</span></li>
-          <li>主机密码 :<span style="float: right;color: #4A90E2;font-size: .28rem">发送密码</span></li>
-        </ul>
-
-
+        <div class="top">
+          <h6 class="title">{{$route.query.name}}</h6>
+          <ul>
+            <li>主机状态：{{details.computerStatus ? "开机" : "关机"}}</li>
+            <li>系统镜像：{{details.template}}</li>
+            <li>系统盘：<span style="color:rgba(74,144,226,1);">{{details.memory}}G</span></li>
+            <li>内网IP：{{details.privateIp}}</li>
+            <li>主机配置：{{$route.query.configs}}</li>
+            <li>主机密码：<span style="color:rgba(74,144,226,1);" @click="sendPassword">发送密码</span></li>
+          </ul>
+          <img src="../../assets/img/back/open.png">
+        </div>
         <div class="xins">
           <p class="xin-title">主机基础信息</p>
           <ol>
             <li>计费方式 <span>{{details.case_type == 1 ? '包年' : details.case_type == 2 ? '包月' : '实时'}}</span></li>
             <li>创建时间 <span>{{details.createTime}}</span></li>
             <li>有效期 <span>{{details.endTime}}</span></li>
-            <li>主机价格 <span>{{$route.query.price}}/{{details.case_type == 1 ? '年' : details.case_type == 2 ? '月' : '小时'}}</span>
+            <li>主机价格
+              <span>{{$route.query.price}}/{{details.case_type == 1 ? '年' : details.case_type == 2 ? '月' : '小时'}}</span>
             </li>
           </ol>
         </div>
@@ -54,8 +55,14 @@
             </router-link>
           </div>
         </div>
-
-        <toast v-model="show" type="text"  is-show-mask text="暂未开放" position="middle" width="25%"></toast>
+        <div v-transfer-dom>
+          <confirm v-model="showSend"
+                   title="发送主机密码"
+                   @on-confirm="sendOk">
+            <input type="text" class="input">
+          </confirm>
+        </div>
+        <toast v-model="show" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
       </div>
     </div>
   </div>
@@ -64,11 +71,11 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Grid, GridItem, CellFormPreview, Group, Cell, XHeader,Toast} from 'vux'
+  import {Confirm, TransferDomDirective as TransferDom, CellFormPreview, Group, Cell, XHeader, Toast} from 'vux'
   export default{
     components: {
-      Grid,
-      GridItem,
+      Confirm,
+      TransferDom,
       CellFormPreview,
       Group,
       Cell,
@@ -78,26 +85,36 @@
     data (){
       window.scrollTo(0, 0);
       return {
-         //暂未开放
-        show:false,
+        //暂未开放
+        show: false,
+        showSend: false,
         details: {},
         //主机操作
         hostHandle: [
-          {img:require('../../assets/img/back/xufei.png'), title: '续费', url: ''},
-          {img:require('../../assets/img/back/shengji.png'), title: '升级', url: ''},
-          {img:require('../../assets/img/back/jkong.png'), title: '监控', url: ''},
-          {img:require('../../assets/img/back/mima.png'), title: '重置主机密码', url: ''},
-          {img:require('../../assets/img/back/riji.png'), title: '查看操作日志', url: ''}
+          {img: require('../../assets/img/back/xufei.png'), title: '续费', url: ''},
+          {img: require('../../assets/img/back/shengji.png'), title: '升级', url: ''},
+          {img: require('../../assets/img/back/jkong.png'), title: '监控', url: ''},
+          {img: require('../../assets/img/back/mima.png'), title: '重置主机密码', url: ''},
+          {img: require('../../assets/img/back/riji.png'), title: '查看操作日志', url: ''}
         ]
       }
     },
     methods: {
-        //暂未开放
+      //暂未开放
       onOpen(url){
-         if(url==''){
-             this.show=true
-         }
-      }
+        if (url == '') {
+          this.show = true
+        }
+      },
+      //发送密码弹窗
+      sendPassword(){
+        this.showSend = true
+      },
+      //确认发送
+      sendOk(){
+        console.log(123)
+      },
+
     },
     beforeRouteEnter(to, from, next){
       axios.get('information/listVMByComputerId.do', {
@@ -105,87 +122,103 @@
           zoneId: $store.state.zone.zoneid,
           VMId: to.query.id
         }
-      }).then(response =>
-      {
-        next(vm=>
-      {
-        vm.details = response.data.result
-    }
-    )
-    }
-    )
+      }).then(response => {
+          next(vm => {
+              vm.details = response.data.result
+            }
+          )
+        }
+      )
     }
   }
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
   .host {
-    background: rgba(243, 243, 243, 1);
     .host-item {
-      .title {
-        padding: .2rem;
+      .top {
         background: rgba(255, 255, 255, 1);
-        font-size: .32rem;
-        font-weight: normal;
-        color: #222;
-        line-height: .45rem;
-      }
-      ul {
-        background: rgba(255, 255, 255, 1);
-        border-bottom: 1px solid #D9D9D9;
+        padding: .14rem .18rem .12rem .3rem;
+        border-bottom: 1px solid #e7e7e7;
         margin-bottom: .2rem;
-        padding: .3rem;
-        li {
-          list-style: none;
-          font-size: .28rem;
-          color: #999;
-          line-height: .8rem;
+        .title {
+          font-size: .32rem;
+          font-weight: normal;
+          color: #222;
+          line-height: .45rem;
+          padding-bottom: .28rem;
+        }
+        ul {
+          li {
+            list-style: none;
+            font-size: .28rem;
+            color: #333;
+            line-height: .4rem;
+            padding-bottom: .2rem;
+          }
+        }
+        img {
+          position: absolute;
+          right: 0;
+          top: 1.3rem;
         }
       }
       .xins {
         background: rgba(255, 255, 255, 1);
         margin-bottom: .2rem;
+        border-bottom: 1px solid #e7e7e7;
         .xin-title {
-          padding: .23rem .3rem;
+          margin-left: .3rem;
+          padding: .23rem 0 .2rem 0;
           font-size: .32rem;
           color: rgba(51, 51, 51, 1);
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
+          margin-left: .3rem;
           li {
-            padding: 0 0.3rem;
+            padding-right: .3rem;
             border-bottom: 1px solid #e7e7e7;
             list-style: none;
             font-size: .28rem;
             color: #333;
-            line-height: 1rem;
+            line-height: .8rem;
             span {
               float: right;
               color: #666;
+            }
+            &:last-of-type {
+              border-bottom: none;
             }
           }
         }
       }
       .disks {
         background: rgba(255, 255, 255, 1);
+        border-bottom: 1px solid #e7e7e7;
         margin-bottom: .2rem;
         .disks-title {
-          padding: .23rem .3rem;
+          margin-left: .3rem;
+          padding: .23rem 0 .2rem 0;
           font-size: .32rem;
           color: rgba(51, 51, 51, 1);
           border-bottom: 1px solid #e7e7e7;
         }
         ol {
+          margin-left: .3rem;
           li {
-            padding: 0 .3rem;
+            padding-right: .3rem;
+            border-bottom: 1px solid #e7e7e7;
             list-style: none;
             font-size: .28rem;
             color: #333;
-            line-height: 1rem;
-            border-bottom: 1px solid #e7e7e7;
+            line-height: .8rem;
             span {
               color: #4A90E2;
               float: right;
+            }
+            &:last-of-type {
+              border-bottom: none;
             }
           }
         }
@@ -193,39 +226,39 @@
 
       //主机操作
       .handle {
-        background: rgba(255, 255, 255, 1);
-        margin-bottom: .2rem;
-        border-top: 1px solid #e7e7e7;
-        border-bottom: 1px solid #e7e7e7;
-        padding: .4rem 0;
-        .handle-title {
-          padding: 0.2rem .3rem;
-          font-size: .32rem;
-          color: rgba(51, 51, 51, 1);
-        }
-        .handle-content {
-          padding: .5rem;
-          display: flex;
-          flex-wrap: wrap;
-          a {
-            width: 33.3%;
-          }
-          div {
-            text-align: center;
-            margin-bottom: .5rem;
-            img {
-              width: .8rem;
-              height: .8rem;
-              margin: 0 auto;
-              display: block;
-            }
-            p {
-              padding-top: .32rem;
-              font-size: .28rem;
-              color: #222;
-            }
-          }
-        }
+      background: rgba(255, 255, 255, 1);
+      margin-bottom: .2rem;
+      border-top: 1px solid #e7e7e7;
+      border-bottom: 1px solid #e7e7e7;
+      padding: .4rem 0;
+      .handle-title {
+      padding: 0.2rem .3rem;
+      font-size: .32rem;
+      color: rgba(51, 51, 51, 1);
+      }
+      .handle-content {
+      padding: .5rem;
+      display: flex;
+      flex-wrap: wrap;
+      a {
+      width: 33.3%;
+      }
+      div {
+      text-align: center;
+      margin-bottom: .5rem;
+      img {
+      width: .8rem;
+      height: .8rem;
+      margin: 0 auto;
+      display: block;
+      }
+      p {
+      padding-top: .32rem;
+      font-size: .28rem;
+      color: #222;
+      }
+      }
+      }
       }
     }
   }

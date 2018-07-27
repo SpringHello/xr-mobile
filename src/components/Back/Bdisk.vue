@@ -65,21 +65,24 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
     ul {
-      padding: .3rem;
       background: rgba(255, 255, 255, 1);
+      border-bottom: 1px solid #e7e7e7;
       li {
         border-bottom: 1px solid #e7e7e7;
         list-style: none;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-left: .3rem;
+        padding: .2rem .3rem .2rem 0;
         .soures {
-          img {
-            width: .8rem;
-            display: inline-block;
-          }
+          display: flex;
+          align-items: center;
+          /*img {*/
+          /*width: .8rem;*/
+          /*margin-right: .24rem;*/
+          /*}*/
           > div {
-            display: inline-block;
             .soures-title {
               color: rgba(34, 34, 34, 1);
               font-size: .32rem;
@@ -111,6 +114,9 @@
             display: inline-block;
             margin-left: .2rem;
           }
+        }
+        &:last-of-type {
+          border-bottom: none;
         }
       }
     }

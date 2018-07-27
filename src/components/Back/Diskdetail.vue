@@ -26,6 +26,9 @@
         <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
                   @click.native="showUnload(details)"></x-switch>
       </group>
+      <group class="delete" @click.native="delDisk">
+        <p> 删除云硬盘</p>
+      </group>
 
       <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="35%"></toast>
       <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="35%"></toast>
@@ -133,7 +136,7 @@
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             response.data.result.forEach(list => {
-              this.mountHostList.push({name: list.computername, value: list.computerid,parent:0})
+              this.mountHostList.push({name: list.computername, value: list.computerid, parent: 0})
             })
           }
         })
@@ -147,17 +150,34 @@
             VMId: this.mount[0],
             zoneId: this.details.zoneid,
           }
-        }).then(response =>{
+        }).then(response => {
           let cb = (data) => {
             this.setData(data)
           }
           getDisk(cb, this.$route.params.diskId)
-          if (response.status == 200 && response.statusText == 'OK'){
+          if (response.status == 200 && response.statusText == 'OK') {
             this.showOK = true
             this.messageOK = response.data.message
-          }else{
+          } else {
             this.showError = true
             this.messageError = response.data.message
+          }
+        })
+      },
+      //删除硬盘
+      delDisk(){
+        axios.get('Disk/delDisk.do', {
+          params: {
+            id: this.details.id,
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.$router.push('/ruicloud/bdisk')
+            this.$vux.toast.text(response.data.message, 'middle')
+          } else {
+            this.$router.push('/ruicloud/bdisk')
+            this.$vux.toast.text(response.data.message, 'middle')
+
           }
         })
       },
@@ -194,6 +214,15 @@
             float: right;
           }
         }
+      }
+    }
+    .delete {
+      p {
+        font-size: .28rem;
+        color: #FF0000;
+        line-height: .4rem;
+        padding: .24rem 0;
+        text-align: center;
       }
     }
   }

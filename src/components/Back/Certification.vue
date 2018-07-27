@@ -63,7 +63,6 @@
     background: rgba(247, 251, 255, 1);
     padding: .24rem .32rem .24rem .16rem;
     display: flex;
-    justify-content: center;
     img {
       width: .32rem;
       height: .32rem;

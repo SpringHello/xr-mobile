@@ -60,9 +60,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .button {
-    position: fixed;
-    bottom: 1.2rem;
-    margin: 0px 5%;
+    margin: 1.5rem 5% 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);

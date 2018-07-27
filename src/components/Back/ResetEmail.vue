@@ -5,7 +5,7 @@
       <Group>
         <x-input title="输入邮箱" placeholder="请输入邮箱" placeholder-align="left" v-model="froms.email"></x-input>
         <x-input title="邮箱验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.emailcode">
-          <button  slot="right"class="button" @click.prevent="getCode">{{message}}</button>
+          <button slot="right" class="button" @click.prevent="getCode">{{message}}</button>
         </x-input>
       </Group>
 
@@ -127,9 +127,7 @@
   }
 
   .btns {
-    position: fixed;
-    bottom: 1.2rem;
-    margin: 0px 5%;
+    margin: 1.5rem 5% 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);

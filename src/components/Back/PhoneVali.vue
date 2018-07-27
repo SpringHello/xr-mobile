@@ -11,7 +11,7 @@
       <Group>
         <cell title="原手机号" :value="oldPhone" value-align="left"></cell>
         <x-input title="图形验证码" placeholder="请输入图形验证码" placeholder-align="left" v-model="froms.code">
-          <img :src="imgSrc" @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`"  slot="right">
+          <img :src="imgSrc" @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`" slot="right">
         </x-input>
         <x-input title="手机验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.phoneCode">
           <button class="button" @click.prevent="getPhoneCode" slot="right">{{message}}</button>
@@ -133,9 +133,7 @@
   }
 
   .btns {
-    position: fixed;
-    bottom: 1.2rem;
-    margin: 0px 5%;
+    margin: 1.5rem 5% 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);
