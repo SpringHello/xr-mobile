@@ -170,6 +170,9 @@
       XDialog,
       TransferDom,
     },
+    beforeRouteEnter(to, from, next){
+      next()
+    },
     data () {
       window.scrollTo(0, 0);
       return {
@@ -322,7 +325,8 @@
         this.$router.push(url)
       }
     },
-    beforeRouteEnter(to, from, next){
+    beforeRouteLeave(to, from, next){
+      document.body.style.overflow = 'auto'
       next()
     }
   }
