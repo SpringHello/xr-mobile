@@ -89,7 +89,7 @@
             }
           }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
-              this.$router.push('/ruicloud/setting')
+              this.$router.push('setting')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {
               this.$vux.toast.text(response.data.message, 'middle')
