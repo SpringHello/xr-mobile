@@ -89,7 +89,7 @@
             }
           }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
-              this.$router.push('setting')
+              this.$router.push('/ruicloud/setting')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {
               this.$vux.toast.text(response.data.message, 'middle')
@@ -134,9 +134,7 @@
   }
 
   .btns {
-    position: fixed;
-    bottom: 1.2rem;
-    margin: 0px 5%;
+    margin: 1.5rem 5% 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);
