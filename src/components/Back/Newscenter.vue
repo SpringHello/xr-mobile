@@ -170,13 +170,17 @@
       color: #000;
     }
     .content {
+      border-top: 1px solid #e7e7e7;
+      background-color: #FFF;
       margin-top: .2rem;
+      border-bottom: 1px solid #e7e7e7;
       ul {
-        padding: .24rem .31rem;
+        margin-left: .3rem;
         background-color: #FFF;
-        border-bottom: 1px solid #e7e7e7;
         li {
           list-style: none;
+          border-bottom: 1px solid #e7e7e7;
+          padding: .2rem .3rem .2rem 0;
           > div {
             display: flex;
             justify-content: space-between;
@@ -200,6 +204,9 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+          }
+          &:last-of-type {
+            border-bottom: none;
           }
         }
       }

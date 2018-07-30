@@ -1,10 +1,10 @@
 <template>
   <div style="background:rgba(245,245,245,1);">
     <!--顶部logo-->
-    <x-header :left-options="{backText: '',showBack: false}" style="padding: .1rem;" :right-options="{showMore: true}"
+    <x-header :left-options="{backText: '',showBack: false}" :right-options="{showMore: true}"
               @on-click-more="ClikcMore">
       <a slot="left">
-        <img src="../assets/img/home/logo.png" style="width: 1.86rem;height: .48rem;"></a>
+        <img src="../assets/img/home/logo.png" style="width: 1.86rem;"></a>
     </x-header>
 
     <!--走马灯-->
@@ -116,11 +116,28 @@
       </div>
     </div>
 
-    <div style="height: 1.2rem;"></div>
+    <div style="height: 1rem;"></div>
 
     <div class="mask" :class="{opened:showMask}" ref="mask"
-         style="position:absolute;top:1rem;width:100%;">
-      tdfhdhfuh guug
+         style="position:absolute;top:46px;width:100%;overflow: hidden">
+      <div>
+        <ul v-for="(item,index) in moreMenus" :key="index">
+          <li class="title" @click="item.open=!item.open">
+            <p>{{item.title}}<span v-show="index==0" :class="{topTo:item.open}"></span></p>
+          </li>
+          <div v-show="item.open">
+            <li v-for="(menu,index) in item.menu" :key="index">
+              {{menu.name}}
+              <p>
+                <router-link v-for="(sub,index) in menu.subname" :key="index" :to="sub.url">
+                  {{sub.product}}
+                </router-link>
+              </p>
+            </li>
+          </div>
+        </ul>
+      </div>
+
     </div>
 
   </div>
@@ -156,6 +173,36 @@
     data () {
       window.scrollTo(0, 0);
       return {
+        //菜单
+        moreMenus: [
+          {
+            title: '产品',
+            open: true,
+            menu: [
+              {
+                name: '云计算',
+                subname: [
+                  {product: '云服务器', url: 'host'},
+                  {product: '镜像服务', url: 'mirror'},
+                  {product: 'ECS快照', url: 'ecsSnapshot'},
+                ]
+              },
+              {
+                name: '云网络',
+                subname: [
+                  {product: '虚拟私有云VPC', url: 'vpc'},
+                  {product: '弹性IP', url: 'elasticip'},
+                  {product: '负载均衡', url: 'balance'},
+                  {product: 'NAT网关', url: 'natgateway'},
+                  {product: '虚拟专网VPN', url: 'virtualvpn'},
+                ]
+              }
+            ]
+          },
+          {title: '动态'},
+          {title: '关于'},
+          {title: '文档'},
+        ],
         // 轮播图资料
         swiperList: [
           {
@@ -264,6 +311,11 @@
     methods: {
       ClikcMore(){
         this.showMask = !this.showMask
+        if (this.showMask) {
+          document.body.style.overflow = 'hidden'
+        } else {
+          document.body.style.overflow = 'auto'
+        }
       },
       push(url){
         this.DialogStyle = false
@@ -571,8 +623,55 @@
   .mask {
     transition: bottom .5s;
     bottom: 100%;
-    background: rgba(51, 51, 51, .9);
+    background: rgba(51, 51, 51, .98);
     z-index: 1000000;
+    > div {
+      margin: .22rem .24rem 0 .24rem;
+      color: rgba(255, 255, 255, 1);
+      ul {
+        .title {
+          list-style: none;
+          padding-bottom: .16rem;
+          border-bottom: 1px solid #202023;
+          p {
+            font-size: .28rem;
+            color: rgba(255, 255, 255, 1);
+            line-height: .4rem;
+            span {
+              float: right;
+              width: .14rem;
+              height: .14rem;
+              border-right: 1px solid #FFF;
+              border-bottom: 1px solid #FFF;
+              transform: translate(-.1rem, .1rem) rotate(-315deg);
+            }
+            .topTo {
+              transform: translate(-.1rem, .2rem) rotate(225deg);
+            }
+          }
+        }
+        > div {
+          padding-top: .16rem;
+          li {
+            list-style: none;
+            font-size: .28rem;
+            line-height: .33rem;
+            p {
+              padding: .21rem 0 0 .4rem;
+              a {
+                display: block;
+                font-size: .24rem;
+                line-height: .33rem;
+                color: rgba(255, 255, 255, 1);
+                padding-bottom: .16rem;
+              }
+
+            }
+          }
+        }
+      }
+    }
+
   }
 
   .opened {

@@ -81,7 +81,14 @@ import Active1 from '@/components/Active/Active1'
 import Active2 from '@/components/Active/Active2'
 import Active3 from '@/components/Active/Active3'
 
-import Test from '@/components/Test'
+
+/* 拼团活动 */
+import GroupBooking from '@/components/Active/groupBooking/HomePage'
+import ShareLink from '@/components/Active/groupBooking/SharePage'
+import ActivityLink from '@/components/Active/groupBooking/LinkPage'
+
+
+
 
 Vue.use(Router)
 
@@ -105,6 +112,7 @@ export default new Router({
             {path: 'Mine', name: 'Mine', component: Mine},
           ]
         },
+<<<<<<< HEAD
         {path: '/Bhost', name: 'Bhost', component: Bhost},
         {path: '/Bdisk', name: 'Bdisk', component: Bdisk},
         {path: '/Belasticip', name: 'Belasticip', component: Belasticip},
@@ -145,6 +153,51 @@ export default new Router({
         {path: '/dynamic', name: 'active_1', component: Active1},
         {path: '/active_1', name: 'active_2', component: Active2},
         {path: '/active_2', name: 'active_3', component: Active3},
+=======
+        {path: '/ruicloud/Bhost', name: 'Bhost', component: Bhost},
+        {path: '/ruicloud/Bdisk', name: 'Bdisk', component: Bdisk},
+        {path: '/ruicloud/Belasticip', name: 'Belasticip', component: Belasticip},
+        {path: '/ruicloud/Bmirror', name: 'Bmirror', component: Bmirror},
+        {path: '/ruicloud/Bbalance', name: 'Bbalance', component: Bbalance},
+        {path: '/ruicloud/Bnat', name: 'Bnat', component: Bnat},
+        {path: '/ruicloud/feedback', name: 'feedback', component: feedback},
+        {path: '/ruicloud/certification', name: 'certification', component: certification},
+        {path: '/ruicloud/CertficaOK', name: 'CertficaOK', component: CertficaOK},
+        {path: '/ruicloud/idcard', name: 'idcard', component: idcard},
+        {path: '/ruicloud/RZsuccess', name: 'RZsuccess', component: RZsuccess},
+        {path: '/ruicloud/RZfail', name: 'RZfail', component: RZfail},
+        {path: '/ruicloud/Setting', name: 'Setting', component: Setting},
+        {path: '/ruicloud/phonevali', name: 'PhoneVali', component: PhoneVali},
+        {path: '/ruicloud/emailvali', name: 'EmailVali', component: EmailVali},
+        {path: '/ruicloud/resetPhone', name: 'ResetPhone', component: ResetPhone},
+        {path: '/ruicloud/resetEmail', name: 'ResetEmail', component: ResetEmail},
+        {path: '/ruicloud/BoundEmail', name: 'BoundEmail', component: BoundEmail},
+        {path: '/ruicloud/ChangePassworld', name: 'ChangePassworld', component: ChangePassworld},
+        {path: '/ruicloud/invoice', name: 'Invoice', component: Invoice},
+        {path: '/ruicloud/applyinvoice', name: 'Applyinvoice', component: Applyinvoice},
+        {path: '/ruicloud/ticketVali', name: 'TicketVali', component: TicketVali},
+        {path: '/ruicloud/traceinvoice', name: 'Traceinvoice', component: Traceinvoice},
+        {path: '/ruicloud/Warn', name: 'Warn', component: Warn},
+        {path: '/ruicloud/workorder', name: 'Workorder', component: Workorder,},
+        {path: '/ruicloud/work', name: 'Work', component: Work,},
+        {path: '/ruicloud/workdetail', name: 'Workdetail', component: Workdetail,},
+        {path: '/ruicloud/expense', name: 'Expense', component: Expense},
+        {path: '/ruicloud/orders', name: 'Orders', component: Orders},
+        {path: '/ruicloud/orderdetail', name: 'Orderdetail', component: Orderdetail},
+        {path: '/ruicloud/account', name: 'Account', component: Account},
+        {path: '/ruicloud/vouchers', name: 'Vouchers', component: Vouchers},
+        {path: '/ruicloud/Hostdetail', name: 'hostDetail', component: Hostdetail},
+        {path: '/ruicloud/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
+        {path: '/ruicloud/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
+        {path: '/ruicloud/Newscenter', name: 'Newscenter', component: Newscenter},
+        {path: '/ruicloud/Newdetail', name: 'Newdetail', component: Newdetail},
+        {path: '/ruicloud/active_1', name: 'active_1', component: Active1},
+        {path: '/ruicloud/active_2', name: 'active_2', component: Active2},
+        {path: '/ruicloud/active_3', name: 'active_3', component: Active3},
+        {path: '/ruicloud/groupBooking', name: 'groupBooking', component: GroupBooking},
+        {path: '/ruicloud/shareLink', name: 'shareLink', component: ShareLink},
+        {path: '/ruicloud/activityLink', name: 'activityLink', component: ActivityLink},
+>>>>>>> 36bb804a496ee0a18f0638c80643235a41a3c3c7
         {
           path: '/Login',
           name: 'Login',

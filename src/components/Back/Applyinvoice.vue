@@ -190,9 +190,11 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .top {
     display: flex;
-    padding: .24rem 0;
+    justify-content: space-between;
+    padding: .3rem .2rem;
     background: #F7FBFF;
     > div {
+      width: 95%;
       p {
         font-size: .24rem;
         color: rgba(125, 161, 217, 1);
@@ -202,7 +204,6 @@
     img {
       width: .32rem;
       height: .32rem;
-      margin: 0 .16rem;
     }
   }
 

@@ -26,9 +26,10 @@
                       @on-change="mirrorValue" show-name></popup-picker>
 
         <checklist label-position="left" :options="IP"
-                   v-model="checkIp" @on-change="BuyIp"></checklist>
+                   v-model="checkIp"></checklist>
 
-        <popup-picker title="配置" :data="configs" v-model="config" :columns="3" show-name></popup-picker>
+        <popup-picker title="配置" :data="configs" v-model="config" :columns="2" show-name
+                      @on-change="configChange"></popup-picker>
       </Group>
 
       <Group>
@@ -48,7 +49,7 @@
         <x-switch title="自动续费"></x-switch>
       </Group>
       <div class="bottom">
-        <p>配置价格：<span>¥ {{Qprices.toFixed(2)}}</span></p>
+        <p>配置价格：<span>¥ {{Qprices}}</span></p>
         <button @click="">立即购买</button>
       </div>
     </div>
@@ -217,19 +218,19 @@
         IP: ['购买公网IP'],
         checkIp: ['购买公网IP'],
         //配置
-        config: ['1#1#1#40#sas'],
+        config: ['1#1#1#40#sas#1'],
         configs: [],
         isBuyConfig: [
-          {name: '1核  1G  1Mbps  40GB(SAS存储)', value: '1#1#1#40#sas', parent: 0},
-          {name: '2核  4G  1Mbps  40GB(SAS存储)', value: '2#4#1#40#sas', parent: 0},
-          {name: '4核  4G  2Mbps  40GB(SSD存储)', value: '4#4#2#40#ssd', parent: 0},
-          {name: '4核  8G  2Mbps  40GB(SSD存储)', value: '4#8#2#40#ssd', parent: 0},
+          {name: '1核  1G  1Mbps  40GB(SAS存储)', value: '1#1#1#40#sas#1', parent: 0},
+          {name: '2核  4G  1Mbps  40GB(SAS存储)', value: '2#4#1#40#sas#1', parent: 0},
+          {name: '4核  4G  2Mbps  40GB(SSD存储)', value: '4#4#2#40#ssd#2', parent: 0},
+          {name: '4核  8G  2Mbps  40GB(SSD存储)', value: '4#8#2#40#ssd##2', parent: 0},
         ],
         unBuyConfig: [
-          {name: '1核  1G  0Mbps 40GB(SAS存储)', value: '1#1#0#40#sas', parent: 0},
-          {name: '2核  4G  0Mbps 40GB(SAS存储)', value: '2#4#0#40#sas', parent: 0},
-          {name: '4核  4G  0Mbps 40GB(SSD存储)', value: '4#4#0#40#ssd', parent: 0},
-          {name: '4核  8G  0Mbps 40GB(SSD存储)', value: '4#8#0#40#ssd', parent: 0},
+          {name: '1核  1G  0Mbps 40GB(SAS存储)', value: '1#1#0#40#sas#1', parent: 0},
+          {name: '2核  4G  0Mbps 40GB(SAS存储)', value: '2#4#0#40#sas#1', parent: 0},
+          {name: '4核  4G  0Mbps 40GB(SSD存储)', value: '4#4#0#40#ssd#2', parent: 0},
+          {name: '4核  8G  0Mbps 40GB(SSD存储)', value: '4#8#0#40#ssd#2', parent: 0},
         ],
         //主机信息
         hostMsg: [
@@ -593,8 +594,8 @@
         diskType,
         diskList: [{value: ['ssd', '20']}],
         //价格
-        Qprices: 0.00,
-        Cprices: 0.00,
+        Qprices: 0,
+        Cprices: 0,
       }
     },
     created(){
@@ -604,6 +605,7 @@
       this.vpcChange();
       this.networkCardChange();
       this.queryQprices();
+      this.queryCprices();
     },
     methods: {
       publicBuy(){
@@ -637,12 +639,8 @@
       //包年包月
       //镜像系统
       //配置
-      BuyIp(value){
-        if (value[0] == '购买公网IP') {
-          this.configs = this.isBuyConfig
-        } else {
-          this.configs = this.unBuyConfig
-        }
+      configChange(){
+        this.queryQprices();
       },
       changeType(){
         this.mirrorCustom = []
@@ -758,12 +756,14 @@
       },
       //查询价格(quickly)
       queryQprices(){
+        let timeout = setTimeout(() => {
+          this.Qprices = '查询中'
+        }, 1000)
         var param = this.config[0].split('#')
         if (this.charges.length != 0) {
           var times = this.charges[0].split('#')
         }
-        this.Qprices = 0
-        axios.post('device/QueryBillingPrice.do',
+        let bill = axios.post('device/QueryBillingPrice.do',
           {
             cpuNum: param[0],
             diskSize: param[3],
@@ -773,20 +773,16 @@
             timeValue: this.str == 'current' ? '1' : times[1],
             zoneId: $store.state.zone.zoneid,
           }
-        ).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.Qprices += response.data.cost
-          }
-        })
-        axios.post('device/queryIpPrice.do', {
+        )
+        let ip = axios.post('device/queryIpPrice.do', {
           brand: param[2],
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.Qprices += response.data.cost
-          }
+        })
+        Promise.all([bill, ip]).then(response => {
+          clearTimeout(timeout)
+          this.Qprices = (response[0].data.cost + response[1].data.cost).toFixed(2)
         })
       },
       //查询价格(custom)
@@ -806,10 +802,36 @@
           zoneId: $store.state.zone.zoneid,
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            console.log(response.data.cost)
+            this.Cprices += response.data.cost
+          }
+        })
+        /*IP价格*/
+        axios.post('device/queryIpPrice.do', {
+          brand: this.bandwidth.toString(),
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          zoneId: $store.state.zone.zoneid,
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+//            console.log(response.data.cost)
+          }
+        })
+        /*云硬盘价格*/
+        axios.post('device/QueryBillingPrice.do', {
+          diskSize: '',
+          diskType: '',
+          cpuNum: '0',
+          memory: '0',
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          zoneId: $store.state.zone.zoneid,
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+//            console.log(response.data.cost)
           }
         })
       },
+
     },
     /*computed: mapState([
      // 映射 this.count 为 store.state.count
@@ -826,16 +848,36 @@
         if (this.str != '') {
           this.charges = []
           this.queryQprices();
+          this.queryCprices();
         }
       },
-      charges(){
-        if (this.charges.length != 0) {
+      charges(value){
+        if (value.length != 0) {
           this.str = ''
           this.queryQprices();
+          this.queryCprices();
         }
       },
       regional(){
         this.vpcChange();
+      },
+      genre(){
+        this.queryCprices();
+      },
+      systemDisk(){
+        this.queryCprices();
+      },
+      checkIp(val){
+        let config = this.config[0]
+        let configArr = config.split('#')
+        if (val == '购买公网IP') {
+          this.configs = this.isBuyConfig
+          configArr[2] = configArr[5]
+        } else {
+          this.configs = this.unBuyConfig
+          configArr[2] = 0
+        }
+        this.config = [configArr.join('#')]
       },
       vpc(){
         this.networkCardChange();
@@ -843,13 +885,16 @@
       cores(){
         this.showCore();
         this.coreValue();
+        this.queryCprices();
+
+      },
+      memory(){
+        this.queryCprices();
       },
       bandwidth(){
-          /*IP价格*/
-          axios.post('device/queryIpPrice.do',{
-
-          })
+        this.queryCprices();
       },
+
     }
   }
 </script>
