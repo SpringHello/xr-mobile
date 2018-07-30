@@ -5,7 +5,7 @@
         <p style="font-size:.6rem;font-family:PingFangSC-Medium;color:rgba(242,102,103,1);margin-bottom: .8rem;">
           恭喜您注册成功！</p>
         <p style="font-size:.36rem;font-family:Arial-Black;color:rgba(242,102,103,1);margin-bottom: .4rem;">
-          158元新手大礼包已发送至账号</p>
+          196元新手大礼包已发送至账号</p>
         <p style="font-size:.24rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);margin-bottom: 1.72rem;">
           前往“费用中心-卡券包”进行查看</p>
         <p style="font-size:.36rem;font-family:PingFangSC-Regular;color:rgba(255,255,255,1);margin-bottom: .16rem">

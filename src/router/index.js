@@ -10,7 +10,7 @@ import Mine from '@/components/Mine'
 
 import Warn from '@/components/Back/Warn'
 
-import Dynamic from '@/components/App/Dynamic'  //公告详情
+//import Dynamic from '@/components/App/Dynamic'  //公告详情
 import Prodetail from '@/components/App/Prodetail' // 产品详情
 import host from '@/components/App/Products/Host'
 import ecsSnapshot from '@/components/App/Products/EcsSnapshot'
@@ -81,6 +81,7 @@ import Active1 from '@/components/Active/Active1'
 import Active2 from '@/components/Active/Active2'
 import Active3 from '@/components/Active/Active3'
 
+
 /* 拼团活动 */
 import GroupBooking from '@/components/Active/groupBooking/HomePage'
 import ShareLink from '@/components/Active/groupBooking/SharePage'
@@ -92,10 +93,10 @@ import ActivityLink from '@/components/Active/groupBooking/LinkPage'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   routes: [
     {
-      path: '/ruicloud',
+      path: '/',
       name: 'App',
       component: App,
       children: [
@@ -155,108 +156,108 @@ export default new Router({
         {path: '/ruicloud/shareLink', name: 'shareLink', component: ShareLink},
         {path: '/ruicloud/activityLink', name: 'activityLink', component: ActivityLink},
         {
-          path: '/ruicloud/Login',
+          path: '/Login',
           name: 'Login',
           component: Login,
         },
         {
-          path: '/ruicloud/agreement',
+          path: '/agreement',
           name: 'Agreement',
           component: Agreement,
         },
         {
-          path: '/ruicloud/Register',
+          path: '/Register',
           name: 'Register',
           component: Register,
         },
         {
-          path: '/ruicloud/registerSuccess',
+          path: '/registerSuccess',
           name: 'RegisterSuccess',
           component: RegisterSuccess,
         },
         {
-          path: '/ruicloud/Reset',
+          path: '/Reset',
           name: 'Reset',
           component: Reset,
         },
+        /*{
+         path: '/Dynamic',
+         name: 'Dynamic',
+         component: Dynamic,
+         },*/
         {
-          path: '/ruicloud/Dynamic',
-          name: 'Dynamic',
-          component: Dynamic,
-        },
-        {
-          path: '/ruicloud/Prodetail',
+          path: '/Prodetail',
           name: 'Prodetail',
           component: Prodetail,
         },
         {
-          path: '/ruicloud/host',
+          path: '/host',
           name: 'host',
           component: host,
         },
         {
-          path: '/ruicloud/ecsSnapshot',
+          path: '/ecsSnapshot',
           name: 'ecsSnapshot',
           component: ecsSnapshot,
         },
         {
-          path: '/ruicloud/mirror',
+          path: '/mirror',
           name: 'mirror',
           component: mirror,
         },
         {
-          path: '/ruicloud/disk',
+          path: '/disk',
           name: 'disk',
           component: disk,
         },
         {
-          path: '/ruicloud/diskbackup',
+          path: '/diskbackup',
           name: 'diskbackup',
           component: diskbackup,
         },
         {
-          path: '/ruicloud/vpc',
+          path: '/vpc',
           name: 'vpc',
           component: vpc,
         },
         {
-          path: '/ruicloud/elasticip',
+          path: '/elasticip',
           name: 'elasticip',
           component: elasticip,
         },
         {
-          path: '/ruicloud/balance',
+          path: '/balance',
           name: 'balance',
           component: balance,
         },
         {
-          path: '/ruicloud/natgateway',
+          path: '/natgateway',
           name: 'natgateway',
           component: natgateway,
         },
         {
-          path: '/ruicloud/virtualvpn',
+          path: '/virtualvpn',
           name: 'virtualvpn',
           component: virtualvpn,
         },
         {
-          path: '/ruicloud/cloudmonitoring',
+          path: '/cloudmonitoring',
           name: 'cloudmonitoring',
           component: cloudmonitoring,
         },
         {
-          path: '/ruicloud/firewall',
+          path: '/firewall',
           name: 'firewall',
           component: firewall,
         },
         {
-          path: '/ruicloud/ddos',
+          path: '/ddos',
           name: 'ddos',
           component: ddos,
         },
         // 所有购买页面
         {
-          path: '/ruicloud/hostShop',
+          path: '/hostShop',
           name: 'HostShop',
           component: HostShop,
         },

@@ -529,6 +529,7 @@
         }
         let params = {
           questionId: '4',
+          version: '1',
           msg: '',
           username: this.signForm.username,
           password: this.signForm.password,

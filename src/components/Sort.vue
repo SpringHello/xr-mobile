@@ -4,7 +4,7 @@
     <div class="active-box">
       <router-link v-for="(item,index) in actives" :key="index" :to="item.url">
         <div class="active-item">
-          <img src="" class="item-img">
+          <img :src="item.mobileImgPathUrl" class="item-img">
           <h6>{{item.name}}</h6>
           <p class="item-bottom">{{item.des}}</p>
         </div>
@@ -67,9 +67,10 @@
       background-color: #FFF;
       padding-bottom: .3rem;
       .item-img {
+        width: 100%;
         height: 3.54rem;
         display: block;
-        background-color: #4767B1;
+        //background-color: #4767B1;
       }
       h6 {
         padding: .19rem 0 .08rem .24rem;

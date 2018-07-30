@@ -3,7 +3,7 @@
     <router-view></router-view>
     <div class="weui-tabbar components-bottom-bar">
       <div>
-        <router-link to="/ruicloud/home" class="weui-tabbar__item">
+        <router-link to="/home" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
             <img v-if="active=='Home'" class=" icon-classify" style="width: .44rem"
                  src="../assets/img/home/foot-1-active.png">
@@ -13,7 +13,7 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/ruicloud/sort" class="weui-tabbar__item">
+        <router-link to="/sort" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
             <img v-if="active=='Sort'" class=" icon-classify" style="width: .44rem"
                  src="../assets/img/home/foot-2-active.png">
@@ -23,7 +23,7 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/ruicloud/console" class="weui-tabbar__item">
+        <router-link to="/console" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
             <img v-if="active=='Console'" class=" icon-mall" style="width: .44rem"
                  src="../assets/img/home/foot-3-active.png">
@@ -33,7 +33,7 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/ruicloud/mine" class="weui-tabbar__item">
+        <router-link to="/mine" class="weui-tabbar__item">
           <div class="weui-tabbar__icon">
             <img v-if="active=='Mine'" class=" icon-mine" style="width: .44rem"
                  src="../assets/img/home/foot-4-active.png">
