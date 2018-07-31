@@ -46,11 +46,11 @@
         <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
                  placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
 
-        <x-switch title="自动续费"></x-switch>
+        <x-switch title="自动续费" v-model="renewal"></x-switch>
       </Group>
       <div class="bottom">
         <p>配置价格：<span>¥ {{Qprices}}</span></p>
-        <button @click="">立即购买</button>
+        <button @click="QtoOrder">立即购买</button>
       </div>
     </div>
     <div v-show="index==1" class="custom">
@@ -113,10 +113,10 @@
         <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
                  placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
 
-        <x-switch title="自动续费"></x-switch>
+        <x-switch title="自动续费" v-model="renewal"></x-switch>
       </Group>
       <div class="bottom">
-        <p>配置价格：<span>¥ {{Cprices.toFixed(2)}}</span></p>
+        <p>配置价格：<span>¥ {{Cprices}}</span></p>
         <button>立即购买</button>
       </div>
     </div>
@@ -596,6 +596,8 @@
         //价格
         Qprices: 0,
         Cprices: 0,
+        //是否自动续费
+        renewal: false,
       }
     },
     created(){
@@ -787,12 +789,14 @@
       },
       //查询价格(custom)
       queryCprices(){
+        let timeout = setTimeout(() => {
+          this.Cprices = '查询中'
+        }, 1000)
         /*主机价格*/
         if (this.charges.length != 0) {
           var times = this.charges[0].split('#')
         }
-        this.Cprices = 0
-        axios.post('device/QueryBillingPrice.do', {
+        let bill = axios.post('device/QueryBillingPrice.do', {
           cpuNum: this.cores[0],
           diskType: this.systemDisk[0],
           memory: this.memory[0],
@@ -800,34 +804,63 @@
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.Cprices += response.data.cost
-          }
         })
         /*IP价格*/
-        axios.post('device/queryIpPrice.do', {
+        let ip = axios.post('device/queryIpPrice.do', {
           brand: this.bandwidth.toString(),
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-//            console.log(response.data.cost)
-          }
+        })
+        let diskSize = ''
+        let diskType = ''
+        this.diskList.forEach(disk => {
+          diskType += disk.value[0] + ','
+          diskSize += disk.value[1] + ','
         })
         /*云硬盘价格*/
-        axios.post('device/QueryBillingPrice.do', {
-          diskSize: '',
-          diskType: '',
+        let disk = axios.post('device/QueryBillingPrice.do', {
+          diskSize,
+          diskType,
           cpuNum: '0',
           memory: '0',
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
+        })
+        Promise.all([bill, ip, disk]).then(response => {
+            clearTimeout(timeout)
+            this.Cprices = (response[0].data.cost + response[1].data.cost + response[2].data.cost).toFixed(2)
+          }
+        )
+      },
+      //立即购买(quickly)
+      QtoOrder(){
+        var param = this.config[0].split('#')
+        if (this.charges.length != 0) {
+          var times = this.charges[0].split('#')
+        }
+        let params = {
+          zoneId: this.regional[0],
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          templateId: this.mirrorCustom[1],
+          isAutoRenew: this.renewal ? '1' : '0',
+          count: '1',
+          cpuNum: param[0],
+          memory: param[1],
+          bandWidth: param[2],
+          rootDiskType: param[4],
+          networkId: this.networkCard[0],
+          vpcId: this.vpc[0],
+          VMName: this.hostName,
+          password: this.loginPassword,
+        }
+        axios.get('information/deployVirtualMachine.do', {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-//            console.log(response.data.cost)
+            this.$router.push('orderconfirm')
+          } else {
+            this.$vux.toast.text(response.data.message, 'middle')
           }
         })
       },
@@ -861,8 +894,24 @@
       regional(){
         this.vpcChange();
       },
-      genre(){
-        this.queryCprices();
+      genre(val){
+        switch (val[0]) {
+          case 'standard':
+            this.systemDisk = ['sas']
+            this.cores = ['1']
+            this.memory = ['1']
+            break;
+          case 'optimization':
+            this.systemDisk = ['ssd']
+            this.cores = ['4']
+            this.memory = ['4']
+            break;
+          case 'IO':
+            this.systemDisk = ['ssd']
+            this.cores = ['16']
+            this.memory = ['16']
+            break;
+        }
       },
       systemDisk(){
         this.queryCprices();
@@ -890,6 +939,12 @@
       },
       memory(){
         this.queryCprices();
+      },
+      'diskList': {
+        handler(){
+          this.queryCprices();
+        },
+        deep: true
       },
       bandwidth(){
         this.queryCprices();
