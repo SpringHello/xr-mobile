@@ -72,10 +72,10 @@
             src: require('../../../../assets/img/active/groupBooking/gb-icon19.png'),
             text: '朋友圈'
           },
-/*          {
+          {
             src: require('../../../../assets/img/active/groupBooking/gb-icon18.png'),
             text: '微博'
-          }*/
+          }
         ]
       }
     },
@@ -177,6 +177,9 @@
                 // 用户取消分享后执行的回调函数
               }
             });
+            break
+          case 4:
+            window.open('http://service.weibo.com/share/share.php?url=' + this.activeLink + '&title=' + '我有你也有，高品质云主机59元畅享一年，详情查看活动链接' + '&pic=' + '' + '&searchPic=false','_self')
             break
         }
       },
@@ -315,6 +318,9 @@
         font-family: "Microsoft YaHei", "微软雅黑";
         color: rgba(102, 102, 102, 1);
       }
+    }
+    ul:nth-child(5){
+      margin-top: .1rem;
     }
   }
 </style>
