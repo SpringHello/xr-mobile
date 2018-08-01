@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="ipdetails">
     <x-header></x-header>
     <div class="host" style="margin-bottom: .2rem;">
       <div class="host-item">

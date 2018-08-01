@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="diskdetails">
     <x-header></x-header>
     <div class="host">
       <div class="host-item">

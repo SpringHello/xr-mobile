@@ -25,7 +25,7 @@
             <swipeout-button @click.native="Delete(type,item.id)" :width="80" background-color="#DB4232"
                              text="删除"></swipeout-button>
           </div>
-          <div slot="content" class="demo-content vux-1px-t">
+          <div slot="content" class="demo-content">
             <div class="content" v-show="datas.length!=0">
               <ul @click="toview(item)">
                 <li>
