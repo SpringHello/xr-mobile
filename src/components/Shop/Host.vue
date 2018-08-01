@@ -213,7 +213,7 @@
         mirrorType: ['public'],
         //镜像系统
         mirrorCustomList: [],
-        mirrorCustom: ['window', '6dbacf6d-68d5-4d5e-b763-24ffc1b2902b'],
+        mirrorCustom: [],
         //是否购买IP
         IP: ['购买公网IP'],
         checkIp: ['购买公网IP'],
@@ -610,26 +610,6 @@
       this.queryCprices();
     },
     methods: {
-      publicBuy(){
-        console.log(this.mirrorCustom)
-        if (this.mirrorType.length == 0) {
-          this.$vux.toast.text('请选择一个镜像类型', 'middle')
-          return
-        }
-        if (this.mirrorCustom.length == 0) {
-          this.$vux.toast.text('请选择一个镜像系统', 'middle')
-          return
-        }
-        axios.get('information/deployVirtualMachine.do', {
-          params: {
-            zoneId: $store.state.zone.zoneid,
-            timeType: this.str,
-            timeValue: '',
-            templateId: this.mirrorCustom[1],
-            isAutoRenew: '',
-          }
-        })
-      },
       //切换导航
       click(value){
         this.index = value
@@ -711,9 +691,10 @@
               for (let type in response.data.result) {
                 this.mirrorCustomList.push({name: type, value: type, parent: 0})
                 response.data.result[type].forEach(e => {
-                    this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
+                    this.mirrorCustomList.push({name: e.templatename, value: e.systemtemplateid, parent: type})
                   }
                 )
+                this.mirrorCustom = ['window', response.data.result.window[0].systemtemplateid]
                 if (this.mirrorCustomList.length == 4) {
                   this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
                 }
@@ -852,12 +833,15 @@
           bandWidth: param[2],
           rootDiskType: param[4],
           networkId: this.networkCard[0],
-          vpcId: this.vpc[0],
-          VMName: this.hostName,
-          password: this.loginPassword,
+          vpcId: this.vpc[0]
         }
+        /* if (this.hostmsg[0] == 'custom') {
+         params.VMName = this.hostName
+         params.password = this.loginPassword
+         }*/
         axios.get('information/deployVirtualMachine.do', {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
+            sessionStorage.setItem('countOrder', this.Qprices.toString())
             this.$router.push('orderconfirm')
           } else {
             this.$vux.toast.text(response.data.message, 'middle')

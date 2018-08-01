@@ -3,33 +3,34 @@
     <x-header>订单确认</x-header>
     <div class="orderdetails">
       <div class="resources">
-        <p>资源详情</p>
+        <p class="title">资源详情</p>
         <ul>
-          <li>地域：</li>
-          <li>机型：</li>
-          <li>镜像：</li>
-          <li>存储：</li>
-          <li>网络：</li>
-          <li>弹性IP：</li>
-          <li>宽带：</li>
+          <li v-for="(item,index) in orderData.资源" :key="index">
+            <p v-for="(value,key) of item" class="item">{{key}}：{{value}}</p>
+          </li>
         </ul>
       </div>
       <div class="billing">
-        <p>计费详情</p>
+        <p class="title">计费详情</p>
         <ul>
-          <li>计费类型：</li>
-          <li>购买时长：</li>
-          <li>购买数量：</li>
-          <li>原价：</li>
-          <li>活动优惠：</li>
+          <li>计费类型：{{orderData.类型}}</li>
+          <li>购买时长：{{orderData.时长}}</li>
+          <li>购买数量：{{orderData.数量}}</li>
+          <li>原价：{{orderData.原价}}</li>
         </ul>
       </div>
     </div>
     <Group>
-      <x-switch :title="xtitle" v-model="xvalue"></x-switch>
+      <x-switch :title="xtitle" v-model="xvalue" @on-change="useOrnot"></x-switch>
       <cell title="选择优惠券" :value="text" @click.native="select" v-show="xvalue"></cell>
 
     </Group>
+
+    <div class="pay">
+      <p>应付金额：<span>¥ {{payMoney}}</span></p>
+      <button @click="pay">去支付</button>
+    </div>
+
     <div class="tickets" :class="{'tickets-none':showTickets}">
       <div v-for="(ticket,index) in tickets" :key="index"
            style="background-color: #FFF;margin: .2rem .2rem 0 .2rem;border-radius:.1rem;">
@@ -43,7 +44,7 @@
             <p>{{ticket.starttime}}</p>
             <p>{{ticket.endtime}}</p>
           </div>
-          <button @click="uesTicket(ticket.remark,ticket.operatorid)">立即使用
+          <button @click="uesTicket(ticket.remark,ticket.tickettype,ticket.money,ticket.operatorid)">立即使用
           </button>
         </div>
         <p class="content-bottom">
@@ -76,16 +77,16 @@
         // 存放优惠券数据
         tickets: [],
         ticketNname: '',
-        ticketId: '',
         text: '选择',
-        showTickets: false
+        showTickets: false,
+        payMoney: 0,
+        orderNum: '',
+        ticketId: ''
       }
     },
     beforeRouteEnter(to, from, next){
       let params = {}
-      /*if (to.query.countOrder) {
-       params.countOrder = to.query.countOrder
-       }*/
+      params.totalCost = sessionStorage.getItem('countOrder')
       axios.get('user/searchOrderByBuy.do', {
         params
       }).then(response => {
@@ -99,13 +100,15 @@
     methods: {
       setOrder(response){
         if (response.status == 200 && response.data.status == 1) {
-          this.orderData = response.data.result.data[0]
+          this.orderData = JSON.parse(response.data.result.data[0].display)
+          this.orderNum = response.data.result.data[0].ordernumber
         }
+        this.payMoney = sessionStorage.getItem('countOrder')
         axios.get('ticket/getUserTicket.do', {
           params: {
             ticketType: '',
             isuse: 0,
-            totalCost: this.orderData.originalcost
+            totalCost: sessionStorage.getItem('countOrder')
           }
         }).then(response => {
           this.tickets = response.data.result
@@ -116,10 +119,36 @@
         this.showTickets = !this.showTickets
       },
       //立即使用
-      uesTicket(name, id){
+      uesTicket(name, type, money, id){
         this.text = this.ticketNname = name
-        this.ticketId = id
         this.showTickets = !this.showTickets
+        this.ticketId = id
+        if (type == 1) {
+          this.payMoney = (parseFloat(sessionStorage.getItem('countOrder')) * money / 10).toFixed(2)
+        } else if (type == 0) {
+          this.payMoney = (parseFloat(sessionStorage.getItem('countOrder')) - money).toFixed(2)
+        }
+      },
+      //是否使用优惠卷
+      useOrnot(value){
+        if (value == false) {
+          this.payMoney = sessionStorage.getItem('countOrder')
+        }
+      },
+      //去支付
+      pay(){
+        axios.get('information/zfconfirm.do', {
+          params: {
+            order: this.orderNum,
+            ticket: this.ticketId,
+            money: this.payMoney,
+          }
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            sessionStorage.setItem('payData', JSON.stringify(response.data.result))
+            this.$router.push('hostOrder')
+          }
+        })
       },
 
     }
@@ -129,21 +158,21 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .orderdetails {
     background: rgba(255, 255, 255, 1);
-    li {
-      list-style: none;
-      font-size: .24rem;
-      line-height: .33rem;
-      padding-bottom: .24rem;
-    }
-    p {
-      font-size: .32rem;
-      line-height: .45rem;
-    }
     .resources {
       margin-left: .3rem;
       border-bottom: 1px solid #e7e7e7;
       color: #333;
-      p {
+      li {
+        list-style: none;
+        .item {
+          font-size: .24rem;
+          line-height: .33rem;
+          padding-bottom: .24rem;
+        }
+      }
+      .title {
+        font-size: .32rem;
+        line-height: .45rem;
         padding-bottom: .21rem;
         padding-top: .4rem;
       }
@@ -151,10 +180,46 @@
     .billing {
       color: #999;
       margin-left: .3rem;
-      p {
+      .title {
+        font-size: .32rem;
+        line-height: .45rem;
         padding-bottom: .21rem;
         padding-top: .4rem;
       }
+      li {
+        list-style: none;
+        font-size: .24rem;
+        line-height: .33rem;
+        padding-bottom: .24rem;
+      }
+    }
+  }
+
+  .pay {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFF;
+    position: fixed;
+    bottom: 0;
+    p {
+      padding: .32rem 0 .32rem .3rem;
+      font-size: .28rem;
+      color: rgba(0, 0, 0, 1);
+      line-height: .36rem;
+      span {
+        font-size: .36rem;
+        color: rgba(230, 0, 27, 1);
+      }
+    }
+    button {
+      font-size: .32rem;
+      color: rgba(255, 255, 255, 1);
+      line-height: .36rem;
+      outline: none;
+      border: 0;
+      background: rgba(219, 66, 50, 1);
+      padding: .33rem .77rem .31rem .78rem;
     }
   }
 

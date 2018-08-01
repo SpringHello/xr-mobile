@@ -23,6 +23,7 @@ function appendMD5(params, type) {
       str = encodeURI(str)
     }
     str = md5(str)
+    count = count % 10
     var mac = str.substr(0, count) + count + str.substr(count)
     return {
       ...params,
@@ -47,7 +48,7 @@ axios.interceptors.request.use(macIntercept)
 /*axios.defaults.baseURL = 'https://zschj.xrcloud.net/ruicloud/'
  axios.defaults.withCredentials = true*/
 
-axios.defaults.baseURL = 'https://pan.xrcloud.net/ruicloud/'
+axios.defaults.baseURL = 'https://zschj.xrcloud.net/ruicloud/'
 axios.defaults.withCredentials = true
 
 export default axios
