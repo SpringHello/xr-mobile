@@ -957,7 +957,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .public {
     p {
-      padding: .31rem 0 .16rem .3rem;
+      padding: .31rem 0 0 .3rem;
       font-size: .24rem;
       color: rgba(153, 153, 153, 1);
       line-height: .33rem;
