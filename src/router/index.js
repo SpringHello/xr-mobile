@@ -66,7 +66,10 @@ import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 // 购买页面
 import HostShop from '@/components/Shop/Host'
+import OrderConfirm from '@/components/Shop/OrderConfirm'
 import Charge from '@/components/Shop/Charge'
+import HostOrder from '@/components/Shop/Order'
+import PayResult from '@/components/Shop/PayResult'
 
 /*登录注册相关*/
 import Login from '@/components/LR/Login'
@@ -86,8 +89,6 @@ import Active3 from '@/components/Active/Active3'
 import GroupBooking from '@/components/Active/groupBooking/HomePage'
 import ShareLink from '@/components/Active/groupBooking/SharePage'
 import ActivityLink from '@/components/Active/groupBooking/LinkPage'
-
-
 
 
 Vue.use(Router)
@@ -256,16 +257,11 @@ export default new Router({
           component: ddos,
         },
         // 所有购买页面
-        {
-          path: '/hostShop',
-          name: 'HostShop',
-          component: HostShop,
-        },
-        {
-          path: '/Charge',
-          name: 'Charge',
-          component: Charge,
-        },
+        {path: 'hostShop', name: 'HostShop', component: HostShop,},
+        {path: 'orderConfirm', name: 'OrderConfirm', component: OrderConfirm,},
+        {path: 'Charge', name: 'Charge', component: Charge,},
+        {path: 'hostOrder', name: 'HostOrder', component: HostOrder,},
+        {path: 'payResult', name: 'PayResult', component: PayResult,},
       ]
     },
   ]

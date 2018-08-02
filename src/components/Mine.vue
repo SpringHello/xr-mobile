@@ -378,7 +378,7 @@
           height: .14rem;
           border-left: 1px solid #C7C7CC;
           border-bottom: 1px solid #C7C7CC;
-          transform: translateY(.165rem) rotate(-135deg);
+          transform: translateY(.15rem) rotate(-135deg);
           position: absolute;
           right: .4rem;
         }

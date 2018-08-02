@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="hostdetails">
     <x-header></x-header>
     <div class="host">
       <div class="host-item">
@@ -59,7 +59,15 @@
           <confirm v-model="showSend"
                    title="发送主机密码"
                    @on-confirm="sendOk">
-            <input type="text" class="input">
+            <div style="text-align:center;">
+              <p style="font-size: .3rem;color: #888;padding-bottom: .2rem;">请输入控制台登录密码</p>
+              <input v-model="lookPassword" type="text"
+                     style="outline: none;border:none;border-bottom: 1px solid #e7e7e7;text-align: center;font-size: .36rem;color: #333;width: 60%;">
+              <div style="padding-top: .35rem;">
+                <check-icon :value.sync="email"><span style="font-size: .3rem;color: #888;">邮箱接收</span></check-icon>
+                <check-icon :value.sync="phone"><span style="font-size: .3rem;color: #888;">短信接收</span></check-icon>
+              </div>
+            </div>
           </confirm>
         </div>
         <toast v-model="show" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
@@ -71,7 +79,16 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Confirm, TransferDomDirective as TransferDom, CellFormPreview, Group, Cell, XHeader, Toast} from 'vux'
+  import {
+    Confirm,
+    TransferDomDirective as TransferDom,
+    CellFormPreview,
+    Group,
+    Cell,
+    XHeader,
+    Toast,
+    CheckIcon
+  } from 'vux'
   export default{
     components: {
       Confirm,
@@ -80,7 +97,8 @@
       Group,
       Cell,
       XHeader,
-      Toast
+      Toast,
+      CheckIcon
     },
     data (){
       window.scrollTo(0, 0);
@@ -96,7 +114,11 @@
           {img: require('../../assets/img/back/jkong.png'), title: '监控', url: ''},
           {img: require('../../assets/img/back/mima.png'), title: '重置主机密码', url: ''},
           {img: require('../../assets/img/back/riji.png'), title: '查看操作日志', url: ''}
-        ]
+        ],
+        //发送主机密码
+        lookPassword: '',
+        email: false,
+        phone: true
       }
     },
     methods: {
@@ -112,7 +134,19 @@
       },
       //确认发送
       sendOk(){
-        console.log(123)
+        axios.post('log/sendVMPassword.do', {
+          VMId: this.details.computerId,
+          password: this.lookPassword,
+          letter: '1',
+          email: this.email ? '1' : '0',
+          phone: this.phone ? '1' : '0'
+        }).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.$vux.toast.text(response.data.message, 'middle')
+          } else {
+            this.$vux.toast.text(response.data.message, 'middle')
+          }
+        })
       },
 
     },
@@ -226,39 +260,39 @@
 
       //主机操作
       .handle {
-      background: rgba(255, 255, 255, 1);
-      margin-bottom: .2rem;
-      border-top: 1px solid #e7e7e7;
-      border-bottom: 1px solid #e7e7e7;
-      padding: .4rem 0;
-      .handle-title {
-      padding: 0.2rem .3rem;
-      font-size: .32rem;
-      color: rgba(51, 51, 51, 1);
-      }
-      .handle-content {
-      padding: .5rem;
-      display: flex;
-      flex-wrap: wrap;
-      a {
-      width: 33.3%;
-      }
-      div {
-      text-align: center;
-      margin-bottom: .5rem;
-      img {
-      width: .8rem;
-      height: .8rem;
-      margin: 0 auto;
-      display: block;
-      }
-      p {
-      padding-top: .32rem;
-      font-size: .28rem;
-      color: #222;
-      }
-      }
-      }
+        background: rgba(255, 255, 255, 1);
+        margin-bottom: .2rem;
+        border-top: 1px solid #e7e7e7;
+        border-bottom: 1px solid #e7e7e7;
+        padding: .4rem 0;
+        .handle-title {
+          padding: 0.2rem .3rem;
+          font-size: .32rem;
+          color: rgba(51, 51, 51, 1);
+        }
+        .handle-content {
+          padding: .5rem;
+          display: flex;
+          flex-wrap: wrap;
+          a {
+            width: 33.3%;
+          }
+          div {
+            text-align: center;
+            margin-bottom: .5rem;
+            img {
+              width: .8rem;
+              height: .8rem;
+              margin: 0 auto;
+              display: block;
+            }
+            p {
+              padding-top: .32rem;
+              font-size: .28rem;
+              color: #222;
+            }
+          }
+        }
       }
     }
   }

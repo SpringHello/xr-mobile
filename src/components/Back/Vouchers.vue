@@ -11,7 +11,7 @@
 
     <div class="content" v-for="(item,index) in vouchers">
       <div class="content-top"
-           :class="{yhui:item.operator=='优惠券',xjin:item.operator=='现金券',zkou:item.operator=='折扣卷'}">
+           :class="{yhui:item.operator=='优惠券',xjin:item.operator=='现金券',zkou:item.operator=='折扣券'}">
         <div class="top-left">
           <p>¥ <span>{{item.money}}</span></p>
           <p>{{item.remark}}</p>
@@ -22,7 +22,7 @@
           <p>{{item.endtime}}</p>
         </div>
         <button
-          :class="{byhui:item.operator=='优惠券',bxjin:item.operator=='现金券',bzkou:item.operator=='折扣卷'}"
+          :class="{byhui:item.operator=='优惠券',bxjin:item.operator=='现金券',bzkou:item.operator=='折扣券'}"
           v-show="!item.maketicketover">立即使用
         </button>
         <p class="top-right" v-show="item.maketicketover">

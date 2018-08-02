@@ -46,11 +46,11 @@
         <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
                  placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
 
-        <x-switch title="自动续费"></x-switch>
+        <x-switch title="自动续费" v-model="renewal"></x-switch>
       </Group>
       <div class="bottom">
         <p>配置价格：<span>¥ {{Qprices}}</span></p>
-        <button @click="">立即购买</button>
+        <button @click="QtoOrder">立即购买</button>
       </div>
     </div>
     <div v-show="index==1" class="custom">
@@ -113,10 +113,10 @@
         <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
                  placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
 
-        <x-switch title="自动续费"></x-switch>
+        <x-switch title="自动续费" v-model="renewal"></x-switch>
       </Group>
       <div class="bottom">
-        <p>配置价格：<span>¥ {{Cprices.toFixed(2)}}</span></p>
+        <p>配置价格：<span>¥ {{Cprices}}</span></p>
         <button>立即购买</button>
       </div>
     </div>
@@ -213,7 +213,7 @@
         mirrorType: ['public'],
         //镜像系统
         mirrorCustomList: [],
-        mirrorCustom: ['window', '6dbacf6d-68d5-4d5e-b763-24ffc1b2902b'],
+        mirrorCustom: [],
         //是否购买IP
         IP: ['购买公网IP'],
         checkIp: ['购买公网IP'],
@@ -596,6 +596,8 @@
         //价格
         Qprices: 0,
         Cprices: 0,
+        //是否自动续费
+        renewal: false,
       }
     },
     created(){
@@ -608,26 +610,6 @@
       this.queryCprices();
     },
     methods: {
-      publicBuy(){
-        console.log(this.mirrorCustom)
-        if (this.mirrorType.length == 0) {
-          this.$vux.toast.text('请选择一个镜像类型', 'middle')
-          return
-        }
-        if (this.mirrorCustom.length == 0) {
-          this.$vux.toast.text('请选择一个镜像系统', 'middle')
-          return
-        }
-        axios.get('information/deployVirtualMachine.do', {
-          params: {
-            zoneId: $store.state.zone.zoneid,
-            timeType: this.str,
-            timeValue: '',
-            templateId: this.mirrorCustom[1],
-            isAutoRenew: '',
-          }
-        })
-      },
       //切换导航
       click(value){
         this.index = value
@@ -709,9 +691,10 @@
               for (let type in response.data.result) {
                 this.mirrorCustomList.push({name: type, value: type, parent: 0})
                 response.data.result[type].forEach(e => {
-                    this.mirrorCustomList.push({name: e.templatename, value: e.templateid, parent: type})
+                    this.mirrorCustomList.push({name: e.templatename, value: e.systemtemplateid, parent: type})
                   }
                 )
+                this.mirrorCustom = ['window', response.data.result.window[0].systemtemplateid]
                 if (this.mirrorCustomList.length == 4) {
                   this.mirrorCustomList = [{name: '暂无数据', value: '暂无数据', parent: 0}]
                 }
@@ -787,12 +770,14 @@
       },
       //查询价格(custom)
       queryCprices(){
+        let timeout = setTimeout(() => {
+          this.Cprices = '查询中'
+        }, 1000)
         /*主机价格*/
         if (this.charges.length != 0) {
           var times = this.charges[0].split('#')
         }
-        this.Cprices = 0
-        axios.post('device/QueryBillingPrice.do', {
+        let bill = axios.post('device/QueryBillingPrice.do', {
           cpuNum: this.cores[0],
           diskType: this.systemDisk[0],
           memory: this.memory[0],
@@ -800,34 +785,66 @@
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.Cprices += response.data.cost
-          }
         })
         /*IP价格*/
-        axios.post('device/queryIpPrice.do', {
+        let ip = axios.post('device/queryIpPrice.do', {
           brand: this.bandwidth.toString(),
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-//            console.log(response.data.cost)
-          }
+        })
+        let diskSize = ''
+        let diskType = ''
+        this.diskList.forEach(disk => {
+          diskType += disk.value[0] + ','
+          diskSize += disk.value[1] + ','
         })
         /*云硬盘价格*/
-        axios.post('device/QueryBillingPrice.do', {
-          diskSize: '',
-          diskType: '',
+        let disk = axios.post('device/QueryBillingPrice.do', {
+          diskSize,
+          diskType,
           cpuNum: '0',
           memory: '0',
           timeType: this.str == 'current' ? 'current' : times[0],
           timeValue: this.str == 'current' ? '1' : times[1],
           zoneId: $store.state.zone.zoneid,
-        }).then(response => {
+        })
+        Promise.all([bill, ip, disk]).then(response => {
+            clearTimeout(timeout)
+            this.Cprices = (response[0].data.cost + response[1].data.cost + response[2].data.cost).toFixed(2)
+          }
+        )
+      },
+      //立即购买(quickly)
+      QtoOrder(){
+        var param = this.config[0].split('#')
+        if (this.charges.length != 0) {
+          var times = this.charges[0].split('#')
+        }
+        let params = {
+          zoneId: this.regional[0],
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          templateId: this.mirrorCustom[1],
+          isAutoRenew: this.renewal ? '1' : '0',
+          count: '1',
+          cpuNum: param[0],
+          memory: param[1],
+          bandWidth: param[2],
+          rootDiskType: param[4],
+          networkId: this.networkCard[0],
+          vpcId: this.vpc[0]
+        }
+        /* if (this.hostmsg[0] == 'custom') {
+         params.VMName = this.hostName
+         params.password = this.loginPassword
+         }*/
+        axios.get('information/deployVirtualMachine.do', {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-//            console.log(response.data.cost)
+            sessionStorage.setItem('countOrder', this.Qprices.toString())
+            this.$router.push('orderconfirm')
+          } else {
+            this.$vux.toast.text(response.data.message, 'middle')
           }
         })
       },
@@ -861,8 +878,24 @@
       regional(){
         this.vpcChange();
       },
-      genre(){
-        this.queryCprices();
+      genre(val){
+        switch (val[0]) {
+          case 'standard':
+            this.systemDisk = ['sas']
+            this.cores = ['1']
+            this.memory = ['1']
+            break;
+          case 'optimization':
+            this.systemDisk = ['ssd']
+            this.cores = ['4']
+            this.memory = ['4']
+            break;
+          case 'IO':
+            this.systemDisk = ['ssd']
+            this.cores = ['16']
+            this.memory = ['16']
+            break;
+        }
       },
       systemDisk(){
         this.queryCprices();
@@ -891,6 +924,12 @@
       memory(){
         this.queryCprices();
       },
+      'diskList': {
+        handler(){
+          this.queryCprices();
+        },
+        deep: true
+      },
       bandwidth(){
         this.queryCprices();
       },
@@ -902,7 +941,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .public {
     p {
-      padding: .31rem 0 .16rem .3rem;
+      padding: .31rem 0 0 .3rem;
       font-size: .24rem;
       color: rgba(153, 153, 153, 1);
       line-height: .33rem;

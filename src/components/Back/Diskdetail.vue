@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="diskdetails">
     <x-header></x-header>
     <div class="host">
       <div class="host-item">
@@ -18,22 +18,21 @@
           <li>创建时间 <span>{{details.createtime}}</span></li>
         </ul>
       </div>
-
-      <group>
-        <popup-picker title="挂载" class="bei" :data="mountHostList" v-model="mount" :columns="2"
-                      v-if="!details.mounton && !details.mountonname && details.status == 1"
-                      @on-show="showMount" show-name @on-change="onChange"></popup-picker>
-        <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
-                  @click.native="showUnload(details)"></x-switch>
-      </group>
-      <group class="delete" @click.native="delDisk">
-        <p> 删除云硬盘</p>
-      </group>
-
-      <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="35%"></toast>
-      <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="35%"></toast>
-
     </div>
+
+    <group>
+      <popup-picker title="挂载" class="bei" :data="mountHostList" v-model="mount" :columns="2"
+                    v-if="!details.mounton && !details.mountonname && details.status == 1"
+                    @on-show="showMount" show-name @on-change="onChange"></popup-picker>
+      <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
+                @click.native="showUnload(details)"></x-switch>
+    </group>
+    <group class="delete" @click.native="delDisk">
+      <p> 删除云硬盘</p>
+    </group>
+
+    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="35%"></toast>
+    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="35%"></toast>
   </div>
 </template>
 
@@ -187,23 +186,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .host {
-    background: rgba(243, 243, 243, 1);
+    background: rgba(255, 255, 255, 1);
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: .2rem;
     .host-item {
       .title {
-        padding: .23rem 0 .2rem .3rem;
-        background: rgba(255, 255, 255, 1);
+        margin-left: .3rem;
+        padding: .23rem 0 .2rem 0;
         font-size: .32rem;
         font-weight: normal;
         color: #222;
         line-height: .45rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
       }
       ul {
-        background: rgba(255, 255, 255, 1);
-        margin-bottom: .2rem;
+        margin-left: .3rem;
         li {
-          padding: .24rem .3rem;
-          border-bottom: 1px solid #D9D9D9;
+          padding: .24rem .3rem .24rem 0;
+          border-bottom: 1px solid #e7e7e7;
           list-style: none;
           font-size: .28rem;
           color: #333;
@@ -213,17 +213,22 @@
             color: #666;
             float: right;
           }
+          &:last-of-type {
+            border-bottom: none;
+          }
+        ;
         }
       }
     }
-    .delete {
-      p {
-        font-size: .28rem;
-        color: #FF0000;
-        line-height: .4rem;
-        padding: .24rem 0;
-        text-align: center;
-      }
+  }
+
+  .delete {
+    p {
+      font-size: .28rem;
+      color: #FF0000;
+      line-height: .4rem;
+      padding: .24rem 0;
+      text-align: center;
     }
   }
 </style>

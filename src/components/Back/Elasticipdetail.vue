@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="ipdetails">
     <x-header></x-header>
-    <div class="host">
+    <div class="host" style="margin-bottom: .2rem;">
       <div class="host-item">
         <h6 class="title">IP基础信息</h6>
         <ul>
@@ -29,8 +29,6 @@
         </ul>
       </div>
     </div>
-
-
     <div class="opreat">
       <Group>
         <p class="title">IP操作</p>
@@ -277,23 +275,24 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .host {
-    background: rgba(243, 243, 243, 1);
+    background: rgba(255, 255, 255, 1);
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
     .host-item {
       .title {
-        padding: .23rem 0 .2rem .3rem;
-        background: rgba(255, 255, 255, 1);
+        margin-left: .3rem;
+        padding: .23rem 0 .2rem 0;
         font-size: .32rem;
         font-weight: normal;
         color: #333;
         line-height: .45rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
       }
       ul {
-        background: rgba(255, 255, 255, 1);
-        margin-bottom: .2rem;
         li {
-          padding: .24rem .3rem;
-          border-bottom: 1px solid #D9D9D9;
+          margin-left: .3rem;
+          padding: .24rem .3rem .24rem 0;
+          border-bottom: 1px solid #e7e7e7;
           list-style: none;
           font-size: .28rem;
           color: #333;
@@ -303,31 +302,36 @@
             color: #666;
             float: right;
           }
+          &:last-of-type {
+            border-bottom: none;
+          }
         }
       }
+    }
+    &:first-of-type {
+      border-top: none;
     }
   }
 
   .opreat {
-    padding-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 1);
     .title {
-      padding: .23rem 0 .2rem .3rem;
-      background: rgba(255, 255, 255, 1);
+      margin-left: .3rem;
+      padding: .23rem 0 .2rem 0;
       font-size: .32rem;
       font-weight: normal;
       color: #222;
       line-height: .45rem;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #e7e7e7;
     }
     .unbound {
-      padding: .23rem .35rem .2rem .3rem;
-      background: rgba(255, 255, 255, 1);
+      margin-left: .3rem;
+      padding: .23rem .35rem .2rem 0;
       font-size: .28rem;
       font-weight: normal;
       color: #222;
       line-height: .45rem;
-      border-bottom: 1px solid #D9D9D9;
-      border-top: 1px solid #D9D9D9;
+      border-top: 1px solid #e7e7e7;
       span {
         float: right;
         font-size: .28rem;
@@ -336,8 +340,8 @@
       .span {
         width: .15rem;
         height: .15rem;
-        border-right: 2px solid #C8C8CD;
-        border-bottom: 2px solid #C8C8CD;
+        border-right: 2px solid #C7C7C7;
+        border-bottom: 2px solid #C7C7C7;
         transform: translateY(.15rem) rotate(311deg);
         float: right;
       }

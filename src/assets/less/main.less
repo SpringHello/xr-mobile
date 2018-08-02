@@ -26,7 +26,7 @@ html {
 }
 
 #mine {
-  .vux-badge-single {
+  .vux-badge {
     position: absolute;
     right: .8rem;
   }
@@ -429,6 +429,9 @@ html {
 
 //所有购买页面
 #shop-host {
+  .weui-cells {
+    margin-top: .2rem;
+  }
   .vux-tab-wrap {
     .vux-tab .vux-tab-item {
       font-size: .32rem;
@@ -447,41 +450,45 @@ html {
   }
   .qucikly {
     margin-bottom: 1.2rem;
-    .vux-cell-box {
-      .weui-cell__hd {
-        font-size: .28rem;
-      }
-      .vux-popup-picker-value {
-        font-size: .28rem;
-      }
-    }
-    .vux-x-switch {
-    }
-    .weui-cell__bd {
-      font-size: .28rem;
-    }
-    .weui-switch:checked {
-      border-color: #4A90E2;
-      background-color: #4A90E2;
-    }
-    .vux-x-input {
-      font-size: .28rem;
-    }
-    .weui-cells .weui-cell {
-      font-size: .32rem;
-      .weui-input {
-        color: #999;
-      }
-    }
-    .weui-cells_checkbox {
-      .weui-cell__hd {
-        padding-right: 0;
-      }
-      .weui-cell__bd {
-        font-size: .28rem;
+    .weui-cells {
+      .vux-cell-box {
+        .weui-cell__hd {
+          font-size: .28rem;
+        }
+        .vux-popup-picker-value {
+          font-size: .28rem;
+        }
       }
       .weui-icon-checked:before {
         color: #108EE9;
+      }
+      .weui-cells_checkbox {
+        .weui-cell__bd {
+          font-size: .28rem;
+        }
+      }
+      .vux-x-input {
+        .weui-cell__hd {
+          font-size: .28rem;
+        }
+        .weui-cell__bd {
+          font-size: .28rem;
+        }
+        .weui-input {
+          color: #999;
+        }
+      }
+      .vux-cell-primary {
+        font-size: .28rem;
+      }
+      .vux-x-switch {
+        .weui-cell__bd {
+          font-size: .28rem;
+        }
+        .weui-switch:checked {
+          border-color: #4A90E2;
+          background-color: #4A90E2;
+        }
       }
 
     }
@@ -489,6 +496,7 @@ html {
   .custom {
     margin-bottom: 1.2rem;
     .weui-cells {
+
       .weui-cells_checkbox {
         .weui-cell__hd {
           padding-right: 0;
@@ -541,6 +549,12 @@ html {
           }
         }
       }
+      .vux-cell-bd {
+        font-size: .28rem;
+        .vux-label {
+          font-size: .32rem;
+        }
+      }
     }
   }
 }
@@ -566,6 +580,60 @@ html {
   }
 }
 
+#pay {
+  .weui-cells {
+    .weui-cell__ft {
+      font-size: .32rem;
+      color: rgba(230, 0, 27, 1);
+    }
+    .weui-label {
+      width: auto !important;
+    }
+    .weui-switch:checked {
+      border-color: #4A90E2;
+      background-color: #4A90E2;
+    }
+  }
+  .three {
+    .weui-cells {
+      margin-top: .2rem;
+      .weui-cell__bd {
+        font-size: .36rem;
+      }
+      .weui-check:checked + .weui-icon-checked:before {
+        color: #4A90E2;
+      }
+      .weui-cells_radio {
+        .weui-cell__bd {
+          .vux-radio-icon {
+            width: .64rem;
+            height: .64rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+#orderconfirm {
+  .weui-cells {
+    .vux-x-switch {
+      .weui-cell__bd {
+        font-size: .28rem;
+      }
+      .weui-switch:checked {
+        border-color: #4A90E2;
+        background-color: #4A90E2;
+      }
+    }
+    .weui-cell {
+      .vux-cell-primary {
+        font-size: .28rem;
+      }
+    }
+  }
+}
+
 /*所有资源*/
 .resouredetail {
   .vux-no-group-title {
@@ -582,3 +650,24 @@ html {
     }
   }
 }
+
+#ipdetails {
+  .weui-cells {
+    margin-top: .2rem;
+    .vux-cell-primary {
+      font-size: .28rem;
+    }
+  }
+}
+
+#diskdetails {
+  .weui-cells {
+    margin-top: .2rem;
+    .weui-cell_switch {
+      .weui-cell__bd {
+        font-size: .28rem;
+      }
+    }
+  }
+}
+
