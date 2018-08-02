@@ -172,10 +172,10 @@
           }
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            this.$router.push('/ruicloud/bdisk')
+            this.$router.push('bdisk')
             this.$vux.toast.text(response.data.message, 'middle')
           } else {
-            this.$router.push('/ruicloud/bdisk')
+            this.$router.push('bdisk')
             this.$vux.toast.text(response.data.message, 'middle')
 
           }
