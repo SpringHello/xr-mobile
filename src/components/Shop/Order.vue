@@ -11,7 +11,13 @@
 
     <Group class="three">
       <p>第三方支付渠道</p>
-      <radio :options="radios" @on-change="" :disabled="disabled"></radio>
+      <radio :options="radios" @on-change="print" :disabled="disabled">
+        <template slot-scope="props" slot="each-item">
+          <img src="../../assets/img/back/zfb.png" class="vux-radio-icon" v-show="props.label=='支付宝支付'">
+          <img src="../../assets/img/back/wx.png" class="vux-radio-icon" v-show="props.label=='微信支付'">
+          {{ props.label }}
+        </template>
+      </radio>
     </Group>
 
     <div class="btn">
@@ -45,15 +51,14 @@
         remainder: '',
         remaining: true,
         //第三方支付
-        radios: [
-          {icon: `url(../../assets/img/back/wx.png)`, key: 'alipay', value: '支付宝'},
-          {icon: '../../assets/img/back/wx.png', key: 'wxpay', value: '微信支付'},
-        ],
+        radios: ['支付宝支付', '微信支付'],
         disabled: true,
+        radioValue: '',
 
       }
     },
     methods: {
+      //显示余额
       showYE(value){
         if (value) {
           this.remainder = '￥' + this.payData.remainder
@@ -61,6 +66,11 @@
           this.remainder = '￥  0.00'
         }
       },
+
+      print(value){
+        this.radioValue = value
+      },
+      //支付
       pay(){
         if (this.disabled) {
           axios.get('information/payOrder.do', {
@@ -78,7 +88,15 @@
             }
           })
         } else {
-          window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
+          switch (this.radioValue) {
+            case '支付宝支付':
+              window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
+              break;
+            case '微信支付':
+//                window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
+              break;
+          }
+
         }
 
       },
