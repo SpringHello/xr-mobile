@@ -129,7 +129,6 @@
       },
       // 查看详情
       push(item){
-        console.log(item)
         this.address = '/hostdetail'
         var params = {
           id: item.id,
@@ -244,6 +243,7 @@
         justify-content: space-between;
         padding: .2rem .3rem .2rem 0;
         .soures {
+          width: 78%;
           display: flex;
           align-items: center;
           .img {

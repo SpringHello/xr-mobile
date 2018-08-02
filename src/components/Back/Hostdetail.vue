@@ -31,13 +31,13 @@
           <ol>
             <li>所属VPC <span>{{details.vpc}}</span></li>
             <li>绑定公网 <span style="color: #108EE9;">{{details.publicIp}}</span></li>
-            <li>所属负载均衡 <span style="color: #108EE9;">{{details.loadbalance.join('|')}}</span></li>
+            <li>所属负载均衡 <span style="color: #108EE9;">{{balance}}</span></li>
           </ol>
         </div>
         <div class="disks">
           <p class="disks-title">磁盘与快照</p>
           <ol>
-            <li>挂载磁盘 <span>{{details.disk.join('|') }}</span></li>
+            <li>挂载磁盘 <span>{{disk}}</span></li>
             <li>挂载磁盘容量统计 <span></span></li>
             <li>主机快照 <span></span></li>
           </ol>
@@ -107,6 +107,8 @@
         show: false,
         showSend: false,
         details: {},
+        balance: '',
+        disk: '',
         //主机操作
         hostHandle: [
           {img: require('../../assets/img/back/xufei.png'), title: '续费', url: ''},
@@ -118,7 +120,7 @@
         //发送主机密码
         lookPassword: '',
         email: false,
-        phone: true
+        phone: true,
       }
     },
     methods: {
@@ -159,6 +161,8 @@
       }).then(response => {
           next(vm => {
               vm.details = response.data.result
+              vm.balance = vm.details.loadbalance.join('|')
+              vm.disk = vm.details.disk.join('|')
             }
           )
         }
