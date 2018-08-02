@@ -90,10 +90,10 @@
         } else {
           switch (this.radioValue) {
             case '支付宝支付':
-              window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
+              window.open(`zfb/appzf.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
               break;
             case '微信支付':
-//                window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
+              /* window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)*/
               break;
           }
 
