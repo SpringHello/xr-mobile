@@ -4,7 +4,7 @@
     <x-header>云服务器</x-header>
     <Group>
       <popup-picker title="节点选择" :data="nodeList" v-model="nodes" :columns="3"
-                    show-name></popup-picker>
+                    show-name @on-change="nodeChange"></popup-picker>
     </Group>
     <div class="box" v-if="list!=''">
       <ul>
@@ -38,11 +38,11 @@
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {Group, Cell, CellBox, XHeader, Actionsheet, Toast, PopupPicker} from 'vux'
-  function getHost(cb) {
+  function getHost(cb, zoneid) {
     let list = []
     axios.get('information/listVirtualMachines.do', {
       params: {
-        zoneId: $store.state.zone.zoneid
+        zoneId: zoneid
       }
     }).then((response) => {
       for (let type in response.data.result) {
@@ -75,16 +75,20 @@
       let cb = (list) => {
         next(vm => {
           vm.setData(list)
+          $store.state.zoneList.forEach(e => {
+            vm.nodeList.push({name: e.zonename, value: e.zoneid})
+          })
         })
       }
-      getHost(cb)
+      getHost(cb, $store.state.zone.zoneid)
     },
     data () {
       window.scrollTo(0, 0);
       return {
         //节点选择
         nodeList: [],
-        nodes: ['75218bb2-9bfe-4c87-91d4-0b90e86a8ff2'],
+        nodes: [$store.state.zone.zoneid],
+
         list: [],
         address: '',
         showOpera: false,
@@ -115,21 +119,36 @@
         this.setData(list)
       }
       this.setInt = setInterval(() => {
-        getHost(cb)
+        getHost(cb, this.nodes[0])
       }, 5000)
 
     },
     methods: {
       //节点选择
       nodeChange(){
-        this.nodeList = []
-        $store.state.zoneList.forEach(e => {
-          this.nodeList.push({name: e.zonename, value: e.zoneid})
+        this.list = []
+        axios.get('information/listVirtualMachines.do', {
+          params: {
+            zoneId: this.nodes[0]
+          }
+        }).then((response) => {
+          for (let type in response.data.result) {
+            response.data.result[type].list.forEach(host => {
+              this.list.push({
+                status: type,
+                title: host.instancename,
+                desc: host.templatename,
+                id: host.computerid,
+                price: host.cpCase,
+                password: host.connectpassword,
+                statusL: host.status
+              })
+            })
+          }
         })
       },
       // 查看详情
       push(item){
-        console.log(item)
         this.address = '/hostdetail'
         var params = {
           id: item.id,
@@ -244,6 +263,7 @@
         justify-content: space-between;
         padding: .2rem .3rem .2rem 0;
         .soures {
+          width: 78%;
           display: flex;
           align-items: center;
           .img {
