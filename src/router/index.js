@@ -69,6 +69,7 @@ import HostShop from '@/components/Shop/Host'
 import OrderConfirm from '@/components/Shop/OrderConfirm'
 import Charge from '@/components/Shop/Charge'
 import HostOrder from '@/components/Shop/Order'
+import PayResult from '@/components/Shop/PayResult'
 
 /*登录注册相关*/
 import Login from '@/components/LR/Login'
@@ -260,6 +261,7 @@ export default new Router({
         {path: 'orderConfirm', name: 'OrderConfirm', component: OrderConfirm,},
         {path: 'Charge', name: 'Charge', component: Charge,},
         {path: 'hostOrder', name: 'HostOrder', component: HostOrder,},
+        {path: 'payResult', name: 'PayResult', component: PayResult,},
       ]
     },
   ]

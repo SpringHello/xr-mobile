@@ -2,19 +2,21 @@
   <div id="pay">
     <x-header>选择支付方式</x-header>
     <div class="countdown">
-      <p>{{date}}</p>
       <p>下单后请24小时之内完成付款 超时未付款订单将被自动取消</p>
     </div>
     <Group>
       <cell title="应付金额：" :value='value' value-align="left"></cell>
-      <x-switch title="账户余额" @on-change="showYE" v-model="remaining"></x-switch>
-      <cell title="账户余额：" :value='remainder' value-align="left"></cell>
+      <x-switch :title="title" @on-change="showYE" v-model="remaining"></x-switch>
     </Group>
 
     <Group class="three">
       <p>第三方支付渠道</p>
-      <radio :options="radios" @on-change=""></radio>
+      <radio :options="radios" @on-change="" :disabled="disabled"></radio>
     </Group>
+
+    <div class="btn">
+      <button @click="pay">确认支付</button>
+    </div>
   </div>
 </template>
 
@@ -32,24 +34,22 @@
     beforeRouteEnter(to, from, next){
       next(vm => {
         vm.payData = JSON.parse(sessionStorage.getItem('payData'))
-        vm.remainder = '￥' + vm.payData.remainder
-        vm.value = '￥' + vm.payData.money
-        vm.date = new Date().getTime()
-
+        vm.remainder = '¥' + vm.payData.remainder
+        vm.value = '¥' + vm.payData.money
       })
     },
     data (){
       return {
         payData: {},
-        date: 0,
         value: '',
         remainder: '',
         remaining: true,
         //第三方支付
         radios: [
-          {icon: '', key: 'zfb', value: '支付宝'},
-          {icon: '', key: 'wx', value: '微信支付'},
-        ]
+          {icon: `url(../../assets/img/back/wx.png)`, key: 'alipay', value: '支付宝'},
+          {icon: '../../assets/img/back/wx.png', key: 'wxpay', value: '微信支付'},
+        ],
+        disabled: true,
 
       }
     },
@@ -61,7 +61,45 @@
           this.remainder = '￥  0.00'
         }
       },
+      pay(){
+        if (this.disabled) {
+          axios.get('information/payOrder.do', {
+            params: {
+              order: this.payData.order,
+              ticket: this.payData.ticket,
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.$router.push('payresult')
+              sessionStorage.setItem('status', (response.data.status).toString())
+            } else {
+              this.$router.push('payresult')
+              sessionStorage.setItem('status', (response.data.status).toString())
+            }
+          })
+        } else {
+          window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
+        }
+
+      },
     },
+    computed: {
+      title(){
+        let cost = this.remaining ? this.remainder : '¥0.0'
+        return `<span>账户余额：</span><span style="color: #E6001B;">${cost}</span>`
+      }
+    },
+    watch: {
+      remaining(){
+        if (this.remaining) {
+          if (this.payData.remainder >= this.payData.money) {
+            this.disabled = true
+          }
+        } else {
+          this.disabled = false
+        }
+      },
+    }
   }
 </script>
 
@@ -86,6 +124,21 @@
         font-size: .28rem;
         color: rgba(102, 102, 102, 1);
         line-height: .4rem;
+      }
+    }
+
+    .btn {
+      button {
+        position: absolute;
+        bottom: 0;
+        background: rgba(219, 66, 50, 1);
+        width: 100%;
+        padding: .25rem 0;
+        outline: none;
+        border: none;
+        font-size: .36rem;
+        color: rgba(255, 255, 255, 1);
+        line-height: .5rem;
       }
     }
   }

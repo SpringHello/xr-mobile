@@ -8,11 +8,12 @@
     </Group>
     <div class="box" v-if="list!=''">
       <ul>
-        <li v-for="(item,index) in list" :key="index" v-show="item.status=='open' || item.status=='close'">
+        <li v-for="(item,index) in list" :key="index"
+            v-show="item.status=='open' || item.status=='close'||item.status=='wait'">
           <div class="soures" @click="operation(item.id,item.status,item.statusL)">
             <img class="img" v-if="item.status=='open'" src="../../assets/img/back/open.png">
             <img class="img" v-if="item.status=='close'" src="../../assets/img/back/close.png">
-            <!--<img class="img" v-if="item.status=='wait'" src="../../assets/img/back/open.png">-->
+            <img class="img" v-if="item.status=='wait'" src="../../assets/img/back/open.png">
             <!--<img class="img" v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">-->
             <div>
               <p class="soures-title">名称: {{item.title}}</p>
