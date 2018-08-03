@@ -48,21 +48,21 @@
       gbFooter,
       XDialog
     },
-        beforeRouteEnter(to, from, next) {
-          if ($store.state.userInfo) {
-            let info = axios.get('activity/teamMemberList.do')
-            let start = axios.get('network/getTime.do')
-            Promise.all([info, start]).then((result) => {
-              next(vm => {
-                vm.setInfo(result)
-              })
-            }).catch((error) => {
-              console.log(error)
-            })
-          } else{
-            next({path: '/ruicloud/groupBooking'})
-          }
-        },
+    beforeRouteEnter(to, from, next) {
+      if ($store.state.userInfo) {
+        let info = axios.get('activity/teamMemberList.do')
+        let start = axios.get('network/getTime.do')
+        Promise.all([info, start]).then((result) => {
+          next(vm => {
+            vm.setInfo(result)
+          })
+        }).catch((error) => {
+          console.log(error)
+        })
+      } else {
+        next({path: '/ruicloud/groupBooking'})
+      }
+    },
     data() {
       return {
         paySuccess: false,
@@ -71,8 +71,7 @@
         endTime: 0,
         activeLink: '',
         participationPersonColumns: ['云朵', '加入时间', '状态'],
-        participationPersonData: [
-        ],
+        participationPersonData: [],
         hostDuration: 0,
       }
     },
@@ -121,7 +120,7 @@
         font-size: .24rem;
         font-family: "Microsoft YaHei", "微软雅黑";
         color: rgba(102, 102, 102, 1);
-        >span{
+        > span {
           color: #5893FF;
         }
       }
