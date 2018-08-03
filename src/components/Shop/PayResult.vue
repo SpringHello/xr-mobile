@@ -4,7 +4,7 @@
       <img src="../../assets/img/back/success.png">
       <h3>支付成功</h3>
       <p>请稍等，正在为您配置资源…</p>
-      <router-link to="bhost">查看资源</router-link>
+      <router-link :to="resorceList">查看资源</router-link>
     </div>
     <div v-else>
       <img src="../../assets/img/back/fail.png">
@@ -23,7 +23,8 @@
     },
     data () {
       return {
-        status: sessionStorage.getItem('status')
+        status: sessionStorage.getItem('status'),
+        resorceList: sessionStorage.getItem('resorceList')
       }
     }
   }

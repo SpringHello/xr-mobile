@@ -16,7 +16,7 @@
           <li>计费类型：{{orderData.类型}}</li>
           <li>购买时长：{{orderData.时长}}</li>
           <li>购买数量：{{orderData.数量}}</li>
-          <li>原价：{{orderData.原价}}</li>
+          <li>原价：{{(orderData.原价).toFixed(2)}}</li>
         </ul>
       </div>
     </div>
@@ -81,7 +81,9 @@
         showTickets: false,
         payMoney: 0,
         orderNum: '',
-        ticketId: ''
+        ticketId: '',
+        //购买title
+        titleName: '',
       }
     },
     beforeRouteEnter(to, from, next){
@@ -101,6 +103,7 @@
       setOrder(response){
         if (response.status == 200 && response.data.status == 1) {
           this.orderData = JSON.parse(response.data.result.data[0].display)
+          this.titleName = this.orderData.订单类型
           this.orderNum = response.data.result.data[0].ordernumber
         }
         this.payMoney = sessionStorage.getItem('countOrder')
@@ -146,7 +149,8 @@
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             sessionStorage.setItem('payData', JSON.stringify(response.data.result))
-            this.$router.push('hostOrder')
+            sessionStorage.setItem('titleName', this.titleName)
+            this.$router.push('shopOrder')
           }
         })
       },
