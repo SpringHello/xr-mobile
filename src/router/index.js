@@ -66,9 +66,10 @@ import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 // 购买页面
 import HostShop from '@/components/Shop/Host'
+import DiskShop from '@/components/Shop/Disk'
 import OrderConfirm from '@/components/Shop/OrderConfirm'
 import Charge from '@/components/Shop/Charge'
-import HostOrder from '@/components/Shop/Order'
+import ShopOrder from '@/components/Shop/Order'
 import PayResult from '@/components/Shop/PayResult'
 
 /*登录注册相关*/
@@ -258,9 +259,10 @@ export default new Router({
         },
         // 所有购买页面
         {path: 'hostShop', name: 'HostShop', component: HostShop,},
+        {path: 'diskShop', name: 'DiskShop', component: DiskShop,},
         {path: 'orderConfirm', name: 'OrderConfirm', component: OrderConfirm,},
         {path: 'Charge', name: 'Charge', component: Charge,},
-        {path: 'hostOrder', name: 'HostOrder', component: HostOrder,},
+        {path: 'shopOrder', name: 'ShopOrder', component: ShopOrder,},
         {path: 'payResult', name: 'PayResult', component: PayResult,},
       ]
     },

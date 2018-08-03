@@ -74,9 +74,9 @@
       <Group>
         <cell title="网络与带宽"></cell>
 
-        <popup-picker title="私有云VPC" :data="vpcList" v-model="vpc" :columns="3" show-name></popup-picker>
+        <popup-picker title="私有云VPC" :data="vpcList" v-model="vpc" :columns="2" show-name></popup-picker>
 
-        <popup-picker title="网卡" :data="networkCardList" v-model="networkCard" :columns="3" show-name></popup-picker>
+        <popup-picker title="网卡" :data="networkCardList" v-model="networkCard" :columns="2" show-name></popup-picker>
 
         <checklist label-position="left" :options="IP"
                    v-model="checkIp"></checklist>
@@ -117,7 +117,7 @@
       </Group>
       <div class="bottom">
         <p>配置价格：<span>¥ {{Cprices}}</span></p>
-        <button>立即购买</button>
+        <button @click="CtoOrder">立即购买</button>
       </div>
     </div>
   </div>
@@ -583,10 +583,10 @@
         memory: ['1'],
         //私有云VPC
         vpcList: [],
-        vpc: ['no'],
+        vpc: [],
         //网卡
         networkCardList: [],
-        networkCard: ['no'],
+        networkCard: [],
         //带宽
         bandwidth: 1,
         //数据盘
@@ -617,9 +617,6 @@
           this.queryCprices();
         }
       },
-      //实际计费
-      //包年包月
-      //镜像系统
       //配置
       configChange(){
         this.queryQprices();
@@ -712,6 +709,7 @@
         }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
               this.vpcList = []
+              this.vpc = [response.data.result[0].vpcid]
               response.data.result.forEach(e => {
                   this.vpcList.push({name: e.vpcname, value: e.vpcid,})
                 }
@@ -729,6 +727,7 @@
         }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
               this.networkCardList = []
+              this.networkCard = [response.data.result[0].ipsegmentid]
               response.data.result.forEach(e => {
                   this.networkCardList.push({name: e.name, value: e.ipsegmentid,})
                 }
@@ -832,13 +831,54 @@
           memory: param[1],
           bandWidth: param[2],
           rootDiskType: param[4],
-          networkId: this.networkCard[0],
-          vpcId: this.vpc[0]
+          networkId: 'no',
+          vpcId: 'no'
         }
-        /* if (this.hostmsg[0] == 'custom') {
-         params.VMName = this.hostName
-         params.password = this.loginPassword
-         }*/
+        if (this.hostmsg[0] == 'custom') {
+          params.VMName = this.hostName
+          params.password = this.loginPassword
+        }
+        axios.get('information/deployVirtualMachine.do', {params}).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            sessionStorage.setItem('countOrder', this.Qprices.toString())
+            this.$router.push('orderconfirm')
+          } else {
+            this.$vux.toast.text(response.data.message, 'middle')
+          }
+        })
+      },
+      //自定义购买（custom）
+      CtoOrder(){
+        if (this.charges.length != 0) {
+          var times = this.charges[0].split('#')
+        }
+        let diskSize = ''
+        let diskType = ''
+        this.diskList.forEach(disk => {
+          diskType += disk.value[0] + ','
+          diskSize += disk.value[1] + ','
+        })
+
+        let params = {
+          zoneId: this.regional[0],
+          timeType: this.str == 'current' ? 'current' : times[0],
+          timeValue: this.str == 'current' ? '1' : times[1],
+          templateId: this.mirrorCustom[1],
+          isAutoRenew: this.renewal ? '1' : '0',
+          count: '1',
+          cpuNum: this.cores[0],
+          memory: this.memory[0],
+          bandWidth: 1,
+          rootDiskType: this.systemDisk[0],
+          networkId: this.networkCard[0],
+          vpcId: this.vpc[0],
+          diskType,
+          diskSize,
+        }
+        if (this.hostmsg[0] == 'custom') {
+          params.VMName = this.hostName
+          params.password = this.loginPassword
+        }
         axios.get('information/deployVirtualMachine.do', {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             sessionStorage.setItem('countOrder', this.Qprices.toString())
@@ -877,6 +917,7 @@
       },
       regional(){
         this.vpcChange();
+        this.networkCardChange();
       },
       genre(val){
         switch (val[0]) {

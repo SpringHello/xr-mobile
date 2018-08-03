@@ -54,7 +54,8 @@
         radios: ['支付宝支付', '微信支付'],
         disabled: true,
         radioValue: '',
-
+        //购买title跳转到资源列表
+        resorceList: sessionStorage.getItem('titleName') == 'host' ? 'bhost' : sessionStorage.getItem('titleName') == 'disk' ? 'bdisk' : 'belasticip'
       }
     },
     methods: {
@@ -82,6 +83,7 @@
             if (response.status == 200 && response.data.status == 1) {
               this.$router.push('payresult')
               sessionStorage.setItem('status', (response.data.status).toString())
+              sessionStorage.setItem('resorceList', this.resorceList)
             } else {
               this.$router.push('payresult')
               sessionStorage.setItem('status', (response.data.status).toString())
