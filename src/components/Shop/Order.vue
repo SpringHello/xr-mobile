@@ -95,7 +95,14 @@
               window.open(`zfb/appzf.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
               break;
             case '微信支付':
-              /* window.open(`zfb/alipayapi.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)*/
+              axios.get('wx/wxpayapi.do', {
+                params: {
+                  total_fee: this.payData.money,
+                  type: 'h5'
+                }
+              }).then(response => {
+                window.open(response.data.result.codeUrl)
+              })
               break;
           }
 
