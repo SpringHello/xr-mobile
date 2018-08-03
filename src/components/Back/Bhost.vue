@@ -38,6 +38,17 @@
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {Group, Cell, CellBox, XHeader, Actionsheet, Toast, PopupPicker} from 'vux'
+  class Hello {
+    constructor() {
+      this.name = 'name';s
+    }
+
+    public name: ''
+
+    hi() {
+
+    }
+  }
   function getHost(cb, zoneid) {
     let list = []
     axios.get('information/listVirtualMachines.do', {
@@ -126,12 +137,12 @@
     methods: {
       //节点选择
       nodeChange(){
-        this.list = []
         axios.get('information/listVirtualMachines.do', {
           params: {
             zoneId: this.nodes[0]
           }
         }).then((response) => {
+          this.list = []
           for (let type in response.data.result) {
             response.data.result[type].list.forEach(host => {
               this.list.push({

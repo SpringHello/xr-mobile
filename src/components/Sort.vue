@@ -2,7 +2,7 @@
   <div>
     <x-header :left-options="{showBack: false}">活动</x-header>
     <div class="active-box">
-      <router-link v-for="(item,index) in actives" :key="index" :to="item.url">
+      <router-link v-for="(item,index) in actives" :key="index" :to="item.url||''">
         <div class="active-item">
           <img :src="item.mobileImgPathUrl" class="item-img">
           <h6>{{item.name}}</h6>

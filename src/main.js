@@ -32,8 +32,9 @@ import {AlertPlugin} from 'vux'
 
 Vue.use(AlertPlugin)
 
-import {WechatPlugin} from 'vux'
+//import {WechatPlugin} from 'vux'
 
+/*
 Vue.use(WechatPlugin)
 
 Vue.wechat.config({
@@ -44,6 +45,7 @@ Vue.wechat.config({
   signature: '测试',// 必填，签名，
   jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，
 })
+*/
 
 import './assets/less/main.less'
 import './assets/less/public.less'
