@@ -2,6 +2,9 @@
   <!--资源详情页面-->
   <div class="resouredetail">
     <x-header>弹性IP</x-header>
+    <Group>
+      <popup-picker title="节点选择" :data="nodeList" v-model="nodes" :columns="3" show-name></popup-picker>
+    </Group>
     <div class="box" v-if="list!=''">
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
@@ -23,19 +26,43 @@
 <script>
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import {Group, Cell, CellBox, XHeader} from 'vux'
+  import {Group, Cell, CellBox, XHeader, PopupPicker} from 'vux'
   export default {
     components: {
       Group,
       Cell,
       CellBox,
-      XHeader
+      XHeader,
+      PopupPicker
+    },
+    watch: {
+      nodes(){
+        axios.get('network/listPublicIp.do', {
+          params: {
+            zoneId: this.nodes[0]
+          }
+        }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.setData(response.data.result)
+            }
+          }
+        )
+      },
     },
     data () {
       window.scrollTo(0, 0);
+      let nodeList = []
+      let nodes = []
+      $store.state.zoneList.forEach(e => {
+        nodeList.push({name: e.zonename, value: e.zoneid})
+      })
+      nodes = [$store.state.zone.zoneid]
       return {
         list: [],
         address: '',
+        //节点选择
+        nodeList,
+        nodes,
       }
     },
     methods: {
@@ -63,6 +90,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
+    margin-top: .2rem;
     ul {
       background: rgba(255, 255, 255, 1);
       border-bottom: 1px solid #e7e7e7;
