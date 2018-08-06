@@ -67,6 +67,7 @@ import Newdetail from '@/components/Back/Newdetail'//消息详情
 // 购买页面
 import HostShop from '@/components/Shop/Host'
 import DiskShop from '@/components/Shop/Disk'
+import ElasticIPShop from '@/components/Shop/ElasticIP'
 import OrderConfirm from '@/components/Shop/OrderConfirm'
 import Charge from '@/components/Shop/Charge'
 import ShopOrder from '@/components/Shop/Order'
@@ -260,6 +261,7 @@ export default new Router({
         // 所有购买页面
         {path: 'hostShop', name: 'HostShop', component: HostShop,},
         {path: 'diskShop', name: 'DiskShop', component: DiskShop,},
+        {path: 'elasticIPShop', name: 'ElasticIPShop', component: ElasticIPShop,},
         {path: 'orderConfirm', name: 'OrderConfirm', component: OrderConfirm,},
         {path: 'Charge', name: 'Charge', component: Charge,},
         {path: 'shopOrder', name: 'ShopOrder', component: ShopOrder,},

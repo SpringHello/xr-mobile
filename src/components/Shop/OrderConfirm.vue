@@ -16,7 +16,7 @@
           <li>计费类型：{{orderData.类型}}</li>
           <li>购买时长：{{orderData.时长}}</li>
           <li>购买数量：{{orderData.数量}}</li>
-          <li>原价：{{(orderData.原价).toFixed(2)}}</li>
+          <li>原价：{{orderData.原价}}</li>
         </ul>
       </div>
     </div>
