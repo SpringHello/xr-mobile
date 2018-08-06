@@ -61,6 +61,7 @@ import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
 import Elasticipdetail from '@/components/Back/Elasticipdetail'//弹性IP详情
+import Balancedetail from '@/components/Back/Balancedetail'//负载均衡详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
@@ -150,6 +151,7 @@ export default new Router({
         {path: '/Hostdetail', name: 'hostDetail', component: Hostdetail},
         {path: '/Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: '/Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
+        {path: '/Balancedetail', name: 'Balancedetail', component: Balancedetail},
         {path: '/Newscenter', name: 'Newscenter', component: Newscenter},
         {path: '/Newdetail', name: 'Newdetail', component: Newdetail},
         {path: '/active_1', name: 'active_1', component: Active1},
