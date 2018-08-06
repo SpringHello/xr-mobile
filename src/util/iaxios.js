@@ -48,8 +48,9 @@ axios.interceptors.request.use(macIntercept)
 /*axios.defaults.baseURL = 'https://zschj.xrcloud.net/ruicloud/'
  axios.defaults.withCredentials = true*/
 
-axios.defaults.baseURL = 'https://zschj.xrcloud.net/ruicloud/'
-axios.defaults.withCredentials = true
+axios.defaults.baseURL = 'https://www.xrcloud.net/ruicloud/'
+//axios.defaults.withCredentials = true
+
 
 export default axios
 
