@@ -38,17 +38,17 @@
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {Group, Cell, CellBox, XHeader, Actionsheet, Toast, PopupPicker} from 'vux'
-  class Hello {
-    constructor() {
-      this.name = 'name';s
-    }
+  /* class Hello {
+   constructor() {
+   this.name = 'name';s
+   }
 
-    public name: ''
+   public name: ''
 
-    hi() {
+   hi() {
 
-    }
-  }
+   }
+   }*/
   function getHost(cb, zoneid) {
     let list = []
     axios.get('information/listVirtualMachines.do', {
