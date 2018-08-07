@@ -22,7 +22,7 @@
     </Group>
 
     <Group>
-      <cell title="负载均衡主机" is-link class="basic"></cell>
+      <cell title="负载均衡主机" is-link class="basic" @click.native="balhost"></cell>
     </Group>
   </div>
 </template>
@@ -40,6 +40,18 @@
       return {
         balanceData,
       }
+    },
+    methods: {
+      //跳转负载均衡主机
+      balhost(){
+        sessionStorage.setItem('roleId', this.balanceData.loadbalanceroleid || this.balanceData.lbid)
+        sessionStorage.setItem('loadbalanceType', this.balanceData._internal ? '' : '1')
+        sessionStorage.setItem('internalLoadbalance', this.balanceData._internal ? '1' : '')
+        sessionStorage.setItem('networkid', this.balanceData.networkid)
+        sessionStorage.setItem('loadbalanceId', this.balanceData.loadbalanceroleid)
+        this.$router.push('Balancehost')
+      },
+
     }
   }
 </script>
