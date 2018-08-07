@@ -2,7 +2,7 @@
   <div id="balance-host">
     <x-header></x-header>
     <Group>
-      <cell v-for="(item,index) in balHostData" :key="index" :title="item.computername" inline-desc="正常"></cell>
+      <cell v-for="(item,index) in hostList" :key="index" :title="item.computername" inline-desc="正常"></cell>
     </Group>
     <Group>
       <popup-picker title="添加主机" :data="addHost" v-model="host" @on-change="hostBind"></popup-picker>
@@ -24,6 +24,8 @@
     data(){
       return {
         balHostData: JSON.parse(sessionStorage.getItem('databal')),
+        //主机列表
+        hostList: [],
         //添加主机
         addHost: [],
         host: [],
@@ -39,7 +41,7 @@
             loadbalanceType: this.balHostData.type == 'internalLoadbalance' ? '' : '1'
           }
         }).then(response => {
-          this.balHostData = response.data.result
+          this.hostList = response.data.result
         })
       },
       // 绑定主机列表
@@ -75,6 +77,7 @@
             _t: new Date().getTime()
           }
         }
+
         axios.get(url, {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.$router.push('balancedetail')
