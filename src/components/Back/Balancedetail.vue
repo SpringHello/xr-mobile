@@ -44,11 +44,7 @@
     methods: {
       //跳转负载均衡主机
       balhost(){
-        sessionStorage.setItem('roleId', this.balanceData.loadbalanceroleid || this.balanceData.lbid)
-        sessionStorage.setItem('loadbalanceType', this.balanceData._internal ? '' : '1')
-        sessionStorage.setItem('internalLoadbalance', this.balanceData._internal ? '1' : '')
-        sessionStorage.setItem('networkid', this.balanceData.networkid)
-        sessionStorage.setItem('loadbalanceId', this.balanceData.loadbalanceroleid)
+        sessionStorage.setItem('databal', JSON.stringify(this.balanceData))
         this.$router.push('Balancehost')
       },
 

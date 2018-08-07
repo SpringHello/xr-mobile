@@ -5,7 +5,7 @@
       <cell v-for="(item,index) in balHostData" :key="index" :title="item.computername" inline-desc="正常"></cell>
     </Group>
     <Group>
-      <popup-picker title="添加主机" :data="addHost" v-model="host"></popup-picker>
+      <popup-picker title="添加主机" :data="addHost" v-model="host" @on-change="hostBind"></popup-picker>
     </Group>
   </div>
 </template>
@@ -21,39 +21,50 @@
       XHeader,
       PopupPicker
     },
-    beforeRouteEnter(to, from, next){
-      //查询该负载均衡下的主机
-      var balhost = axios.get('loadbalance/listVmByRoleId.do', {
-        params: {
-          zoneId: $store.state.zone.zoneid,
-          roleId: sessionStorage.getItem('roleId'),
-          loadbalanceType: sessionStorage.getItem('loadbalanceType')
-        }
-      })
-      // 负载均衡绑定主机
-      var host = axios.get('network/showLoadBalanceVM.do', {
-        params: {
-          zoneId: $store.state.zone.zoneid,
-          netwrokId: sessionStorage.getItem('networkid'),
-          internalLoadbalance: sessionStorage.getItem('internalLoadbalance'),
-          loadbalanceId: sessionStorage.getItem('loadbalanceId')
-        }
-      })
-      Promise.all([balhost, host]).then(response => {
-        next(vm => {
-          vm.balHostData = response[0].data.result
-          vm.addHost = response[1].data.result
-        })
-      })
-    },
     data(){
       return {
-        balHostData: [],
+        balHostData: JSON.parse(sessionStorage.getItem('databal')),
         //添加主机
         addHost: [],
         host: [],
       }
     },
+    methods: {
+      //查询该负载均衡下的主机
+      balhost(){
+        axios.get('loadbalance/listVmByRoleId.do', {
+          params: {
+            zoneId: $store.state.zone.zoneid,
+            roleId: this.balHostData.loadbalanceroleid || this.balHostData.lbid,
+            loadbalanceType: this.balHostData._internal ? '' : '1'
+          }
+        }).then(response => {
+          this.balHostData = response.data.result
+        })
+      },
+      // 负载均衡绑定主机
+      host(){
+        axios.get('network/showLoadBalanceVM.do', {
+          params: {
+            zoneId: $store.state.zone.zoneid,
+            netwrokId: this.balHostData.networkid,
+            internalLoadbalance: this.balHostData._internal ? '1' : '',
+            loadbalanceId: this.balHostData.loadbalanceroleid
+          }
+        }).then(response => {
+          response.data.result.forEach(e => {
+            this.addHost.push({name: e.computername, value: e.computerid})
+          })
+        })
+      },
+      //添加主机
+      hostBind(){
+      },
+    },
+    created(){
+      this.balhost()
+      this.host()
+    }
   }
 </script>
 
