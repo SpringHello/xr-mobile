@@ -42,8 +42,8 @@
           this.balHostData = response.data.result
         })
       },
-      // 负载均衡绑定主机
-      host(){
+      // 绑定主机列表
+      hosted(){
         axios.get('network/showLoadBalanceVM.do', {
           params: {
             zoneId: $store.state.zone.zoneid,
@@ -62,8 +62,8 @@
       },
     },
     created(){
-      this.balhost()
-      this.host()
+      this.balhost();
+      this.hosted();
     }
   }
 </script>

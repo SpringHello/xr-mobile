@@ -149,7 +149,7 @@
       },
       // 查看详情
       push(item){
-        this.address = '/hostdetail'
+        this.address = '/ruicloud/hostdetail'
         var params = {
           id: item.id,
           name: item.title,
