@@ -36,7 +36,7 @@
           params: {
             zoneId: $store.state.zone.zoneid,
             roleId: this.balHostData.loadbalanceroleid || this.balHostData.lbid,
-            loadbalanceType: this.balHostData._internal ? '' : '1'
+            loadbalanceType: this.balHostData.type == 'internalLoadbalance' ? '' : '1'
           }
         }).then(response => {
           this.balHostData = response.data.result
@@ -48,8 +48,8 @@
           params: {
             zoneId: $store.state.zone.zoneid,
             netwrokId: this.balHostData.networkid,
-            internalLoadbalance: this.balHostData._internal ? '1' : '',
-            loadbalanceId: this.balHostData.loadbalanceroleid
+            internalLoadbalance: this.balHostData.type == 'internalLoadbalance' ? '1' : '',
+            loadbalanceId: this.balHostData.lbid || this.balHostData.loadbalanceroleid
           }
         }).then(response => {
           response.data.result.forEach(e => {
@@ -59,6 +59,27 @@
       },
       //添加主机
       hostBind(){
+        let url = '', params = {}
+        if (this.balHostData.type == 'internalLoadbalance') {
+          url = 'loadbalance/assignToInternalLoadBalancerRule.do'
+          params = {
+            VMIds: this.host[0],
+            lbId: this.balHostData.lbid,
+            _t: new Date().getTime()
+          }
+        } else {
+          url = 'loadbalance/assignToLoadBalancerRule.do'
+          params = {
+            VMIds: this.host[0],
+            roleId: this.balHostData.loadbalanceroleid,
+            _t: new Date().getTime()
+          }
+        }
+        axios.get(url, {params}).then(response => {
+          if (response.status == 200 && response.data.status == 1) {
+            this.$router.push('balancedetail')
+          }
+        })
       },
     },
     created(){
