@@ -103,10 +103,11 @@
               axios.get('wx/wxpayapi.do', {
                 params: {
                   total_fee: this.payData.money,
-                  type: 'h5'
+                  type: 'JSAPI',
+                  code: sessionStorage.getItem('wx-code')
                 }
               }).then(response => {
-                console.log(response)
+                alert(response)
                 function onBridgeReady() {
                   WeixinJSBridge.invoke(
                     'getBrandWCPayRequest', {

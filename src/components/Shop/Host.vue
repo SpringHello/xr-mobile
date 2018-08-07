@@ -868,7 +868,7 @@
           count: '1',
           cpuNum: this.cores[0],
           memory: this.memory[0],
-          bandWidth: 1,
+          bandWidth: this.bandwidth,
           rootDiskType: this.systemDisk[0],
           networkId: this.networkCard[0],
           vpcId: this.vpc[0],
@@ -881,7 +881,7 @@
         }
         axios.get('information/deployVirtualMachine.do', {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            sessionStorage.setItem('countOrder', this.Qprices.toString())
+            sessionStorage.setItem('countOrder', this.Cprices.toString())
             this.$router.push('orderconfirm')
           } else {
             this.$vux.toast.text(response.data.message, 'middle')

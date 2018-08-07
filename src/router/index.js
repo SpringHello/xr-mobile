@@ -61,12 +61,15 @@ import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
 import Elasticipdetail from '@/components/Back/Elasticipdetail'//弹性IP详情
+import Balancedetail from '@/components/Back/Balancedetail'//负载均衡详情
+import Balancehost from '@/components/Back/Balance-host'//负载均衡详情
 import Newscenter from '@/components/Back/Newscenter'//消息中心
 import Newdetail from '@/components/Back/Newdetail'//消息详情
 
 // 购买页面
 import HostShop from '@/components/Shop/Host'
 import DiskShop from '@/components/Shop/Disk'
+import ElasticIPShop from '@/components/Shop/ElasticIP'
 import OrderConfirm from '@/components/Shop/OrderConfirm'
 import Charge from '@/components/Shop/Charge'
 import ShopOrder from '@/components/Shop/Order'
@@ -260,6 +263,7 @@ export default new Router({
         // 所有购买页面
         {path: 'hostShop', name: 'HostShop', component: HostShop,},
         {path: 'diskShop', name: 'DiskShop', component: DiskShop,},
+        {path: 'elasticIPShop', name: 'ElasticIPShop', component: ElasticIPShop,},
         {path: 'orderConfirm', name: 'OrderConfirm', component: OrderConfirm,},
         {path: 'Charge', name: 'Charge', component: Charge,},
         {path: 'shopOrder', name: 'ShopOrder', component: ShopOrder,},
