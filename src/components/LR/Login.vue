@@ -101,7 +101,7 @@
                 }
               }
             )
-            this.$router.go(-1)
+            this.$router.push('home')
           } else {
             this.imgSrc = `user/getKaptchaImage.do?t=${new Date().getTime()}`
             this.$vux.toast.text(response.data.message)

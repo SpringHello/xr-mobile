@@ -83,7 +83,7 @@
         orderNum: '',
         ticketId: '',
         //购买title
-        titleName: '',
+        titleName: ''
       }
     },
     beforeRouteEnter(to, from, next){
@@ -98,6 +98,7 @@
       })
     },
     created(){
+
     },
     methods: {
       setOrder(response){
