@@ -9,13 +9,13 @@
         {{item.title}}
       </tab-item>
     </tab>
-    <div v-show="indexs" class="work-item">
+    <div class="work-item">
       <ul>
         <li v-for="(item,index) in worksItem" :key="index" @click="checkOrder(item.id,item.subdescription)">
           <p>{{item.title}}</p>
           <div>
             <span>{{type=='operating'?'处理中':'已关闭'}}</span>
-            <span>提交时间：{{time}}</span>
+            <span>提交时间：{{item.time}}</span>
           </div>
         </li>
       </ul>
@@ -40,21 +40,20 @@
       axios.get('order/getOrders.do', {
         params: {
           currentPage: 1,
-          pageSize: 10
+          pageSize: 10,
+          type: 'operating'
         }
       }).then(response => {
         next(vm => {
-//          console.log(response.data.result)
+          vm.setData(response.data.result)
         })
       })
     },
     data (){
       window.scrollTo(0, 0);
       return {
-        indexs: false,
         type: '',
         tabItems: [
-          {title: '全部', type: '',},
           {title: '进行中', type: 'operating',},
           {title: '已关闭', type: 'closing',}
         ],
@@ -72,7 +71,6 @@
     methods: {
       //导航点击事件
       workClick(type){
-        this.indexs = true
         switch (type) {
           case 'operating':
             this.type = 'operating'
@@ -92,7 +90,7 @@
             this.worksItem = response.data.result
             response.data.result.forEach(item => {
               item.puddate = parseInt(item.puddate)
-              this.time = new Date(item.puddate).format('yyyy/MM/dd  hh:mm:ss')
+              item.time = new Date(item.puddate).format('yyyy/MM/dd  hh:mm:ss')
             })
           }
         })
@@ -124,6 +122,14 @@
           sessionStorage.setItem('subdescription', this.subdescription)
           this.$router.push('workdetail')
         }
+      },
+      setData(result){
+        result.forEach(item => {
+          item.puddate = parseInt(item.puddate)
+          item.time = new Date(item.puddate).format('yyyy/MM/dd  hh:mm:ss')
+        })
+        this.worksItem = result
+        this.type = 'operating'
       }
     }
   }
@@ -132,13 +138,13 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .work-item {
     margin: .2rem 0 1rem 0;
-    border-top: 1px solid #D8D8D8;
+    border-top: 1px solid #e7e7e7;
     ul {
       li {
         padding: .24rem 0 .25rem .3rem;
         list-style: none;
         background: rgba(255, 255, 255, 1);
-        border-bottom: 1px solid #D8D8D8;
+        border-bottom: 1px solid #e7e7e7;
         p {
           font-size: .32rem;
           color: #000;

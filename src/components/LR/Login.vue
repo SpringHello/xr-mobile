@@ -31,7 +31,7 @@
           <button class="nextStep" @click.prevent="login">登录</button>
         </div>
         <div class="form-item" style="border:none;text-align: right;">
-          <router-link to="/reset" style="font-size: .28rem;color:#4990E2">忘记密码</router-link>
+          <router-link to="reset" style="font-size: .28rem;color:#4990E2">忘记密码</router-link>
           <div style="clear:both"></div>
         </div>
       </form>

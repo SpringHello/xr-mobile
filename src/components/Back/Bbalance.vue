@@ -7,8 +7,8 @@
     </Group>
     <div class="box" v-if="list!=''">
       <Group>
-        <cell v-for="(item,index) in list" :key="index" :title="item.name" is-link
-              :inline-desc="item._internal ? '类型:内网负载均衡' : '类型:公网负载均衡'"
+        <cell v-for="(item,index) in list" :key="index" :title="item.name ||item.lbname" is-link
+              :inline-desc="item.type=='internalLoadbalance' ? '类型: 内网负载均衡' : '类型: 公网负载均衡'"
               @click.native="push(item)"></cell>
       </Group>
     </div>
@@ -63,6 +63,7 @@
         this.list = []
         for (var type in value) {
           value[type].forEach(e => {
+            e.type = type
             this.list.push(e)
           })
         }

@@ -65,7 +65,7 @@
     }
     .bom {
       margin-top: .24rem;
-      border-top: 1px solid #D9D9D9;
+      border-top: 1px solid #e7e7e7;
       li {
         font-size: .28rem;
         color: rgba(153, 153, 153, 1);

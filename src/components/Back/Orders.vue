@@ -231,7 +231,7 @@
       }
       .btns {
         margin-top: .24rem;
-        border-top: 1px solid rgba(217, 217, 217, 1);
+        border-top: 1px solid #e7e7e7;
         text-align: right;
       }
     }

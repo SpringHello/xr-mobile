@@ -15,7 +15,8 @@
           <input type="text" v-model="questionnaire.uname" placeholder="请输入您的姓名" autocomplete="off" class="main-input">
         </div>
         <div class="form-item">
-          <input type="text" v-model="questionnaire.uphone" placeholder="请输入电话号码" autocomplete="off" class="main-input">
+          <input type="number" v-model="questionnaire.uphone" placeholder="请输入电话号码" autocomplete="off"
+                 class="main-input">
         </div>
         <div class="form-item" style="position: relative">
           <input type="text" v-model="questionnaire.company" placeholder="请输入公司名称" autocomplete="off"
