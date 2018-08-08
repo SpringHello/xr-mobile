@@ -17,7 +17,7 @@
     </div>
     <div v-show="index==0" class="qucikly">
       <Group>
-        <cell title="主机规格选择"></cell>
+        <cell title="主机规格选择" class="title"></cell>
 
         <popup-picker title="镜像类型" :data="mirrorTypeList" v-model="mirrorType" :columns="3" show-name
                       @on-change="changeType"></popup-picker>
@@ -25,15 +25,14 @@
         <popup-picker title="镜像系统" :data="mirrorCustomList" v-model="mirrorCustom" :columns="3"
                       @on-change="mirrorValue" show-name></popup-picker>
 
-        <checklist label-position="left" :options="IP"
-                   v-model="checkIp"></checklist>
+        <checklist label-position="left" :options="IP" v-model="checkIp" class="ip"></checklist>
 
         <popup-picker title="配置" :data="configs" v-model="config" :columns="2" show-name
                       @on-change="configChange"></popup-picker>
       </Group>
 
       <Group>
-        <cell title="登录设置"></cell>
+        <cell title="登录设置" class="title"></cell>
 
         <popup-picker title="主机信息" :data="hostMsg" v-model="hostmsg" :columns="3" show-name></popup-picker>
 
@@ -55,7 +54,7 @@
     </div>
     <div v-show="index==1" class="custom">
       <Group>
-        <cell title="主机规格选择"></cell>
+        <cell title="主机规格选择" class="title"></cell>
         <popup-picker title="类型" :data="genreList" v-model="genre" :columns="3" show-name></popup-picker>
 
         <popup-picker title="镜像类型" :data="mirrorTypeList" v-model="mirrorType" :columns="3" show-name
@@ -72,14 +71,14 @@
       </Group>
 
       <Group>
-        <cell title="网络与带宽"></cell>
+        <cell title="网络与带宽" class="title"></cell>
 
         <popup-picker title="私有云VPC" :data="vpcList" v-model="vpc" :columns="2" show-name></popup-picker>
 
         <popup-picker title="网卡" :data="networkCardList" v-model="networkCard" :columns="2" show-name></popup-picker>
 
         <checklist label-position="left" :options="IP"
-                   v-model="checkIp"></checklist>
+                   v-model="checkIp" class="ip"></checklist>
         <x-number title="带宽(MB)" v-model="bandwidth" :min="1" :max="100" class="number" button-style="round"
                   :fillable='true' v-show="checkIp[0]"></x-number>
       </Group>
@@ -100,7 +99,7 @@
 
 
       <Group>
-        <cell title="登录设置"></cell>
+        <cell title="登录设置" class="title"></cell>
 
         <popup-picker title="主机信息" :data="hostMsg" v-model="hostmsg" :columns="3" show-name></popup-picker>
 
@@ -981,43 +980,46 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-  .public {
-    p {
-      padding: .31rem 0 0 .3rem;
-      font-size: .24rem;
-      color: rgba(153, 153, 153, 1);
-      line-height: .33rem;
-    }
-  }
+  #shop-host {
+    margin-bottom: 1rem;
 
-  .bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: #FFF;
-    position: fixed;
-    bottom: 0;
-    p {
-      padding: .32rem 0 .32rem .3rem;
-      font-size: .28rem;
-      color: rgba(0, 0, 0, 1);
-      line-height: .36rem;
-      span {
-        font-size: .36rem;
-        color: rgba(230, 0, 27, 1);
+    .public {
+      p {
+        padding: .31rem 0 0 .3rem;
+        font-size: .24rem;
+        color: rgba(153, 153, 153, 1);
+        line-height: .33rem;
       }
     }
-    button {
-      font-size: .32rem;
-      color: rgba(255, 255, 255, 1);
-      line-height: .36rem;
-      outline: none;
-      border: 0;
-      background: rgba(219, 66, 50, 1);
-      padding: .33rem .77rem .31rem .78rem;
+
+    .bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      background-color: #FFF;
+      position: fixed;
+      bottom: 0;
+      p {
+        padding: .32rem 0 .32rem .3rem;
+        font-size: .28rem;
+        color: rgba(0, 0, 0, 1);
+        line-height: .36rem;
+        span {
+          font-size: .36rem;
+          color: rgba(230, 0, 27, 1);
+        }
+      }
+      button {
+        font-size: .32rem;
+        color: rgba(255, 255, 255, 1);
+        line-height: .36rem;
+        outline: none;
+        border: 0;
+        background: rgba(219, 66, 50, 1);
+        padding: .33rem .77rem .31rem .78rem;
+      }
     }
+
   }
-
-
 </style>
 

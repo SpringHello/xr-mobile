@@ -138,13 +138,13 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .work-item {
     margin: .2rem 0 1rem 0;
-    border-top: 1px solid #D8D8D8;
+    border-top: 1px solid #e7e7e7;
     ul {
       li {
         padding: .24rem 0 .25rem .3rem;
         list-style: none;
         background: rgba(255, 255, 255, 1);
-        border-bottom: 1px solid #D8D8D8;
+        border-bottom: 1px solid #e7e7e7;
         p {
           font-size: .32rem;
           color: #000;

@@ -425,6 +425,9 @@ html {
 
 //所有购买页面
 #shop-host {
+  .weui-cell {
+    height: .88rem;
+  }
   .weui-cells {
     margin-top: .2rem;
   }
@@ -434,8 +437,10 @@ html {
       color: #333;
     }
   }
-  .weui-cells .vux-cell-box .weui-cell__hd {
-    font-size: .32rem;
+  .vux-cell-box {
+    .weui-cell__hd {
+      font-size: .32rem;
+    }
   }
   .weui-cells_radio {
     .weui-cell__ft {
@@ -447,6 +452,19 @@ html {
   .qucikly {
     margin-bottom: 1.2rem;
     .weui-cells {
+      .title {
+        .vux-label {
+          font-size: .32rem;
+        }
+      }
+      .ip {
+        .weui-cells:before {
+          left: .3rem;
+        }
+        .weui-cells:after {
+          border-bottom: none;
+        }
+      }
       .vux-cell-box {
         .weui-cell__hd {
           font-size: .28rem;
@@ -459,6 +477,7 @@ html {
         color: #108EE9;
       }
       .weui-cells_checkbox {
+        margin-top: 0;
         .weui-cell__bd {
           font-size: .28rem;
         }
@@ -486,14 +505,26 @@ html {
           background-color: #4A90E2;
         }
       }
-
     }
   }
   .custom {
     margin-bottom: 1.2rem;
     .weui-cells {
-
+      .title {
+        .vux-label {
+          font-size: .32rem;
+        }
+      }
+      .ip {
+        .weui-cells:before {
+          left: .3rem;
+        }
+        .weui-cells:after {
+          border-bottom: none;
+        }
+      }
       .weui-cells_checkbox {
+        margin-top: 0;
         .weui-cell__hd {
           padding-right: 0;
         }
@@ -536,6 +567,9 @@ html {
       }
       .number {
         font-size: .28rem;
+        .vux-number-input {
+          font-size: .28rem;
+        }
         .vux-number-selector {
           padding: .002rem 0;
           border-color: #4A90E2;
@@ -547,9 +581,6 @@ html {
       }
       .vux-cell-bd {
         font-size: .28rem;
-        .vux-label {
-          font-size: .32rem;
-        }
       }
     }
   }
@@ -638,6 +669,9 @@ html {
       }
       .number {
         font-size: .28rem;
+        .vux-number-input {
+          font-size: .28rem;
+        }
         .vux-number-selector {
           padding: .002rem 0;
           border-color: #4A90E2;

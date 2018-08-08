@@ -135,7 +135,7 @@
   .details {
     padding: .24rem .42rem .24rem .3rem;
     background: rgba(255, 255, 255, 1);
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: 1px solid #e7e7e7;
     display: flex;
     justify-content: space-between;
     align-items: center;

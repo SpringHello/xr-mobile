@@ -78,7 +78,7 @@
       }
       .foot {
         padding: .22rem 0 .26rem 0;
-        border-top: 1px solid rgba(217, 217, 217, 1);
+        border-top: 1px solid #e7e7e7;
         li {
           color: rgba(153, 153, 153, 1);
         }
