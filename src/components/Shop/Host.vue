@@ -981,7 +981,7 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   #shop-host {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
     .public {
       p {
@@ -999,6 +999,7 @@
       background-color: #FFF;
       position: fixed;
       bottom: 0;
+      border-top: 1px solid #D7D7D7;
       p {
         padding: .32rem 0 .32rem .3rem;
         font-size: .28rem;
@@ -1013,8 +1014,6 @@
         font-size: .32rem;
         color: rgba(255, 255, 255, 1);
         line-height: .36rem;
-        outline: none;
-        border: 0;
         background: rgba(219, 66, 50, 1);
         padding: .33rem .77rem .31rem .78rem;
       }
