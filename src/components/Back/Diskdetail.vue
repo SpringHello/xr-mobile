@@ -4,7 +4,7 @@
     <div class="host">
       <div class="host-item">
         <h6 class="title" v-if="!details.mounton && !details.mountonname && details.status == 1">挂载磁盘信息</h6>
-        <h6 class="title" v-if="details.mounton && details.mountonname && details.status == 1">负载均衡基础信息</h6>
+        <h6 class="title" v-if="details.mounton && details.mountonname && details.status == 1">卸载磁盘信息</h6>
         <ul>
           <li>硬盘名称 <span>{{details.diskname}}</span></li>
           <li>硬盘类型 <span>{{details.diskoffer == 'ssd' ? 'SSD' : details.diskoffer == 'sas' ? 'SAS' : 'SATA'}}</span>

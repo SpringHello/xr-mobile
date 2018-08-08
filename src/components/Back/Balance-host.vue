@@ -32,7 +32,7 @@
       }
     },
     methods: {
-      //查询该负载均衡下的主机
+      //该负载均衡下主机列表
       balhost(){
         axios.get('loadbalance/listVmByRoleId.do', {
           params: {
@@ -81,6 +81,8 @@
         axios.get(url, {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.$router.push('balancedetail')
+          } else {
+            this.$vux.toast.text(response.data.result, 'middle')
           }
         })
       },
