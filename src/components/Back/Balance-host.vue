@@ -44,7 +44,7 @@
           this.hostList = response.data.result
         })
       },
-      // 绑定主机列表
+      // 绑定主机
       hosted(){
         axios.get('network/showLoadBalanceVM.do', {
           params: {

@@ -177,7 +177,8 @@
         {name: 'SSD存储', value: 'ssd', parent: 0},
       ];
       diskType.forEach(type => {
-        for (let i = 20; i <= 1000; i += 10) {
+        diskType.push({name: '20GB', value: '20', parent: type.value})
+        for (let i = 50; i <= 1000; i += 50) {
           diskType.push({name: `${i}GB`, value: `${i}`, parent: type.value})
         }
       })
