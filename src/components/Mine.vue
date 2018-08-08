@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--版块三-->
-      <div>
+      <div style="position: relative">
         <div class="xx-item" @click="XXclick">
           <div>
             <img src="../assets/img/mine/xiaoxi.png">
