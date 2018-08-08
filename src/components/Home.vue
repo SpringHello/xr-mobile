@@ -171,7 +171,9 @@
       TransferDom,
     },
     beforeRouteEnter(to, from, next){
-      sessionStorage.setItem('wx-code', to.query.code)
+      if (to.query.code) {
+        sessionStorage.setItem('wx-code', to.query.code)
+      }
       next()
     },
     data () {
