@@ -281,6 +281,7 @@
       bottom: 0;
       right: 0;
       font-family: "Microsoft YaHei", "微软雅黑";
+      z-index: 5;
       p {
         padding: .27rem .3rem;
         font-size: .32rem;
