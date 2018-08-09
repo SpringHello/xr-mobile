@@ -62,10 +62,12 @@
             <div style="text-align:center;">
               <p style="font-size: .3rem;color: #888;padding-bottom: .2rem;">请输入控制台登录密码</p>
               <input v-model="lookPassword" type="text"
-                     style="outline: none;border:none;border-bottom: 1px solid #e7e7e7;text-align: center;font-size: .36rem;color: #333;width: 60%;">
+                     style="outline: none;border:none;border-bottom: 1px solid #e7e7e7;text-align: center;font-size: .36rem;color: #333;width: 70%;">
               <div style="padding-top: .35rem;">
-                <check-icon :value.sync="email"><span style="font-size: .3rem;color: #888;">邮箱接收</span></check-icon>
-                <check-icon :value.sync="phone"><span style="font-size: .3rem;color: #888;">短信接收</span></check-icon>
+                <check-icon :value.sync="email" v-show="$store.state.userInfo.loginname"><span
+                  style="font-size: .3rem;color: #888;">邮箱接收</span></check-icon>
+                <check-icon :value.sync="phone" v-show="$store.state.userInfo.phone"><span
+                  style="font-size: .3rem;color: #888;">短信接收</span></check-icon>
               </div>
             </div>
           </confirm>
@@ -136,19 +138,24 @@
       },
       //确认发送
       sendOk(){
-        axios.post('log/sendVMPassword.do', {
-          VMId: this.details.computerId,
-          password: this.lookPassword,
-          letter: '1',
-          email: this.email ? '1' : '0',
-          phone: this.phone ? '1' : '0'
-        }).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.$vux.toast.text(response.data.message, 'middle')
-          } else {
-            this.$vux.toast.text(response.data.message, 'middle')
-          }
-        })
+        if (this.lookPassword) {
+          axios.post('log/sendVMPassword.do', {
+            VMId: this.details.computerId,
+            password: this.lookPassword,
+            letter: '1',
+            email: this.email ? '1' : '0',
+            phone: this.phone ? '1' : '0'
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.$vux.toast.text(response.data.message, 'middle')
+            } else {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        } else {
+          this.$vux.toast.text('请输入控制台登录密码', 'middle')
+        }
+
       },
 
     },

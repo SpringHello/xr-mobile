@@ -29,6 +29,7 @@
 
         <popup-picker title="配置" :data="configs" v-model="config" :columns="2" show-name
                       @on-change="configChange"></popup-picker>
+
       </Group>
 
       <Group>
