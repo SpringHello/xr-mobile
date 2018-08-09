@@ -32,8 +32,7 @@ import {AlertPlugin} from 'vux'
 
 Vue.use(AlertPlugin)
 
-
-import './assets/js/wxjssdk'
+//import './assets/js/wxjssdk'
 /*import {WechatPlugin} from 'vux'
 
  Vue.use(WechatPlugin)
