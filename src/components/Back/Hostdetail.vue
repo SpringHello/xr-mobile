@@ -4,7 +4,11 @@
     <div class="host">
       <div class="host-item">
         <div class="top">
-          <h6 class="title">{{$route.query.name}}</h6>
+          <h6 class="title" style="vertical-align: middle;">{{name}}<span
+            style="color: #4A90E2;font-size: .24rem;line-height:.33rem;padding-left: .3rem; "
+            @click="rename=true">
+            <img src="../../assets/img/back/Fill.png"> 修改名称</span>
+          </h6>
           <ul>
             <li>主机状态：{{details.computerStatus ? "开机" : "关机"}}</li>
             <li>系统镜像：{{details.template}}</li>
@@ -13,7 +17,7 @@
             <li>主机配置：{{$route.query.configs}}</li>
             <li>主机密码：<span style="color:rgba(74,144,226,1);" @click="sendPassword">发送密码</span></li>
           </ul>
-          <img src="../../assets/img/back/open.png">
+          <img src="../../assets/img/back/open.png" class="img">
         </div>
         <div class="xins">
           <p class="xin-title">主机基础信息</p>
@@ -72,6 +76,17 @@
             </div>
           </confirm>
         </div>
+        <div v-transfer-dom>
+          <confirm v-model="rename"
+                   title="主机重命名"
+                   @on-confirm="Cname">
+            <div style="text-align:center;">
+              <p style="font-size: .3rem;color: #888;padding-bottom: .2rem;">请输入主机名</p>
+              <input v-model="newName" type="text"
+                     style="text-align: center;font-size: .36rem;color: #333;width: 70%;outline: none;border: none;border-bottom: 1px solid #e7e7e7">
+            </div>
+          </confirm>
+        </div>
         <toast v-model="show" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
       </div>
     </div>
@@ -105,6 +120,10 @@
     data (){
       window.scrollTo(0, 0);
       return {
+        //重命名
+        rename: false,
+        name: this.$route.query.name,
+        newName: '',
         //暂未开放
         show: false,
         showSend: false,
@@ -130,6 +149,22 @@
       onOpen(url){
         if (url == '') {
           this.show = true
+        }
+      },
+      //主机重命名
+      Cname(){
+        if (this.newName) {
+          axios.post('information/changeVmName.do', {
+            name: this.newName,
+            vmId: this.details.computerId,
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.name = this.newName
+            }
+          })
+
+        } else {
+          this.$vux.toast.text('请输入主机名', 'middle')
         }
       },
       //发送密码弹窗
@@ -202,7 +237,7 @@
             padding-bottom: .2rem;
           }
         }
-        img {
+        .img {
           position: absolute;
           right: 0;
           top: 1.3rem;
