@@ -103,7 +103,9 @@
               let params = {
                 total_fee: this.payData.money,
                 type: 'JSAPI',
-                code: sessionStorage.getItem('wx-code')
+                code: sessionStorage.getItem('wx-code'),
+                orders: this.payData.order,
+                ticket: this.payData.ticket
               }
               if (sessionStorage.getItem('wx-openid')) {
                 params.openid = sessionStorage.getItem('wx-openid')

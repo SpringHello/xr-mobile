@@ -32,9 +32,10 @@ import {AlertPlugin} from 'vux'
 
 Vue.use(AlertPlugin)
 
-//import {WechatPlugin} from 'vux'
 
-/*
+import './assets/js/wxjssdk'
+/*import {WechatPlugin} from 'vux'
+
  Vue.use(WechatPlugin)
 
  Vue.wechat.config({
@@ -44,8 +45,7 @@ Vue.use(AlertPlugin)
  nonceStr: '520', // 必填，生成签名的随机串
  signature: '测试',// 必填，签名，
  jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，
- })
- */
+ })*/
 
 import './assets/less/main.less'
 import './assets/less/public.less'
