@@ -19,7 +19,7 @@
       <x-number title="带宽(MB)" v-model="bandwidth" :min="1" :max="100" class="number" button-style="round"
                 :fillable='true'></x-number>
 
-      <x-switch title="自动续费" v-model="renewal" inline-desc="开启后，资源到期会自动续费，请确保账户内有足够的余额。"></x-switch>
+      <x-switch title="自动续费" v-model="renewal"></x-switch>
     </Group>
 
     <div class="bottom">

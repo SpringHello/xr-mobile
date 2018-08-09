@@ -8,7 +8,7 @@ import App from './App'
 
 import {ToastPlugin} from 'vux'
 
-Vue.use(ToastPlugin, {time: 5000})
+Vue.use(ToastPlugin, {time: 3500})
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'

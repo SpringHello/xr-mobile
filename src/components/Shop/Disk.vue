@@ -25,7 +25,7 @@
                @click.stop.prevent="delDisk(index)">
         </template>
       </popup-picker>
-      <x-switch title="自动续费" v-model="renewal" inline-desc="开启后，资源到期会自动续费，请确保账户内有足够的余额。"></x-switch>
+      <x-switch title="自动续费" v-model="renewal"></x-switch>
     </Group>
 
     <div class="bottom">
