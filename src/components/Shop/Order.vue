@@ -100,15 +100,21 @@
               window.open(`zfb/appzf.do?total_fee=${this.payData.money}&orders=${this.payData.order}&ticket=${this.payData.ticket}`)
               break;
             case '微信支付':
+              let params = {
+                total_fee: this.payData.money,
+                type: 'JSAPI',
+                code: sessionStorage.getItem('wx-code'),
+                orders: this.payData.order,
+                ticket: this.payData.ticket
+              }
+              if (sessionStorage.getItem('wx-openid')) {
+                params.openid = sessionStorage.getItem('wx-openid')
+              }
               axios.get('wx/wxpayapi.do', {
-                params: {
-                  total_fee: this.payData.money,
-                  type: 'JSAPI',
-                  code: sessionStorage.getItem('wx-code')
-                }
+                params
               }).then(response => {
-                alert(response)
-                function onBridgeReady() {
+                sessionStorage.setItem('wx-openid', response.data.result.openid)
+                let onBridgeReady = () => {
                   WeixinJSBridge.invoke(
                     'getBrandWCPayRequest', {
                       "appId": response.data.result.appid,     //公众号名称，由商户传入
@@ -116,13 +122,19 @@
                       "nonceStr": response.data.result.nonce_str, //随机串
                       "package": `prepay_id=${response.data.result.prepay_id}`,
                       "signType": "MD5",         //微信签名方式：
-                      "paySign": response.data.result.sign, //微信签名
-                      "trade_type": "JSAPI"
+                      "paySign": response.data.result.sign //微信签名
                     },
-                    function (res) {
+                    (res) => {
                       if (res.err_msg == "get_brand_wcpay_request:ok") {
                         //使用以上方式判断前端返回,微信团队郑重提示：
                         //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                        this.$router.push('payresult')
+                        sessionStorage.setItem('status', '1')
+                        sessionStorage.setItem('resorceList', this.resorceList)
+                      } else if (res.err_msg == "get_brand_wcpay_request:fail") {
+                        this.$router.push('payresult')
+                        sessionStorage.setItem('status', '0')
+                        sessionStorage.setItem('resorceList', this.resorceList)
                       }
                     }
                   );

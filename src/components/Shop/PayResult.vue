@@ -10,7 +10,7 @@
       <img src="../../assets/img/back/fail.png">
       <h3>支付失败</h3>
       <p>抱歉，你的订单支付失败，请重新支付</p>
-      <router-link to="home" class="fail">重新支付</router-link>
+      <router-link to="order" class="fail">重新支付</router-link>
     </div>
   </div>
 </template>
