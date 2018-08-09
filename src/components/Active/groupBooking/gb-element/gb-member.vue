@@ -82,6 +82,7 @@
       }
     },
     created() {
+
     },
     props: {
       participationPersonColumns: {
@@ -107,8 +108,15 @@
     },
     methods: {
       shareLink(val) {
-        axios.get('wx/wxgetinfo.do').then(response => {
-          if (response.data.status == 1) {
+        this.activeLink = location.href
+        alert('参与签名的url是' + this.activeLink)
+        axios.get('wx/wxgetinfo.do', {
+          params: {
+            urls: encodeURI(this.activeLink)
+          }
+        }).then(response => {
+          alert('返回值是' + JSON.stringify(response.data.result))
+          if (response.status == 200) {
             wx.config({
               debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
               appId: response.data.result.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -117,90 +125,232 @@
               signature: response.data.result.signature,// 必填，签名，见附录1
               jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
-            switch (val) {
-              case 0:
-                wx.onMenuShareQQ({ // 分享给QQ  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
-                  title: '分享', // 分享标题
-                  desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
-                  link: this.activeLink, // 分享链接
-                  imgUrl: '', // 分享图标
-                  type: '', // 分享类型,music、video或link，不填默认为link
-                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                  success: function () {
-                    this.$vux.toast.text('分享成功')
-                    this.shareAlert = false
-                    // 用户确认分享后执行的回调函数
-                  },
-                  cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                  }
-                });
-                break
-              case 1:
-                wx.onMenuShareQZone({ // 分享给空间  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
-                  title: '分享', // 分享标题
-                  desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
-                  link: this.activeLink, // 分享链接
-                  imgUrl: '', // 分享图标
-                  type: '', // 分享类型,music、video或link，不填默认为link
-                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                  success: function () {
-                    this.$vux.toast.text('分享成功')
-                    this.shareAlert = false
-                    // 用户确认分享后执行的回调函数
-                  },
-                  cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                  }
-                });
-                break
-              case 2:
-                wx.onMenuShareAppMessage({ // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
-                  title: '分享', // 分享标题
-                  desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
-                  link: this.activeLink, // 分享链接
-                  imgUrl: '', // 分享图标
-                  type: '', // 分享类型,music、video或link，不填默认为link
-                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                  success: function () {
-                    this.$vux.toast.text('分享成功')
-                    this.shareAlert = false
-                    // 用户确认分享后执行的回调函数
-                  },
-                  cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                  }
-                });
-                break
-              case 3:
-                wx.onMenuShareTimeline({ // 分享给朋友圈  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
-                  title: '分享', // 分享标题
-                  desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
-                  link: this.activeLink, // 分享链接
-                  imgUrl: '', // 分享图标
-                  type: '', // 分享类型,music、video或link，不填默认为link
-                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                  success: function () {
-                    this.$vux.toast.text('分享成功')
-                    this.shareAlert = false
-                    // 用户确认分享后执行的回调函数
-                  },
-                  cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                  }
-                });
-                break
-              case 4:
-                window.open('http://service.weibo.com/share/share.php?url=' + this.activeLink + '&title=' + '我有你也有，高品质云主机59元畅享一年，详情查看活动链接' + '&pic=' + '' + '&searchPic=false', '_self')
-                break
-            }
-          } else {
-            this.$vux.toast.text('平台开小差了，请稍候再试')
           }
         })
-        /*        wx.ready(function () {
-                  // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
-                });*/
+        wx.ready(() => {
+          switch (val) {
+            case 0:
+              wx.onMenuShareQQ({ // 分享给QQ  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+                title: '分享', // 分享标题
+                desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+                link: this.activeLink, // 分享链接
+                imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+                /*type: '', // 分享类型,music、video或link，不填默认为link
+                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*/
+                success: function () {
+                  this.$vux.toast.text('分享成功')
+                  this.shareAlert = false
+                  // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                  // 用户取消分享后执行的回调函数
+                }
+              });
+              break
+            case 1:
+              wx.onMenuShareQZone({ // 分享给空间  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+                title: '分享', // 分享标题
+                desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+                link: this.activeLink, // 分享链接
+                imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+                /* type: '', // 分享类型,music、video或link，不填默认为link
+                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*/
+                success: function () {
+                  this.$vux.toast.text('分享成功')
+                  this.shareAlert = false
+                  // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                  // 用户取消分享后执行的回调函数
+                }
+              });
+              break
+            case 2:
+              wx.onMenuShareAppMessage({ // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+                title: '分享', // 分享标题
+                desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+                link: this.activeLink, // 分享链接
+                imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+                /*type: '', // 分享类型,music、video或link，不填默认为link
+                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*/
+                success: function () {
+                  this.$vux.toast.text('分享成功')
+                  this.shareAlert = false
+                  // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                  // 用户取消分享后执行的回调函数
+                }
+              });
+              break
+            case 3:
+              wx.onMenuShareTimeline({ // 分享给朋友圈  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+                title: '分享', // 分享标题
+                desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+                link: this.activeLink, // 分享链接
+                imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+                /*type: '', // 分享类型,music、video或link，不填默认为link
+                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*/
+                success: function () {
+                  this.$vux.toast.text('分享成功')
+                  this.shareAlert = false
+                  // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                  // 用户取消分享后执行的回调函数
+                }
+              });
+              break
+            case 4:
+              window.open('http://service.weibo.com/share/share.php?url=' + this.activeLink + '&title=' + '我有你也有，高品质云主机59元畅享一年，详情查看活动链接' + '&pic=' + '' + '&searchPic=false', '_self')
+              break
+          }
+        })
+
+        /*var shareData = {
+         title: '分享', // 分享标题
+         desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+         link: this.activeLink, // 分享链接
+         imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+         success: () => {
+         alert(JSON.stringify(this))
+         // 分享成功可以做相应的数据处理
+         this.$vux.toast.text('分享成功')
+         //alert("分享成功"); }
+         }
+         }*/
+        /*wx.ready((res) => {
+         wx.onMenuShareTimeline(shareData);
+         wx.onMenuShareAppMessage(shareData);
+         wx.onMenuShareQQ(shareData);
+         wx.onMenuShareWeibo(shareData);
+         alert(JSON.stringify(res))
+         })
+         wx.error(function (res) {
+         alert(JSON.stringify(res))
+         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+         });*/
+        /*wx.onMenuShareTimeline(shareData);
+         wx.onMenuShareAppMessage(shareData);
+         wx.onMenuShareQQ(shareData);
+         wx.onMenuShareWeibo(shareData);*/
+        //this.activeLink = this.$route
+        /*this.activeLink = location.href
+         axios.get('wx/wxgetinfo.do', {
+         params: {
+         urls: this.activeLink
+         }
+         }).then(response => {
+         if (response.data.status == 1) {
+
+         var shareData = {
+         title: '分享', // 分享标题
+         //desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+         link: this.activeLink, // 分享链接
+         imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+         success: () => {
+         alert(JSON.stringify(this))
+         // 分享成功可以做相应的数据处理
+         this.$vux.toast.text('分享成功')
+         //alert("分享成功"); }
+         }
+         }
+         wx.onMenuShareTimeline(shareData);
+         /!*wx.onMenuShareAppMessage(shareData);
+         wx.onMenuShareQQ(shareData);
+         wx.onMenuShareWeibo(shareData);*!/
+
+         switch (val) {
+         case 0:
+         wx.onMenuShareQQ({ // 分享给QQ  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+         title: '分享', // 分享标题
+         desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+         link: this.activeLink, // 分享链接
+         imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+         /!*type: '', // 分享类型,music、video或link，不填默认为link
+         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*!/
+         success: function () {
+         this.$vux.toast.text('分享成功')
+         this.shareAlert = false
+         // 用户确认分享后执行的回调函数
+         },
+         cancel: function () {
+         // 用户取消分享后执行的回调函数
+         }
+         });
+         break
+         case 1:
+         wx.onMenuShareQZone({ // 分享给空间  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+         title: '分享', // 分享标题
+         desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+         link: this.activeLink, // 分享链接
+         imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+         /!* type: '', // 分享类型,music、video或link，不填默认为link
+         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*!/
+         success: function () {
+         this.$vux.toast.text('分享成功')
+         this.shareAlert = false
+         // 用户确认分享后执行的回调函数
+         },
+         cancel: function () {
+         // 用户取消分享后执行的回调函数
+         }
+         });
+         break
+         case 2:
+         wx.onMenuShareAppMessage({ // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+         title: '分享', // 分享标题
+         desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+         link: this.activeLink, // 分享链接
+         imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+         /!*type: '', // 分享类型,music、video或link，不填默认为link
+         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*!/
+         success: function () {
+         this.$vux.toast.text('分享成功')
+         this.shareAlert = false
+         // 用户确认分享后执行的回调函数
+         },
+         cancel: function () {
+         // 用户取消分享后执行的回调函数
+         }
+         });
+         break
+         case 3:
+         wx.onMenuShareTimeline({ // 分享给朋友圈  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用
+         title: '分享', // 分享标题
+         desc: '我有你也有，高品质云主机59元畅享一年，详情查看活动链接', // 分享描述
+         link: this.activeLink, // 分享链接
+         imgUrl: 'http://pan.xrcloud.net/ruicloud/static/img/banner-1.d90d236.png', // 分享图标
+         /!*type: '', // 分享类型,music、video或link，不填默认为link
+         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空*!/
+         success: function () {
+         this.$vux.toast.text('分享成功')
+         this.shareAlert = false
+         // 用户确认分享后执行的回调函数
+         },
+         cancel: function () {
+         // 用户取消分享后执行的回调函数
+         }
+         });
+         break
+         case 4:
+         window.open('http://service.weibo.com/share/share.php?url=' + this.activeLink + '&title=' + '我有你也有，高品质云主机59元畅享一年，详情查看活动链接' + '&pic=' + '' + '&searchPic=false', '_self')
+         break
+         }
+         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+
+         wx.config({
+         debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+         appId: response.data.result.appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+         timestamp: response.data.result.timestamp, // 必填，生成签名的时间戳
+         nonceStr: response.data.result.nonceStr, // 必填，生成签名的随机串
+         signature: response.data.result.signature,// 必填，签名，见附录1
+         jsApiList: ['onMenuShareTimeline'/!*, 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'*!/] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+         });
+         } else {
+         this.$vux.toast.text('平台开小差了，请稍候再试')
+         }
+         })*/
       },
       onCopy() {
         this.$vux.toast.text('复制成功')
