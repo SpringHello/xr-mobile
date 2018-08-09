@@ -49,7 +49,7 @@
         response.data.result[type].list.forEach(host => {
           list.push({
             status: type,
-            title: host.instancename,
+            title: host.computername,
             desc: host.templatename,
             id: host.computerid,
             price: host.cpCase,
@@ -136,7 +136,7 @@
             response.data.result[type].list.forEach(host => {
               this.list.push({
                 status: type,
-                title: host.instancename,
+                title: host.computername,
                 desc: host.templatename,
                 id: host.computerid,
                 price: host.cpCase,

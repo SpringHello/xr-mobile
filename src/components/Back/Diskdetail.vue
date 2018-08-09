@@ -6,7 +6,9 @@
         <h6 class="title" v-if="!details.mounton && !details.mountonname && details.status == 1">挂载磁盘信息</h6>
         <h6 class="title" v-if="details.mounton && details.mountonname && details.status == 1">卸载磁盘信息</h6>
         <ul>
-          <li>硬盘名称 <span>{{details.diskname}}</span></li>
+          <li>硬盘名称 <span style="vertical-align: middle;">{{diskname}}<img src="../../assets/img/back/Fill.png"
+                                                                          style="padding-left: .2rem;"
+                                                                          @click="rename=true"></span></li>
           <li>硬盘类型 <span>{{details.diskoffer == 'ssd' ? 'SSD' : details.diskoffer == 'sas' ? 'SAS' : 'SATA'}}</span>
           </li>
           <li>容量 <span>{{details.disksize}}GB</span></li>
@@ -26,10 +28,28 @@
                     @on-show="showMount" show-name @on-change="onChange"></popup-picker>
       <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
                 @click.native="showUnload(details)"></x-switch>
+      <cell title="硬盘备份" is-link></cell>
     </group>
+
+    <Group>
+      <cell title="扩容" is-link></cell>
+    </Group>
+
     <group class="delete" @click.native="delDisk">
       <p> 删除云硬盘</p>
     </group>
+
+    <div v-transfer-dom>
+      <confirm v-model="rename"
+               title="修改硬盘"
+               @on-confirm="ReDiskname">
+        <div style="text-align:center;">
+          <p style="font-size: .3rem;color: #888;padding-bottom: .2rem;">硬盘名称</p>
+          <input v-model="newName" type="text"
+                 style="text-align: center;font-size: .36rem;color: #333;width: 70%;outline: none;border: none;border-bottom: 1px solid #e7e7e7">
+        </div>
+      </confirm>
+    </div>
 
     <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="35%"></toast>
     <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="35%"></toast>
@@ -70,6 +90,11 @@
     data (){
       window.scrollTo(0, 0);
       return {
+        //重命名
+        rename: false,
+        diskname: '',
+        newName: '',
+
         details: {},
         mount: [],
         mountHostList: [],
@@ -91,6 +116,25 @@
       // 获取磁盘数据
       setData(disks){
         this.details = disks
+        this.diskname = this.details.diskname
+      },
+      //修改磁盘名称
+      ReDiskname(){
+        if (this.newName) {
+          axios.get('Disk/updateDisk.do', {
+            params: {
+              zoneId: $store.state.zone.zoneid,
+              diskId: this.details.diskid,
+              diskName: this.newName
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.diskname = this.newName
+            }
+          })
+        } else {
+          this.$vux.toast.text('请输入磁盘名称', 'middle')
+        }
       },
       // 卸载弹窗
       showUnload(details){

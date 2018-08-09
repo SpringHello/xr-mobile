@@ -13,7 +13,7 @@
     </div>
     <Group class="disk">
       <x-input title="磁盘名称" placeholder="请输入磁盘名" placeholder-align="right" text-align="right"
-               v-model="diskName"></x-input>
+               v-model="diskName" @on-blur="dnameRule"></x-input>
       <cell title='云硬盘' value="添加数据盘" :inline-desc="'可添加数量：'+diskListNums" @click.native="addDisk"
             class="Cdisk"></cell>
       <popup-picker v-for="(disk,index) in diskList" :key="index" :data="diskType" v-model="disk.value"
@@ -134,6 +134,12 @@
         this.diskList.splice(index, 1)
         this.diskListNums = 5 - this.diskList.length
       },
+      //磁盘名称校验
+      dnameRule(){
+        if (this.diskName.trim() == '') {
+          this.$vux.toast.text('请输入2-16位中文、英文字母或数字', 'middle')
+        }
+      },
       //硬盘价格
       Dprices(){
         let timeout = setTimeout(() => {
@@ -191,7 +197,7 @@
             sessionStorage.setItem('countOrder', this.diskPrice.toString())
             this.$router.push('orderconfirm')
           } else {
-            this.$vux.toast.text(response.data.message, 'middle')
+            this.$vux.toast.text('请输入2-16位中文、英文字母或数字', 'middle')
           }
         })
       },

@@ -29,6 +29,9 @@
 
         <popup-picker title="配置" :data="configs" v-model="config" :columns="2" show-name
                       @on-change="configChange"></popup-picker>
+        <cell title="防火墙" value="默认设置" is-link></cell>
+        <p style="font-size: .22rem;color: #999;padding: 0 .3rem .2rem .3rem;">
+          默认防火墙仅打开22、3389、443、80端口，您可以在创建之后再控制台自定义防火墙规则。</p>
       </Group>
 
       <Group>
@@ -81,6 +84,9 @@
                    v-model="checkIp" class="ip"></checklist>
         <x-number title="带宽(MB)" v-model="bandwidth" :min="1" :max="100" class="number" button-style="round"
                   :fillable='true' v-show="checkIp[0]"></x-number>
+        <cell title="防火墙" value="默认设置" is-link></cell>
+        <p style="font-size: .22rem;color: #999;padding: 0 .3rem .2rem .3rem;">
+          默认防火墙仅打开22、3389、443、80端口，您可以在创建之后再控制台自定义防火墙规则。</p>
       </Group>
 
       <Group>
