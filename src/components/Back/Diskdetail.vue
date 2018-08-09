@@ -28,7 +28,13 @@
                     @on-show="showMount" show-name @on-change="onChange"></popup-picker>
       <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
                 @click.native="showUnload(details)"></x-switch>
+      <cell title="硬盘备份" is-link></cell>
     </group>
+
+    <Group>
+      <cell title="扩容" is-link></cell>
+    </Group>
+
     <group class="delete" @click.native="delDisk">
       <p> 删除云硬盘</p>
     </group>
