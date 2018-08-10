@@ -60,6 +60,9 @@ import Expense from '@/components/Back/Expense'//当月消费
 import feedback from '@/components/Back/Feedback'//意见反馈
 import Hostdetail from '@/components/Back/Hostdetail'//主机资源详情
 import Diskdetail from '@/components/Back/Diskdetail'//云硬盘详情
+import Diskbackup from '@/components/Back/Diskbackup'//云硬盘备份(创建)
+import DiskbackupList from '@/components/Back/DiskbackupList'//云硬盘备份
+import DiskbackupDetail from '@/components/Back/DiskbackupDetail'//盘备份详情
 import Elasticipdetail from '@/components/Back/Elasticipdetail'//弹性IP详情
 import Balancedetail from '@/components/Back/Balancedetail'//负载均衡详情
 import Balancehost from '@/components/Back/Balance-host'//负载均衡-主机详情
@@ -150,6 +153,9 @@ export default new Router({
         {path: 'account', name: 'Account', component: Account},
         {path: 'vouchers', name: 'Vouchers', component: Vouchers},
         {path: 'Hostdetail', name: 'hostDetail', component: Hostdetail},
+        {path: 'Diskbackup/:diskID', name: 'Diskbackup', component: Diskbackup},
+        {path: 'DiskbackupList', name: 'DiskbackupList', component: DiskbackupList},
+        {path: 'DiskbackupDetail', name: 'DiskbackupDetail', component: DiskbackupDetail},
         {path: 'Diskdetail/:diskId', name: 'diskdetail', component: Diskdetail},
         {path: 'Elasticipdetail/:ipId', name: 'elasticipdetail', component: Elasticipdetail},
         {path: 'Balancedetail', name: 'Balancedetail', component: Balancedetail},
