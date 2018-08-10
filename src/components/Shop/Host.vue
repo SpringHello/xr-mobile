@@ -644,7 +644,7 @@
           return
         }
         if (!RegExp.Password.test(this.loginPassword)) {
-          this.$vux.toast.text('请输入6-23位包含大小写与数字的密码', 'middle')
+          this.$vux.toast.text('请输入至少6位包含大小写与数字的密码', 'middle')
           return
         }
       },
