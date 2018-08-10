@@ -91,6 +91,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .box {
     margin-top: .2rem;
+    border-top: 1px solid #e7e7e7;
     ul {
       background: rgba(255, 255, 255, 1);
       border-bottom: 1px solid #e7e7e7;

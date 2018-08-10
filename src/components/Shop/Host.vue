@@ -125,6 +125,7 @@
         <button @click="CtoOrder">立即购买</button>
       </div>
     </div>
+    <div style="height: 2rem"></div>
   </div>
 </template>
 
@@ -987,8 +988,6 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   #shop-host {
-    margin-bottom: 2rem;
-
     .public {
       p {
         padding: .31rem 0 0 .3rem;
@@ -1005,7 +1004,7 @@
       background-color: #FFF;
       position: fixed;
       bottom: 0;
-      border-top: 1px solid #D7D7D7;
+      border-top: 1px solid #D9D9D9;
       p {
         padding: .32rem 0 .32rem .3rem;
         font-size: .28rem;
@@ -1017,6 +1016,7 @@
         }
       }
       button {
+        border: none;
         font-size: .32rem;
         color: rgba(255, 255, 255, 1);
         line-height: .36rem;
