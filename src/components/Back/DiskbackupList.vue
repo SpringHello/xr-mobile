@@ -8,9 +8,9 @@
       </Group>
     </div>
 
-    <Group>
-      <cell title="新建备份" is-link></cell>
-    </Group>
+    <!-- <Group>
+       <cell title="新建备份" is-link></cell>
+     </Group>-->
   </div>
 </template>
 
