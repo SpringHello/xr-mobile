@@ -316,21 +316,23 @@
     },
     mounted(){
       /*alert(location.href)
-      axios.get('wx/wxgetinfo.do', {
-        params: {
-          urls: location.href.split('?')[0]
-        }
-      }).then(response => {
-        sessionStorage.setItem('ios-share', JSON.stringify(response.data.result))
-      })*/
+       axios.get('wx/wxgetinfo.do', {
+       params: {
+       urls: location.href.split('?')[0]
+       }
+       }).then(response => {
+       sessionStorage.setItem('ios-share', JSON.stringify(response.data.result))
+       })*/
     },
     methods: {
       ClikcMore(){
         this.showMask = !this.showMask
         if (this.showMask) {
           document.body.style.overflow = 'hidden'
+          document.body.style.height = '100%'
         } else {
           document.body.style.overflow = 'auto'
+          document.body.style.height = 'auto'
         }
       },
       push(url){
@@ -340,6 +342,7 @@
     },
     beforeRouteLeave(to, from, next){
       document.body.style.overflow = 'auto'
+      document.body.style.height = 'auto'
       next()
     }
   }

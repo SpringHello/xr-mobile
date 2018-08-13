@@ -25,6 +25,7 @@
       <button @click="shareAlert = true">分享链接</button>
       <div v-if="shareAlert" class="mask">
         <img src="../../../../assets/img/active/groupBooking/guide1.png">
+
       </div>
     </div>
   </div>
