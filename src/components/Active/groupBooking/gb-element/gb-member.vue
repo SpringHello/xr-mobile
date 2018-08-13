@@ -22,10 +22,10 @@
         <p>还差1人即可获得赠送资格，赶快分享吧。</p>
       </div>
       <p>参团链接：<span>{{ activeLink }}</span></p>
-      <button @click="shareAlert = true">分享链接</button>
+      <button @click="shareLink">分享链接</button>
       <div v-if="shareAlert" class="mask">
         <img src="../../../../assets/img/active/groupBooking/guide1.png">
-
+        <button @click="shareAlert=false">我知道了</button>
       </div>
     </div>
   </div>
@@ -147,6 +147,16 @@
       onError() {
         this.$vux.toast.text('复制失败')
       },
+      shareLink(){
+        this.shareAlert = !this.shareAlert
+        if (this.shareAlert) {
+          document.body.style.overflow = 'hidden'
+          document.body.style.height = '100%'
+        } else {
+          document.body.style.overflow = 'auto'
+          document.body.style.height = 'auto'
+        }
+      },
     },
     watch: {
       participationPersonData() {
@@ -156,6 +166,11 @@
           this.someoneParticipation = true
         }
       }
+    },
+    beforeRouteLeave(to, from, next){
+      document.body.style.overflow = 'auto'
+      document.body.style.height = 'auto'
+      next()
     }
   }
 </script>
@@ -289,5 +304,8 @@
     bottom: 0px;
     z-index: 10000;
     left: 0px;
+    button {
+
+    }
   }
 </style>
