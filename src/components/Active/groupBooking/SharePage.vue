@@ -2,7 +2,8 @@
   <div class="share-page">
     <x-header>分享</x-header>
     <share-header :start-time="startTime" :end-time="endTime"></share-header>
-    <gb-member :active-link="activeLink" :host-duration="hostDuration" :participation-person-columns="participationPersonColumns"
+    <gb-member :active-link="activeLink" :host-duration="hostDuration"
+               :participation-person-columns="participationPersonColumns"
                :participation-person-data="participationPersonData"></gb-member>
     <div class="center">
       <gb-myhost :product-groups="productGroups"></gb-myhost>
@@ -15,11 +16,17 @@
       <x-dialog v-model="paySuccess" :hide-on-blur="true">
         <div>
           <img src="../../../assets/img/active/groupBooking/gb-icon12.png" style="max-width:100%">
-          <p style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;">支付成功！</p>
-          <p style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;margin-bottom: .5rem">分享给好友获得免费赠送时长吧</p>
+          <p
+            style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;">
+            支付成功！</p>
+          <p
+            style="font-size: .24rem; font-family: 'Microsoft YaHei', '微软雅黑';color: rgba(102, 102, 102, 1);line-height: .33rem;margin-bottom: .5rem">
+            分享给好友获得免费赠送时长吧</p>
         </div>
         <div style="border: .01rem solid #D8D8D8;display: flex">
-          <span style="width:100%;color:rgba(74,144,226,1);font-size: .36rem;font-family: 'Microsoft YaHei', '微软雅黑';line-height: 1rem" @click="iKnow">知道了</span>
+          <span
+            style="width:100%;color:rgba(74,144,226,1);font-size: .36rem;font-family: 'Microsoft YaHei', '微软雅黑';line-height: 1rem"
+            @click="iKnow">知道了</span>
         </div>
       </x-dialog>
     </div>
@@ -49,18 +56,26 @@
       XDialog
     },
     beforeRouteEnter(to, from, next) {
-      if ($store.state.userInfo) {
-        let info = axios.get('activity/teamMemberList.do')
-        let start = axios.get('network/getTime.do')
-        Promise.all([info, start]).then((result) => {
-          next(vm => {
-            vm.setInfo(result)
-          })
-        }).catch((error) => {
-          console.log(error)
-        })
+      var u = navigator.userAgent;
+      var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      // XXX: 修复iOS版微信HTML5 History兼容性问题
+      if (isiOS && to.path !== location.pathname) {
+        // 此处不可使用location.replace
+        location.assign(to.fullPath)
       } else {
-        next({path: '/ruicloud/groupBooking'})
+        if ($store.state.userInfo) {
+          let info = axios.get('activity/teamMemberList.do')
+          let start = axios.get('network/getTime.do')
+          Promise.all([info, start]).then((result) => {
+            next(vm => {
+              vm.setInfo(result)
+            })
+          }).catch((error) => {
+            console.log(error)
+          })
+        } else {
+          next({path: '/ruicloud/groupBooking'})
+        }
       }
     },
     data() {

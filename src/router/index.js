@@ -161,7 +161,7 @@ export default new Router({
         {path: 'active_3', name: 'active_3', component: Active3},
         {path: 'groupBooking', name: 'groupBooking', component: GroupBooking},
         {path: 'shareLink', name: 'shareLink', component: ShareLink},
-        {path: 'activityLink', name: 'activityLink', component: ActivityLink},
+        {path: 'activity', name: 'activityLink', component: ActivityLink},
         {
           path: 'Login',
           name: 'Login',

@@ -314,6 +314,16 @@
         showMask: false
       }
     },
+    mounted(){
+      /*alert(location.href)
+      axios.get('wx/wxgetinfo.do', {
+        params: {
+          urls: location.href.split('?')[0]
+        }
+      }).then(response => {
+        sessionStorage.setItem('ios-share', JSON.stringify(response.data.result))
+      })*/
+    },
     methods: {
       ClikcMore(){
         this.showMask = !this.showMask
