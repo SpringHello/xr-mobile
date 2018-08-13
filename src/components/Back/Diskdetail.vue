@@ -28,7 +28,7 @@
                     @on-show="showMount" show-name @on-change="onChange"></popup-picker>
       <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
                 @click.native="showUnload(details)"></x-switch>
-      <cell title="硬盘备份" is-link></cell>
+      <cell title="硬盘备份" is-link @click.native="ToBackup"></cell>
     </group>
 
     <Group>
@@ -223,6 +223,12 @@
 
           }
         })
+      },
+      //硬盘备份
+      ToBackup(){
+        sessionStorage.setItem('name', this.diskname)
+        let address = `/ruicloud/Diskbackup/${this.details.diskid}`
+        this.$router.push({path: address})
       },
     },
   }

@@ -136,8 +136,13 @@
       },
       //磁盘名称校验
       dnameRule(){
-        if (this.diskName.trim() == '') {
+        if (this.diskName == '') {
+          this.$vux.toast.text('请输入磁盘名', 'middle')
+          return
+        }
+        if (!RegExp.phoneRegexp.test(this.diskName.trim())) {
           this.$vux.toast.text('请输入2-16位中文、英文字母或数字', 'middle')
+          return
         }
       },
       //硬盘价格
@@ -196,8 +201,6 @@
           if (response.status == 200 && response.data.status == 1) {
             sessionStorage.setItem('countOrder', this.diskPrice.toString())
             this.$router.push('orderconfirm')
-          } else {
-            this.$vux.toast.text('请输入2-16位中文、英文字母或数字', 'middle')
           }
         })
       },
@@ -244,6 +247,7 @@
     background-color: #FFF;
     position: fixed;
     bottom: 0;
+    border-top: 1px solid #D9D9D9;
     p {
       padding: .32rem 0 .32rem .3rem;
       font-size: .28rem;
@@ -255,11 +259,10 @@
       }
     }
     button {
+      border: none;
       font-size: .32rem;
       color: rgba(255, 255, 255, 1);
       line-height: .36rem;
-      outline: none;
-      border: 0;
       background: rgba(219, 66, 50, 1);
       padding: .33rem .77rem .31rem .78rem;
     }

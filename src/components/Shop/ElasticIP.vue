@@ -224,6 +224,7 @@
     background-color: #FFF;
     position: fixed;
     bottom: 0;
+    border-top: 1px solid #D9D9D9;
     p {
       padding: .32rem 0 .32rem .3rem;
       font-size: .28rem;
@@ -235,11 +236,10 @@
       }
     }
     button {
+      border: none;
       font-size: .32rem;
       color: rgba(255, 255, 255, 1);
       line-height: .36rem;
-      outline: none;
-      border: 0;
       background: rgba(219, 66, 50, 1);
       padding: .33rem .77rem .31rem .78rem;
     }
