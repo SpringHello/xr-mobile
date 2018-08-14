@@ -157,6 +157,18 @@
     TransferDomDirective as TransferDom
   } from 'vux'
   import axios from '@/util/iaxios'
+  var preventDefault = function (e) {
+    e.preventDefault();
+  };
+  function stop() {
+    document.body.style.overflow = 'hidden';
+    document.addEventListener("touchmove", preventDefault, false);//禁止页面滑动
+  }
+  /***取消滑动限制***/
+  function move() {
+    document.body.style.overflow = '';//出现滚动条
+    document.removeEventListener("touchmove", preventDefault, false);
+  }
   export default {
     components: {
       Swiper,
@@ -328,11 +340,9 @@
       ClikcMore(){
         this.showMask = !this.showMask
         if (this.showMask) {
-          document.body.style.overflow = 'hidden'
-          document.body.style.height = '100%'
+          stop()
         } else {
-          document.body.style.overflow = 'auto'
-          document.body.style.height = 'auto'
+          move()
         }
       },
       push(url){

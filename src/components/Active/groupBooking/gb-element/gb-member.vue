@@ -35,6 +35,18 @@
   import {TransferDom, Popup,XButton } from 'vux'
   import axios from  '../../../../util/iaxios'
   //var wx = require('weixin-js-sdk')
+  var mo = function (e) {
+    e.preventDefault();
+  };
+  function stop() {
+    document.body.style.overflow = 'hidden';
+    document.addEventListener("touchmove", mo, false);//禁止页面滑动
+  }
+  /***取消滑动限制***/
+  function move() {
+    document.body.style.overflow = '';//出现滚动条
+    document.removeEventListener("touchmove", mo, false);
+  }
   export default {
     components: {
       TransferDom,
@@ -151,11 +163,9 @@
       shareLink(){
         this.shareAlert = !this.shareAlert
         if (this.shareAlert) {
-          document.body.style.overflow = 'hidden'
-          document.body.style.height = '100%'
+          stop()
         } else {
-          document.body.style.overflow = 'auto'
-          document.body.style.height = 'auto'
+          move()
         }
       },
     },
@@ -169,8 +179,7 @@
       }
     },
     beforeRouteLeave(to, from, next){
-      document.body.style.overflow = 'auto'
-      document.body.style.height = 'auto'
+      move()
       next()
     }
   }
