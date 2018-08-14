@@ -23,7 +23,7 @@
         </div>
         <button
           :class="{byhui:item.operator=='优惠券',bxjin:item.operator=='现金券',bzkou:item.operator=='折扣券'}"
-          v-show="!item.maketicketover">立即使用
+          v-show="!item.maketicketover" @click="useNow(item.operator,item.id)">立即使用
         </button>
         <p class="top-right" v-show="item.maketicketover">
           <img src="../../assets/img/account/used.png">
@@ -101,6 +101,24 @@
             this.vouchers = response.data.result
           }
         })
+      },
+      //立即使用
+      useNow(name, id){
+        if (name == '现金券') {
+          axios.get('ticket/useMoneyTicket.do', {
+            params: {
+              moneyTicketId: id
+            }
+          }).then(response => {
+            if (response.status == 200 && response.data.status == 1) {
+              this.$router.push('mine')
+            } else {
+              this.$vux.toast.text(response.data.message, 'middle')
+            }
+          })
+        } else {
+          this.$router.push('hostShop')
+        }
       }
     },
   }

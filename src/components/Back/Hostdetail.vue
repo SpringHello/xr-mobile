@@ -34,16 +34,16 @@
           <p class="xin-title">主机网络信息</p>
           <ol>
             <li>所属VPC <span>{{details.vpc}}</span></li>
-            <li>绑定公网 <span style="color: #108EE9;">{{details.publicIp}}</span></li>
-            <li>所属负载均衡 <span style="color: #108EE9;">{{balance}}</span></li>
+            <li @click="Toip(details.publicIp)">绑定公网 <span style="color: #108EE9;">{{details.publicIp}}</span></li>
+            <li @click="Tobalance(balance)">所属负载均衡 <span style="color: #108EE9;">{{balance}}</span></li>
           </ol>
         </div>
         <div class="disks">
           <p class="disks-title">磁盘与快照</p>
           <ol>
-            <li>挂载磁盘 <span>{{disk}}</span></li>
-            <li>挂载磁盘容量统计 <span></span></li>
-            <li>主机快照 <span></span></li>
+            <li @click="Todisk(disk)">挂载磁盘 <span v-show="disk>0">{{disk}}</span></li>
+            <li>挂载磁盘容量统计 <span style="color:#666">--</span></li>
+            <li>主机快照 <span style="color:#666">--</span></li>
           </ol>
         </div>
 
@@ -129,7 +129,7 @@
         showSend: false,
         details: {},
         balance: '',
-        disk: '',
+        disk: 0,
         //主机操作
         hostHandle: [
           {img: require('../../assets/img/back/xufei.png'), title: '续费', url: ''},
@@ -193,6 +193,23 @@
 
       },
 
+      //跳转
+      Todisk(name){
+        if (name > 0) {
+          this.$router.push('bdisk')
+        }
+      },
+      Tobalance(name){
+        if (name) {
+          this.$router.push('bbalance')
+        }
+      },
+      Toip(name){
+        if (name) {
+          this.$router.push('belasticip')
+        }
+      }
+
     },
     beforeRouteEnter(to, from, next){
       axios.get('information/listVMByComputerId.do', {
@@ -204,7 +221,7 @@
           next(vm => {
               vm.details = response.data.result
               vm.balance = vm.details.loadbalance.join('|')
-              vm.disk = vm.details.disk.join('|')
+              vm.disk = vm.details.disk.length
             }
           )
         }
