@@ -41,7 +41,7 @@
         <div class="disks">
           <p class="disks-title">磁盘与快照</p>
           <ol>
-            <li @click="Todisk(disk)">挂载磁盘 <span>{{disk}}</span></li>
+            <li @click="Todisk(disk)">挂载磁盘 <span v-show="disk>0">{{disk}}</span></li>
             <li>挂载磁盘容量统计 <span style="color:#666">--</span></li>
             <li>主机快照 <span style="color:#666">--</span></li>
           </ol>
@@ -129,7 +129,7 @@
         showSend: false,
         details: {},
         balance: '',
-        disk: '',
+        disk: 0,
         //主机操作
         hostHandle: [
           {img: require('../../assets/img/back/xufei.png'), title: '续费', url: ''},
@@ -195,7 +195,7 @@
 
       //跳转
       Todisk(name){
-        if (name) {
+        if (name > 0) {
           this.$router.push('bdisk')
         }
       },
@@ -221,7 +221,7 @@
           next(vm => {
               vm.details = response.data.result
               vm.balance = vm.details.loadbalance.join('|')
-              vm.disk = vm.details.disk.join('|')
+              vm.disk = vm.details.disk.length
             }
           )
         }
