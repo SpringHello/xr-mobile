@@ -3,7 +3,7 @@
     <header class="header-wrapper">
       <p>控制台</p>
       <div style="display: flex">
-        <router-link class="userInfo" to="home">
+        <router-link class="userInfo" to="">
           <div>
             <span v-if="userInfo">{{alarm}}</span>
             <span v-else>0</span>
@@ -17,7 +17,7 @@
             <span>工单</span>
           </div>
         </router-link>
-        <router-link class="userInfo" to="home">
+        <router-link class="userInfo" to="">
           <div>
             <span v-if="userInfo">{{renewal}}</span>
             <span v-else>0</span>

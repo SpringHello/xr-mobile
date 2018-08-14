@@ -109,6 +109,7 @@
       },
       // 查看消息详情
       toview(msg){
+        this.ISread(this.type, msg.id)
         sessionStorage.setItem('content', JSON.stringify(msg))
         this.$router.push('Newdetail')
       },

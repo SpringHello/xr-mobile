@@ -1,7 +1,7 @@
 <template>
   <div id="mine">
     <router-link :to="userInfo?'account':'login'">
-      <header class="header-wrapper">
+      <header class="header-wrapper" @click="account">
         <div>
           <div class="login-left">
             <img src="../assets/img/mine/avatar.png" class="avator">

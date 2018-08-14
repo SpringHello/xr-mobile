@@ -72,9 +72,10 @@
         </div>
       </div>
     </div>
+    <div style="height: 1.2rem;"></div>
 
     <!--购买-->
-    <router-link :to="$store.state.userInfo?'home':'login'" class="buy">立即购买</router-link>
+    <!--<router-link :to="$store.state.userInfo?'home':'login'" class="buy">立即购买</router-link>-->
   </div>
 </template>
 
