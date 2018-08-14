@@ -10,10 +10,7 @@
     </div>
 
     <ul v-for="(item,index) in lists" :key="index" class="content"
-        @click="showDel(item.ordernumber)"
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
-        infinite-scroll-distance=".2">
+        @click="showDel(item.ordernumber)">
       <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
       <li>¥{{item.cost}}</li>
       <li>创建时间：{{item.ordercreatetime}}</li>
@@ -57,7 +54,7 @@
         alls: 0,
         order_type: '',
         pageType: {
-          pageSize: '10',
+          pageSize: '20',
           page: '1'
         },
         tabItems: [
@@ -166,8 +163,6 @@
         )
       },
       //上拉刷新
-      loadMore(){
-      },
       //详情
       check(item){
         sessionStorage.setItem('order-item', JSON.stringify(item))

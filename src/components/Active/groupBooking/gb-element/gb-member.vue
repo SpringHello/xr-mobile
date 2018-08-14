@@ -25,20 +25,21 @@
       <button @click="shareLink">分享链接</button>
       <div v-if="shareAlert" class="mask">
         <img src="../../../../assets/img/active/groupBooking/guide1.png">
-        <button @click="shareAlert=false">我知道了</button>
+        <x-button mini type="primary" @click.native="shareAlert=false">我知道了</x-button>
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {TransferDom, Popup,} from 'vux'
+  import {TransferDom, Popup,XButton } from 'vux'
   import axios from  '../../../../util/iaxios'
   //var wx = require('weixin-js-sdk')
   export default {
     components: {
       TransferDom,
       Popup,
+      XButton
     },
     data() {
       return {
