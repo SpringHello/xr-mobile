@@ -147,7 +147,10 @@
   }
 
   .btn {
-    padding: 0 .3rem;
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    margin: 0 5%;
     button {
       padding: .19rem 0;
       background: rgba(74, 144, 226, 1);

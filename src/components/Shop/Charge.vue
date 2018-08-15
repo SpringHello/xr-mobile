@@ -8,7 +8,7 @@
     </group>
     </Group>
 
-    <div style="padding: .8rem .3rem 0 .3rem;">
+    <div style="margin: .8rem .3rem 0 .3rem">
       <x-button type="primary" @click.native="CHARGE">充值</x-button>
     </div>
   </div>

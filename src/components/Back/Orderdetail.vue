@@ -76,7 +76,10 @@
   }
 
   .btn {
-    padding: 1.5rem .3rem;
+    width: 90%;
+    margin: 0 5%;
+    position: fixed;
+    bottom: .48rem;
     .weui-btn_primary {
       background: #4A90E2;
     }

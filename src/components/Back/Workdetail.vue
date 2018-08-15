@@ -185,7 +185,8 @@
   }
 
   .bottom {
-    margin-bottom: 1rem;
+    position: fixed;
+    bottom: 0;
     display: flex;
     button {
       outline: none;
@@ -202,16 +203,4 @@
     }
   }
 
-  .v-transfer-dom {
-    .vux-confirm {
-      .vux-x-dialog {
-        .weui-dialog {
-          .vux-prompt {
-            padding-bottom: .5rem;
-          }
-        }
-      }
-
-    }
-  }
 </style>
