@@ -5,7 +5,7 @@
     </x-header>
     <tab active-color="#4A90E2" default-color="#000">
       <tab-item :selected="index==0" v-for="(item,index) in tabItems" :key="index"
-                @on-item-click="workClick(item.type)">
+                @on-item-click="changeType(item.type)">
         {{item.title}}
       </tab-item>
     </tab>
@@ -37,22 +37,14 @@
       Actionsheet
     },
     beforeRouteEnter(to, from, next){
-      axios.get('order/getOrders.do', {
-        params: {
-          currentPage: 1,
-          pageSize: 10,
-          type: 'operating'
-        }
-      }).then(response => {
-        next(vm => {
-          vm.setData(response.data.result)
-        })
+      next(vm => {
+        vm.getWorks()
       })
     },
     data (){
       window.scrollTo(0, 0);
       return {
-        type: '',
+        type: 'operating',
         tabItems: [
           {title: '进行中', type: 'operating',},
           {title: '已关闭', type: 'closing',}
@@ -69,23 +61,16 @@
       }
     },
     methods: {
-      //导航点击事件
-      workClick(type){
-        switch (type) {
-          case 'operating':
-            this.type = 'operating'
-            break;
-          case 'closing':
-            this.type = 'closing'
-            break;
+      //获取工单数据
+      getWorks(){
+        let params = {
+          currentPage: 1,
+          pageSize: 10
         }
-        axios.get('order/getOrders.do', {
-          params: {
-            type: this.type,
-            currentPage: 1,
-            pageSize: 10
-          }
-        }).then(response => {
+        if (this.type) {
+          params.type = this.type
+        }
+        axios.get('order/getOrders.do', {params}).then(response => {
           if (response.status == 200 && response.data.status == 1) {
             this.worksItem = response.data.result
             response.data.result.forEach(item => {
@@ -94,6 +79,11 @@
             })
           }
         })
+      },
+      //导航点击事件
+      changeType(type){
+        this.type = type
+        this.getWorks()
       },
       //弹窗显示
       checkOrder(id, subdescription){
@@ -111,7 +101,9 @@
           }).then(response => {
             if (response.status == 200 && response.data.status == 1) {
               this.$vux.toast.text(response.data.msg, 'middle')
-              this.workClick(this.type)
+              this.worksItem = this.worksItem.filter(item => {
+                return item.id != this.id
+              })
             } else {
               this.$vux.toast.text(response.data.msg, 'middle')
             }
@@ -123,14 +115,6 @@
           this.$router.push('workdetail')
         }
       },
-      setData(result){
-        result.forEach(item => {
-          item.puddate = parseInt(item.puddate)
-          item.time = new Date(item.puddate).format('yyyy/MM/dd  hh:mm:ss')
-        })
-        this.worksItem = result
-        this.type = 'operating'
-      }
     }
   }
 </script>
