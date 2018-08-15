@@ -123,7 +123,7 @@
         detailsShow: false,
         one: false,
         two: false,
-        three: false,
+        three: true,
         disable: false,
 
       }
@@ -137,19 +137,18 @@
           switch (this.details.status) {
             case 2:
               this.two = true
+              this.three = false
               this.disable = true
               break;
             case 1:
               this.one = true
+              this.three = false
               this.disable = true
               break;
             case 0:
               this.detailsShow = true
               break;
           }
-        } else {
-          this.three = true
-          this.disable = true
         }
         var response = values[1]
         if (response.status == 200 && response.data.status == 1) {
@@ -160,6 +159,7 @@
       invoiceMake(){
         if (this.Froms.pmoney > this.invoice || this.Froms.pmoney < 1000) {
           this.$vux.toast.text('开票金额不能少于1000或者多于实际可开金额', 'middle')
+          return
         }
         let params = {
           amount: this.Froms.pmoney,//开票金额

@@ -3,7 +3,8 @@
     <x-header>发票申请记录</x-header>
     <div class="Trace">
       <Card v-for="(item,index) in invoiceList" :key="index" class="card">
-        <div slot="header" class="header">快递单号： </div>
+        <div slot="header" class="header"><span>{{item.status == 0 ? '已签收' : item.status == 1 ? '已驳回' : item.status == 2 ? '审核中' : '物流中'}}</span>
+        </div>
         <div slot="content" class="content" @click="detele()">
           <li>发票种类： {{item.type == 0 ? '普通发票' : '增值税专用发票'}}</li>
           <li>发票抬头： {{item.title}}</li>
@@ -68,6 +69,10 @@
         font-size: .32rem;
         color: rgba(51, 51, 51, 1);
         line-height: .45rem;
+        span {
+          float: right;
+          color: rgba(230, 0, 27, 1);
+        }
       }
       .content {
         padding: 0 0 .24rem 0;
