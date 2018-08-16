@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="invoice">
     <x-header>发票申请</x-header>
 
     <div class="top">
@@ -208,7 +208,7 @@
   }
 
   .money {
-    padding: .15rem .3rem 0 .31rem;
+    padding: .18rem .3rem .09rem .31rem;
     font-size: .26rem;
     color: rgba(178, 178, 178, 1);
     line-height: .33rem;
@@ -219,7 +219,7 @@
 
   .middle {
     .ticket {
-      padding: .15rem .3rem 0 .31rem;
+      padding: .18rem .3rem .09rem .31rem;
       font-size: .26rem;
       color: rgba(178, 178, 178, 1);
       line-height: .33rem;
