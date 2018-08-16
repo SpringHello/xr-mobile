@@ -32,6 +32,7 @@
       axios.get('activity/getActivitys.do', {
         params: {
           zoneId: $store.state.zone.zoneid,
+          isStart: '2'
         }
       }).then(response => {
         next(vm => {
