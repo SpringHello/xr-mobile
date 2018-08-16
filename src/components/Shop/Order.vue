@@ -194,7 +194,7 @@
       background: rgba(255, 255, 255, 0.7);
       p {
         padding: .2rem .3rem;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #e7e7e7;
         font-size: .28rem;
         color: rgba(102, 102, 102, 1);
         line-height: .4rem;
