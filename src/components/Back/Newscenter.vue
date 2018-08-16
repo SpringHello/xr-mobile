@@ -4,7 +4,7 @@
     <div class="newscenter">
       <div class="news-nav">
         <tab active-color="#4A90E2">
-          <tab-item @on-item-click="getData(item.type)" v-for="(item,index) in news"
+          <tab-item @on-item-click="changeType(item.type)" v-for="(item,index) in news"
                     class="tab-item" :key="index" :selected="index==0">
             {{item.title}}({{item.num}})
           </tab-item>
@@ -14,15 +14,15 @@
       <swipeout>
         <swipeout-item v-for="(item,index) in datas" class="content-item" :key="`${item.id+Math.random()}`">
           <div slot="right-menu">
-            <swipeout-button @click.native="ISread(type,item.id)" :width="(type=='all'|| type=='unread')?80:0"
+            <swipeout-button @click.native="ISread(item.id)" :width="(type=='all'|| type=='unread')?80:0"
                              background-color="#4A90E2"
                              v-if="type=='all'|| type=='unread'" text="已读">
             </swipeout-button>
-            <swipeout-button @click.native="UNread(type,item.id)" :width="(type=='all'|| type=='isread')?80:0"
+            <swipeout-button @click.native="UNread(item.id)" :width="(type=='all'|| type=='isread')?80:0"
                              background-color="#4A90E2"
                              v-if="type=='all'|| type=='isread'" text="未读">
             </swipeout-button>
-            <swipeout-button @click.native="Delete(type,item.id)" :width="80" background-color="#DB4232"
+            <swipeout-button @click.native="Delete(item.id)" :width="80" background-color="#DB4232"
                              text="删除"></swipeout-button>
           </div>
           <div slot="content" class="demo-content">
@@ -49,6 +49,7 @@
   import {XHeader, Tab, TabItem, Swipeout, SwipeoutItem, SwipeoutButton} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
+  import $ from 'jquery'
   export default{
     components: {
       XHeader,
@@ -58,6 +59,11 @@
       SwipeoutItem,
       SwipeoutButton
     },
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.searchNext()
+      })
+    },
     data (){
       window.scrollTo(0, 0);
       return {
@@ -66,86 +72,109 @@
           {title: '已读', type: 'isread', status: false, num: ''},
           {title: '未读', type: 'unread', status: false, num: ''},
         ],
+        pageType: {
+          pageSize: '10',
+          page: 0
+        },
         datas: [],
-        type: '',
+        type: 'all',
         width: 0
       }
     },
-    methods: {
-      //获取数据
-      getData(type){
-        let params = {
-          rows: 15,
-          page: 1,
+    mounted(){
+      $(window).scroll(() => {
+        var scrollTop = $(window).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(window).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+          this.searchNext()
         }
-        if (type == 'isread') {
-          params.isRead = '1'
-          this.type = 'isread'
-        } else if (type == 'unread') {
-          params.isRead = '0'
-          this.type = 'unread'
-        } else if (type == 'all') {
-          this.type = 'all'
-          params.isRead = '2'
+      });
+    },
+    methods: {
+      //获取下一页数据
+      searchNext(){
+        this.pageType.page += 1
+        let params = {
+          rows: this.pageType.pageSize,
+          page: this.pageType.page,
+        }
+        switch (this.type) {
+          case 'all':
+            params.isRead = '2'
+            break;
+          case 'isread':
+            params.isRead = '1'
+            break;
+          case 'unread':
+            params.isRead = '0'
+            break;
         }
         axios.post('user/getEventNotifyList.do', params).then(response => {
-          if (response.status == 200 && response.data.status == 1) {
-            this.datas = response.data.result
-            this.news.forEach(item => {
-              switch (item.type) {
-                case 'all':
-                  item.num = response.data.pageTotal
-                  break;
-                case 'isread':
-                  item.num = response.data.alreadyTotal
-                  break;
-                case 'unread':
-                  item.num = response.data.noReadTotal
-                  break;
-              }
-            })
+            if (response.status == 200 && response.data.status == 1) {
+              this.datas = this.datas.concat(response.data.result)
+              this.news.forEach(item => {
+                switch (item.type) {
+                  case 'all':
+                    item.num = response.data.pageTotal
+                    break;
+                  case 'isread':
+                    item.num = response.data.alreadyTotal
+                    break;
+                  case 'unread':
+                    item.num = response.data.noReadTotal
+                    break;
+                }
+              })
+            }
           }
-        })
+        )
+      },
+      changeType(type){
+        this.type = type
+        this.datas = []
+        this.pageType.page = 0
+        this.searchNext()
       },
       // 查看消息详情
       toview(msg){
+        this.ISread(msg.id)
         sessionStorage.setItem('content', JSON.stringify(msg))
         this.$router.push('Newdetail')
       },
       //操作
-      ISread(type, id){
+      ISread(id){
         axios.post(`user/readedEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
           if (response.status == 200 && response.data.status == 1
           ) {
-            this.getData(type)
+            this.changeType(this.type)
           }
         })
       },
-      Delete(type, id){
+      Delete(id){
         axios.post(`user/delEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1
-          ) {
-            this.getData(type)
+          if (response.status == 200 && response.data.status == 1) {
+            /*this.datas = this.datas.filter(item => {
+             return item.id != id
+             })*/
+            this.changeType(this.type)
           }
         })
       },
-      UNread(type, id){
+      UNread(id){
         axios.post(`user/unreadedEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
           if (response.status == 200 && response.data.status == 1
           ) {
-            this.getData(type)
+            this.changeType(this.type)
           }
         })
       },
-    },
-    created(){
-      this.getData('all')
     },
 
   }

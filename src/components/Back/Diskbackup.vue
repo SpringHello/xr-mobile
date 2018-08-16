@@ -101,9 +101,9 @@
 
   button {
     position: fixed;
-    bottom: .48rem;
+    bottom: 0;
     width: 90%;
-    margin: 0 5% 0 5%;
+    margin: 0 5%;
     padding: .19rem 0;
     outline: none;
     background: rgba(74, 144, 226, 1);

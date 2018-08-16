@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="account">
     <x-header>账户余额</x-header>
     <header class="header-wrapper">
       <div>

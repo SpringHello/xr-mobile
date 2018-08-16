@@ -105,7 +105,9 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .btn {
-    padding: 0 .3rem;
-    margin-top: 3.86rem;
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    margin: 0 5%;
   }
 </style>

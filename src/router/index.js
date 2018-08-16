@@ -7,6 +7,7 @@ import Home from '@/components/Home'
 import Sort from '@/components/Sort'
 import Console from '@/components/Console'
 import Mine from '@/components/Mine'
+import test from '@/components/Test'
 
 import Warn from '@/components/Back/Warn'
 
@@ -118,6 +119,7 @@ export default new Router({
             {path: 'Sort', name: 'Sort', component: Sort},
             {path: 'Console', name: 'Console', component: Console},
             {path: 'Mine', name: 'Mine', component: Mine},
+            {path: 'test', name: 'test', component: test},
           ]
         },
         {path: 'Bhost', name: 'Bhost', component: Bhost},

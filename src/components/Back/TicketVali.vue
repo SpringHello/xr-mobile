@@ -1,5 +1,5 @@
 <template>
-  <div id="ticket">
+  <div id="invoice">
     <x-header>增票资质认证</x-header>
 
     <div class="top">
@@ -84,6 +84,7 @@
     padding: .3rem .2rem;
     background: #F7FBFF;
     justify-content: space-between;
+    margin-bottom: .2rem;
     > div {
       width: 95%;
       p {
@@ -99,7 +100,10 @@
   }
 
   .btn {
-    padding: 1.5rem .3rem;
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    margin: 0 5%;
     .weui-btn_primary {
       background: #4A90E2;
     }

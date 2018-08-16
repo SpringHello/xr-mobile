@@ -60,6 +60,8 @@
 
 <style rel="stylesheet/less" lang="less" scoped>
   .button {
+    position: fixed;
+    bottom: 0;
     margin: 1.5rem 5% 0 5%;
     width: 90%;
     display: block;
