@@ -49,7 +49,6 @@
   import {XHeader, Tab, TabItem, Swipeout, SwipeoutItem, SwipeoutButton} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import $ from 'jquery'
   export default{
     components: {
       XHeader,
@@ -82,14 +81,15 @@
       }
     },
     mounted(){
-      $(window).scroll(() => {
-        var scrollTop = $(window).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(window).height();
+      window.onscroll = () => {
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight;
+        var windowHeight = document.documentElement.clientHeight;
         if (scrollTop + windowHeight == scrollHeight) {
           this.searchNext()
+          return
         }
-      });
+      };
     },
     methods: {
       //获取下一页数据
@@ -147,9 +147,13 @@
         axios.post(`user/readedEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1
-          ) {
-            this.changeType(this.type)
+          if (response.status == 200 && response.data.status == 1) {
+            if (this.type != 'all') {
+              this.datas = this.datas.filter(item => {
+                return item.id != id
+              })
+            }
+            this.getNumber()
           }
         })
       },
@@ -158,10 +162,10 @@
           list: JSON.stringify([{'id': id}])
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            /*this.datas = this.datas.filter(item => {
-             return item.id != id
-             })*/
-            this.changeType(this.type)
+            this.datas = this.datas.filter(item => {
+              return item.id != id
+            })
+            this.getNumber()
           }
         })
       },
@@ -169,12 +173,39 @@
         axios.post(`user/unreadedEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1
-          ) {
-            this.changeType(this.type)
+          if (response.status == 200 && response.data.status == 1) {
+            if (this.type != 'all') {
+              this.datas = this.datas.filter(item => {
+                return item.id != id
+              })
+            }
+            this.getNumber()
           }
         })
       },
+      getNumber(){
+        let params = {
+          rows: this.pageType.pageSize,
+          page: this.pageType.page,
+          isRead: '2'
+        }
+        axios.post('user/getEventNotifyList.do', params).then(response => {
+          this.datas = this.datas.concat(response.data.result)
+          this.news.forEach(item => {
+            switch (item.type) {
+              case 'all':
+                item.num = response.data.pageTotal
+                break;
+              case 'isread':
+                item.num = response.data.alreadyTotal
+                break;
+              case 'unread':
+                item.num = response.data.noReadTotal
+                break;
+            }
+          })
+        })
+      }
     },
 
   }

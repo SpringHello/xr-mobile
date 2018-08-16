@@ -32,7 +32,6 @@
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {Group, XHeader, Tab, TabItem, XButton, Actionsheet} from 'vux'
-  import $ from 'jquery'
   export default{
     components: {
       Group,
@@ -72,14 +71,15 @@
       }
     },
     mounted(){
-      $(window).scroll(() => {
-        var scrollTop = $(window).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(window).height();
+      window.onscroll = () => {
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight;
+        var windowHeight = document.documentElement.clientHeight;
         if (scrollTop + windowHeight == scrollHeight) {
           this.searchNext()
+          return
         }
-      });
+      };
     },
     methods: {
       //获取下一页数据
