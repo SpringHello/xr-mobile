@@ -969,7 +969,53 @@
       vpc(){
         this.networkCardChange();
       },
-      cores(){
+      cores(val){
+        if (this.regional == '39a6af0b-6624-4194-b9d5-0c552d903858' || this.regional == '1ce0d0b9-a964-432f-8078-a61100789e30') {
+          switch (val[0]) {
+            case '1':
+              this.memory[0] = '1'
+              break;
+            case '2':
+              this.memory[0] = '2'
+              break;
+            case '4':
+              this.memory[0] = '4'
+              break;
+            case '8':
+              this.memory[0] = '8'
+              break;
+            case '16':
+              this.memory[0] = '16'
+              break;
+            case '32':
+              this.memory[0] = '64'
+              break;
+            case '64':
+              this.memory[0] = '128'
+              break;
+          }
+        } else {
+          switch (val[0]) {
+            case '1':
+              this.memory[0] = '1'
+              break;
+            case '2':
+              this.memory[0] = '4'
+              break;
+            case '4':
+              this.memory[0] = '4'
+              break;
+            case '8':
+              this.memory[0] = '16'
+              break;
+            case '16':
+              this.memory[0] = '16'
+              break;
+            case '32':
+              this.memory[0] = '32'
+              break;
+          }
+        }
         this.showCore();
         this.coreValue();
         this.queryCprices();
