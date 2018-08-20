@@ -17,7 +17,7 @@
             <!--<img class="img" v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">-->
             <div>
               <p class="soures-title">名称: {{item.title}}</p>
-              <p class="soures-desc">镜像系统: {{item.desc}}</p>
+              <p class="soures-desc">镜像系统: {{item.name}}</p>
             </div>
           </div>
           <p class="check" @click="push(item)">详细信息</p>
@@ -50,7 +50,8 @@
           list.push({
             status: type,
             title: host.computername,
-            desc: host.templatename,
+            name: host.templatename,
+            desc: host.serviceoffername,
             id: host.computerid,
             price: host.cpCase,
             password: host.connectpassword,
@@ -137,7 +138,8 @@
               this.list.push({
                 status: type,
                 title: host.computername,
-                desc: host.templatename,
+                name: host.templatename,
+                desc: host.serviceoffername,
                 id: host.computerid,
                 price: host.cpCase,
                 password: host.connectpassword,

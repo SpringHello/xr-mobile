@@ -351,8 +351,7 @@
       }
     },
     beforeRouteLeave(to, from, next){
-      document.body.style.overflow = 'auto'
-      document.body.style.height = 'auto'
+      move()
       next()
     }
   }
