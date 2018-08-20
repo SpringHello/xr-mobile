@@ -28,7 +28,7 @@
         <x-input title="联系电话" placeholder="请输入联系电话" v-model="Froms.pphone" required ref="from1"></x-input>
       </group>
 
-
+      <div style="height:1.5rem;"></div>
       <div class="btn">
         <x-button type="primary" @click.native="invoiceMake">确认开票</x-button>
       </div>
@@ -70,8 +70,7 @@
         <x-input title="联系电话" placeholder="请输入联系电话" v-model="Froms.pphone" required ref="from2"></x-input>
       </group>
 
-      <div style="height: 1.5rem;"></div>
-
+      <div style="height:1.5rem;"></div>
       <div class="btn">
         <x-button type="primary" @click.native="invoiceMake" :disabled="disable">确认开票</x-button>
       </div>
