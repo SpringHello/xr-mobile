@@ -12,7 +12,7 @@
           <ul>
             <li>主机状态：{{details.computerStatus ? "开机" : "关机"}}</li>
             <li>系统镜像：{{details.template}}</li>
-            <li>系统盘：<span style="color:rgba(74,144,226,1);">{{details.memory}}G</span></li>
+            <li>系统盘：<span style="color:rgba(74,144,226,1);">暂无数据</span></li>
             <li>内网IP：{{details.privateIp}}</li>
             <li>主机配置：{{$route.query.configs}}</li>
             <li>主机密码：<span style="color:rgba(74,144,226,1);" @click="sendPassword">发送密码</span></li>

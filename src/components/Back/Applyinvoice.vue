@@ -5,7 +5,7 @@
     <div class="top">
       <img src="../../assets/img/back/yjfk.png">
       <div>
-        <p>1.您选择的发票金额不能小于10000元，请累计之后一并申请。</p>
+        <p>1.您选择的发票金额不能小于1000元，请累计之后一并申请。</p>
         <p>2.发票寄出时间：每月20号统一寄出，15号之前申请的发票将在当月20号寄出，15号之后申请的发票将在次月20号寄出。</p>
       </div>
     </div>
@@ -69,6 +69,8 @@
         <x-input title="收件人" placeholder="请输入收件人名字" v-model="Froms.pname" required ref="from2"></x-input>
         <x-input title="联系电话" placeholder="请输入联系电话" v-model="Froms.pphone" required ref="from2"></x-input>
       </group>
+
+      <div style="height: 1rem;"></div>
 
       <div class="btn">
         <x-button type="primary" @click.native="invoiceMake" :disabled="disable">确认开票</x-button>
