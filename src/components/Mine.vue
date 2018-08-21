@@ -285,7 +285,7 @@
         isRead: '2',
         zoneId: $store.state.zone.zoneid,
         page: 1,
-        rows: 15
+        rows: 1
       })
 
       Promise.all([device, newcounts]).then(values => {
