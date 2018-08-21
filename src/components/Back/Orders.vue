@@ -1,25 +1,29 @@
 <template>
   <div id="orders">
-    <x-header>订单管理</x-header>
-    <div class="header">
-      <tab active-color="#4A90E2" default-color="#333">
-        <tab-item :selected="index==0" v-for="(item,index) in tabItems" :key="index" :value="item.type"
-                  @on-item-click="changeType(item.type)">{{item.name}}
-        </tab-item>
-      </tab>
+    <div style="position: fixed;top: 0;width: 100%;z-index: 7;">
+      <x-header>订单管理</x-header>
+      <div class="header">
+        <tab active-color="#4A90E2" default-color="#333">
+          <tab-item :selected="index==0" v-for="(item,index) in tabItems" :key="index" :value="item.type"
+                    @on-item-click="changeType(item.type)">{{item.name}}
+          </tab-item>
+        </tab>
+      </div>
     </div>
 
-    <ul v-for="(item,index) in lists" :key="item.ordernumber" class="content"
-        @click="showDel(item.ordernumber)">
-      <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
-      <li>¥{{item.cost}}</li>
-      <li>创建时间：{{item.ordercreatetime}}</li>
-      <li>订单编号：{{item.ordernumber}}</li>
-      <p class="btns">
-        <x-button mini @click.native="check(item)">详情</x-button>
-        <x-button type="primary" mini v-show="!item.paymentstatus" @click.native="pay">支付</x-button>
-      </p>
-    </ul>
+    <div style="margin-top: 2rem">
+      <ul v-for="(item,index) in lists" :key="item.ordernumber" class="content"
+          @click="showDel(item.ordernumber)">
+        <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
+        <li>¥{{item.cost}}</li>
+        <li>创建时间：{{item.ordercreatetime}}</li>
+        <li>订单编号：{{item.ordernumber}}</li>
+        <p class="btns">
+          <x-button mini @click.native="check(item)">详情</x-button>
+          <x-button type="primary" mini v-show="!item.paymentstatus" @click.native="pay">支付</x-button>
+        </p>
+      </ul>
+    </div>
 
 
     <actionsheet v-model="showDelete" :menus="menusDelete" :close-on-clicking-mask="false" show-cancel

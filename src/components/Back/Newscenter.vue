@@ -1,7 +1,7 @@
 <template>
   <div>
-    <x-header></x-header>
-    <div class="newscenter">
+    <div style="position: fixed;top: 0;width: 100%;z-index: 7;">
+      <x-header></x-header>
       <div class="news-nav">
         <tab active-color="#4A90E2">
           <tab-item @on-item-click="changeType(item.type)" v-for="(item,index) in news"
@@ -10,7 +10,9 @@
           </tab-item>
         </tab>
       </div>
+    </div>
 
+    <div style="margin-top: 2rem;">
       <swipeout>
         <swipeout-item v-for="(item,index) in datas" class="content-item" :key="`${item.id+Math.random()}`">
           <div slot="right-menu">
@@ -41,6 +43,7 @@
         </swipeout-item>
       </swipeout>
     </div>
+
 
   </div>
 </template>
@@ -212,15 +215,13 @@
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-  .newscenter {
-    .news-nav {
-      margin-bottom: .2rem;
-      .tab-item {
-        font-size: .3rem;
-        color: #000;
-      }
-    }
 
+  .news-nav {
+    margin-bottom: .2rem;
+    .tab-item {
+      font-size: .3rem;
+      color: #000;
+    }
   }
 
   .content-item {
