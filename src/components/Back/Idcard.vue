@@ -9,7 +9,7 @@
              slot="right">
       </x-input>
     </group>
-    <group>
+    <group style="margin-bottom: 2rem;">
       <x-input title="+ 86" placeholder="请填写手机号码" placeholder-align="left" v-model="froms.phone"></x-input>
       <x-input title="验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.phoneCode">
         <button slot="right" class="button" @click.prevent="getPhoneCode">{{message}}</button>

@@ -99,6 +99,10 @@
     }
   }
 
+  .middle{
+    margin-bottom: 2rem;
+  }
+
   .btn {
     position: fixed;
     bottom: .48rem;

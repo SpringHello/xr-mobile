@@ -88,6 +88,7 @@
   }
 
   .backup {
+    margin-bottom: 1rem;
     p {
       padding: .56rem 0 0 .39rem;
       font-size: .24rem;

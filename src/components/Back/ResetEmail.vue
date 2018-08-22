@@ -114,7 +114,7 @@
     }
   }
   .middle{
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     .button {
       width: 1.8rem;
       padding: .14rem .1rem;
