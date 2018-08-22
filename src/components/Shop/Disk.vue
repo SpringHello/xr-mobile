@@ -142,7 +142,7 @@
           this.$vux.toast.text('请输入磁盘名', 'middle')
           return
         }
-        if (!RegExp.phoneRegexp.test(this.diskName.trim())) {
+        if (!RegExp.Name.test(this.diskName.trim())) {
           this.$vux.toast.text('请输入2-16位中文、英文字母或数字', 'middle')
           return
         }

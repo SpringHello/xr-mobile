@@ -113,17 +113,19 @@
       line-height: .36rem;
     }
   }
-
-  .button {
-    width: 1.8rem;
-    padding: .14rem .1rem;
-    background: rgba(74, 144, 226, 1);
-    border-radius: .06rem;
-    border: 2px solid rgba(74, 144, 226, 1);
-    font-size: .24rem;
-    color: #FFF;
-    line-height: .33rem;
-    outline: none;
+  .middle{
+    margin-bottom: 1rem;
+    .button {
+      width: 1.8rem;
+      padding: .14rem .1rem;
+      background: rgba(74, 144, 226, 1);
+      border-radius: .06rem;
+      border: 2px solid rgba(74, 144, 226, 1);
+      font-size: .24rem;
+      color: #FFF;
+      line-height: .33rem;
+      outline: none;
+    }
   }
 
   .btns {
