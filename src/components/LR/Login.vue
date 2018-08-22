@@ -1,5 +1,5 @@
 <template>
-  <div style="background:rgba(255,255,255,1);height: 100%;">
+  <div style="background:rgba(255,255,255,1);height: 100%;min-height: 500px;">
     <x-header>登录
       <router-link slot="right" to="register">注册</router-link>
     </x-header>
