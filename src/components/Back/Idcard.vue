@@ -148,7 +148,7 @@
 
   .btn {
     position: fixed;
-    bottom: 0;
+    bottom: .48rem;
     width: 90%;
     margin: 0 5%;
     button {

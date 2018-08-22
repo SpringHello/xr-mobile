@@ -134,8 +134,8 @@
 
   .btns {
     position: fixed;
-    bottom: 0;
-    margin: 1.5rem 5% 0 5%;
+    bottom: .48rem;
+    margin: 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);

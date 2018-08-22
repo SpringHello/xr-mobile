@@ -9,7 +9,7 @@
         {{item.title}}
       </tab-item>
     </tab>
-    <div class="work-item">
+    <div class="work-item" v-show="worksItem.length!=0">
       <ul>
         <li v-for="(item,index) in worksItem" :key="index" @click="checkOrder(item.id,item.subdescription)">
           <p>{{item.title}}</p>
