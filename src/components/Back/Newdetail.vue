@@ -27,7 +27,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .newdetail {
     margin: .2rem;
-    height: 3.5rem;
+    /*height: 3.5rem;*/
     background: #FFF;
     text-align: center;
     h6 {
@@ -44,8 +44,8 @@
       margin-top: .24rem;
       border-top: 1px solid #E8E8E8;
       text-align: left;
-      font-size:.24rem;
-      color:rgba(102,102,102,1);
+      font-size: .24rem;
+      color: rgba(102, 102, 102, 1);
       line-height: .45rem;
       padding: .24rem;
     }
