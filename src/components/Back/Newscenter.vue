@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div style="margin-top: 2rem;">
+    <div style="margin-top: 2rem;" v-if="datas.length!=0">
       <swipeout>
         <swipeout-item v-for="(item,index) in datas" class="content-item" :key="`${item.id+Math.random()}`">
           <div slot="right-menu">
@@ -44,6 +44,10 @@
       </swipeout>
     </div>
 
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
 
   </div>
 </template>
@@ -70,9 +74,9 @@
       window.scrollTo(0, 0);
       return {
         news: [
-          {title: '全部', type: 'all', status: false, num: ''},
-          {title: '已读', type: 'isread', status: false, num: ''},
-          {title: '未读', type: 'unread', status: false, num: ''},
+          {title: '全部', type: 'all', num: ''},
+          {title: '已读', type: 'isread', num: ''},
+          {title: '未读', type: 'unread', num: ''},
         ],
         pageType: {
           pageSize: '10',
@@ -193,7 +197,6 @@
           isRead: '2'
         }
         axios.post('user/getEventNotifyList.do', params).then(response => {
-          this.datas = this.datas.concat(response.data.result)
           this.news.forEach(item => {
             switch (item.type) {
               case 'all':
@@ -264,6 +267,20 @@
           }
         }
       }
+    }
+  }
+
+  .nodata {
+    text-align: center;
+    margin: 50% auto;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    p {
+      font-size: .36rem;
+      color: rgba(153, 153, 153, 1);
+      line-height: 0;
     }
   }
 

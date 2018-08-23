@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div style="margin-top: 2rem">
+    <div style="margin-top: 2rem" v-if="lists.length!=0">
       <ul v-for="(item,index) in lists" :key="item.ordernumber" class="content"
           @click="showDel(item.ordernumber)">
         <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
@@ -25,6 +25,10 @@
       </ul>
     </div>
 
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
 
     <actionsheet v-model="showDelete" :menus="menusDelete" :close-on-clicking-mask="false" show-cancel
                  @on-click-menu="deleteOrder"></actionsheet>
@@ -216,6 +220,20 @@
         margin-top: .24rem;
         border-top: 1px solid #e7e7e7;
         text-align: right;
+      }
+    }
+
+    .nodata {
+      text-align: center;
+      margin: 50% auto;
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      p {
+        font-size: .36rem;
+        color: rgba(153, 153, 153, 1);
+        line-height: 0;
       }
     }
   }

@@ -19,7 +19,10 @@
         </li>
       </ul>
     </div>
-    <p v-else style="color: #ccc;text-align: center;font-size: .28rem;margin: 50% 0;">暂无数据</p>
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
   </div>
 </template>
 
@@ -141,6 +144,20 @@
           border-bottom: none;
         }
       }
+    }
+  }
+
+  .nodata {
+    text-align: center;
+    margin: 50% auto;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    p {
+      font-size: .36rem;
+      color: rgba(153, 153, 153, 1);
+      line-height: 0;
     }
   }
 </style>
