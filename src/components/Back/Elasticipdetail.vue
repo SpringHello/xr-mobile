@@ -45,10 +45,6 @@
       </Group>
     </div>
 
-    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="70%"
-           :time="3000"></toast>
-    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="65%"
-           :time="3000"></toast>
   </div>
 </template>
 
@@ -56,20 +52,7 @@
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {CellFormPreview, Group, Cell, XHeader, XSwitch, Confirm, Toast, PopupPicker, Alert} from 'vux'
-  //  function getIP(cb, ipId) {
-  //    axios.get('network/listPublicIpById.do', {
-  //      params: {
-  //        ipId,
-  //        zoneId: $store.state.zone.zoneid,
-  //      }
-  //    }).then(response => {
-  //      if (response.status == 200 && response.data.status == 1) {
-  //        let ips = response.data.result[0]
-  //        cb(ips)
-  //      }
-  //    })
-  //
-  //  }
+
   export default{
     components: {
       CellFormPreview,
@@ -105,10 +88,7 @@
         value6: [],
         list: [{name: '绑定云主机', value: 'host', parent: 0}, {name: '绑定NAT网关', value: 'NAT', parent: 0},],
         details: {},
-        showOK: false,
-        messageOK: '',
-        showError: false,
-        messageError: ''
+
       }
     },
     methods: {
@@ -156,14 +136,12 @@
               }
               details.status = 4
               axios.get(url, {params}).then(response => {
+                  this.$router.push('/ruicloud/belasticip')
                   if (response.status == 200 && response.data.status == 1) {
-                    this.$router.push('/ruicloud/belasticip')
-                    this.showOK = true
-                    this.messageOK = response.data.message
+                    this.$vux.toast.text(response.data.message, 'middle')
                   }
                   else {
-                    this.showError = true
-                    this.messageError = response.data.message
+                    this.$vux.toast.text(response.data.message, 'middle')
                   }
                 }
               )
@@ -186,12 +164,10 @@
               }).then(response => {
                   if (response.status == 200 && response.data.status == 1) {
                     this.$router.push('/ruicloud/belasticip')
-                    this.showOK = true
-                    this.messageOK = response.data.message
+                    this.$vux.toast.text(response.data.message, 'middle')
                   }
                   else {
-                    this.showError = true
-                    this.messageError = response.data.message
+                    this.$vux.toast.text(response.data.message, 'middle')
                   }
                 }
               )
@@ -243,11 +219,12 @@
               zoneId: $store.state.zone.zoneid
             }
           }).then(response => {
+            this.$router.push('/ruicloud/belasticip')
             if (response.status == 200 && response.data.status == 1) {
-              this.$router.push('/ruicloud/belasticip')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {
               this.$vux.toast.text(response.data.message, 'middle')
+
             }
           })
         }
@@ -259,8 +236,8 @@
               zoneId: $store.state.zone.zoneid
             }
           }).then(response => {
+            this.$router.push('/ruicloud/belasticip')
             if (response.status == 200 && response.data.status == 1) {
-              this.$router.push('/ruicloud/belasticip')
               this.$vux.toast.text(response.data.message, 'middle')
             } else {
               this.$vux.toast.text(response.data.message, 'middle')

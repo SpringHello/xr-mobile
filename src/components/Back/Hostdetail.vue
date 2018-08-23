@@ -87,7 +87,6 @@
             </div>
           </confirm>
         </div>
-        <toast v-model="show" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
       </div>
     </div>
   </div>
@@ -124,8 +123,6 @@
         rename: false,
         name: this.$route.query.name,
         newName: '',
-        //暂未开放
-        show: false,
         showSend: false,
         details: {},
         balance: '',
@@ -148,7 +145,7 @@
       //暂未开放
       onOpen(url){
         if (url == '') {
-          this.show = true
+          this.$vux.toast.text('暂未开放', 'middle')
         }
       },
       //主机重命名

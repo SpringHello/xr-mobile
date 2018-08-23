@@ -49,9 +49,6 @@
         </div>
       </confirm>
     </div>
-
-    <toast v-model="showOK" type="text" is-show-mask :text="messageOK" position="middle" width="35%"></toast>
-    <toast v-model="showError" type="text" is-show-mask :text="messageError" position="middle" width="35%"></toast>
   </div>
 </template>
 
@@ -98,10 +95,6 @@
         details: {},
         mount: [],
         mountHostList: [],
-        showOK: false,
-        messageOK: '',
-        showError: false,
-        messageError: ''
       }
     },
     beforeRouteEnter(to, from, next){
@@ -165,11 +158,11 @@
           }
           getDisk(cb, this.$route.params.diskId)
           if (response.status == 200 && response.statusText == 'OK') {
-            this.showOK = true
-            this.messageOK = response.data.message
+            this.$vux.toast.text(response.data.message, 'middle')
+            this.mount[0] = ''
           } else {
-            this.showError = true
-            this.messageError = response.data.message
+            this.$vux.toast.text(response.data.message, 'middle')
+            this.$router.push('/ruicloud/bdisk')
           }
         })
       },
@@ -203,11 +196,10 @@
           }
           getDisk(cb, this.$route.params.diskId)
           if (response.status == 200 && response.statusText == 'OK') {
-            this.showOK = true
-            this.messageOK = response.data.message
+            this.$vux.toast.text(response.data.message, 'middle')
           } else {
-            this.showError = true
-            this.messageError = response.data.message
+            this.$vux.toast.text(response.data.message, 'middle')
+            this.$router.push('/ruicloud/bdisk')
           }
         })
       },
@@ -218,11 +210,10 @@
             id: this.details.id,
           }
         }).then(response => {
+          this.$router.push('/ruicloud/bdisk')
           if (response.status == 200 && response.data.status == 1) {
-            this.$router.push('/ruicloud/bdisk')
             this.$vux.toast.text(response.data.message, 'middle')
           } else {
-            this.$router.push('/ruicloud/bdisk')
             this.$vux.toast.text(response.data.message, 'middle')
 
           }
