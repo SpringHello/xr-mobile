@@ -3,8 +3,7 @@
     <x-header></x-header>
     <div class="host">
       <div class="host-item">
-        <h6 class="title" v-if="!details.mounton && !details.mountonname && details.status == 1">挂载磁盘信息</h6>
-        <h6 class="title" v-if="details.mounton && details.mountonname && details.status == 1">卸载磁盘信息</h6>
+        <h6 class="title">磁盘信息</h6>
         <ul>
           <li>硬盘名称 <span style="vertical-align: middle;">{{diskname}}<img src="../../assets/img/back/Fill.png"
                                                                           style="padding-left: .2rem;"
@@ -27,7 +26,7 @@
                     v-if="!details.mounton && !details.mountonname && details.status == 1"
                     @on-show="showMount" show-name @on-change="onChange"></popup-picker>
       <x-switch title="卸载" class="bei" v-if="details.mounton && details.mountonname && details.status == 1"
-                @click.native="showUnload(details)"></x-switch>
+                @click.native="showUnload(details)" v-model="showload"></x-switch>
       <cell title="硬盘备份" is-link @click.native="ToBackup"></cell>
     </group>
 
@@ -95,6 +94,7 @@
         diskname: '',
         newName: '',
 
+        showload: false,
         details: {},
         mount: [],
         mountHostList: [],
@@ -143,6 +143,9 @@
           content: '是否将确认将硬盘（' + details.diskname + '）从主机（' + details.mountonname + '）卸载，卸载之后该主机将失去该硬盘所存信息',
           onConfirm: () => {
             this._unloadOk()
+          },
+          onCancel: () => {
+            this.showload = false
           }
         })
       },

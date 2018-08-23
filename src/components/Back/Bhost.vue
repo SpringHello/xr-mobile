@@ -162,7 +162,11 @@
           price: item.price,
           password: item.password
         }
-        this.$router.push({path: this.address, query: params})
+        if (item.id) {
+          this.$router.push({path: this.address, query: params})
+        } else {
+          this.$vux.toast.text('暂无详情信息', 'middle')
+        }
       },
       // 操作
       operation(id, type, statusL){
