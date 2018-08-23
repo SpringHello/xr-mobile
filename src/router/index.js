@@ -186,10 +186,10 @@ const ActivityLink = () => import('@/components/Active/groupBooking/LinkPage')
 Vue.use(Router)
 
 export default new Router({
-  //mode: 'history',
+  mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/ruicloud',
       name: 'App',
       component: App,
       children: [
