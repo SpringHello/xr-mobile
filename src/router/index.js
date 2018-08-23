@@ -102,10 +102,10 @@ import ActivityLink from '@/components/Active/groupBooking/LinkPage'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   routes: [
     {
-      path: '/ruicloud',
+      path: '/',
       name: 'App',
       component: App,
       children: [
@@ -114,12 +114,11 @@ export default new Router({
           name: 'Main',
           component: Main,
           children: [
-            {path: '/', name: 'Home', component: Home},
+            {path: '', name: 'Home', component: Home},
             {path: 'Home', name: 'Home', component: Home},
             {path: 'Sort', name: 'Sort', component: Sort},
             {path: 'Console', name: 'Console', component: Console},
             {path: 'Mine', name: 'Mine', component: Mine},
-            {path: 'test', name: 'test', component: test},
           ]
         },
         {path: 'Bhost', name: 'Bhost', component: Bhost},
