@@ -138,6 +138,7 @@
       },
       // 卸载弹窗
       showUnload(details){
+        this.showload = true
         this.$vux.confirm.show({
           title: '磁盘卸载',
           content: '是否将确认将硬盘（' + details.diskname + '）从主机（' + details.mountonname + '）卸载，卸载之后该主机将失去该硬盘所存信息',
