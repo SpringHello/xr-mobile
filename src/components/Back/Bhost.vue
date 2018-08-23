@@ -17,14 +17,17 @@
             <!--<img class="img" v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">-->
             <div>
               <p class="soures-title">名称: {{item.title}}</p>
-              <p class="soures-desc">镜像系统: {{item.desc}}</p>
+              <p class="soures-desc">镜像系统: {{item.name}}</p>
             </div>
           </div>
           <p class="check" @click="push(item)">详细信息</p>
         </li>
       </ul>
     </div>
-    <p v-else style="color: #ccc;text-align: center;font-size: .28rem;margin: 50% 0;">暂无数据</p>
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
 
     <actionsheet v-model="showOpera" :menus="menus" @on-click-menu="clickItem" show-cancel
                  :close-on-clicking-mask="false"></actionsheet>
@@ -50,7 +53,8 @@
           list.push({
             status: type,
             title: host.computername,
-            desc: host.templatename,
+            name: host.templatename,
+            desc: host.serviceoffername,
             id: host.computerid,
             price: host.cpCase,
             password: host.connectpassword,
@@ -137,7 +141,8 @@
               this.list.push({
                 status: type,
                 title: host.computername,
-                desc: host.templatename,
+                name: host.templatename,
+                desc: host.serviceoffername,
                 id: host.computerid,
                 price: host.cpCase,
                 password: host.connectpassword,
@@ -157,7 +162,11 @@
           price: item.price,
           password: item.password
         }
-        this.$router.push({path: this.address, query: params})
+        if (item.id) {
+          this.$router.push({path: this.address, query: params})
+        } else {
+          this.$vux.toast.text('暂无详情信息', 'middle')
+        }
       },
       // 操作
       operation(id, type, statusL){
@@ -301,6 +310,20 @@
           border-bottom: none;
         }
       }
+    }
+  }
+
+  .nodata {
+    text-align: center;
+    margin: 50% auto;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    p {
+      font-size: .36rem;
+      color: rgba(153, 153, 153, 1);
+      line-height: 0;
     }
   }
 

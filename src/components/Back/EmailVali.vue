@@ -11,7 +11,7 @@
       <Group>
         <cell title="邮箱账号" :value="oldEmail" value-align="left"></cell>
         <x-input title="图形验证码" placeholder="请输入图形验证码" placeholder-align="left" v-model="froms.code">
-          <img :src="imgSrc"  @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`"  slot="right">
+          <img :src="imgSrc" @click="imgSrc=`/ruicloud/user/getKaptchaImage.do?t=${new Date().getTime()}`" slot="right">
         </x-input>
         <x-input title="邮箱验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.emailCode">
           <button slot="right" class="button" @click.prevent="getemailCode">{{message}}</button>
@@ -87,14 +87,14 @@
       },
       //下一步
       resetPhone(){
-        if(this.froms.code.length==4 && this.froms.emailCode.length==6){
+        if (this.froms.code.length == 4 && this.froms.emailCode.length == 6) {
           if (sessionStorage.getItem('type') == 'phone') {
             this.$router.push('resetphone')
           }
           else {
             this.$router.push('resetemail')
           }
-        }else{
+        } else {
           this.$vux.toast.text('请输入正确的号码', 'middle')
         }
       }
@@ -120,22 +120,25 @@
     }
   }
 
-  .button {
-    width: 1.8rem;
-    padding: .14rem .1rem;
-    background: rgba(74, 144, 226, 1);
-    border-radius: .06rem;
-    border: 2px solid rgba(74, 144, 226, 1);
-    font-size: .24rem;
-    color: #FFF;
-    line-height: .33rem;
-    outline: none;
+  .middle {
+    margin-bottom: 2rem;
+    .button {
+      width: 1.8rem;
+      padding: .14rem .1rem;
+      background: rgba(74, 144, 226, 1);
+      border-radius: .06rem;
+      border: 2px solid rgba(74, 144, 226, 1);
+      font-size: .24rem;
+      color: #FFF;
+      line-height: .33rem;
+      outline: none;
+    }
   }
 
   .btns {
     position: fixed;
-    bottom: 0;
-    margin: 1.5rem 5% 0 5%;
+    bottom: .48rem;
+    margin: 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);

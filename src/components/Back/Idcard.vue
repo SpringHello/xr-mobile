@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="work">
     <x-header>身份证号验证</x-header>
     <group>
       <x-input title="真实姓名" placeholder="请输入姓名" placeholder-align="left" v-model="froms.name"></x-input>
@@ -9,10 +9,10 @@
              slot="right">
       </x-input>
     </group>
-    <group>
+    <group style="margin-bottom: 2rem;">
       <x-input title="+ 86" placeholder="请填写手机号码" placeholder-align="left" v-model="froms.phone"></x-input>
       <x-input title="验证码" placeholder="请输入验证码" placeholder-align="left" v-model="froms.phoneCode">
-        <button slot="right"  class="button" @click.prevent="getPhoneCode">{{message}}</button>
+        <button slot="right" class="button" @click.prevent="getPhoneCode">{{message}}</button>
       </x-input>
     </group>
     <div class="btn">
@@ -148,7 +148,7 @@
 
   .btn {
     position: fixed;
-    bottom: 0;
+    bottom: .48rem;
     width: 90%;
     margin: 0 5%;
     button {

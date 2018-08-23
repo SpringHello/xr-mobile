@@ -1,7 +1,7 @@
 <template>
   <div class="work">
     <x-header>创建工单</x-header>
-    <Group label-width="2.5rem">
+    <Group label-width="2.5rem" style="margin-bottom: 2rem;">
       <x-input title='工单标题' required placeholder="请输入问题标题" v-model="title"></x-input>
       <popup-picker title="问题类型" :data="listType" v-model="wtype" @on-show="ShowType" @on-change="changeType"
                     :columns="2"></popup-picker>
@@ -106,7 +106,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .btn {
     position: fixed;
-    bottom: 0;
+    bottom: .48rem;
     width: 90%;
     margin: 0 5%;
   }

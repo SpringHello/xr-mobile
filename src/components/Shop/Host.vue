@@ -44,7 +44,9 @@
 
         <cell title="系统用户名" :value="userName"></cell>
 
-        <cell title="登录密码" v-show="hostmsg[0]=='default'" inline-desc="密码为默认密码，创建成功后通过短信和站内信查看"></cell>
+        <cell title="登录密码" v-show="hostmsg[0]=='default'"></cell>
+        <p v-show="hostmsg[0]=='default'" style="font-size: .22rem;color: #999;padding: 0 .3rem .2rem .3rem;">
+          密码为默认密码，创建成功后通过短信和站内信查看</p>
         <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
                  placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
 
@@ -90,8 +92,10 @@
       </Group>
 
       <Group>
-        <cell title='云硬盘' value="添加数据盘" :inline-desc="'可添加数量：'+diskListNums" @click.native="addDisk"
+        <cell title='云硬盘' value="添加数据盘" @click.native="addDisk"
               class="Cdisk"></cell>
+        <p style="font-size: .22rem;color: #999;padding: 0 .3rem .2rem .3rem;margin-top: -.15rem">
+          可添加数量：{{diskListNums}}</p>
         <popup-picker v-for="(disk,index) in diskList" :key="index" :data="diskType" v-model="disk.value"
                       :columns="3"
                       show-name>
@@ -114,7 +118,9 @@
 
         <cell title="系统用户名" :value="userName"></cell>
 
-        <cell title="登录密码" v-show="hostmsg[0]=='default'" inline-desc="密码为默认密码，创建成功后通过短信和站内信查看"></cell>
+        <cell title="登录密码" v-show="hostmsg[0]=='default'"></cell>
+        <p v-show="hostmsg[0]=='default'" style="font-size: .22rem;color: #999;padding: 0 .3rem .2rem .3rem;">
+          密码为默认密码，创建成功后通过短信和站内信查看</p>
         <x-input title="登录密码" v-model="loginPassword" placeholder="请设置登录密码" v-show="hostmsg[0]=='custom'"
                  placeholder-align="right" text-align="right" @on-blur="setPassword"></x-input>
 
@@ -963,7 +969,53 @@
       vpc(){
         this.networkCardChange();
       },
-      cores(){
+      cores(val){
+        if (this.regional == '39a6af0b-6624-4194-b9d5-0c552d903858' || this.regional == '1ce0d0b9-a964-432f-8078-a61100789e30') {
+          switch (val[0]) {
+            case '1':
+              this.memory[0] = '1'
+              break;
+            case '2':
+              this.memory[0] = '2'
+              break;
+            case '4':
+              this.memory[0] = '4'
+              break;
+            case '8':
+              this.memory[0] = '8'
+              break;
+            case '16':
+              this.memory[0] = '16'
+              break;
+            case '32':
+              this.memory[0] = '64'
+              break;
+            case '64':
+              this.memory[0] = '128'
+              break;
+          }
+        } else {
+          switch (val[0]) {
+            case '1':
+              this.memory[0] = '1'
+              break;
+            case '2':
+              this.memory[0] = '4'
+              break;
+            case '4':
+              this.memory[0] = '4'
+              break;
+            case '8':
+              this.memory[0] = '16'
+              break;
+            case '16':
+              this.memory[0] = '16'
+              break;
+            case '32':
+              this.memory[0] = '32'
+              break;
+          }
+        }
         this.showCore();
         this.coreValue();
         this.queryCprices();

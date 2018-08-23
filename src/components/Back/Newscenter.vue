@@ -1,7 +1,7 @@
 <template>
   <div>
-    <x-header></x-header>
-    <div class="newscenter">
+    <div style="position: fixed;top: 0;width: 100%;z-index: 7;">
+      <x-header></x-header>
       <div class="news-nav">
         <tab active-color="#4A90E2">
           <tab-item @on-item-click="changeType(item.type)" v-for="(item,index) in news"
@@ -10,7 +10,9 @@
           </tab-item>
         </tab>
       </div>
+    </div>
 
+    <div style="margin-top: 2rem;" v-if="datas.length!=0">
       <swipeout>
         <swipeout-item v-for="(item,index) in datas" class="content-item" :key="`${item.id+Math.random()}`">
           <div slot="right-menu">
@@ -42,6 +44,11 @@
       </swipeout>
     </div>
 
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
+
   </div>
 </template>
 
@@ -49,7 +56,6 @@
   import {XHeader, Tab, TabItem, Swipeout, SwipeoutItem, SwipeoutButton} from 'vux'
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
-  import $ from 'jquery'
   export default{
     components: {
       XHeader,
@@ -68,9 +74,9 @@
       window.scrollTo(0, 0);
       return {
         news: [
-          {title: '全部', type: 'all', status: false, num: ''},
-          {title: '已读', type: 'isread', status: false, num: ''},
-          {title: '未读', type: 'unread', status: false, num: ''},
+          {title: '全部', type: 'all', num: ''},
+          {title: '已读', type: 'isread', num: ''},
+          {title: '未读', type: 'unread', num: ''},
         ],
         pageType: {
           pageSize: '10',
@@ -82,14 +88,15 @@
       }
     },
     mounted(){
-      $(window).scroll(() => {
-        var scrollTop = $(window).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(window).height();
+      window.onscroll = () => {
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight;
+        var windowHeight = document.documentElement.clientHeight;
         if (scrollTop + windowHeight == scrollHeight) {
           this.searchNext()
+          return
         }
-      });
+      };
     },
     methods: {
       //获取下一页数据
@@ -147,9 +154,13 @@
         axios.post(`user/readedEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1
-          ) {
-            this.changeType(this.type)
+          if (response.status == 200 && response.data.status == 1) {
+            if (this.type != 'all') {
+              this.datas = this.datas.filter(item => {
+                return item.id != id
+              })
+            }
+            this.getNumber()
           }
         })
       },
@@ -158,10 +169,10 @@
           list: JSON.stringify([{'id': id}])
         }).then(response => {
           if (response.status == 200 && response.data.status == 1) {
-            /*this.datas = this.datas.filter(item => {
-             return item.id != id
-             })*/
-            this.changeType(this.type)
+            this.datas = this.datas.filter(item => {
+              return item.id != id
+            })
+            this.getNumber()
           }
         })
       },
@@ -169,27 +180,51 @@
         axios.post(`user/unreadedEventNotify.do`, {
           list: JSON.stringify([{'id': id}])
         }).then(response => {
-          if (response.status == 200 && response.data.status == 1
-          ) {
-            this.changeType(this.type)
+          if (response.status == 200 && response.data.status == 1) {
+            if (this.type != 'all') {
+              this.datas = this.datas.filter(item => {
+                return item.id != id
+              })
+            }
+            this.getNumber()
           }
         })
       },
+      getNumber(){
+        let params = {
+          rows: this.pageType.pageSize,
+          page: this.pageType.page,
+          isRead: '2'
+        }
+        axios.post('user/getEventNotifyList.do', params).then(response => {
+          this.news.forEach(item => {
+            switch (item.type) {
+              case 'all':
+                item.num = response.data.pageTotal
+                break;
+              case 'isread':
+                item.num = response.data.alreadyTotal
+                break;
+              case 'unread':
+                item.num = response.data.noReadTotal
+                break;
+            }
+          })
+        })
+      }
     },
 
   }
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
-  .newscenter {
-    .news-nav {
-      margin-bottom: .2rem;
-      .tab-item {
-        font-size: .3rem;
-        color: #000;
-      }
-    }
 
+  .news-nav {
+    margin-bottom: .2rem;
+    .tab-item {
+      font-size: .3rem;
+      color: #000;
+    }
   }
 
   .content-item {
@@ -232,6 +267,20 @@
           }
         }
       }
+    }
+  }
+
+  .nodata {
+    text-align: center;
+    margin: 50% auto;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    p {
+      font-size: .36rem;
+      color: rgba(153, 153, 153, 1);
+      line-height: 0;
     }
   }
 

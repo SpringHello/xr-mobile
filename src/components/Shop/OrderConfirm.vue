@@ -163,6 +163,7 @@
 <style rel="stylesheet/less" lang="less" scoped>
   .orderdetails {
     background: rgba(255, 255, 255, 1);
+    border-bottom: 1px solid #e7e7e7;
     .resources {
       margin-left: .3rem;
       border-bottom: 1px solid #e7e7e7;
@@ -207,6 +208,7 @@
     background-color: #FFF;
     position: fixed;
     bottom: 0;
+    border-top: 1px solid #D9D9D9;
     p {
       padding: .32rem 0 .32rem .3rem;
       font-size: .28rem;

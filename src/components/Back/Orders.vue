@@ -1,26 +1,34 @@
 <template>
   <div id="orders">
-    <x-header>订单管理</x-header>
-    <div class="header">
-      <tab active-color="#4A90E2" default-color="#333">
-        <tab-item :selected="index==0" v-for="(item,index) in tabItems" :key="index" :value="item.type"
-                  @on-item-click="changeType(item.type)">{{item.name}}
-        </tab-item>
-      </tab>
+    <div style="position: fixed;top: 0;width: 100%;z-index: 7;">
+      <x-header>订单管理</x-header>
+      <div class="header">
+        <tab active-color="#4A90E2" default-color="#333">
+          <tab-item :selected="index==0" v-for="(item,index) in tabItems" :key="index" :value="item.type"
+                    @on-item-click="changeType(item.type)">{{item.name}}
+          </tab-item>
+        </tab>
+      </div>
     </div>
 
-    <ul v-for="(item,index) in lists" :key="item.ordernumber" class="content"
-        @click="showDel(item.ordernumber)">
-      <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
-      <li>¥{{item.cost}}</li>
-      <li>创建时间：{{item.ordercreatetime}}</li>
-      <li>订单编号：{{item.ordernumber}}</li>
-      <p class="btns">
-        <x-button mini @click.native="check(item)">详情</x-button>
-        <x-button type="primary" mini v-show="!item.paymentstatus" @click.native="pay">支付</x-button>
-      </p>
-    </ul>
+    <div style="margin-top: 2rem" v-if="lists.length!=0">
+      <ul v-for="(item,index) in lists" :key="item.ordernumber" class="content"
+          @click="showDel(item.ordernumber)">
+        <p>{{item.type}} <span class="paym">{{item.paymentstatus=='1'? '已支付':'未支付'}}</span></p>
+        <li>¥{{item.cost}}</li>
+        <li>创建时间：{{item.ordercreatetime}}</li>
+        <li>订单编号：{{item.ordernumber}}</li>
+        <p class="btns">
+          <x-button mini @click.native="check(item)">详情</x-button>
+          <x-button type="primary" mini v-show="!item.paymentstatus" @click.native="pay">支付</x-button>
+        </p>
+      </ul>
+    </div>
 
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
 
     <actionsheet v-model="showDelete" :menus="menusDelete" :close-on-clicking-mask="false" show-cancel
                  @on-click-menu="deleteOrder"></actionsheet>
@@ -32,7 +40,6 @@
   import axios from '@/util/iaxios'
   import $store from '@/vuex'
   import {Group, XHeader, Tab, TabItem, XButton, Actionsheet} from 'vux'
-  import $ from 'jquery'
   export default{
     components: {
       Group,
@@ -72,14 +79,15 @@
       }
     },
     mounted(){
-      $(window).scroll(() => {
-        var scrollTop = $(window).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(window).height();
+      window.onscroll = () => {
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight;
+        var windowHeight = document.documentElement.clientHeight;
         if (scrollTop + windowHeight == scrollHeight) {
           this.searchNext()
+          return
         }
-      });
+      };
     },
     methods: {
       //获取下一页数据
@@ -212,6 +220,20 @@
         margin-top: .24rem;
         border-top: 1px solid #e7e7e7;
         text-align: right;
+      }
+    }
+
+    .nodata {
+      text-align: center;
+      margin: 50% auto;
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      p {
+        font-size: .36rem;
+        color: rgba(153, 153, 153, 1);
+        line-height: 0;
       }
     }
   }

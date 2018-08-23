@@ -14,8 +14,10 @@
     <Group class="disk">
       <x-input title="磁盘名称" placeholder="请输入磁盘名" placeholder-align="right" text-align="right"
                v-model="diskName" @on-blur="dnameRule"></x-input>
-      <cell title='云硬盘' value="添加数据盘" :inline-desc="'可添加数量：'+diskListNums" @click.native="addDisk"
+      <cell title='云硬盘' value="添加数据盘" @click.native="addDisk"
             class="Cdisk"></cell>
+      <p style="font-size: .22rem;color: #999;padding: 0 .3rem .2rem .3rem;margin-top: -.15rem">
+        可添加数量：{{diskListNums}}</p>
       <popup-picker v-for="(disk,index) in diskList" :key="index" :data="diskType" v-model="disk.value"
                     :columns="3"
                     show-name>
@@ -140,7 +142,7 @@
           this.$vux.toast.text('请输入磁盘名', 'middle')
           return
         }
-        if (!RegExp.phoneRegexp.test(this.diskName.trim())) {
+        if (!RegExp.Name.test(this.diskName.trim())) {
           this.$vux.toast.text('请输入2-16位中文、英文字母或数字', 'middle')
           return
         }

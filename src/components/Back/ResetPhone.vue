@@ -121,22 +121,25 @@
     }
   }
 
-  .button {
-    width: 1.8rem;
-    padding: .14rem .1rem;
-    background: rgba(74, 144, 226, 1);
-    border-radius: .06rem;
-    border: 2px solid rgba(74, 144, 226, 1);
-    font-size: .24rem;
-    color: #FFF;
-    line-height: .33rem;
-    outline: none;
+  .middle {
+    margin-bottom: 2rem;
+    .button {
+      width: 1.8rem;
+      padding: .14rem .1rem;
+      background: rgba(74, 144, 226, 1);
+      border-radius: .06rem;
+      border: 2px solid rgba(74, 144, 226, 1);
+      font-size: .24rem;
+      color: #FFF;
+      line-height: .33rem;
+      outline: none;
+    }
   }
 
   .btns {
     position: fixed;
-    bottom: 0;
-    margin: 1.5rem 5% 0 5%;
+    bottom: .48rem;
+    margin: 0 5%;
     width: 90%;
     display: block;
     background: rgba(74, 144, 226, 1);

@@ -9,7 +9,7 @@
         {{item.title}}
       </tab-item>
     </tab>
-    <div class="work-item">
+    <div class="work-item" v-if="worksItem.length!=0">
       <ul>
         <li v-for="(item,index) in worksItem" :key="index" @click="checkOrder(item.id,item.subdescription)">
           <p>{{item.title}}</p>
@@ -20,6 +20,11 @@
         </li>
       </ul>
     </div>
+    <div v-else class="nodata">
+      <img src="../../assets/img/back/zero.png">
+      <p> 暂无数据 </p>
+    </div>
+
     <actionsheet v-model="showOpreation" :menus="menus" @on-click-menu="opreation" show-cancel></actionsheet>
   </div>
 </template>
@@ -144,6 +149,20 @@
           }
         }
       }
+    }
+  }
+
+  .nodata {
+    text-align: center;
+    margin: 50% auto;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    p {
+      font-size: .36rem;
+      color: rgba(153, 153, 153, 1);
+      line-height: 0;
     }
   }
 </style>

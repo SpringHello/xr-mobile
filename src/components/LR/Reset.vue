@@ -1,5 +1,5 @@
 <template>
-  <div style="background:rgba(255,255,255,1);height: 100%;">
+  <div style="background:rgba(255,255,255,1);height: 100%;min-height: 560px;">
     <x-header>重置密码
       <router-link slot="right" to="register">注册</router-link>
     </x-header>
