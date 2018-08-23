@@ -239,10 +239,10 @@
         ],
         // 走马灯下方介绍
         introduce: [
-          {img: require('../assets/img/home/itr-1.png'), title: "云服务器", url: "/ruicloud/host"},
-          {img: require('../assets/img/home/itr-2.png'), title: "云硬盘", url: "/ruicloud/disk"},
-          {img: require('../assets/img/home/itr-3.png'), title: "负载均衡", url: "/ruicloud/balance"},
-          {img: require('../assets/img/home/itr-4.png'), title: "弹性IP", url: "/ruicloud/elasticip"}
+          {img: require('../assets/img/home/itr-1.png'), title: "云服务器",  url: "host"},
+          {img: require('../assets/img/home/itr-2.png'), title: "云硬盘",  url: "disk"},
+          {img: require('../assets/img/home/itr-3.png'), title: "负载均衡",  url: "balance"},
+          {img: require('../assets/img/home/itr-4.png'), title: "弹性IP",  url: "elasticip"}
         ],
         // 产品资料
         productList: [
@@ -251,9 +251,9 @@
             opened: false,
             img: require('../assets/img/home/pro-jisuan.png'),
             prodItem: [
-              {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: '/ruicloud/host'},
-              {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: '/ruicloud/mirror'},
-              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: '/ruicloud/ecsSnapshot'},
+              {title: '弹性云服务器（ECS）', desc: '通用型、内存优化型、高IO型', path: 'host'},
+              {title: '镜像服务', desc: '公共镜像、功能镜像、自定义镜像', path: 'mirror'},
+              {title: 'ECS快照', desc: '稳定可靠、安全保障', path: 'ecsSnapshot'},
               {title: '裸金属服务器（敬请期待）', desc: '专属物理服务器', path: ''},
               {title: '弹性伸缩（敬请期待）', desc: '高可用、可视化、低成本', path: ''}
             ]
@@ -262,19 +262,19 @@
             opened: false,
             img: require('../assets/img/home/pro-cunchu.png'),
             prodItem: [
-              {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: '/ruicloud/disk'},
-              {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: '/ruicloud/diskbackup'}
+              {title: '云硬盘', desc: '性能型、超高性能型、存储型', path: 'disk'},
+              {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: 'diskbackup'}
             ]
           }, {
             title: '云网络',
             opened: false,
             img: require('../assets/img/home/pro-shujuku.png'),
             prodItem: [
-              {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: '/ruicloud/vpc'},
-              {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: '/ruicloud/elasticip'},
-              {title: '负载均衡', desc: '源算法、轮询、最小连接数', path: '/ruicloud/balance'},
-              {title: 'NAT网关', desc: 'TCP/HTTP协议、多对一支持', path: '/ruicloud/natgateway'},
-              {title: '虚拟专网VPN', desc: '跨VPC链接', path: '/ruicloud/virtualvpn'},
+              {title: '虚拟私有云VPC', desc: '网络隔离、分配子网', path: 'vpc'},
+              {title: '弹性IP', desc: '绑定与解绑IP、扩容', path: 'elasticip'},
+              {title: '负载均衡', desc: '源算法、轮询、最小连接数', path: 'balance'},
+              {title: 'NAT网关', desc: 'TCP/HTTP协议、多对一支持', path: 'natgateway'},
+              {title: '虚拟专网VPN', desc: '跨VPC链接', path: 'virtualvpn'},
               {title: 'CDN（敬请期待）', desc: '节点丰富、安全易用', path: ''}
             ]
           }, {
@@ -282,7 +282,7 @@
             opened: false,
             img: require('../assets/img/home/pro-yunwei.png'),
             prodItem: [
-              {title: '云监控', desc: '自定义监控项、多告警推送方式', path: '/ruicloud/cloudmonitoring'},
+              {title: '云监控', desc: '自定义监控项、多告警推送方式', path: 'cloudmonitoring'},
               {title: '访问控制（敬请期待）', desc: '权限管理、精准控制', path: ''}
             ]
 
@@ -291,8 +291,8 @@
             opened: false,
             img: require('../assets/img/home/pro-anquan.png'),
             prodItem: [
-              {title: '防火墙', desc: '自定义规则、协议、端口', path: '/ruicloud/firewall'},
-              {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: '/ruicloud/ddos'}
+              {title: '防火墙', desc: '自定义规则、协议、端口', path: 'firewall'},
+              {title: 'DDOS高防IP', desc: '硬件防护、40G超大流量', path: 'ddos'}
             ]
 
           }
