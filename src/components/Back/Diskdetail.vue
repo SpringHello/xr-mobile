@@ -34,6 +34,7 @@
       <cell title="扩容" is-link></cell>
     </Group>
 
+    <div style="height: 1rem"></div>
     <group class="delete" @click.native="delDisk">
       <p> 删除云硬盘</p>
     </group>

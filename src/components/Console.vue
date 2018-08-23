@@ -52,7 +52,6 @@
     </div>
 
     <div style="height: 1rem;"></div>
-    <toast v-model="showPositionValue" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
   </div>
 </template>
 
@@ -106,7 +105,6 @@
           {img: require('../assets/img/console/jingxiang.png'), title: '镜像服务', url: ''},
           {img: require('../assets/img/console/nat.png'), title: 'NAT网关', url: ''},
         ],
-        showPositionValue: false,
       }
     },
     methods: {
@@ -129,7 +127,7 @@
             this.$router.push({path: item.url})
           }
           else {
-            this.showPositionValue = true
+            this.$vux.toast.text('暂未开放', 'middle')
           }
         } else {
           this.$router.push('login')
@@ -144,14 +142,7 @@
           this.$router.push('login')
         }
       },
-      //备案
-//      toRecord(){
-//          if($store.state.userInfo){
-//              this.$router.push('records')
-//          }else{
-//            this.$router.push('login')
-//          }
-//      }
+
 
     },
     computed: mapState([

@@ -45,6 +45,8 @@
       </Group>
     </div>
 
+    <div style="height: 1rem"></div>
+
   </div>
 </template>
 

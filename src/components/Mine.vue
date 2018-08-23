@@ -113,7 +113,7 @@
     <actionsheet v-model="showTC" :menus="menusTC" show-cancel :close-on-clicking-mask="false"
                  @on-click-menu="clickExit"></actionsheet>
 
-    <toast v-model="show" type="text" is-show-mask text="暂未开放" position="middle" width="25%"></toast>
+
   </div>
 </template>
 
@@ -135,8 +135,7 @@
       return {
         //认证信息
         authInfo: $store.state.authInfo,
-        //未开放
-        show: false,
+
         remainder: '',
         voucher: '',
         groupList: [
@@ -267,7 +266,7 @@
       //暂未开放
       onOpen(){
         if ($store.state.userInfo) {
-          this.show = true
+          this.$vux.toast.text('暂未开放', 'middle')
         } else {
           this.$router.push('login')
         }
