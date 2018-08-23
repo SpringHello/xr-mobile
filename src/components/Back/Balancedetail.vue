@@ -25,6 +25,8 @@
     <Group>
       <cell title="负载均衡主机" is-link class="basic" @click.native="balhost"></cell>
     </Group>
+
+    <div style="height: 1rem"></div>
   </div>
 </template>
 
