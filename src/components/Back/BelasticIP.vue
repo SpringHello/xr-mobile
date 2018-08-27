@@ -10,7 +10,7 @@
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
             <div>
-              <p class="soures-title">IP地址:{{item.publicip}}
+              <p class="soures-title">{{item.publicip}}
               </p>
               <p class="soures-desc">所属VPC:{{item.vpcname}}</p>
             </div>

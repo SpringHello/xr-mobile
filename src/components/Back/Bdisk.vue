@@ -10,7 +10,7 @@
         <li v-for="(item,index) in list" :key="index" @click="push(item)">
           <div class="soures">
             <div>
-              <p class="soures-title">名称: {{item.diskname}}</p>
+              <p class="soures-title">{{item.diskname}}</p>
               <p class="soures-desc">
                 <span>硬盘类型: {{item.diskoffer.toUpperCase()}}</span>
                 <span>磁盘容量: {{item.disksize}}G</span>

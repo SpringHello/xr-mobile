@@ -16,7 +16,7 @@
             <img class="img" v-if="item.status=='wait'" src="../../assets/img/back/open.png">
             <!--<img class="img" v-if="item.status=='arrears'" src="../../assets/img/back/arrears.png">-->
             <div>
-              <p class="soures-title">名称: {{item.title}}</p>
+              <p class="soures-title">{{item.title}}</p>
               <p class="soures-desc">镜像系统: {{item.name}}</p>
             </div>
           </div>

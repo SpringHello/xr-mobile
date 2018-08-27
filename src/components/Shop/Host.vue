@@ -131,7 +131,7 @@
         <button @click="CtoOrder">立即购买</button>
       </div>
     </div>
-    <div style="height: 2rem"></div>
+    <div style="height: 1.5rem"></div>
   </div>
 </template>
 

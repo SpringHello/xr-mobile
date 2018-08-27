@@ -266,7 +266,7 @@
               {title: '云硬盘备份', desc: '高可用保障、敏捷易用', path: 'diskbackup'}
             ]
           }, {
-            title: '云数据库',
+            title: '云网络',
             opened: false,
             img: require('../assets/img/home/pro-shujuku.png'),
             prodItem: [
